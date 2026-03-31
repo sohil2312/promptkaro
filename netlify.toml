@@ -1,0 +1,22 @@
+[build]
+  publish = "."
+
+# Force HTTPS
+[[redirects]]
+  from = "http://promptkaro.in/*"
+  to = "https://promptkaro.in/:splat"
+  status = 301
+  force = true
+
+# www → apex
+[[redirects]]
+  from = "https://www.promptkaro.in/*"
+  to = "https://promptkaro.in/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.promptkaro.in/*"
+  to = "https://promptkaro.in/:splat"
+  status = 301
+  force = true

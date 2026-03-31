@@ -1,0 +1,4 @@
+Contact: mailto:hello@promptkaro.in
+Expires: 2027-03-31T00:00:00.000Z
+Preferred-Languages: en, hi, gu
+Canonical: https://promptkaro.in/.well-known/security.txt

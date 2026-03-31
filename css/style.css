@@ -1386,6 +1386,25 @@ section {
   letter-spacing: 0.04em;
 }
 
+.footer-legal {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 8px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.footer-legal a {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-legal a:hover {
+  color: var(--lime);
+}
+
 /* ===== FLOATING WHATSAPP (desktop) ===== */
 .wa-float {
   position: fixed;
