@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PromptKaro — Final Logo Assets</title>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@700;800;900&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: #0a0a0c;
+  color: #e8e6e1;
+  font-family: 'DM Sans', sans-serif;
+  padding: 20px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+h1 { font-family: 'Rubik', sans-serif; font-size: 1.4rem; color: #fff; margin: 30px 0 6px; }
+.sub { color: #666; font-size: 0.82rem; margin-bottom: 24px; }
+h2 { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 2px; color: #555; margin: 28px 0 12px; }
+
+.logo-box {
+  border-radius: 14px;
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.dark-bg { background: #0a0a0c; border: 1px solid #1e1e24; }
+.light-bg { background: #f5f3ee; }
+.saffron-bg { background: linear-gradient(135deg, #ff9933, #ff6b35); }
+
+/* Main logo */
+.logo {
+  font-family: 'Rubik', sans-serif;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  user-select: all;
+}
+
+.logo-lg { font-size: 2.8rem; }
+.logo-md { font-size: 1.8rem; }
+.logo-sm { font-size: 1.2rem; }
+
+.chevron { font-weight: 900; margin-right: 6px; }
+
+.dark-theme .chevron { color: #c8ff00; }
+.dark-theme .prompt { color: #fff; }
+.dark-theme .karo { color: #c8ff00; }
+
+.light-theme .chevron { color: #ff6b35; }
+.light-theme .prompt { color: #1a1a1a; }
+.light-theme .karo { color: #ff6b35; }
+
+.white-theme .chevron { color: #fff; }
+.white-theme .prompt { color: #fff; }
+.white-theme .karo { color: #fff; opacity: 0.85; }
+
+.cursor {
+  display: inline-block;
+  width: 3px;
+  background: #c8ff00;
+  margin-left: 3px;
+  animation: blink 1s infinite;
+}
+
+.cursor-lg { height: 2.4rem; }
+.cursor-md { height: 1.5rem; }
+.cursor-sm { height: 1rem; }
+
+.cursor-orange { background: #ff6b35; }
+.cursor-white { background: #fff; }
+
+@keyframes blink { 0%,50%{opacity:1} 51%,100%{opacity:0} }
+
+/* Icon versions */
+.icon-row {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin: 12px 0;
+}
+
+.icon-box {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 900;
+  font-size: 1.6rem;
+}
+
+.icon-dark { background: #111; border: 1px solid #222; color: #c8ff00; }
+.icon-gradient { background: linear-gradient(135deg, #ff6b35, #ff2d87); color: #fff; }
+.icon-saffron { background: #ff9933; color: #fff; }
+.icon-lime { background: #c8ff00; color: #0a0a0c; }
+.icon-outline { background: transparent; border: 2.5px solid #c8ff00; color: #c8ff00; }
+
+.note { font-size: 0.75rem; color: #444; margin: 4px 0 16px; }
+
+.usage-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 12px 0;
+}
+
+@media (max-width: 480px) { .usage-grid { grid-template-columns: 1fr; } }
+
+.usage-card {
+  background: #111114;
+  border: 1px solid #1e1e24;
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.usage-card h3 {
+  font-family: 'Rubik', sans-serif;
+  font-size: 0.82rem;
+  color: #c8ff00;
+  margin-bottom: 4px;
+}
+
+.usage-card p { font-size: 0.78rem; color: #666; margin: 0; }
+
+.color-row {
+  display: flex;
+  gap: 10px;
+  margin: 12px 0;
+  flex-wrap: wrap;
+}
+
+.color-swatch {
+  text-align: center;
+}
+
+.swatch {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  margin-bottom: 4px;
+}
+
+.color-swatch span {
+  font-size: 0.65rem;
+  font-family: 'DM Sans', monospace;
+  color: #555;
+}
+
+.final-note {
+  background: #111114;
+  border: 1px solid #c8ff00;
+  border-radius: 14px;
+  padding: 20px;
+  margin: 28px 0;
+  text-align: center;
+}
+
+.final-note p { font-size: 0.88rem; color: #aaa; }
+.final-note strong { color: #c8ff00; }
+</style>
+</head>
+<body>
+
+<h1>PromptKaro — Final Logo Pack</h1>
+<p class="sub">Option 2: Terminal style. All sizes and backgrounds. Screenshot what you need.</p>
+
+<!-- FULL SIZE LOGOS -->
+<h2>Primary Logo — Dark Background</h2>
+<div class="logo-box dark-bg">
+  <div class="logo logo-lg dark-theme">
+    <span class="chevron">›</span><span class="prompt">Prompt</span><span class="karo">Karo</span><span class="cursor cursor-lg"></span>
+  </div>
+</div>
+
+<h2>Primary Logo — Light Background</h2>
+<div class="logo-box light-bg">
+  <div class="logo logo-lg light-theme">
+    <span class="chevron">›</span><span class="prompt">Prompt</span><span class="karo">Karo</span><span class="cursor cursor-lg cursor-orange"></span>
+  </div>
+</div>
+
+<h2>On Saffron / Brand Color</h2>
+<div class="logo-box saffron-bg">
+  <div class="logo logo-lg white-theme">
+    <span class="chevron">›</span><span class="prompt">Prompt</span><span class="karo">Karo</span><span class="cursor cursor-lg cursor-white"></span>
+  </div>
+</div>
+
+<!-- MEDIUM SIZE -->
+<h2>Medium Size — For Headers & Social</h2>
+<div class="logo-box dark-bg">
+  <div class="logo logo-md dark-theme">
+    <span class="chevron">›</span><span class="prompt">Prompt</span><span class="karo">Karo</span><span class="cursor cursor-md"></span>
+  </div>
+</div>
+<div class="logo-box light-bg">
+  <div class="logo logo-md light-theme">
+    <span class="chevron">›</span><span class="prompt">Prompt</span><span class="karo">Karo</span><span class="cursor cursor-md cursor-orange"></span>
+  </div>
+</div>
+
+<!-- SMALL SIZE -->
+<h2>Small — For Footer, Watermark</h2>
+<div class="logo-box dark-bg" style="padding: 24px;">
+  <div class="logo logo-sm dark-theme">
+    <span class="chevron">›</span><span class="prompt">Prompt</span><span class="karo">Karo</span><span class="cursor cursor-sm"></span>
+  </div>
+</div>
+
+<!-- ICON VERSIONS -->
+<h2>App Icons / WhatsApp Profile / Favicon</h2>
+<div class="icon-row">
+  <div class="icon-box icon-dark">›_</div>
+  <div class="icon-box icon-gradient">›_</div>
+  <div class="icon-box icon-saffron">›_</div>
+  <div class="icon-box icon-lime">›_</div>
+  <div class="icon-box icon-outline">›_</div>
+</div>
+<p class="note">The "›_" symbol = terminal prompt + cursor. Recognizable even at 32×32px favicon size.</p>
+
+<!-- BRAND COLORS -->
+<h2>Brand Colors</h2>
+<div class="color-row">
+  <div class="color-swatch">
+    <div class="swatch" style="background: #c8ff00;"></div>
+    <span>#c8ff00</span><br><span style="color:#c8ff00; font-size:0.6rem;">Lime</span>
+  </div>
+  <div class="color-swatch">
+    <div class="swatch" style="background: #ff6b35;"></div>
+    <span>#ff6b35</span><br><span style="color:#ff6b35; font-size:0.6rem;">Saffron</span>
+  </div>
+  <div class="color-swatch">
+    <div class="swatch" style="background: #0a0a0c; border: 1px solid #222;"></div>
+    <span>#0a0a0c</span><br><span style="color:#888; font-size:0.6rem;">Dark BG</span>
+  </div>
+  <div class="color-swatch">
+    <div class="swatch" style="background: #f5f3ee;"></div>
+    <span>#f5f3ee</span><br><span style="color:#888; font-size:0.6rem;">Light BG</span>
+  </div>
+  <div class="color-swatch">
+    <div class="swatch" style="background: #ffffff; border: 1px solid #ddd;"></div>
+    <span>#ffffff</span><br><span style="color:#888; font-size:0.6rem;">Text Light</span>
+  </div>
+  <div class="color-swatch">
+    <div class="swatch" style="background: #1a1a1a;"></div>
+    <span>#1a1a1a</span><br><span style="color:#888; font-size:0.6rem;">Text Dark</span>
+  </div>
+</div>
+
+<!-- WHERE TO USE WHAT -->
+<h2>Where to Use What</h2>
+<div class="usage-grid">
+  <div class="usage-card">
+    <h3>Website Header</h3>
+    <p>Medium logo, dark theme, with blinking cursor animation</p>
+  </div>
+  <div class="usage-card">
+    <h3>WhatsApp Business</h3>
+    <p>Icon version: dark bg with lime "›_" — screenshot at 500×500px</p>
+  </div>
+  <div class="usage-card">
+    <h3>Instagram Profile</h3>
+    <p>Gradient icon version — stands out in circular crop</p>
+  </div>
+  <div class="usage-card">
+    <h3>Social Media Posts</h3>
+    <p>Large logo on saffron background — maximum desi energy</p>
+  </div>
+  <div class="usage-card">
+    <h3>Invoice / Docs</h3>
+    <p>Medium logo, light theme — professional on white paper</p>
+  </div>
+  <div class="usage-card">
+    <h3>Favicon</h3>
+    <p>Lime icon version — visible on browser tabs</p>
+  </div>
+</div>
+
+<!-- FINAL NOTE -->
+<div class="final-note">
+<p><strong>How to export:</strong> Screenshot each version you need from this page. Crop tightly. Save as PNG. That's your logo pack.</p>
+<p style="margin-top:8px;">For SVG/vector: ask me later when you need print-quality. For now, <strong>screenshots are enough to launch.</strong></p>
+</div>
+
+<p style="text-align:center; color:#333; font-size:0.7rem; padding: 20px 0 40px;">PromptKaro Brand Kit v1.0 — March 2026</p>
+
+</body>
+</html>

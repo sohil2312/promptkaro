@@ -1,0 +1,108 @@
+/* =============================================
+   PromptKaro — animations.css
+   All @keyframes and transition definitions
+   ============================================= */
+
+/* ===== LOGO CURSOR BLINK ===== */
+@keyframes blink {
+  0%, 50%  { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* ===== DOT GRID DRIFT (Hero background) ===== */
+@keyframes dotDrift {
+  0%   { background-position: 0 0; }
+  100% { background-position: 36px 36px; }
+}
+
+/* ===== HERO GLOW PULSE ===== */
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50%       { opacity: 0.7; transform: scale(1.05); }
+}
+
+.hero-glow-lime  { animation: glowPulse 8s ease-in-out infinite; }
+.hero-glow-orange { animation: glowPulse 10s ease-in-out 2s infinite; }
+
+/* ===== BADGE PULSE (status dot) ===== */
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(40, 200, 64, 0.5); }
+  50%       { box-shadow: 0 0 0 5px rgba(40, 200, 64, 0); }
+}
+
+/* ===== SCROLL BOUNCE ===== */
+@keyframes scrollBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.5; }
+  50%       { transform: translateX(-50%) translateY(6px); opacity: 1; }
+}
+
+/* ===== TERMINAL LINE APPEAR ===== */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== WHATSAPP PULSE (float button on load) ===== */
+@keyframes waPulse {
+  0%   { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+  50%  { box-shadow: 0 4px 30px rgba(37, 211, 102, 0.7), 0 0 0 8px rgba(37, 211, 102, 0.15); }
+  100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+}
+
+/* ===== SECTION REVEAL (handled via JS + class toggle) ===== */
+/* .reveal-card base is in style.css — just the @keyframes here */
+
+/* ===== PRICING CARD ENTRANCE ===== */
+@keyframes cardEntrance {
+  from { opacity: 0; transform: translateY(20px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ===== DASHED LINE MARCH (process connector) ===== */
+@keyframes dashMarch {
+  from { stroke-dashoffset: 20; }
+  to   { stroke-dashoffset: 0; }
+}
+
+/* ===== COUNT UP FLASH ===== */
+@keyframes numFlash {
+  0%   { color: var(--text-primary); }
+  50%  { color: var(--lime); }
+  100% { color: var(--lime); }
+}
+
+/* ===== PREFERS REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal-card {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .dot-grid {
+    animation: none !important;
+  }
+
+  .logo-cursor,
+  .t-caret {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  .badge-pulse {
+    animation: none !important;
+  }
+
+  .scroll-hint {
+    animation: none !important;
+  }
+
+  .wa-float {
+    animation: none !important;
+  }
+}

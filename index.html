@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PromptKaro — Websites, Apps & Dashboards in 48hrs | AI Vibecoding Studio</title>
+  <meta name="description" content="AI-powered websites, apps, dashboards and custom tools for Indian businesses. Free demo first, payment after. PromptKaro — AI Vibecoding Studio.">
+
+  <!-- OG / Social -->
+  <meta property="og:title" content="PromptKaro — Websites, Apps & More in 48 Hours">
+  <meta property="og:description" content="AI Vibecoding Studio. Websites, apps, dashboards, custom tools — free demo first.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://promptkaro.in">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PromptKaro — Websites, Apps & More in 48 Hours">
+  <meta name="twitter:description" content="AI Vibecoding Studio. Free demo first. Build anything.">
+
+  <!-- Favicon: lime cursor block on dark -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23111114'/><rect x='12' y='6' width='8' height='20' rx='2' fill='%23c8ff00'/></svg>">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@800&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&family=Noto+Sans+Gujarati:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <!-- Film grain overlay -->
+  <div class="grain-overlay" aria-hidden="true"></div>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav id="nav" role="navigation" aria-label="Main navigation">
+    <a href="#hero" class="logo" aria-label="PromptKaro — homepage">
+      <span class="logo-chevron" aria-hidden="true">›</span><span class="logo-prompt">Prompt</span><span class="logo-karo">Karo</span><span class="logo-cursor" aria-hidden="true"></span>
+    </a>
+    <div class="nav-right">
+      <a href="#demos" class="nav-link" data-en="Kaam Dekho" data-gu="કામ જુઓ">Kaam Dekho</a>
+      <button class="lang-toggle" id="langToggle" aria-label="Toggle language between English and Gujarati">
+        <span class="lt-en">EN</span><span class="lt-sep">|</span><span class="lt-gu">ગુ</span>
+      </button>
+      <a href="https://wa.me/919999999999?text=Hi%20PromptKaro%2C%20mujhe%20apne%20business%20ke%20liye%20website%20chahiye"
+         class="btn-wa nav-wa"
+         target="_blank"
+         rel="noopener noreferrer"
+         aria-label="WhatsApp pe baat karo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3-8.63A2 2 0 0 1 3.77 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section id="hero" aria-label="Hero">
+    <div class="hero-bg" aria-hidden="true">
+      <div class="dot-grid"></div>
+      <div class="hero-glow hero-glow-lime"></div>
+      <div class="hero-glow hero-glow-orange"></div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-badge" data-en="⚡ AI Vibecoding Studio · 48hr Delivery" data-gu="⚡ AI વાઇબકોડિંગ સ્ટુડિયો · 48 કલાક ડિલિવરી">
+        <span class="badge-pulse" aria-hidden="true"></span>
+        ⚡ AI Vibecoding Studio · 48hr Delivery
+      </div>
+
+      <h1 class="hero-headline">
+        <span class="hl-line hl-static" data-en="Aapka Idea" data-gu="તમારો આઈડિયો">Aapka Idea</span>
+        <span class="hl-line">
+          <span class="hl-rotating-wrap">
+            <span class="hl-rotating" id="rotatingWord" aria-live="polite">Website</span>
+          </span>
+        </span>
+        <span class="hl-line hl-static hl-ready" data-en="48 Ghante Mein Ready." data-gu="48 કલાકમાં તૈયાર.">48 Ghante Mein Ready.</span>
+      </h1>
+
+      <!-- Terminal window -->
+      <div class="terminal-window" role="log" aria-label="Live build demo">
+        <div class="terminal-header" aria-hidden="true">
+          <span class="t-dot t-red"></span>
+          <span class="t-dot t-yellow"></span>
+          <span class="t-dot t-green"></span>
+          <span class="t-title">promptkaro — build</span>
+        </div>
+        <div class="terminal-body">
+          <div class="t-prompt-line">
+            <span class="t-prompt-char" aria-hidden="true">›</span>
+            <span class="t-command" id="terminalCommand"></span><span class="t-caret" id="terminalCaret" aria-hidden="true">▌</span>
+          </div>
+          <div class="t-pixel-canvas" id="terminalCanvas" aria-hidden="true"></div>
+          <div class="t-ready-msg" id="terminalReady" aria-live="polite"></div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="hero-cta">
+        <a href="https://wa.me/919999999999?text=Hi%20PromptKaro%2C%20mujhe%20free%20demo%20chahiye"
+           class="btn-primary"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Free demo ke liye WhatsApp karo">
+          <span data-en="Free Demo Mangao →" data-gu="ફ્રી ડેમો માંગો →">Free Demo Mangao →</span>
+        </a>
+        <p class="cta-sub" data-en="Koi charge nahi. Pehle dekho, phir decide karo." data-gu="કોઈ ચાર્જ નહીં. પહેલાં જુઓ, પછી નક્કી કરો.">Koi charge nahi. Pehle dekho, phir decide karo.</p>
+      </div>
+    </div>
+
+    <div class="scroll-hint" aria-hidden="true">
+      <span class="scroll-arrow">↓</span>
+      <span>Scroll karo</span>
+    </div>
+  </section>
+
+  <!-- ===== DEMO WALL ===== -->
+  <section id="demos" aria-label="Portfolio — what we can build">
+    <div class="section-header">
+      <div class="section-tag" data-en="Yeh Bana Sakte Hain" data-gu="આ બનાવી શકીએ">Yeh Bana Sakte Hain</div>
+      <h2 class="section-title">
+        <span data-en="Har Business Ke Liye" data-gu="દરેક બિઝનેસ માટે">Har Business Ke Liye</span><br>
+        <span data-en="Ek Perfect Solution" data-gu="એક પર્ફેક્ટ સોલ્યુશન">Ek Perfect Solution</span>
+      </h2>
+    </div>
+
+    <div class="bento-grid">
+      <!-- Large: Property Dealer (spans 2 cols) -->
+      <article class="bento-card bento-large reveal-card" style="--reveal-delay: 0ms">
+        <div class="bcard-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="bcard-body">
+          <h3>Property Dealer Site</h3>
+          <p>Property listings, WhatsApp inquiry, Google Maps — sab kuch ek jagah</p>
+          <a href="#" class="bcard-link" aria-label="Property dealer demo - coming soon">
+            View Demo → <span class="badge-soon">Coming Soon</span>
+          </a>
+        </div>
+        <div class="bcard-mockup" aria-hidden="true">
+          <div class="mock-browser">
+            <div class="mock-bar">
+              <div class="mock-dots"><span></span><span></span><span></span></div>
+            </div>
+            <div class="mock-body">
+              <div class="mock-hero-strip"></div>
+              <div class="mock-cards-row">
+                <div class="mock-card-sm"></div>
+                <div class="mock-card-sm"></div>
+                <div class="mock-card-sm"></div>
+              </div>
+              <div class="mock-text-lines">
+                <div class="mock-line w80"></div>
+                <div class="mock-line w60"></div>
+                <div class="mock-line w70"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Medium: Coaching -->
+      <article class="bento-card bento-medium reveal-card" style="--reveal-delay: 80ms">
+        <div class="bcard-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        </div>
+        <div class="bcard-body">
+          <h3>Coaching Class Site</h3>
+          <p>Batches, fees, results aur admission form</p>
+          <a href="#" class="bcard-link" aria-label="Coaching class demo - coming soon">
+            View Demo → <span class="badge-soon">Coming Soon</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- Medium: Mobile Shop -->
+      <article class="bento-card bento-medium reveal-card" style="--reveal-delay: 160ms">
+        <div class="bcard-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+        </div>
+        <div class="bcard-body">
+          <h3>Mobile Shop Catalog</h3>
+          <p>Product catalog, price list, EMI calculator</p>
+          <a href="#" class="bcard-link" aria-label="Mobile shop demo - coming soon">
+            View Demo → <span class="badge-soon">Coming Soon</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- Small: Doctor -->
+      <article class="bento-card bento-small reveal-card" style="--reveal-delay: 240ms">
+        <div class="bcard-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2a2 2 0 0 0-2 2v5H4a2 2 0 0 0-2 2v2c0 1.1.9 2 2 2h5v5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-5h5a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-5V4a2 2 0 0 0-2-2h-2z"/></svg>
+        </div>
+        <div class="bcard-body">
+          <h3>Doctor / Clinic</h3>
+          <p>Appointment booking aur clinic info</p>
+          <a href="#" class="bcard-link" aria-label="Doctor clinic demo - coming soon">
+            View Demo → <span class="badge-soon">Coming Soon</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- Small: More -->
+      <article class="bento-card bento-small bento-more reveal-card" style="--reveal-delay: 320ms">
+        <div class="bcard-icon bcard-icon-lime" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+        </div>
+        <div class="bcard-body">
+          <h3>Aur Bahut Kuch...</h3>
+          <p>Restaurant, Salon, Shop, NGO — koi bhi business</p>
+          <a href="https://wa.me/919999999999?text=Hi%20PromptKaro%2C%20mujhe%20apne%20business%20ke%20liye%20website%20chahiye"
+             class="bcard-link bcard-link-active"
+             target="_blank" rel="noopener noreferrer"
+             aria-label="Apna business WhatsApp pe discuss karo">
+            Baat Karo →
+          </a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== PROCESS ===== -->
+  <section id="process" aria-label="How it works">
+    <div class="section-header">
+      <div class="section-tag" data-en="Kaise Kaam Karta Hai" data-gu="કેવી રીતે કામ કરે છે">Kaise Kaam Karta Hai</div>
+      <h2 class="section-title" data-en="Teen Step. Bas." data-gu="ત્રણ સ્ટેપ. બસ.">Teen Step. Bas.</h2>
+    </div>
+
+    <div class="process-wrap">
+      <!-- Step 1 -->
+      <article class="process-card reveal-card" style="--reveal-delay: 0ms">
+        <div class="process-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="process-num">01</div>
+        <div class="process-cmd">&gt; idea_batao</div>
+        <h3 data-en="Idea Batao" data-gu="આઈડિયા જણાવો">Idea Batao</h3>
+        <p data-en="WhatsApp pe requirement batao. Hindi, Gujarati, English — jo comfortable ho." data-gu="WhatsApp પર requirement જણાવો. Hindi, Gujarati, English — જે comfortable હોય.">WhatsApp pe requirement batao. Hindi, Gujarati, English — jo comfortable ho.</p>
+      </article>
+
+      <div class="process-connector" aria-hidden="true"></div>
+
+      <!-- Step 2 -->
+      <article class="process-card reveal-card" style="--reveal-delay: 120ms">
+        <div class="process-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <div class="process-num">02</div>
+        <div class="process-cmd">&gt; demo_dekho</div>
+        <h3 data-en="Demo Dekho" data-gu="ડેમો જુઓ">Demo Dekho</h3>
+        <p data-en="48 ghante mein working demo. Free. Pasand nahi toh koi charge nahi." data-gu="48 કલાકમાં working demo. ફ્રી. ન ગમે તો કોઈ charge નહીં.">48 ghante mein working demo. Free. Pasand nahi toh koi charge nahi.</p>
+      </article>
+
+      <div class="process-connector" aria-hidden="true"></div>
+
+      <!-- Step 3 -->
+      <article class="process-card reveal-card" style="--reveal-delay: 240ms">
+        <div class="process-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+        </div>
+        <div class="process-num">03</div>
+        <div class="process-cmd">&gt; live_karo</div>
+        <h3 data-en="Live Karo" data-gu="લાઇવ કરો">Live Karo</h3>
+        <p data-en="1 week mein domain + hosting ke saath live. Sab hum handle karte hain." data-gu="1 અઠવાડિયામાં domain + hosting સાથે live. બધું અમે handle કરીએ.">1 week mein domain + hosting ke saath live. Sab hum handle karte hain.</p>
+      </article>
+    </div>
+
+    <div class="trust-badge" role="note">
+      <span aria-hidden="true">🛡️</span>
+      <span data-en="Free demo pehle. Payment baad mein. Zero risk." data-gu="પહેલાં ફ્રી ડેમો. પછી પેમેન્ટ. ઝીરો રિસ્ક.">Free demo pehle. Payment baad mein. Zero risk.</span>
+    </div>
+  </section>
+
+  <!-- ===== PRICING ===== -->
+  <section id="pricing" aria-label="Pricing">
+    <div class="section-header">
+      <div class="section-tag" data-en="Kitna Paisa Lagega" data-gu="કેટલો ખર્ચ થશે">Kitna Paisa Lagega</div>
+      <h2 class="section-title" data-en="Seedha Price. Koi Jhol Nahi." data-gu="સ્પષ્ટ કિંમત. કોઈ ઘોળ નહીં.">Seedha Price. Koi Jhol Nahi.</h2>
+    </div>
+
+    <div class="pricing-grid">
+      <!-- Starter -->
+      <article class="pricing-card reveal-card" style="--reveal-delay: 0ms">
+        <div class="ptier">
+          <span class="ptier-emoji" aria-hidden="true">🟢</span>
+          <span class="ptier-name">Starter</span>
+        </div>
+        <div class="pprice">
+          <span class="pcurr">₹</span><span class="pamount">4,999</span>
+        </div>
+        <ul class="pfeatures" aria-label="Starter features">
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> 1-page website</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> WhatsApp button</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Google Maps</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Fully responsive</li>
+        </ul>
+        <a href="https://wa.me/919999999999?text=Hi%20PromptKaro%2C%20Starter%20plan%20ke%20baare%20mein%20jaanna%20hai"
+           class="pbtn" target="_blank" rel="noopener noreferrer"
+           aria-label="Starter plan ke liye WhatsApp karo">WhatsApp Karo →</a>
+      </article>
+
+      <!-- Business (Popular) -->
+      <article class="pricing-card pricing-popular reveal-card" style="--reveal-delay: 80ms">
+        <div class="popular-badge" aria-label="Most popular">POPULAR</div>
+        <div class="ptier">
+          <span class="ptier-emoji" aria-hidden="true">🔵</span>
+          <span class="ptier-name">Business</span>
+        </div>
+        <div class="pprice">
+          <span class="pcurr">₹</span><span class="pamount">9,999</span>
+        </div>
+        <ul class="pfeatures" aria-label="Business features">
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> 3-5 pages website</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Inquiry form + gallery</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> SEO optimization</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Google My Business</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> WhatsApp integration</li>
+        </ul>
+        <a href="https://wa.me/919999999999?text=Hi%20PromptKaro%2C%20Business%20plan%20ke%20baare%20mein%20jaanna%20hai"
+           class="pbtn pbtn-primary" target="_blank" rel="noopener noreferrer"
+           aria-label="Business plan ke liye WhatsApp karo">WhatsApp Karo →</a>
+      </article>
+
+      <!-- Pro -->
+      <article class="pricing-card reveal-card" style="--reveal-delay: 160ms">
+        <div class="ptier">
+          <span class="ptier-emoji" aria-hidden="true">🟣</span>
+          <span class="ptier-name">Pro</span>
+        </div>
+        <div class="pprice">
+          <span class="pcurr">₹</span><span class="pamount">19,999</span>
+        </div>
+        <ul class="pfeatures" aria-label="Pro features">
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Custom web app</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Product catalog</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Price / EMI calculator</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Analytics dashboard</li>
+        </ul>
+        <a href="https://wa.me/919999999999?text=Hi%20PromptKaro%2C%20Pro%20plan%20ke%20baare%20mein%20jaanna%20hai"
+           class="pbtn" target="_blank" rel="noopener noreferrer"
+           aria-label="Pro plan ke liye WhatsApp karo">WhatsApp Karo →</a>
+      </article>
+
+      <!-- Monthly -->
+      <article class="pricing-card reveal-card" style="--reveal-delay: 240ms">
+        <div class="ptier">
+          <span class="ptier-emoji" aria-hidden="true">🟡</span>
+          <span class="ptier-name">Monthly</span>
+        </div>
+        <div class="pprice">
+          <span class="pcurr">₹</span><span class="pamount">1,999</span><span class="pperiod">/mo</span>
+        </div>
+        <ul class="pfeatures" aria-label="Monthly features">
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Content updates</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Hosting managed</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Social media graphics</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Priority support</li>
+        </ul>
+        <a href="https://wa.me/919999999999?text=Hi%20PromptKaro%2C%20Monthly%20plan%20ke%20baare%20mein%20jaanna%20hai"
+           class="pbtn" target="_blank" rel="noopener noreferrer"
+           aria-label="Monthly plan ke liye WhatsApp karo">WhatsApp Karo →</a>
+      </article>
+    </div>
+
+    <p class="pricing-footer-note">
+      Custom project?
+      <a href="https://wa.me/919999999999?text=Hi%20PromptKaro%2C%20mujhe%20custom%20project%20ke%20baare%20mein%20baat%20karni%20hai"
+         target="_blank" rel="noopener noreferrer"
+         aria-label="Custom project ke liye WhatsApp karo">WhatsApp pe baat karo →</a>
+    </p>
+  </section>
+
+  <!-- ===== TRUST / ABOUT ===== -->
+  <section id="about" aria-label="About PromptKaro">
+    <div class="about-grid">
+      <div class="about-left reveal-card" style="--reveal-delay: 0ms">
+        <div class="section-tag" data-en="Kaun Hai Hum?" data-gu="અમે કોણ છીએ?">Kaun Hai Hum?</div>
+        <h2 class="section-title">
+          <span data-en="AI-First" data-gu="AI-ફર્સ્ટ">AI-First</span><br>
+          <span data-en="Vibecoding Studio." data-gu="વાઇબકોડિંગ સ્ટુડિયો.">Vibecoding Studio.</span>
+        </h2>
+        <p class="about-body" data-en="Websites, apps, dashboards, catalogs, custom tools — jo bhi aapka business demand kare. AI ki power se, 48 ghante mein working reality." data-gu="Websites, apps, dashboards, catalogs, custom tools — જે business demand કરે. AI ની power થી, 48 કલાકમાં working reality.">Websites, apps, dashboards, catalogs, custom tools — jo bhi aapka business demand kare. AI ki power se, 48 ghante mein working reality.</p>
+
+        <div class="stats-row" aria-label="Statistics">
+          <div class="stat">
+            <span class="stat-val" data-target="48" data-suffix="hr">0hr</span>
+            <span class="stat-label" data-en="Average Delivery" data-gu="સરેરાશ ડિલિવરી">Average Delivery</span>
+          </div>
+          <div class="stat">
+            <span class="stat-val" data-target="5" data-suffix="+">0+</span>
+            <span class="stat-label" data-en="Projects" data-gu="પ્રોજેક્ટ્સ">Projects</span>
+          </div>
+          <div class="stat">
+            <span class="stat-val" data-target="100" data-suffix="%">0%</span>
+            <span class="stat-label" data-en="Satisfaction" data-gu="સંતોષ">Satisfaction</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-right reveal-card" style="--reveal-delay: 150ms">
+        <div class="what-we-build-card">
+          <div class="wwb-head" data-en="What We Build" data-gu="અમે શું બનાવીએ છીએ">What We Build</div>
+          <ul class="wwb-list">
+            <li><span class="wwb-check" aria-hidden="true">✓</span><span data-en="Business Websites" data-gu="બિઝનેસ વેબસાઈટ">Business Websites</span></li>
+            <li><span class="wwb-check" aria-hidden="true">✓</span><span data-en="Mobile Apps" data-gu="મોબાઇલ એપ">Mobile Apps</span></li>
+            <li><span class="wwb-check" aria-hidden="true">✓</span><span data-en="Admin Dashboards" data-gu="Admin Dashboard">Admin Dashboards</span></li>
+            <li><span class="wwb-check" aria-hidden="true">✓</span><span data-en="Product Catalogs" data-gu="પ્રોડક્ટ કેટેલોગ">Product Catalogs</span></li>
+            <li><span class="wwb-check" aria-hidden="true">✓</span><span data-en="Custom Tools & Calculators" data-gu="Custom Tools અને Calculators">Custom Tools &amp; Calculators</span></li>
+            <li><span class="wwb-check" aria-hidden="true">✓</span><span data-en="Anything You Can Imagine" data-gu="જે પણ imagine કરી શકો">Anything You Can Imagine</span></li>
+          </ul>
+          <div class="testimonial-placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <div>
+              <p class="tph-main" data-en="Real reviews coming soon..." data-gu="જલ્દી real reviews આવશે...">Real reviews coming soon...</p>
+              <p class="tph-sub" data-en="Building for you first 🙏" data-gu="પહેલાં આપના માટે બનાવીએ 🙏">Building for you first 🙏</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer id="footer" role="contentinfo">
+    <div class="footer-inner">
+      <a href="#hero" class="logo logo-sm" aria-label="PromptKaro — back to top">
+        <span class="logo-chevron" aria-hidden="true">›</span><span class="logo-prompt">Prompt</span><span class="logo-karo">Karo</span><span class="logo-cursor logo-cursor-sm" aria-hidden="true"></span>
+      </a>
+      <p class="footer-tagline" data-en="Built for Bharat. Powered by AI." data-gu="ભારત માટે બનેલ. AI દ્વારા સંચાલિત.">Built for Bharat. Powered by AI.</p>
+      <nav class="footer-links" aria-label="Social links">
+        <a href="https://wa.me/919999999999" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3-8.63A2 2 0 0 1 3.77 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          WhatsApp
+        </a>
+        <a href="https://instagram.com/promptkaro" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+          Instagram
+        </a>
+        <a href="mailto:hello@promptkaro.in" aria-label="Email">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          Email
+        </a>
+      </nav>
+      <div class="footer-bottom">
+        <p>© 2026 PromptKaro</p>
+        <p class="footer-fine">Powered by caffeine, Claude, and desi jugaad</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp (desktop) -->
+  <a href="https://wa.me/919999999999?text=Hi%20PromptKaro%2C%20mujhe%20apne%20business%20ke%20liye%20website%20chahiye"
+     class="wa-float"
+     target="_blank" rel="noopener noreferrer"
+     aria-label="WhatsApp pe baat karo">
+    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3-8.63A2 2 0 0 1 3.77 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+  </a>
+
+  <!-- Mobile WhatsApp bar -->
+  <a href="https://wa.me/919999999999?text=Hi%20PromptKaro%2C%20mujhe%20apne%20business%20ke%20liye%20website%20chahiye"
+     class="wa-mobile-bar"
+     target="_blank" rel="noopener noreferrer"
+     aria-label="WhatsApp pe baat karo">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3-8.63A2 2 0 0 1 3.77 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    WhatsApp pe baat karo
+  </a>
+
+  <script src="js/terminal-effect.js" defer></script>
+  <script src="js/animations.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>

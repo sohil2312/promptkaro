@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(code:*)",
+      "mcp__playwright",
+      "Bash(mkdir -p css js tests assets)",
+      "Bash(npm init:*)",
+      "Bash(npm install:*)",
+      "Bash(npx playwright:*)",
+      "Bash(find /Users/mufasa/Documents/Projects/promptkaro -maxdepth 2 -not -path */node_modules/* -not -path */.playwright-mcp/*)",
+      "Bash(grep -v \"^\\\\.$\")",
+      "Bash(grep -v \"^\\\\.\\\\.$\")",
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "spawner"
+  ]
+}
