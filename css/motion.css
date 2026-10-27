@@ -200,3 +200,20 @@
   .product.is-armed .frag-tiles li:not(.is-in) { animation: none; }
   .js .frag-bars i { transition: none; }
 }
+
+/* ---------- Rendered objects arrive with a little spring ---------- */
+:root { --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1); }
+.js .frag-thumb .obj { transition: transform 520ms var(--ease-spring), opacity 240ms ease; }
+.product.is-armed .frag-tiles li:not(.is-in) .obj { opacity: 0; transform: translateZ(18px) translateY(10px) scale(0.6); }
+
+.js .map-pin { transition: transform 620ms var(--ease-spring) 180ms, opacity 160ms ease 180ms; }
+.product.is-armed .frag-map-wrap:not(.is-in) .map-pin { opacity: 0; transform: translateZ(28px) translateY(-34px); }
+.frag-map-wrap.is-in .pin-pulse { animation: pin-pulse 900ms var(--ease-out) 700ms 1 both; }
+@keyframes pin-pulse { from { opacity: 0.9; transform: scale(0.4); } to { opacity: 0; transform: scale(1.8); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .js .frag-thumb .obj, .js .map-pin { transition: opacity 200ms ease; }
+  .product.is-armed .frag-tiles li:not(.is-in) .obj,
+  .product.is-armed .frag-map-wrap:not(.is-in) .map-pin { transform: translateZ(18px); }
+  .frag-map-wrap.is-in .pin-pulse { animation: none; }
+}

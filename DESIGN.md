@@ -64,6 +64,10 @@ Based on Emil Kowalski's design-engineering rules.
   before the share button lands; the EMI slider glides 3 → 12 months while the amount rolls (and
   stays a real, keyboard-usable control); the Dashboard bars grow left to right as the total
   counts to 38. Grabbing the slider mid-demo stops the demo. Titles and copy are never hidden.
+- **Rendered objects, not icons:** product visuals are live CSS-rendered clay objects (phone, watch,
+  earbuds, charger, map pin, coins, pillars) sharing one material (`.clay`, set `--c`). They pop in
+  on a spring and sit forward in 3D so they parallax when the card tilts. The coin stack is driven
+  by the EMI slider (one coin per ₹420 a month).
 - **Cards feel physical:** on mouse, a sample card tilts up to 5° (product cards 3°) toward the pointer through a
   damped spring (it lags and settles, never snaps) with a soft sheen; on press, mouse or touch,
   it squishes to 0.98.

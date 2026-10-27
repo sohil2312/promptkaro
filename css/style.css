@@ -856,8 +856,6 @@ html:not(.js) .dock { display: none; }
   border-radius: var(--r-3);
   background: var(--card-bg);
   color: var(--card-fg);
-  overflow: hidden;
-  isolation: isolate;
 }
 .product-rani     { --card-bg: var(--rani);     --card-fg: var(--on-ink); --card-fg-2: #FFE3EE; }
 .product-marigold { --card-bg: var(--marigold); }
@@ -950,7 +948,6 @@ html:not(.js) .dock { display: none; }
   background: var(--marigold-soft);
   color: #7A4A00;
 }
-.frag-thumb svg { width: 28px; height: 28px; }
 .frag-share {
   display: flex;
   align-items: center;
@@ -1040,4 +1037,212 @@ html:not(.js) .dock { display: none; }
 @media (min-width: 1100px) {
   .product { padding: var(--s-7); }
   .product-marigold .frag-tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .product-marigold .frag-thumb { aspect-ratio: 1; }
+  .product-marigold .frag-thumb .obj { scale: 1.35; }
+  .product-neem .frag-bars { height: 168px; }
 }
+
+/* ---------- Rendered clay objects (pure CSS, no images) ----------
+   One material: a lit top-left highlight, a soft core shadow bottom-right,
+   a rim light and a contact shadow. Set --c and the shading follows. */
+.clay {
+  --c: #E9E4DA;
+  background:
+    radial-gradient(85% 75% at 28% 20%, color-mix(in oklab, var(--c) 45%, white) 0%, transparent 60%),
+    radial-gradient(110% 100% at 78% 92%, color-mix(in oklab, var(--c) 72%, black) 0%, transparent 62%),
+    var(--c);
+  box-shadow:
+    inset 1.5px 2px 2.5px color-mix(in oklab, var(--c) 25%, white),
+    inset -2px -3px 5px color-mix(in oklab, var(--c) 62%, black),
+    0 4px 8px -3px rgb(19 32 26 / 0.35);
+}
+.obj { position: relative; display: block; transform-style: preserve-3d; }
+.obj i, .obj b, .obj span { display: block; }
+.obj-shadow {
+  position: absolute;
+  left: 50%;
+  bottom: 9%;
+  width: 46%;
+  height: 10px;
+  translate: -50% 0;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(19 32 26 / 0.28), transparent);
+}
+.frag-thumb { position: relative; transform-style: preserve-3d; }
+.frag-thumb .obj { transform: translateZ(18px); }
+
+/* Phone */
+.phone-body { --c: #1F3A3D; position: relative; width: 34px; height: 60px; padding: 3px; border-radius: 9px; rotate: -12deg; }
+.phone-screen {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr);
+  align-content: start;
+  gap: 3px;
+  height: 100%;
+  padding: 9px 4px 4px;
+  border-radius: 6px;
+  background: radial-gradient(120% 80% at 30% 0%, #2F5960, #0D1A1C 70%);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.06);
+}
+.phone-screen i { height: 7px; border-radius: 2.5px; box-shadow: inset 0 1px 1px rgb(255 255 255 / 0.45); }
+.phone-screen i:nth-child(1) { background: var(--marigold); }
+.phone-screen i:nth-child(2) { background: #25D366; }
+.phone-screen i:nth-child(3) { background: #E8457E; }
+.phone-screen i:nth-child(4) { background: #5CC8D0; }
+.phone-screen i:nth-child(5) { background: #A9D18A; }
+.phone-screen i:nth-child(6) { background: #F6EFE4; }
+.phone-cam { position: absolute; top: 5px; left: 50%; width: 8px; height: 2.5px; translate: -50% 0; border-radius: 2px; background: #050A0B; }
+
+/* Watch */
+.obj-watch { display: grid !important; justify-items: center; rotate: 8deg; }
+.band { --c: #D63F74; width: 20px; height: 14px; }
+.band-top { border-radius: 6px 6px 2px 2px; margin-bottom: -3px; }
+.band-bottom { border-radius: 2px 2px 6px 6px; margin-top: -3px; }
+.watch-case { --c: #2C3A34; position: relative; z-index: 1; width: 36px; height: 40px; padding: 3px; border-radius: 12px; }
+.watch-face {
+  position: relative;
+  display: grid !important;
+  place-items: center;
+  height: 100%;
+  border-radius: 9px;
+  background: radial-gradient(100% 90% at 30% 10%, #24302B, #070C0A 70%);
+}
+.watch-ring {
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  background: conic-gradient(#5BE38F 0 72%, rgb(255 255 255 / 0.12) 0);
+  -webkit-mask: radial-gradient(closest-side, transparent 72%, #000 75%);
+          mask: radial-gradient(closest-side, transparent 72%, #000 75%);
+}
+.watch-face b { position: relative; font-size: 8px; font-weight: 700; color: #FFF; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+
+/* Earbuds in their case */
+.obj-buds { width: 64px; height: 56px; }
+.buds-case { --c: #F4F1EA; position: absolute; left: 6px; bottom: 4px; width: 52px; height: 34px; border-radius: 16px 16px 18px 18px; }
+.buds-seam { position: absolute; left: 6px; right: 6px; top: 11px; height: 1px; background: rgb(19 32 26 / 0.14); border-radius: 1px; }
+.buds-led { position: absolute; left: 50%; top: 18px; width: 4px; height: 4px; translate: -50% 0; border-radius: 50%; background: #25D366; box-shadow: 0 0 4px #25D366; }
+.bud { position: absolute; top: 0; width: 18px; height: 34px; }
+.bud-l { left: 10px; rotate: -14deg; }
+.bud-r { right: 10px; rotate: 14deg; }
+.bud-head { --c: #FFFFFF; width: 18px; height: 18px; border-radius: 50%; }
+.bud-head::after { content: ''; display: block; width: 7px; height: 7px; margin: 5px 0 0 3px; border-radius: 50%; background: #2C3A34; opacity: 0.85; }
+.bud-r .bud-head::after { margin-left: 8px; }
+.bud-stem { --c: #FFFFFF; width: 7px; height: 18px; margin: -3px auto 0; border-radius: 4px; }
+
+/* Charger */
+.obj-plug { display: grid !important; justify-items: center; width: 64px; height: 60px; rotate: -6deg; }
+.plug-prongs { display: flex !important; gap: 8px; margin-bottom: -2px; }
+.plug-prongs i { width: 5px; height: 11px; border-radius: 1.5px 1.5px 0 0; background: linear-gradient(90deg, #9AA19E, #EEF0EF 45%, #8C9390); }
+.plug-body { --c: #F4F1EA; position: relative; z-index: 1; display: grid !important; place-items: center; width: 36px; height: 34px; border-radius: 10px; }
+.plug-body b { font-size: 9px; font-weight: 700; color: var(--ink-3); }
+.plug-cable {
+  position: absolute;
+  top: 40px;
+  left: 30px;
+  width: 26px;
+  height: 18px;
+  border: 4px solid #E6E2D9;
+  border-top: 0;
+  border-right: 0;
+  border-radius: 0 0 0 14px;
+  box-shadow: inset 1px -1px 1px rgb(19 32 26 / 0.12);
+}
+
+/* ---------- Map with a dropping pin (Website card) ---------- */
+.frag-map-wrap { position: relative; margin-top: var(--s-3); transform-style: preserve-3d; }
+.frag-map {
+  position: relative;
+  height: 104px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #ECEEE4;
+}
+.map-water { position: absolute; right: -20%; top: -40%; width: 55%; height: 180%; border-radius: 50%; background: #CDE7EE; box-shadow: inset 6px 0 0 #DCEFF3; }
+.map-park { position: absolute; left: 8%; bottom: -18%; width: 34%; height: 60%; border-radius: 46% 54% 40% 60%; background: #D4E8BF; }
+.map-road { position: absolute; background: #FFFFFF; box-shadow: 0 0 0 1px rgb(19 32 26 / 0.05); }
+.map-road-a { left: -10%; right: -10%; top: 54%; height: 9px; rotate: -8deg; background: #FFF6DC; box-shadow: 0 0 0 1px #F1DFA8; }
+.map-road-b { top: -10%; bottom: -10%; left: 38%; width: 6px; rotate: 14deg; }
+.map-road-c { top: -10%; bottom: -10%; left: 70%; width: 5px; rotate: -20deg; }
+.map-label {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: rgb(255 255 255 / 0.85);
+  font-size: 0.6875rem;
+  font-weight: var(--fw-strong);
+  color: var(--ink-2);
+}
+.map-pin {
+  position: absolute;
+  left: 46%;
+  top: 22px;
+  width: 26px;
+  height: 34px;
+  transform: translateZ(28px);
+  transform-style: preserve-3d;
+}
+.pin-head {
+  --c: #E2336E;
+  position: absolute;
+  inset: 0 0 auto;
+  width: 26px;
+  height: 26px;
+  border-radius: 50% 50% 50% 0;
+  rotate: -45deg;
+}
+.pin-head::after { content: ''; position: absolute; inset: 8px; border-radius: 50%; background: #FFF; box-shadow: inset 1px 1px 2px rgb(19 32 26 / 0.25); }
+.pin-shadow { position: absolute; left: 50%; bottom: -4px; width: 16px; height: 5px; translate: -50% 0; border-radius: 50%; background: radial-gradient(closest-side, rgb(19 32 26 / 0.35), transparent); }
+.pin-pulse { position: absolute; left: 50%; bottom: -8px; width: 34px; height: 12px; translate: -50% 0; border-radius: 50%; border: 2px solid #E2336E; opacity: 0; }
+
+/* ---------- Coin stack (Calculator card) ---------- */
+.frag-emi-result { justify-content: space-between; align-items: flex-end; min-height: 92px; }
+.frag-emi-result p { display: flex; align-items: baseline; gap: var(--s-1); flex-wrap: wrap; }
+.coins { display: flex; flex-direction: column-reverse; align-items: center; padding-bottom: 2px; transform: translateZ(22px); }
+.coin {
+  --c: #F2B528;
+  display: block;
+  width: 38px;
+  height: 13px;
+  margin-top: -7px;
+  border-radius: 50%;
+  background:
+    radial-gradient(60% 55% at 40% 35%, #FFE7A3 0%, transparent 70%),
+    var(--c);
+  box-shadow:
+    inset 0 0 0 2px #E4A417,
+    inset 0 -1px 0 2.5px #FFD66B,
+    0 3px 0 #B98210,
+    0 4px 3px -1px rgb(19 32 26 / 0.3);
+}
+.coin:first-child { margin-top: 0; }
+
+/* ---------- Dashboard pillars ---------- */
+.frag-bars i {
+  position: relative;
+  border-radius: 999px 999px 6px 6px;
+  background:
+    linear-gradient(90deg, rgb(255 255 255 / 0.35) 0%, transparent 38%, rgb(19 32 26 / 0.18) 100%),
+    #9FCB7E;
+  box-shadow: 0 3px 6px -3px rgb(19 32 26 / 0.35);
+}
+.frag-bars .is-today i {
+  background:
+    linear-gradient(90deg, rgb(255 255 255 / 0.3) 0%, transparent 38%, rgb(0 0 0 / 0.22) 100%),
+    var(--action);
+}
+.bar-cap {
+  position: absolute;
+  left: 18%;
+  right: 18%;
+  top: 3px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.55);
+  filter: blur(0.5px);
+}
+
+/* Depth: product cards keep a 3D context so rendered objects parallax under tilt */
+.product, .product .frag, .product .frag-tiles, .product .frag-tiles li, .product .frag-emi, .product .frag-emi-result { transform-style: preserve-3d; }

@@ -15,12 +15,46 @@
   var out = document.getElementById('emiMonthsOut');
   var emi = document.getElementById('emiValue');
 
+  /* Coin stack: one coin per ₹420 a month, so fewer months means a taller stack. */
+  var coins = document.getElementById('emiCoins');
+  var SPRING = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
+
+  function setCoins(monthly) {
+    if (!coins) return;
+    var want = Math.max(1, Math.min(12, Math.round(monthly / 420)));
+    var live = Array.prototype.slice.call(coins.querySelectorAll('.coin:not(.is-leaving)'));
+    var animate = !reduce.matches && 'animate' in coins;
+
+    for (var n = live.length; n < want; n++) {
+      var c = document.createElement('i');
+      c.className = 'coin';
+      coins.appendChild(c);
+      if (animate) {
+        c.animate([
+          { transform: 'translateY(-26px) rotateX(40deg)', opacity: 0 },
+          { transform: 'none', opacity: 1 }
+        ], { duration: 420, easing: SPRING });
+      }
+    }
+    // Lift coins off the top; leaving coins no longer count, so a fast drag never removes one twice.
+    for (var k = live.length - 1; k >= want; k--) {
+      var coin = live[k];
+      if (!animate) { coin.remove(); continue; }
+      coin.classList.add('is-leaving');
+      coin.animate([{ transform: 'none', opacity: 1 }, { transform: 'translateY(-18px)', opacity: 0 }],
+        { duration: 200, easing: 'cubic-bezier(0.23, 1, 0.32, 1)', fill: 'forwards' })
+        .finished.then(function (a) { a.effect.target.remove(); }, function () {});
+    }
+  }
+
   function renderEmi(months) {
     if (!range) return;
     var price = Number(range.dataset.price);
     var m = Math.round(months);
+    var monthly = Math.round(price / m);
     out.textContent = m;
-    emi.textContent = rupees.format(Math.round(price / m));
+    emi.textContent = rupees.format(monthly);
+    setCoins(monthly);
     var pct = ((months - range.min) / (range.max - range.min)) * 100;
     range.style.setProperty('--fill', pct.toFixed(2) + '%');
   }
@@ -36,9 +70,10 @@
 
   /* ---------- Demos ---------- */
   var demos = {
-    // A search is typed, then the shop's result resolves, chips last.
+    // A search is typed, the map finds the shop, then its result resolves, chips last.
     search: function (card) {
       var query = card.querySelector('.frag-query');
+      var map = card.querySelector('.frag-map-wrap');
       var result = card.querySelector('.frag-result');
       var chips = Array.prototype.slice.call(card.querySelectorAll('.frag-chip'));
       card.classList.add('is-typing');
@@ -50,6 +85,9 @@
       return typing.finished.then(function () {
         card.classList.remove('is-typing');
         return wait(220);
+      }).then(function () {
+        if (map) show(map);          // map appears, the pin drops onto the shop
+        return wait(map ? 820 : 0);
       }).then(function () {
         show(result);
         return wait(260);

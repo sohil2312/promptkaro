@@ -140,6 +140,26 @@ test.describe('3. Interaction', () => {
     await expect(page.locator('.frag-share')).toBeVisible();
   });
 
+  test('coin stack follows the EMI: fewer months, more coins', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    const range = page.locator('#emiMonths');
+    await range.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(1800);
+    const live = page.locator('#emiCoins .coin:not(.is-leaving)');
+    await range.fill('3');
+    await expect(live).toHaveCount(11);
+    await range.fill('24');
+    await expect(live).toHaveCount(1);
+    await expect(page.locator('#emiCoins .coin')).toHaveCount(1, { timeout: 2000 }); // leaving coins are removed
+  });
+
+  test('product visuals are rendered elements, not icon SVGs', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    await expect(page.locator('.frag-tiles svg')).toHaveCount(0);
+    await expect(page.locator('.frag-tiles .obj')).toHaveCount(4);
+    await expect(page.locator('.map-pin')).toHaveCount(1);
+  });
+
   test('EMI calculator works as a real control', async ({ page }) => {
     await page.goto(PAGE_URL);
     const range = page.locator('#emiMonths');
