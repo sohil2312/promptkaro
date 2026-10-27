@@ -2,479 +2,535 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PromptKaro — Websites, Apps & Dashboards in 48hrs | AI Vibecoding Studio</title>
-  <meta name="description" content="AI-powered websites, apps, dashboards and custom tools for Indian businesses. Free demo first, payment after. PromptKaro — AI Vibecoding Studio.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PromptKaro: your business website in 48 hours, Idar</title>
+  <meta name="description" content="Websites for shops, clinics, coaching classes and local businesses in Sabarkantha. Free working demo in 48 hours. Pay only if you like it. Fixed prices from ₹4,999.">
+  <meta name="theme-color" content="#FFFFFF">
 
-  <!-- OG / Social -->
-  <meta property="og:title" content="PromptKaro — Websites, Apps & More in 48 Hours">
-  <meta property="og:description" content="AI Vibecoding Studio. Websites, apps, dashboards, custom tools — free demo first.">
+  <meta property="og:title" content="PromptKaro: your website, ready in 48 hours">
+  <meta property="og:description" content="Free working demo first. Pay only if you like it. Fixed prices from ₹4,999.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://promptkaro.in">
+  <meta property="og:url" content="https://promptkaro.in/">
+  <meta property="og:image" content="https://promptkaro.in/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="PromptKaro — Websites, Apps & More in 48 Hours">
-  <meta name="twitter:description" content="AI Vibecoding Studio. Free demo first. Build anything.">
+  <meta name="twitter:image" content="https://promptkaro.in/assets/og.png">
 
-  <!-- Favicon: lime cursor block on dark -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23111114'/><rect x='12' y='6' width='8' height='20' rx='2' fill='%23c8ff00'/></svg>">
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@800&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&family=Noto+Sans+Gujarati:wght@400;700&display=swap" rel="stylesheet">
-  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&display=swap" rel="stylesheet">
-  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/animations.css">
-  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/assets/fonts/anek-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/motion.css">
+  <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
-  <!-- Film grain overlay -->
-  <div class="grain-overlay" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- ===== NAVIGATION ===== -->
-  <nav id="nav" role="navigation" aria-label="Main navigation">
-    <a href="#hero" class="logo" aria-label="PromptKaro — homepage">
-      <span class="logo-chevron" aria-hidden="true">›</span><span class="logo-prompt">Prompt</span><span class="logo-karo">Karo</span><span class="logo-cursor" aria-hidden="true"></span>
-    </a>
-    <div class="nav-right">
-      <a href="#demos" class="nav-link" data-en="Our Work" data-gu="અમારું કામ">Our Work</a>
-      <button class="lang-toggle" id="langToggle" aria-label="Toggle language between English and Gujarati">
-        <span class="lt-en">EN</span><span class="lt-sep">|</span><span class="lt-gu">ગુ</span>
-      </button>
-      <a href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20mujhe%20apne%20business%20ke%20liye%20website%20chahiye"
-         class="btn-wa nav-wa"
-         target="_blank"
-         rel="noopener noreferrer"
-         aria-label="Chat with us on WhatsApp">
-        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3-8.63A2 2 0 0 1 3.77 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        WhatsApp
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a href="#top" class="wordmark" aria-label="PromptKaro, back to top" translate="no">
+        <span class="wordmark-chevron" aria-hidden="true">›</span>Prompt<span class="wordmark-karo">Karo</span><span class="wordmark-cursor" aria-hidden="true"></span>
       </a>
-    </div>
-  </nav>
-
-  <!-- ===== HERO ===== -->
-  <section id="hero" aria-label="Hero">
-    <div class="hero-bg" aria-hidden="true">
-      <div class="dot-grid"></div>
-      <div class="hero-glow hero-glow-lime"></div>
-      <div class="hero-glow hero-glow-orange"></div>
-    </div>
-
-    <div class="hero-content">
-      <div class="hero-badge" data-en="⚡ AI Vibecoding Studio · 48hr Delivery" data-gu="⚡ AI વાઇબકોડિંગ સ્ટુડિયો · 48 કલાક ડિલિવરી">
-        <span class="badge-pulse" aria-hidden="true"></span>
-        ⚡ AI Vibecoding Studio · 48hr Delivery
-      </div>
-
-      <h1 class="hero-headline">
-        <span class="hl-line hl-static" data-en="Your Idea" data-gu="તમારો આઇડિયા">Your Idea</span>
-        <span class="hl-line">
-          <span class="hl-rotating-wrap">
-            <span class="hl-rotating" id="rotatingWord" aria-live="polite">Website</span>
-          </span>
-        </span>
-        <span class="hl-line hl-static hl-ready" data-en="Ready in 48 Hours." data-gu="48 કલાકમાં તૈયાર.">Ready in 48 Hours.</span>
-      </h1>
-
-      <!-- Terminal window -->
-      <div class="terminal-window" role="log" aria-label="Live build demo">
-        <div class="terminal-header" aria-hidden="true">
-          <span class="t-dot t-red"></span>
-          <span class="t-dot t-yellow"></span>
-          <span class="t-dot t-green"></span>
-          <span class="t-title">promptkaro — build</span>
-        </div>
-        <div class="terminal-body">
-          <div class="t-prompt-line">
-            <span class="t-prompt-char" aria-hidden="true">›</span>
-            <span class="t-command" id="terminalCommand"></span><span class="t-caret" id="terminalCaret" aria-hidden="true">▌</span>
-          </div>
-          <div class="t-pixel-canvas" id="terminalCanvas" aria-hidden="true"></div>
-          <div class="t-ready-msg" id="terminalReady" aria-live="polite"></div>
-        </div>
-      </div>
-
-      <!-- CTA -->
-      <div class="hero-cta">
-        <a href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20mujhe%20free%20demo%20chahiye"
-           class="btn-primary"
-           target="_blank"
-           rel="noopener noreferrer"
-           aria-label="Get your free demo on WhatsApp">
-          <span data-en="Get Free Demo →" data-gu="ફ્રી ડેમો મેળવો →">Get Free Demo →</span>
-        </a>
-        <p class="cta-sub" data-en="No charge. See it first, then decide." data-gu="કોઈ ચાર્જ નહીં. પહેલાં જુઓ, પછી નક્કી કરો.">No charge. See it first, then decide.</p>
-      </div>
-    </div>
-
-    <div class="scroll-hint" aria-hidden="true">
-      <span class="scroll-arrow">↓</span>
-      <span data-en="Scroll" data-gu="સ્ક્રોલ">Scroll</span>
-    </div>
-  </section>
-
-  <!-- ===== DEMO WALL ===== -->
-  <section id="demos" aria-label="Portfolio — what we can build">
-    <div class="section-header">
-      <div class="section-tag" data-en="What We Build" data-gu="આ બનાવી શકીએ">What We Build</div>
-      <h2 class="section-title">
-        <span data-en="For Every Business" data-gu="દરેક બિઝનેસ માટે">For Every Business</span><br>
-        <span data-en="One Perfect Solution" data-gu="એક પર્ફેક્ટ સોલ્યુશન">One Perfect Solution</span>
-      </h2>
-    </div>
-
-    <div class="bento-grid">
-      <!-- Large: Property Dealer (spans 2 cols) -->
-      <article class="bento-card bento-large reveal-card" style="--reveal-delay: 0ms">
-        <div class="bcard-icon" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        </div>
-        <div class="bcard-body">
-          <h3 data-en="Property Dealer Site" data-gu="પ્રોપર્ટી ડીલર સાઇટ">Property Dealer Site</h3>
-          <p data-en="Property listings, WhatsApp inquiry, Google Maps — all in one place" data-gu="Property listings, WhatsApp inquiry, Google Maps — બધું એક જ જગ્યાએ">Property listings, WhatsApp inquiry, Google Maps — all in one place</p>
-          <a href="#" class="bcard-link" aria-label="Property dealer demo - coming soon">
-            <span data-en="View Demo →" data-gu="ડેમો જુઓ →">View Demo →</span> <span class="badge-soon">Coming Soon</span>
-          </a>
-        </div>
-        <div class="bcard-mockup" aria-hidden="true">
-          <div class="mock-browser">
-            <div class="mock-bar">
-              <div class="mock-dots"><span></span><span></span><span></span></div>
-            </div>
-            <div class="mock-body">
-              <div class="mock-hero-strip"></div>
-              <div class="mock-cards-row">
-                <div class="mock-card-sm"></div>
-                <div class="mock-card-sm"></div>
-                <div class="mock-card-sm"></div>
-              </div>
-              <div class="mock-text-lines">
-                <div class="mock-line w80"></div>
-                <div class="mock-line w60"></div>
-                <div class="mock-line w70"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <!-- Medium: Coaching -->
-      <article class="bento-card bento-medium reveal-card" style="--reveal-delay: 80ms">
-        <div class="bcard-icon" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-        </div>
-        <div class="bcard-body">
-          <h3 data-en="Coaching Class Site" data-gu="કોચિંગ ક્લાસ સાઇટ">Coaching Class Site</h3>
-          <p data-en="Batches, fees, results and admission form" data-gu="Batches, fees, results અને admission form">Batches, fees, results and admission form</p>
-          <a href="#" class="bcard-link" aria-label="Coaching class demo - coming soon">
-            <span data-en="View Demo →" data-gu="ડેમો જુઓ →">View Demo →</span> <span class="badge-soon">Coming Soon</span>
-          </a>
-        </div>
-      </article>
-
-      <!-- Medium: Mobile Shop -->
-      <article class="bento-card bento-medium reveal-card" style="--reveal-delay: 160ms">
-        <div class="bcard-icon" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
-        </div>
-        <div class="bcard-body">
-          <h3 data-en="Mobile Shop Catalog" data-gu="મોબાઇલ શોપ Catalog">Mobile Shop Catalog</h3>
-          <p data-en="Product catalog, price list, EMI calculator" data-gu="Product catalog, price list, EMI calculator">Product catalog, price list, EMI calculator</p>
-          <a href="#" class="bcard-link" aria-label="Mobile shop demo - coming soon">
-            <span data-en="View Demo →" data-gu="ડેમો જુઓ →">View Demo →</span> <span class="badge-soon">Coming Soon</span>
-          </a>
-        </div>
-      </article>
-
-      <!-- Small: Doctor -->
-      <article class="bento-card bento-small reveal-card" style="--reveal-delay: 240ms">
-        <div class="bcard-icon" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2a2 2 0 0 0-2 2v5H4a2 2 0 0 0-2 2v2c0 1.1.9 2 2 2h5v5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-5h5a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-5V4a2 2 0 0 0-2-2h-2z"/></svg>
-        </div>
-        <div class="bcard-body">
-          <h3 data-en="Doctor / Clinic" data-gu="ડૉક્ટર / ક્લિનિક">Doctor / Clinic</h3>
-          <p data-en="Appointment booking and clinic info" data-gu="Appointment booking અને clinic info">Appointment booking and clinic info</p>
-          <a href="#" class="bcard-link" aria-label="Doctor clinic demo - coming soon">
-            <span data-en="View Demo →" data-gu="ડેમો જુઓ →">View Demo →</span> <span class="badge-soon">Coming Soon</span>
-          </a>
-        </div>
-      </article>
-
-      <!-- Small: More -->
-      <article class="bento-card bento-small bento-more reveal-card" style="--reveal-delay: 320ms">
-        <div class="bcard-icon bcard-icon-lime" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
-        </div>
-        <div class="bcard-body">
-          <h3 data-en="And Much More..." data-gu="અને ઘણું બધું...">And Much More...</h3>
-          <p data-en="Restaurant, Salon, Shop, NGO — any business" data-gu="Restaurant, Salon, Shop, NGO — કોઈ પણ business">Restaurant, Salon, Shop, NGO — any business</p>
-          <a href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20mujhe%20apne%20business%20ke%20liye%20website%20chahiye"
-             class="bcard-link bcard-link-active"
-             target="_blank" rel="noopener noreferrer"
-             aria-label="Discuss your business on WhatsApp">
-            <span data-en="Let's Talk →" data-gu="વાત કરો →">Let's Talk →</span>
-          </a>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- ===== PROCESS ===== -->
-  <section id="process" aria-label="How it works">
-    <div class="section-header">
-      <div class="section-tag" data-en="How It Works" data-gu="કેવી રીતે કામ કરે છે">How It Works</div>
-      <h2 class="section-title" data-en="Three Steps. That's It." data-gu="ત્રણ સ્ટેપ. બસ.">Three Steps. That's It.</h2>
-    </div>
-
-    <div class="process-wrap">
-      <!-- Step 1 -->
-      <article class="process-card reveal-card" style="--reveal-delay: 0ms">
-        <div class="process-icon" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        </div>
-        <div class="process-num">01</div>
-        <div class="process-cmd">&gt; idea_batao</div>
-        <h3 data-en="Share Your Idea" data-gu="આઇડિયા જણાવો">Share Your Idea</h3>
-        <p data-en="Tell us your requirements on WhatsApp. Hindi, Gujarati, or English — your choice." data-gu="WhatsApp પર requirement જણાવો. Hindi, Gujarati, English — જે comfortable હોય.">Tell us your requirements on WhatsApp. Hindi, Gujarati, or English — your choice.</p>
-      </article>
-
-      <div class="process-connector" aria-hidden="true"></div>
-
-      <!-- Step 2 -->
-      <article class="process-card reveal-card" style="--reveal-delay: 120ms">
-        <div class="process-icon" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-        </div>
-        <div class="process-num">02</div>
-        <div class="process-cmd">&gt; demo_dekho</div>
-        <h3 data-en="See the Demo" data-gu="ડેમો જુઓ">See the Demo</h3>
-        <p data-en="Working demo in 48 hours. Free. Don't like it? No charge." data-gu="48 કલાકમાં working demo. ફ્રી. ન ગમે તો કોઈ charge નહીં.">Working demo in 48 hours. Free. Don't like it? No charge.</p>
-      </article>
-
-      <div class="process-connector" aria-hidden="true"></div>
-
-      <!-- Step 3 -->
-      <article class="process-card reveal-card" style="--reveal-delay: 240ms">
-        <div class="process-icon" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
-        </div>
-        <div class="process-num">03</div>
-        <div class="process-cmd">&gt; live_karo</div>
-        <h3 data-en="Go Live" data-gu="લાઇવ કરો">Go Live</h3>
-        <p data-en="Live with domain + hosting in 1 week. We handle everything." data-gu="1 અઠવાડિયામાં domain + hosting સાથે live. બધું અમે handle કરીએ.">Live with domain + hosting in 1 week. We handle everything.</p>
-      </article>
-    </div>
-
-    <div class="trust-badge" role="note">
-      <span aria-hidden="true">🛡️</span>
-      <span data-en="Free demo first. Payment after. Zero risk." data-gu="પહેલાં ફ્રી ડેમો. પછી પેમેન્ટ. ઝીરો રિસ્ક.">Free demo first. Payment after. Zero risk.</span>
-    </div>
-  </section>
-
-  <!-- ===== PRICING ===== -->
-  <section id="pricing" aria-label="Pricing">
-    <div class="section-header">
-      <div class="section-tag" data-en="Pricing" data-gu="કિંમત">Pricing</div>
-      <h2 class="section-title" data-en="Clear Pricing. No Hidden Fees." data-gu="સ્પષ્ટ કિંમત. કોઈ છુપી ફી નહીં.">Clear Pricing. No Hidden Fees.</h2>
-    </div>
-
-    <div class="pricing-grid">
-      <!-- Starter -->
-      <article class="pricing-card reveal-card" style="--reveal-delay: 0ms">
-        <div class="ptier">
-          <span class="ptier-emoji" aria-hidden="true">🟢</span>
-          <span class="ptier-name">Starter</span>
-        </div>
-        <div class="pprice">
-          <span class="pcurr">₹</span><span class="pamount">4,999</span>
-        </div>
-        <ul class="pfeatures" aria-label="Starter features">
-          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> 1-page website</li>
-          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> WhatsApp button</li>
-          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Google Maps</li>
-          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Fully responsive</li>
-        </ul>
-        <a href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20Starter%20plan%20ke%20baare%20mein%20jaanna%20hai"
-           class="pbtn" target="_blank" rel="noopener noreferrer"
-           aria-label="Chat on WhatsApp for Starter plan"><span data-en="Chat on WhatsApp →" data-gu="WhatsApp પર ચેટ →">Chat on WhatsApp →</span></a>
-      </article>
-
-      <!-- Business (Popular) -->
-      <article class="pricing-card pricing-popular reveal-card" style="--reveal-delay: 80ms">
-        <div class="popular-badge" aria-label="Most popular">POPULAR</div>
-        <div class="ptier">
-          <span class="ptier-emoji" aria-hidden="true">🔵</span>
-          <span class="ptier-name">Business</span>
-        </div>
-        <div class="pprice">
-          <span class="pcurr">₹</span><span class="pamount">9,999</span>
-        </div>
-        <ul class="pfeatures" aria-label="Business features">
-          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> 3-5 pages website</li>
-          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Inquiry form + gallery</li>
-          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> SEO optimization</li>
-          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Google My Business</li>
-          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> WhatsApp integration</li>
-        </ul>
-        <a href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20Business%20plan%20ke%20baare%20mein%20jaanna%20hai"
-           class="pbtn pbtn-primary" target="_blank" rel="noopener noreferrer"
-           aria-label="Chat on WhatsApp for Business plan"><span data-en="Chat on WhatsApp →" data-gu="WhatsApp પર ચેટ →">Chat on WhatsApp →</span></a>
-      </article>
-
-      <!-- Pro -->
-      <article class="pricing-card reveal-card" style="--reveal-delay: 160ms">
-        <div class="ptier">
-          <span class="ptier-emoji" aria-hidden="true">🟣</span>
-          <span class="ptier-name">Pro</span>
-        </div>
-        <div class="pprice">
-          <span class="pcurr">₹</span><span class="pamount">19,999</span>
-        </div>
-        <ul class="pfeatures" aria-label="Pro features">
-          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Custom web app</li>
-          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Product catalog</li>
-          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Price / EMI calculator</li>
-          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Analytics dashboard</li>
-        </ul>
-        <a href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20Pro%20plan%20ke%20baare%20mein%20jaanna%20hai"
-           class="pbtn" target="_blank" rel="noopener noreferrer"
-           aria-label="Chat on WhatsApp for Pro plan"><span data-en="Chat on WhatsApp →" data-gu="WhatsApp પર ચેટ →">Chat on WhatsApp →</span></a>
-      </article>
-
-      <!-- Monthly -->
-      <article class="pricing-card reveal-card" style="--reveal-delay: 240ms">
-        <div class="ptier">
-          <span class="ptier-emoji" aria-hidden="true">🟡</span>
-          <span class="ptier-name">Monthly</span>
-        </div>
-        <div class="pprice">
-          <span class="pcurr">₹</span><span class="pamount">1,999</span><span class="pperiod">/mo</span>
-        </div>
-        <ul class="pfeatures" aria-label="Monthly features">
-          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Content updates</li>
-          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Hosting managed</li>
-          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Social media graphics</li>
-          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Priority support</li>
-        </ul>
-        <a href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20Monthly%20plan%20ke%20baare%20mein%20jaanna%20hai"
-           class="pbtn" target="_blank" rel="noopener noreferrer"
-           aria-label="Chat on WhatsApp for Monthly plan"><span data-en="Chat on WhatsApp →" data-gu="WhatsApp પર ચેટ →">Chat on WhatsApp →</span></a>
-      </article>
-    </div>
-
-    <p class="pricing-footer-note">
-      <span data-en="Custom project?" data-gu="Custom project?">Custom project?</span>
-      <a href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20mujhe%20custom%20project%20ke%20baare%20mein%20baat%20karni%20hai"
-         target="_blank" rel="noopener noreferrer"
-         aria-label="Chat with us about your custom project"><span data-en="Chat with us →" data-gu="અમારી સાથે ચેટ →">Chat with us →</span></a>
-    </p>
-  </section>
-
-  <!-- ===== TRUST / ABOUT ===== -->
-  <section id="about" aria-label="About PromptKaro">
-    <div class="about-grid">
-      <div class="about-left reveal-card" style="--reveal-delay: 0ms">
-        <div class="section-tag" data-en="Who Are We?" data-gu="અમે કોણ છીએ?">Who Are We?</div>
-        <h2 class="section-title">
-          <span data-en="AI-First" data-gu="AI-ફર્સ્ટ">AI-First</span><br>
-          <span data-en="Vibecoding Studio." data-gu="વાઇબકોડિંગ સ્ટુડિયો.">Vibecoding Studio.</span>
-        </h2>
-        <p class="about-body" data-en="Websites, apps, dashboards, catalogs, custom tools — whatever your business needs. Powered by AI, delivered in 48 hours." data-gu="Websites, apps, dashboards, catalogs, custom tools — જે business demand કરે. AI ની power થી, 48 કલાકમાં working reality.">Websites, apps, dashboards, catalogs, custom tools — whatever your business needs. Powered by AI, delivered in 48 hours.</p>
-
-        <div class="stats-row" aria-label="Statistics">
-          <div class="stat">
-            <span class="stat-val" data-target="48" data-suffix="hr">0hr</span>
-            <span class="stat-label" data-en="Average Delivery" data-gu="સરેરાશ ડિલિવરી">Average Delivery</span>
-          </div>
-          <div class="stat">
-            <span class="stat-val" data-target="5" data-suffix="+">0+</span>
-            <span class="stat-label" data-en="Projects" data-gu="પ્રોજેક્ટ્સ">Projects</span>
-          </div>
-          <div class="stat">
-            <span class="stat-val" data-target="100" data-suffix="%">0%</span>
-            <span class="stat-label" data-en="Satisfaction" data-gu="સંતોષ">Satisfaction</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="about-right reveal-card" style="--reveal-delay: 150ms">
-        <div class="what-we-build-card">
-          <div class="wwb-head" data-en="What We Build" data-gu="અમે શું બનાવીએ છીએ">What We Build</div>
-          <ul class="wwb-list">
-            <li><span class="wwb-check" aria-hidden="true">✓</span><span data-en="Business Websites" data-gu="બિઝનેસ વેબસાઈટ">Business Websites</span></li>
-            <li><span class="wwb-check" aria-hidden="true">✓</span><span data-en="Mobile Apps" data-gu="મોબાઇલ એપ">Mobile Apps</span></li>
-            <li><span class="wwb-check" aria-hidden="true">✓</span><span data-en="Admin Dashboards" data-gu="Admin Dashboard">Admin Dashboards</span></li>
-            <li><span class="wwb-check" aria-hidden="true">✓</span><span data-en="Product Catalogs" data-gu="પ્રોડક્ટ કેટેલોગ">Product Catalogs</span></li>
-            <li><span class="wwb-check" aria-hidden="true">✓</span><span data-en="Custom Tools & Calculators" data-gu="Custom Tools અને Calculators">Custom Tools &amp; Calculators</span></li>
-            <li><span class="wwb-check" aria-hidden="true">✓</span><span data-en="Anything You Can Imagine" data-gu="જે પણ imagine કરી શકો">Anything You Can Imagine</span></li>
-          </ul>
-          <div class="testimonial-placeholder">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-            <div>
-              <p class="tph-main" data-en="Real reviews coming soon..." data-gu="જલ્દી real reviews આવશે...">Real reviews coming soon...</p>
-              <p class="tph-sub" data-en="Building for you first 🙏" data-gu="પહેલાં આપના માટે બનાવીએ 🙏">Building for you first 🙏</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== FOOTER ===== -->
-  <footer id="footer" role="contentinfo">
-    <div class="footer-inner">
-      <a href="#hero" class="logo logo-sm" aria-label="PromptKaro — back to top">
-        <span class="logo-chevron" aria-hidden="true">›</span><span class="logo-prompt">Prompt</span><span class="logo-karo">Karo</span><span class="logo-cursor logo-cursor-sm" aria-hidden="true"></span>
-      </a>
-      <p class="footer-tagline" data-en="Built for Bharat. Powered by AI." data-gu="ભારત માટે બનેલ. AI દ્વારા સંચાલિત.">Built for Bharat. Powered by AI.</p>
-      <nav class="footer-links" aria-label="Social links">
-        <a href="https://wa.me/919429051036" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3-8.63A2 2 0 0 1 3.77 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          WhatsApp
-        </a>
-        <a href="https://instagram.com/promptkaro" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-          Instagram
-        </a>
-        <a href="mailto:hello@promptkaro.in" aria-label="Email">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-          Email
-        </a>
+      <nav class="header-nav" aria-label="Main">
+        <a href="#work" data-gu="નમૂના">Examples</a>
+        <a href="#prices" data-gu="કિંમત">Prices</a>
+        <a href="#faq" data-gu="સવાલો">Questions</a>
       </nav>
-      <div class="footer-bottom">
-        <p>© 2026 PromptKaro</p>
-        <p class="footer-fine">Powered by caffeine, Claude, and desi jugaad</p>
-        <nav class="footer-legal" aria-label="Legal links">
-          <a href="/privacy.html">Privacy Policy</a>
-          <span aria-hidden="true">·</span>
-          <a href="/terms.html">Terms of Service</a>
+      <div class="header-actions">
+        <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch language to Gujarati" data-gu-label="ભાષા બદલીને English કરો">
+          <span class="lang-en" lang="en">EN</span><span class="lang-gu" lang="gu">ગુ</span>
+        </button>
+        <a class="btn btn-wa btn-sm js-wa" href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20I%27d%20like%20a%20free%20demo%20for%20my%20business."
+           data-msg-en="Hi PromptKaro, I'd like a free demo for my business." data-msg-gu="નમસ્તે PromptKaro, મારા બિઝનેસ માટે મફત ડેમો જોઈએ છે."
+           target="_blank" rel="noopener noreferrer">
+          <svg class="icon-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>
+          <span data-gu="WhatsApp કરો">WhatsApp us</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <h1 id="hero-title" class="hero-title" data-gu="તમારી વેબસાઇટ, 48 કલાકમાં તૈયાર.">Your website, ready in 48&nbsp;hours.</h1>
+          <p class="hero-lead" data-gu="અમે મફતમાં ચાલતો ડેમો બનાવીએ છીએ. ગમે તો જ પૈસા આપો.">We build a working demo for free. You pay only if you like it.</p>
+          <div class="hero-actions">
+            <a class="btn btn-wa btn-lg js-wa" id="heroCta" href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20I%27d%20like%20a%20free%20demo%20for%20my%20business."
+               data-msg-en="Hi PromptKaro, I'd like a free demo for my business." data-msg-gu="નમસ્તે PromptKaro, મારા બિઝનેસ માટે મફત ડેમો જોઈએ છે."
+               target="_blank" rel="noopener noreferrer">
+              <svg class="icon-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>
+              <span data-gu="મફત ડેમો મેળવો">Get a free demo</span>
+            </a>
+            <a class="link-quiet" href="#prices" data-gu="કિંમત જુઓ">See prices</a>
+          </div>
+          <p class="hero-note" data-gu="ગુજરાતી, હિન્દી કે અંગ્રેજી, જે ફાવે તેમાં વાત કરો.">Talk to us in Gujarati, Hindi or English.</p>
+        </div>
+
+        <figure class="hero-chat" aria-labelledby="chat-caption">
+          <figcaption id="chat-caption" class="visually-hidden" data-gu="ઉદાહરણ: WhatsApp પર મોબાઇલ દુકાનનો માલિક વેબસાઇટ માંગે છે, બે દિવસ પછી ડેમો મળે છે અને તે લાઇવ કરવા કહે છે.">Example: a mobile shop owner asks for a website on WhatsApp, gets a demo two days later and asks for it to go live.</figcaption>
+          <div class="chat" id="chat" aria-hidden="true" data-ui>
+            <div class="chat-head">
+              <span class="chat-avatar" translate="no">›</span>
+              <span class="chat-who">
+                <span class="chat-name" translate="no">PromptKaro</span>
+                <span class="chat-status" id="chatStatus" data-gu="ઓનલાઇન">online</span>
+              </span>
+            </div>
+            <div class="chat-body">
+              <ol class="chat-list" id="chatList">
+                <li class="msg msg-out" data-step>
+                  <p data-gu="નમસ્તે! ઇડરમાં મારી મોબાઇલની દુકાન છે. વેબસાઇટ જોઈએ છે.">Hi! I have a mobile shop in Idar. I need a website.</p>
+                  <span class="msg-meta">10:02 <svg class="ticks" viewBox="0 0 16 11"><use href="#i-ticks"/></svg></span>
+                </li>
+                <li class="msg msg-in" data-step data-typing>
+                  <p data-gu="ચોક્કસ. દુકાનનું નામ, થોડા ફોટા અને ભાવ-પત્રક મોકલો. 48 કલાકમાં મફત ડેમો.">Sure. Send your shop name, a few photos and your price list. Free demo in 48 hours.</p>
+                  <span class="msg-meta">10:04</span>
+                </li>
+                <li class="msg msg-out" data-step>
+                  <span class="msg-doc">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-doc"/></svg>
+                    <span><span class="msg-doc-name" data-gu="ભાવ-પત્રક.pdf">Price list.pdf</span><span class="msg-doc-size" data-gu="2 પાનાં">2 pages</span></span>
+                  </span>
+                  <p data-gu="શ્રીજી મોબાઇલ. ફોટા પણ મોકલું છું.">Shreeji Mobile. Sending photos too.</p>
+                  <span class="msg-meta">10:11 <svg class="ticks" viewBox="0 0 16 11"><use href="#i-ticks"/></svg></span>
+                </li>
+                <li class="chat-day" data-step><span data-gu="2 દિવસ પછી">2 days later</span></li>
+                <li class="msg msg-in" data-step data-typing>
+                  <span class="msg-link">
+                    <span class="msg-link-title" data-gu="શ્રીજી મોબાઇલ, ઇડર">Shreeji Mobile, Idar</span>
+                    <span class="msg-link-desc" data-gu="ફોન, ભાવ અને EMI. WhatsApp પર ઓર્ડર.">Phones, prices and EMI. Order on WhatsApp.</span>
+                    <span class="msg-link-url">shreejimobile.in</span>
+                  </span>
+                  <p data-gu="તમારો ડેમો તૈયાર છે. ફોનમાં ખોલીને જુઓ, જે બદલવું હોય તે કહો.">Your demo is ready. Open it on your phone and tell us what to change.</p>
+                  <span class="msg-meta">09:40</span>
+                </li>
+                <li class="msg msg-out" data-step>
+                  <p data-gu="સરસ છે! લાઇવ કરી દો 👍">Looks great. Make it live 👍</p>
+                  <span class="msg-meta">09:52 <svg class="ticks" viewBox="0 0 16 11"><use href="#i-ticks"/></svg></span>
+                </li>
+                <li class="msg msg-typing" id="chatTyping" hidden><span></span><span></span><span></span></li>
+              </ol>
+            </div>
+          </div>
+          <button class="chat-replay" id="chatReplay" type="button" hidden data-gu="ફરી ચલાવો">Play again</button>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Examples -->
+    <section class="section section-work" id="work" aria-labelledby="work-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="work-title" data-gu="તમારી સાઇટ આવી દેખાઈ શકે">What your site could look like</h2>
+          <p data-gu="તમારો બિઝનેસ પસંદ કરો. આ નમૂના છે; તમારી સાઇટમાં તમારું નામ, ફોટા અને ભાવ હશે.">Pick your type of business. These are sample layouts; yours uses your own name, photos and prices.</p>
+        </div>
+
+        <div class="showcase" id="showcase">
+          <div class="tabs" role="tablist" aria-label="Type of business" data-gu-label="બિઝનેસનો પ્રકાર">
+            <button role="tab" id="tab-mobile" aria-controls="panel-mobile" aria-selected="true" data-gu="મોબાઇલ શોપ">Mobile shop</button>
+            <button role="tab" id="tab-coaching" aria-controls="panel-coaching" aria-selected="false" tabindex="-1" data-gu="કોચિંગ ક્લાસ">Coaching class</button>
+            <button role="tab" id="tab-clinic" aria-controls="panel-clinic" aria-selected="false" tabindex="-1" data-gu="ક્લિનિક">Clinic</button>
+            <button role="tab" id="tab-property" aria-controls="panel-property" aria-selected="false" tabindex="-1" data-gu="પ્રોપર્ટી">Property dealer</button>
+            <button role="tab" id="tab-food" aria-controls="panel-food" aria-selected="false" tabindex="-1" data-gu="રેસ્ટોરન્ટ">Restaurant</button>
+          </div>
+
+          <!-- Mobile shop -->
+          <div class="panel" role="tabpanel" id="panel-mobile" aria-labelledby="tab-mobile">
+            <div class="sample sample-mobile" data-ui>
+              <div class="sample-head">
+                <span class="sample-name" translate="no">Shreeji Mobile</span>
+                <span class="sample-place" data-gu="સ્ટેશન રોડ, ઇડર">Station Road, Idar</span>
+              </div>
+              <p class="sample-lead" data-gu="નવા ફોન, એક્સેસરીઝ અને સરળ EMI.">New phones, accessories and easy EMI.</p>
+              <ul class="sample-rows">
+                <li><span data-gu="5G ફોન, 128 GB">5G phone, 128 GB</span><span class="num">₹13,999</span></li>
+                <li><span data-gu="સ્માર્ટ વોચ">Smart watch</span><span class="num">₹2,499</span></li>
+                <li><span data-gu="ફાસ્ટ ચાર્જર 33W">Fast charger 33W</span><span class="num">₹899</span></li>
+              </ul>
+              <p class="sample-note" data-gu="EMI: ₹1,167 × 12 મહિના">EMI: ₹1,167 × 12 months</p>
+              <span class="sample-btn" data-gu="WhatsApp પર ઓર્ડર કરો">Order on WhatsApp</span>
+            </div>
+            <div class="panel-copy">
+              <h3 data-gu="મોબાઇલ શોપની સાઇટમાં શું હોય">On a mobile shop site</h3>
+              <ul class="ticks-list">
+                <li data-gu="ભાવ સાથે પ્રોડક્ટ લિસ્ટ">Product list with prices</li>
+                <li data-gu="EMI કેલ્ક્યુલેટર">EMI calculator</li>
+                <li data-gu="WhatsApp પર સીધો ઓર્ડર">Order button that opens WhatsApp</li>
+                <li data-gu="નકશો અને દુકાનનો સમય">Map and shop timings</li>
+              </ul>
+              <a class="btn btn-ink js-wa" target="_blank" rel="noopener noreferrer"
+                 href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20I%20run%20a%20mobile%20shop.%20Please%20make%20a%20free%20demo."
+                 data-msg-en="Hi PromptKaro, I run a mobile shop. Please make a free demo." data-msg-gu="નમસ્તે PromptKaro, મારી મોબાઇલ શોપ છે. મફત ડેમો બનાવી આપો.">
+                <span data-gu="આવો ડેમો માંગો">Ask for this demo</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Coaching -->
+          <div class="panel" role="tabpanel" id="panel-coaching" aria-labelledby="tab-coaching">
+            <div class="sample sample-coaching" data-ui>
+              <div class="sample-head">
+                <span class="sample-name" translate="no">Vidya Classes</span>
+                <span class="sample-place" data-gu="મોતીપુરા, હિંમતનગર">Motipura, Himatnagar</span>
+              </div>
+              <p class="sample-lead" data-gu="ધોરણ 8 થી 12. નાની બેચ, નિયમિત ટેસ્ટ.">Std 8 to 12. Small batches, weekly tests.</p>
+              <ul class="sample-rows">
+                <li><span data-gu="ધો. 10 સાયન્સ">Std 10 Science</span><span class="num">7:00 am</span></li>
+                <li><span data-gu="ધો. 12 કોમર્સ">Std 12 Commerce</span><span class="num">5:30 pm</span></li>
+                <li><span data-gu="વાર્ષિક ફી">Yearly fees</span><span class="num">₹18,000</span></li>
+              </ul>
+              <p class="sample-note" data-gu="ગયા વર્ષના પરિણામ જુઓ">See last year's results</p>
+              <span class="sample-btn" data-gu="એડમિશન માટે પૂછો">Ask about admission</span>
+            </div>
+            <div class="panel-copy">
+              <h3 data-gu="કોચિંગ ક્લાસની સાઇટમાં શું હોય">On a coaching class site</h3>
+              <ul class="ticks-list">
+                <li data-gu="બેચ, સમય અને ફી">Batches, timings and fees</li>
+                <li data-gu="પરિણામ અને ટોપર્સ">Results and toppers</li>
+                <li data-gu="WhatsApp પર એડમિશન પૂછપરછ">Admission enquiry on WhatsApp</li>
+                <li data-gu="નકશો અને ફોન નંબર">Map and phone number</li>
+              </ul>
+              <a class="btn btn-ink js-wa" target="_blank" rel="noopener noreferrer"
+                 href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20I%20run%20a%20coaching%20class.%20Please%20make%20a%20free%20demo."
+                 data-msg-en="Hi PromptKaro, I run a coaching class. Please make a free demo." data-msg-gu="નમસ્તે PromptKaro, મારો કોચિંગ ક્લાસ છે. મફત ડેમો બનાવી આપો.">
+                <span data-gu="આવો ડેમો માંગો">Ask for this demo</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Clinic -->
+          <div class="panel" role="tabpanel" id="panel-clinic" aria-labelledby="tab-clinic">
+            <div class="sample sample-clinic" data-ui>
+              <div class="sample-head">
+                <span class="sample-name" translate="no">Shanti Clinic</span>
+                <span class="sample-place" data-gu="બસ સ્ટેન્ડ પાસે, ઇડર">Near bus stand, Idar</span>
+              </div>
+              <p class="sample-lead" data-gu="ફેમિલી ડૉક્ટર. બાળકો અને વડીલો માટે.">Family doctor for children and elders.</p>
+              <ul class="sample-rows">
+                <li><span data-gu="સવારે OPD">Morning OPD</span><span class="num">10–1</span></li>
+                <li><span data-gu="સાંજે OPD">Evening OPD</span><span class="num">5–8</span></li>
+                <li><span data-gu="રવિવાર">Sunday</span><span data-gu="બંધ">Closed</span></li>
+              </ul>
+              <p class="sample-note" data-gu="ફોન કરવા એક ટેપ">One tap to call</p>
+              <span class="sample-btn" data-gu="એપોઇન્ટમેન્ટ માંગો">Request appointment</span>
+            </div>
+            <div class="panel-copy">
+              <h3 data-gu="ક્લિનિકની સાઇટમાં શું હોય">On a clinic site</h3>
+              <ul class="ticks-list">
+                <li data-gu="OPD સમય અને રજાઓ">OPD timings and holidays</li>
+                <li data-gu="WhatsApp પર એપોઇન્ટમેન્ટ">Appointment request on WhatsApp</li>
+                <li data-gu="નકશો અને રસ્તો">Map and directions</li>
+                <li data-gu="એક ટેપમાં ફોન">One tap to call</li>
+              </ul>
+              <a class="btn btn-ink js-wa" target="_blank" rel="noopener noreferrer"
+                 href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20I%20run%20a%20clinic.%20Please%20make%20a%20free%20demo."
+                 data-msg-en="Hi PromptKaro, I run a clinic. Please make a free demo." data-msg-gu="નમસ્તે PromptKaro, મારું ક્લિનિક છે. મફત ડેમો બનાવી આપો.">
+                <span data-gu="આવો ડેમો માંગો">Ask for this demo</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Property -->
+          <div class="panel" role="tabpanel" id="panel-property" aria-labelledby="tab-property">
+            <div class="sample sample-property" data-ui>
+              <div class="sample-head">
+                <span class="sample-name" translate="no">Sabar Properties</span>
+                <span class="sample-place" data-gu="ઇડર અને હિંમતનગર">Idar and Himatnagar</span>
+              </div>
+              <p class="sample-lead" data-gu="ખરીદો, વેચો કે ભાડે આપો.">Buy, sell or rent.</p>
+              <ul class="sample-rows">
+                <li><span data-gu="2 BHK ફ્લેટ, ઇડર">2 BHK flat, Idar</span><span class="num" data-gu="₹28 લાખ">₹28 lakh</span></li>
+                <li><span data-gu="દુકાન, મેઇન બજાર">Shop, Main Bazaar</span><span class="num" data-gu="₹12,000/મહિને">₹12,000/mo</span></li>
+                <li><span data-gu="NA પ્લોટ, હાઇવે">NA plot, highway</span><span class="num" data-gu="₹45 લાખ">₹45 lakh</span></li>
+              </ul>
+              <p class="sample-note" data-gu="ખરીદી / ભાડું પસંદ કરો">Filter: buy or rent</p>
+              <span class="sample-btn" data-gu="આ પ્રોપર્ટી વિશે પૂછો">Ask about this property</span>
+            </div>
+            <div class="panel-copy">
+              <h3 data-gu="પ્રોપર્ટી ડીલરની સાઇટમાં શું હોય">On a property dealer site</h3>
+              <ul class="ticks-list">
+                <li data-gu="ફોટા અને ભાવ સાથે લિસ્ટિંગ">Listings with photos and price</li>
+                <li data-gu="દરેક લિસ્ટિંગ પર WhatsApp પૂછપરછ">WhatsApp enquiry on every listing</li>
+                <li data-gu="ખરીદી કે ભાડું ફિલ્ટર">Buy or rent filter</li>
+                <li data-gu="Google Maps પર લોકેશન">Location on Google Maps</li>
+              </ul>
+              <a class="btn btn-ink js-wa" target="_blank" rel="noopener noreferrer"
+                 href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20I%27m%20a%20property%20dealer.%20Please%20make%20a%20free%20demo."
+                 data-msg-en="Hi PromptKaro, I'm a property dealer. Please make a free demo." data-msg-gu="નમસ્તે PromptKaro, હું પ્રોપર્ટી ડીલર છું. મફત ડેમો બનાવી આપો.">
+                <span data-gu="આવો ડેમો માંગો">Ask for this demo</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Restaurant -->
+          <div class="panel" role="tabpanel" id="panel-food" aria-labelledby="tab-food">
+            <div class="sample sample-food" data-ui>
+              <div class="sample-head">
+                <span class="sample-name" translate="no">Annapurna Dining</span>
+                <span class="sample-place" data-gu="હાઇવે, હિંમતનગર">Highway, Himatnagar</span>
+              </div>
+              <p class="sample-lead" data-gu="શુદ્ધ શાકાહારી. બપોરે અને રાત્રે.">Pure veg. Lunch and dinner.</p>
+              <ul class="sample-rows">
+                <li><span data-gu="ગુજરાતી થાળી">Gujarati thali</span><span class="num">₹180</span></li>
+                <li><span data-gu="કાઠિયાવાડી થાળી">Kathiyawadi thali</span><span class="num">₹220</span></li>
+                <li><span data-gu="પંજાબી થાળી">Punjabi thali</span><span class="num">₹240</span></li>
+              </ul>
+              <p class="sample-note" data-gu="11:30–3:30 અને 7–10:30">11:30–3:30 and 7–10:30</p>
+              <span class="sample-btn" data-gu="ટેબલ બુક કરો">Book a table</span>
+            </div>
+            <div class="panel-copy">
+              <h3 data-gu="રેસ્ટોરન્ટની સાઇટમાં શું હોય">On a restaurant site</h3>
+              <ul class="ticks-list">
+                <li data-gu="ભાવ સાથે મેનુ">Menu with prices</li>
+                <li data-gu="WhatsApp પર ઓર્ડર કે ટેબલ બુકિંગ">Order or book a table on WhatsApp</li>
+                <li data-gu="સમય અને નકશો">Timings and map</li>
+                <li data-gu="જગ્યા અને વાનગીના ફોટા">Photos of the place and the food</li>
+              </ul>
+              <a class="btn btn-ink js-wa" target="_blank" rel="noopener noreferrer"
+                 href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20I%20run%20a%20restaurant.%20Please%20make%20a%20free%20demo."
+                 data-msg-en="Hi PromptKaro, I run a restaurant. Please make a free demo." data-msg-gu="નમસ્તે PromptKaro, મારું રેસ્ટોરન્ટ છે. મફત ડેમો બનાવી આપો.">
+                <span data-gu="આવો ડેમો માંગો">Ask for this demo</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="section section-how" id="how" aria-labelledby="how-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="how-title" data-gu="પહેલા મેસેજથી લાઇવ સાઇટ સુધી, એક અઠવાડિયામાં">From first message to live site in a week</h2>
+        </div>
+        <ol class="timeline">
+          <li class="timeline-step">
+            <span class="timeline-when" data-gu="આજે">Today</span>
+            <h3 data-gu="WhatsApp પર મેસેજ કરો">Send a WhatsApp message</h3>
+            <p data-gu="બિઝનેસનું નામ, તમે શું વેચો છો અને ગ્રાહકો કોણ છે તે જણાવો.">Tell us your business name, what you sell and who your customers are.</p>
+          </li>
+          <li class="timeline-step">
+            <span class="timeline-when" data-gu="48 કલાકમાં">In 48 hours</span>
+            <h3 data-gu="મફત ડેમો જુઓ">See a working demo, free</h3>
+            <p data-gu="ફોનમાં ખોલીને જુઓ અને ફેરફાર કહો. ન ગમે તો એક રૂપિયો પણ નહીં.">Open it on your phone and ask for changes. If you don't like it, you pay nothing.</p>
+          </li>
+          <li class="timeline-step">
+            <span class="timeline-when" data-gu="એક અઠવાડિયામાં">Within a week</span>
+            <h3 data-gu="સાઇટ લાઇવ">Your site goes live</h3>
+            <p data-gu="ડોમેન અને હોસ્ટિંગ અમે સંભાળીએ છીએ. તમને એક લિંક મળે, જે બધે શેર કરો.">We handle the domain and hosting. You get one link to share everywhere.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Prices -->
+    <section class="section section-prices" id="prices" aria-labelledby="prices-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="prices-title" data-gu="નક્કી કિંમત. ડેમો ગમે પછી ચુકવણી.">Fixed prices. You pay after the demo.</h2>
+        </div>
+
+        <div class="plans">
+          <article class="plan" aria-labelledby="plan-starter">
+            <h3 class="plan-name" id="plan-starter">Starter</h3>
+            <p class="plan-price"><span class="num">₹4,999</span></p>
+            <p class="plan-for" data-gu="એક પાનાની સાઇટ, જેથી લોકો તમને શોધી શકે.">A one-page site so people can find you.</p>
+            <ul class="ticks-list" aria-label="Starter includes" data-gu-label="Starter માં શામેલ">
+              <li data-gu="એક પાનાની વેબસાઇટ">One-page website</li>
+              <li data-gu="WhatsApp બટન">WhatsApp button</li>
+              <li data-gu="Google Maps">Google Maps</li>
+              <li data-gu="દરેક ફોનમાં બરાબર ચાલે">Works on every phone</li>
+              <li data-gu="1 વાર ફેરફાર">1 round of changes</li>
+            </ul>
+            <a class="btn btn-outline js-wa" target="_blank" rel="noopener noreferrer"
+               href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20I%27m%20interested%20in%20the%20Starter%20plan."
+               data-msg-en="Hi PromptKaro, I'm interested in the Starter plan." data-msg-gu="નમસ્તે PromptKaro, મને Starter પ્લાન વિશે જાણવું છે.">
+              <span data-gu="Starter વિશે પૂછો">Ask about Starter</span>
+            </a>
+          </article>
+
+          <article class="plan plan-pick" aria-labelledby="plan-business">
+            <p class="plan-flag" data-gu="મોટા ભાગની દુકાનો માટે અમારી સલાહ">Our pick for most shops</p>
+            <h3 class="plan-name" id="plan-business">Business</h3>
+            <p class="plan-price"><span class="num">₹9,999</span></p>
+            <p class="plan-for" data-gu="ગ્રાહકો તમારો માલ જોઈ શકે એવી પૂરી સાઇટ.">A full site where customers can browse what you offer.</p>
+            <ul class="ticks-list" aria-label="Business includes" data-gu-label="Business માં શામેલ">
+              <li data-gu="3 થી 5 પાનાં">3 to 5 pages</li>
+              <li data-gu="પૂછપરછ ફોર્મ અને ફોટો ગેલેરી">Enquiry form and photo gallery</li>
+              <li data-gu="Google સર્ચ માટે SEO">SEO for Google search</li>
+              <li data-gu="Google Business Profile સેટઅપ">Google Business Profile setup</li>
+              <li data-gu="WhatsApp ઇન્ટિગ્રેશન">WhatsApp integration</li>
+              <li data-gu="3 વાર ફેરફાર">3 rounds of changes</li>
+            </ul>
+            <a class="btn btn-wa js-wa" target="_blank" rel="noopener noreferrer"
+               href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20I%27m%20interested%20in%20the%20Business%20plan."
+               data-msg-en="Hi PromptKaro, I'm interested in the Business plan." data-msg-gu="નમસ્તે PromptKaro, મને Business પ્લાન વિશે જાણવું છે.">
+              <svg class="icon-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>
+              <span data-gu="Business વિશે પૂછો">Ask about Business</span>
+            </a>
+          </article>
+
+          <article class="plan" aria-labelledby="plan-pro">
+            <h3 class="plan-name" id="plan-pro">Pro</h3>
+            <p class="plan-price"><span class="num">₹19,999</span></p>
+            <p class="plan-for" data-gu="કેટલોગ, કેલ્ક્યુલેટર કે નાની એપ માટે.">For a catalog, a calculator or a small app.</p>
+            <ul class="ticks-list" aria-label="Pro includes" data-gu-label="Pro માં શામેલ">
+              <li data-gu="તમારા કામ માટે ખાસ વેબ એપ">Custom web app</li>
+              <li data-gu="પ્રોડક્ટ કેટલોગ">Product catalog</li>
+              <li data-gu="ભાવ કે EMI કેલ્ક્યુલેટર">Price or EMI calculator</li>
+              <li data-gu="એનાલિટિક્સ ડેશબોર્ડ">Analytics dashboard</li>
+              <li data-gu="5 વાર ફેરફાર">5 rounds of changes</li>
+            </ul>
+            <a class="btn btn-outline js-wa" target="_blank" rel="noopener noreferrer"
+               href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20I%27m%20interested%20in%20the%20Pro%20plan."
+               data-msg-en="Hi PromptKaro, I'm interested in the Pro plan." data-msg-gu="નમસ્તે PromptKaro, મને Pro પ્લાન વિશે જાણવું છે.">
+              <span data-gu="Pro વિશે પૂછો">Ask about Pro</span>
+            </a>
+          </article>
+        </div>
+
+        <div class="care">
+          <div class="care-main">
+            <h3 class="care-title"><span data-gu="કેર પ્લાન">Care plan</span> <span class="num care-price">₹1,999</span><span class="care-unit" data-gu="/મહિને">/month</span></h3>
+            <p data-gu="લાઇવ થયા પછી: કન્ટેન્ટ અપડેટ, હોસ્ટિંગ, સોશિયલ મીડિયા ગ્રાફિક્સ અને પહેલા જવાબ.">After launch: content updates, managed hosting, social media graphics and priority support.</p>
+          </div>
+          <a class="link-quiet js-wa" target="_blank" rel="noopener noreferrer"
+             href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20tell%20me%20about%20the%20care%20plan."
+             data-msg-en="Hi PromptKaro, tell me about the care plan." data-msg-gu="નમસ્તે PromptKaro, કેર પ્લાન વિશે જણાવો.">
+            <span data-gu="કેર પ્લાન વિશે પૂછો">Ask about the care plan</span>
+          </a>
+        </div>
+        <p class="prices-foot" data-gu="બધી કિંમતમાં ટેક્સ શામેલ છે. બીજું કંઈ જોઈએ છે? WhatsApp પર જણાવો, અમે નક્કી ભાવ કહીશું.">Prices include taxes. Need something else? Tell us on WhatsApp and we'll quote a fixed price.</p>
+      </div>
+    </section>
+
+    <!-- Promise -->
+    <section class="section section-promise" aria-labelledby="promise-title">
+      <div class="container promise-grid">
+        <p class="promise-figure" aria-hidden="true"><span class="num">₹0</span></p>
+        <div class="promise-copy">
+          <h2 id="promise-title" data-gu="પહેલાં જુઓ. ગમે તો જ પૈસા.">See it first. Pay only if you like&nbsp;it.</h2>
+          <p data-gu="ડેમો માટે કોઈ એડવાન્સ નહીં. ડેમો તમને ન ફાવે, તો તમારે કંઈ ચૂકવવાનું નથી.">The demo costs nothing and needs no advance. If it isn't right for you, you owe nothing.</p>
+          <a class="btn btn-wa btn-lg js-wa" id="promiseCta" target="_blank" rel="noopener noreferrer"
+             href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20I%27d%20like%20a%20free%20demo%20for%20my%20business."
+             data-msg-en="Hi PromptKaro, I'd like a free demo for my business." data-msg-gu="નમસ્તે PromptKaro, મારા બિઝનેસ માટે મફત ડેમો જોઈએ છે.">
+            <svg class="icon-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>
+            <span data-gu="મફત ડેમો મેળવો">Get a free demo</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="section section-about" id="about" aria-labelledby="about-title">
+      <div class="container about-grid">
+        <div class="about-copy">
+          <h2 id="about-title" data-gu="ઇડરનો સ્ટુડિયો, કોલ સેન્ટર નહીં">A studio in Idar, not a call centre</h2>
+          <p data-gu="PromptKaro ઇડર, સાબરકાંઠામાં છે. પહેલા મેસેજથી લાઇવ થાય ત્યાં સુધી, તમે સીધા એ વ્યક્તિ સાથે વાત કરો છો જે તમારી સાઇટ બનાવે છે.">PromptKaro is based in Idar, Sabarkantha. From the first message to launch day, you talk directly to the person who builds your site.</p>
+          <p data-gu="અમે AI ટૂલ્સથી ઝડપથી બનાવીએ છીએ. એટલે જ ચાલતો ડેમો અઠવાડિયાં નહીં, 48 કલાક લે છે.">We use AI tools to build quickly. That is why a working demo takes 48 hours, not weeks.</p>
+        </div>
+        <dl class="contact-list">
+          <div>
+            <dt data-gu="WhatsApp અને ફોન">WhatsApp and phone</dt>
+            <dd><a href="tel:+919429051036" class="num">+91 94290 51036</a></dd>
+          </div>
+          <div>
+            <dt data-gu="ઇમેઇલ">Email</dt>
+            <dd><a href="mailto:hello@promptkaro.in">hello@promptkaro.in</a></dd>
+          </div>
+          <div>
+            <dt>Instagram</dt>
+            <dd><a href="https://instagram.com/promptkaro" target="_blank" rel="noopener noreferrer">@promptkaro</a></dd>
+          </div>
+          <div>
+            <dt data-gu="વિસ્તાર">Area</dt>
+            <dd data-gu="ઇડર, હિંમતનગર અને આખો સાબરકાંઠા">Idar, Himatnagar and all of Sabarkantha</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section section-faq" id="faq" aria-labelledby="faq-title">
+      <div class="container faq-grid">
+        <h2 id="faq-title" data-gu="દુકાનદારો પૂછે તે સવાલો">Questions shop owners ask</h2>
+        <div class="faq-list">
+          <details>
+            <summary><span data-gu="શું ડેમો ખરેખર મફત છે?">Is the demo really free?</span><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <p data-gu="હા. અમે પહેલાં ચાલતો ડેમો બનાવીએ છીએ. સાઇટ લાઇવ કરવી હોય તો જ તમે પૈસા આપો.">Yes. We build a working demo first. You pay only if you want the site to go live.</p>
+          </details>
+          <details>
+            <summary><span data-gu="મારે શું મોકલવાનું?">What do I need to send?</span><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <p data-gu="બિઝનેસનું નામ, ફોન નંબર, સરનામું, થોડા ફોટા અને ભાવ-પત્રક કે મેનુ. જે હોય તેનાથી શરૂ કરી શકાય.">Your business name, phone number, address, a few photos and your price list or menu. Whatever you have is enough to start.</p>
+          </details>
+          <details>
+            <summary><span data-gu="ડોમેન અને હોસ્ટિંગ મારે સંભાળવાના?">Do I have to deal with domain or hosting?</span><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <p data-gu="ના. ડોમેન અને હોસ્ટિંગ અમે સેટ કરીને સાઇટ લાઇવ કરીએ છીએ.">No. We set up the domain and hosting and put the site live for you.</p>
+          </details>
+          <details>
+            <summary><span data-gu="પૈસા કેવી રીતે અને ક્યારે આપવાના?">How and when do I pay?</span><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <p data-gu="ડેમો જોઈને આગળ વધવાનું નક્કી કરો, પછી જ. UPI કે બેંક ટ્રાન્સફરથી. પૂરી ચુકવણી પછી સાઇટ લાઇવ થાય છે.">Only after you've seen the demo and decided to go ahead. UPI or bank transfer. The site goes live once payment is complete.</p>
+          </details>
+          <details>
+            <summary><span data-gu="વેબસાઇટ કોની માલિકીની?">Who owns the website?</span><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <p data-gu="તમારી. પૂરી ચુકવણી પછી ડિઝાઇન અને કન્ટેન્ટ તમારા છે.">You do. Once payment is complete, the design and content are yours.</p>
+          </details>
+          <details>
+            <summary><span data-gu="પછીથી ફેરફાર કરી શકાય?">Can I change things later?</span><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <p data-gu="હા. દરેક પ્લાનમાં નક્કી વાર ફેરફાર શામેલ છે (Starter 1, Business 3, Pro 5). લાઇવ થયા પછી, કેર પ્લાન (₹1,999/મહિને) માં નિયમિત અપડેટ થાય છે.">Yes. Every plan includes a set number of change rounds (Starter 1, Business 3, Pro 5). After launch, the care plan (₹1,999 a month) covers regular updates.</p>
+          </details>
+          <details>
+            <summary><span data-gu="કઈ ભાષામાં વાત કરી શકાય?">Which language can we talk in?</span><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <p data-gu="ગુજરાતી, હિન્દી કે અંગ્રેજી. જે તમને ફાવે.">Gujarati, Hindi or English, whichever you are comfortable with.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="footer">
+    <div class="container">
+      <div class="footer-cta">
+        <p class="footer-line" data-gu="તમારા બિઝનેસ વિશે એક મેસેજ મોકલો. 48 કલાકમાં ડેમો.">Send one message about your business. Demo in 48&nbsp;hours.</p>
+        <a class="btn btn-wa btn-lg js-wa" id="footerCta" target="_blank" rel="noopener noreferrer"
+           href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20I%27d%20like%20a%20free%20demo%20for%20my%20business."
+           data-msg-en="Hi PromptKaro, I'd like a free demo for my business." data-msg-gu="નમસ્તે PromptKaro, મારા બિઝનેસ માટે મફત ડેમો જોઈએ છે.">
+          <svg class="icon-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>
+          <span data-gu="મફત ડેમો મેળવો">Get a free demo</span>
+        </a>
+      </div>
+      <p class="footer-mark" translate="no" aria-hidden="true">PromptKaro<span class="wordmark-cursor"></span></p>
+      <div class="footer-base">
+        <p>© 2026 PromptKaro. <span data-gu="ઇડર, ગુજરાતમાં બનાવેલ.">Made in Idar, Gujarat.</span></p>
+        <nav class="footer-links" aria-label="Footer">
+          <a href="https://instagram.com/promptkaro" target="_blank" rel="noopener noreferrer">Instagram</a>
+          <a href="mailto:hello@promptkaro.in" data-gu="ઇમેઇલ">Email</a>
+          <a href="/privacy.html" data-gu="પ્રાઇવસી">Privacy</a>
+          <a href="/terms.html" data-gu="શરતો">Terms</a>
         </nav>
       </div>
     </div>
   </footer>
 
-  <!-- Floating WhatsApp (desktop) -->
-  <a href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20mujhe%20apne%20business%20ke%20liye%20website%20chahiye"
-     class="wa-float"
-     target="_blank" rel="noopener noreferrer"
-     aria-label="Chat on WhatsApp">
-    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3-8.63A2 2 0 0 1 3.77 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+  <a class="dock js-wa" id="dock" target="_blank" rel="noopener noreferrer"
+     href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20I%27d%20like%20a%20free%20demo%20for%20my%20business."
+     data-msg-en="Hi PromptKaro, I'd like a free demo for my business." data-msg-gu="નમસ્તે PromptKaro, મારા બિઝનેસ માટે મફત ડેમો જોઈએ છે.">
+    <svg class="icon-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>
+    <span data-gu="WhatsApp પર મફત ડેમો">Free demo on WhatsApp</span>
   </a>
 
-  <!-- Mobile WhatsApp bar -->
-  <a href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20mujhe%20apne%20business%20ke%20liye%20website%20chahiye"
-     class="wa-mobile-bar"
-     target="_blank" rel="noopener noreferrer"
-     aria-label="Chat on WhatsApp">
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3-8.63A2 2 0 0 1 3.77 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-    <span data-en="Chat on WhatsApp" data-gu="WhatsApp પર ચેટ">Chat on WhatsApp</span>
-  </a>
+  <svg class="sprite" width="0" height="0" aria-hidden="true">
+    <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></symbol>
+    <symbol id="i-ticks" viewBox="0 0 16 11"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" d="M1 6l3 3 6-7M6 8.5l.5.5 6-7"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M6 2.75h8l4 4V21.25H6zM14 2.75v4h4"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M12 5v14M5 12h14"/></symbol>
+  </svg>
 
-  <script src="js/terminal-effect.js" defer></script>
-  <script src="js/animations.js" defer></script>
-  <script src="js/main.js" defer></script>
+  <script src="/js/main.js" defer></script>
+  <script src="/js/chat.js" defer></script>
+  <script src="/js/showcase.js" defer></script>
 </body>
 </html>

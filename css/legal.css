@@ -1,0 +1,35 @@
+/* PromptKaro — legal.css: privacy and terms pages, same tokens as the main site. */
+@import url('/css/style.css');
+
+.legal-header { position: sticky; top: 0; z-index: 10; background: var(--ground); box-shadow: 0 1px 0 var(--rule); }
+.legal-header .container { display: flex; align-items: center; justify-content: space-between; height: var(--header-h); }
+.legal-back { font-size: 1rem; font-weight: var(--fw-strong); color: var(--ink-2); text-decoration: none; }
+@media (hover: hover) and (pointer: fine) { .legal-back:hover { color: var(--ink); } }
+
+.legal { max-width: calc(44rem + var(--gutter) * 2); padding-block: var(--s-9) var(--section-y); }
+.legal h1 { font-size: var(--fs-h2); line-height: 1.05; letter-spacing: -0.025em; }
+.legal .updated { margin-top: var(--s-3); margin-bottom: var(--s-7); color: var(--ink-3); font-size: var(--fs-sm); }
+.legal h2 { margin-top: var(--s-7); margin-bottom: var(--s-3); font-size: var(--fs-lead); line-height: 1.3; }
+.legal p, .legal li { color: var(--ink-2); }
+.legal p + p { margin-top: var(--s-4); }
+.legal ul { margin-block: var(--s-3) var(--s-4); padding-left: var(--s-5); list-style: disc; display: grid; gap: var(--s-2); }
+.legal ul + p { margin-top: var(--s-4); }
+.legal strong { color: var(--ink); font-weight: var(--fw-strong); }
+.legal a { color: var(--action); text-underline-offset: 0.2em; }
+.legal hr { display: none; }
+
+.legal-footer { padding-block: var(--s-7); background: var(--ground-2); font-size: var(--fs-sm); color: var(--ink-3); }
+.legal-footer .container { display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-5); }
+.legal-footer a { color: var(--ink-2); }
+
+.pricing-table { width: 100%; margin-block: var(--s-4) var(--s-5); border-collapse: collapse; font-size: 1rem; }
+.pricing-table th, .pricing-table td { padding: var(--s-3) var(--s-3) var(--s-3) 0; text-align: left; vertical-align: top; border-bottom: 1px solid var(--rule); color: var(--ink-2); }
+.pricing-table th { color: var(--ink-3); font-weight: var(--fw-body); font-size: var(--fs-sm); }
+.pricing-table td:first-child { color: var(--ink); font-weight: var(--fw-strong); }
+.pricing-table td:nth-child(2) { font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--ink); }
+@media (max-width: 559px) {
+  .pricing-table thead { display: none; }
+  .pricing-table tr { display: grid; grid-template-columns: auto 1fr; gap: 0 var(--s-3); padding-block: var(--s-3); border-bottom: 1px solid var(--rule); }
+  .pricing-table td { border: 0; padding: 0; }
+  .pricing-table td:last-child { grid-column: 1 / -1; margin-top: var(--s-1); }
+}

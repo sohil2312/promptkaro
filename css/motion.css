@@ -1,0 +1,112 @@
+/* PromptKaro — motion.css
+   One orchestrated moment (the hero chat), feedback on every control, nothing that loops forever.
+   Transform and opacity only. Content is visible without JS and under reduced motion. */
+
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --t-press: 140ms;
+  --t-ui: 200ms;
+  --t-enter: 520ms;
+}
+
+/* ---------- Feedback on controls ---------- */
+.btn {
+  transition: background-color var(--t-ui) ease, color var(--t-ui) ease,
+              box-shadow var(--t-ui) ease, transform var(--t-press) var(--ease-out);
+}
+.btn:active,
+.tabs [role="tab"]:active,
+.lang-toggle:active,
+.chat-replay:active,
+.dock:active { transform: scale(0.97); }
+
+.tabs [role="tab"],
+.lang-toggle,
+.chat-replay,
+.dock { transition: background-color var(--t-ui) ease, color var(--t-ui) ease, box-shadow var(--t-ui) ease, transform var(--t-press) var(--ease-out); }
+.lang-toggle span { transition: background-color var(--t-ui) ease, color var(--t-ui) ease, box-shadow var(--t-ui) ease; }
+
+.link-quiet,
+.header-nav a,
+.footer-links a { transition: color var(--t-ui) ease, text-decoration-color var(--t-ui) ease; }
+
+.site-header { transition: box-shadow var(--t-ui) ease; }
+
+.faq-list summary svg { transition: rotate var(--t-ui) var(--ease-out), color var(--t-ui) ease; }
+.faq-list details[open] p { animation: faq-in 240ms var(--ease-out); }
+@keyframes faq-in { from { opacity: 0; transform: translateY(-4px); } }
+
+/* Focus ring appears instantly: no transition on outline. */
+
+/* ---------- Wordmark cursor: blinks three times on load, then holds. Hover wakes it. ---------- */
+.wordmark .wordmark-cursor { animation: cursor-blink 1s steps(1, end) 0.6s 3; }
+@media (hover: hover) and (pointer: fine) {
+  .wordmark:hover .wordmark-cursor { animation: cursor-blink-hover 1s steps(1, end) 0s 2; }
+}
+@keyframes cursor-blink { 50% { opacity: 0; } }
+@keyframes cursor-blink-hover { 50% { opacity: 0; } }
+
+/* ---------- Page load: the hero arrives once, in order ---------- */
+.js .hero-title,
+.js .hero-lead,
+.js .hero-actions,
+.js .hero-note,
+.js .hero-chat {
+  animation: rise var(--t-enter) var(--ease-out) both;
+}
+.js .hero-lead    { animation-delay: 70ms; }
+.js .hero-actions { animation-delay: 140ms; }
+.js .hero-note    { animation-delay: 200ms; }
+.js .hero-chat    { animation-delay: 120ms; animation-duration: 700ms; }
+@keyframes rise { from { opacity: 0; transform: translateY(16px); } }
+
+/* ---------- Chat: typing dots move only while someone is "typing" ---------- */
+.msg-typing span { animation: typing 1.2s var(--ease-in-out) infinite; }
+.msg-typing span:nth-child(2) { animation-delay: 0.15s; }
+.msg-typing span:nth-child(3) { animation-delay: 0.3s; }
+.msg-typing[hidden] span { animation: none; }
+@keyframes typing { 0%, 60%, 100% { opacity: 0.35; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-3px); } }
+.js .chat-list [data-step].is-pending { display: none; }
+
+/* ---------- Mobile dock slides in from its own edge ---------- */
+.dock { transition: translate 360ms var(--ease-drawer), visibility 0s linear 360ms, transform var(--t-press) var(--ease-out); }
+.dock.is-shown { transition: translate 420ms var(--ease-drawer), visibility 0s, transform var(--t-press) var(--ease-out); }
+
+/* ---------- Scroll: the timeline fills as you read it (goal gradient) ---------- */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .timeline-step::after {
+      transform-origin: left center;
+      background: linear-gradient(var(--ink), var(--ink)) no-repeat 0 0 / 100% 100%, var(--ground-2);
+      animation: fill-x linear both;
+      animation-timeline: view();
+      animation-range: entry 60% cover 45%;
+    }
+    .plan, .timeline-step {
+      animation: settle linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+    .plan:nth-child(2) { animation-range: entry 4% entry 44%; }
+    .plan:nth-child(3) { animation-range: entry 8% entry 48%; }
+  }
+}
+@keyframes fill-x { from { background-size: 0% 100%, auto; } to { background-size: 100% 100%, auto; } }
+@keyframes settle { from { opacity: 0.35; transform: translateY(24px); } }
+@media (max-width: 719px) {
+  @keyframes fill-x { from { background-size: 100% 0%, auto; } to { background-size: 100% 100%, auto; } }
+}
+
+/* ---------- Reduced motion: keep fades that explain, drop all travel ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .js .hero-title, .js .hero-lead, .js .hero-actions, .js .hero-note, .js .hero-chat { animation-name: fade; animation-duration: 240ms; }
+  .btn:active, .tabs [role="tab"]:active, .lang-toggle:active, .chat-replay:active, .dock:active { transform: none; }
+  .msg-typing span { animation: none; opacity: 0.6; }
+  .faq-list details[open] p { animation-name: fade; }
+  .dock, .dock.is-shown { transition: opacity 200ms ease, visibility 0s; translate: 0 0; opacity: 0; }
+  .dock.is-shown { opacity: 1; }
+  .wordmark .wordmark-cursor, .wordmark:hover .wordmark-cursor { animation: none; }
+}
+@keyframes fade { from { opacity: 0; } }
