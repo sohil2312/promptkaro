@@ -181,18 +181,23 @@
     });
   }
 
-  // The chat opens, the customer's message lands, the shop types, the reply arrives.
+  // The chat opens, the customer's message lands, the agent does its step, the auto-reply arrives.
   function converse(mini) {
     var msgs = mini.querySelectorAll('[data-wa-step]');
-    var out = msgs[0], reply = msgs[1];
+    var out = msgs[0], agent = mini.querySelector('.wa-agent'), reply = mini.querySelector('.msg-in');
     show(mini);
     return wait(380).then(function () {
       show(out);
-      return wait(650);
+      return wait(500);
+    }).then(function () {
+      if (!agent) return null;
+      agent.classList.add('is-working');
+      show(agent);
+      return wait(750).then(function () { agent.classList.remove('is-working'); return wait(200); });
     }).then(function () {
       reply.classList.add('is-typing');
       show(reply);
-      return wait(1100);
+      return wait(650);
     }).then(function () {
       reply.classList.remove('is-typing');
       return wait(300);
@@ -227,12 +232,13 @@
   function resend() {
     writePlan();
     if (reduce.matches || !emiChat) return;
-    var msgs = emiChat.querySelectorAll('.msg');
-    var out = msgs[0], reply = msgs[1];
+    var out = emiChat.querySelector('.msg-out'), agent = emiChat.querySelector('.wa-agent'), reply = emiChat.querySelector('.msg-in');
     out.animate([{ opacity: 0, transform: 'translateY(6px) scale(0.97)' }, { opacity: 1, transform: 'none' }],
       { duration: 260, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
+    if (agent) agent.classList.add('is-working');
     reply.classList.add('is-typing');
-    setTimeout(function () { reply.classList.remove('is-typing'); }, 1000);
+    setTimeout(function () { if (agent) agent.classList.remove('is-working'); }, 700);
+    setTimeout(function () { reply.classList.remove('is-typing'); }, 1250);
   }
   if (emiSend) emiSend.addEventListener('click', resend);
   if (emiChat) writePlan();

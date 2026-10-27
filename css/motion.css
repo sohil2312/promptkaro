@@ -237,3 +237,13 @@
   .product.is-armed [data-wa]:not(.is-in), .product.is-armed [data-wa-step]:not(.is-in) { transform: none; }
   .msg.is-typing .wa-dots i { animation: none; opacity: 0.6; }
 }
+
+/* Agents: spinners spin only while a step is working; the fee ring fills smoothly */
+.log-step.is-working .log-icon, .wa-agent.is-working .log-icon { animation: spin 700ms linear infinite; }
+.ring { transition: --p 700ms var(--ease-out); }
+.agent-pause { transition: background-color var(--t-ui) ease, transform var(--t-press) var(--ease-out); }
+.agent-pause:active { transform: scale(0.97); }
+@media (prefers-reduced-motion: reduce) {
+  .log-step.is-working .log-icon, .wa-agent.is-working .log-icon { animation: none; }
+  .ring { transition: none; }
+}

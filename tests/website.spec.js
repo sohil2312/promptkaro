@@ -21,7 +21,7 @@ test.describe('1. Layout', () => {
 
   test('every section has a heading', async ({ page }) => {
     await page.goto(PAGE_URL);
-    for (const id of ['#work', '#how', '#products', '#prices', '#about', '#faq']) {
+    for (const id of ['#work', '#how', '#products', '#agents', '#prices', '#about', '#faq']) {
       await expect(page.locator(`${id} h2`)).toHaveCount(1);
     }
   });
@@ -190,6 +190,46 @@ test.describe('3. Interaction', () => {
     await expect(page.locator('.js-plan')).toHaveText('EMI પ્લાન: 5G ફોન, ₹2,333 × 6 મહિના');
   });
 
+  test('agent console plays a scenario: message, logged steps, auto-reply', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    await page.locator('#agentStage').scrollIntoViewIfNeeded();
+    await page.getByRole('tab', { name: 'Appointments' }).click();
+    await expect(page.locator('#agentState')).toHaveText(/Done in \d+\.\ds/, { timeout: 12000 });
+    await expect(page.locator('#agentLog .log-step.is-done')).toHaveCount(4);
+    await expect(page.locator('#agentLog .log-step.is-working')).toHaveCount(0);
+    await expect(page.locator('#agentChat .msg-out .msg-agent').first()).toHaveText('Auto-reply');
+    await expect(page.locator('#agentChat')).toContainText('token is 14');
+    await expect(page.locator('#agentCustomer')).toHaveText('Meena P.');
+    await expect(page.locator('#agentPause')).toHaveText('Play all'); // clicking a tab hands control to the visitor
+  });
+
+  test('agent console keyboard tabs switch scenarios', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    await page.getByRole('tab', { name: 'Orders' }).focus();
+    await page.keyboard.press('End');
+    await expect(page.getByRole('tab', { name: 'Leads' })).toHaveAttribute('aria-selected', 'true');
+    await expect(page.locator('#agentBiz')).toHaveText('Sabar Properties');
+  });
+
+  test('dashboards tick through their events and land on the final numbers', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    for (const key of ['sales', 'queue', 'fees', 'stock']) {
+      await page.locator(`[data-dash="${key}"]`).scrollIntoViewIfNeeded();
+      await page.waitForTimeout(200);
+    }
+    await page.locator('[data-dash="sales"]').scrollIntoViewIfNeeded();
+    await expect(page.locator('#salesTotal')).toHaveText('₹48,620', { timeout: 10000 });
+    await page.locator('[data-dash="queue"]').scrollIntoViewIfNeeded();
+    await expect(page.locator('#queueNow')).toHaveText('15', { timeout: 10000 });
+    await expect(page.locator('#queueList .is-agent')).toHaveCount(1);
+    await page.locator('[data-dash="fees"]').scrollIntoViewIfNeeded();
+    await expect(page.locator('#feesTotal')).toHaveText('₹3,72,000', { timeout: 10000 });
+    await expect(page.locator('#feesPct')).toHaveText('78%');
+    await page.locator('[data-dash="stock"]').scrollIntoViewIfNeeded();
+    await expect(page.locator('#stockEvents li').nth(1)).toBeVisible({ timeout: 10000 });
+    await expect(page.locator('#stockList li.is-low')).toHaveCount(1);
+  });
+
   test('EMI calculator works as a real control', async ({ page }) => {
     await page.goto(PAGE_URL);
     const range = page.locator('#emiMonths');
@@ -288,6 +328,10 @@ test.describe('5. Robustness', () => {
     await expect(page.locator('.frag-tiles li')).toHaveCount(4);
     await expect(page.locator('.frag-result')).toBeVisible();
     await expect(page.locator('.frag-chart [data-count]')).toHaveText('39');
+    await expect(page.locator('#agentChat .msg')).toHaveCount(4);
+    await expect(page.locator('#agentLog .log-step')).toHaveCount(5);
+    await expect(page.locator('#salesTotal')).toHaveText('₹48,620');
+    await expect(page.locator('.agent-tabs')).toBeHidden();
     await ctx.close();
   });
 
@@ -344,8 +388,9 @@ test.describe('6. Accessibility', () => {
 
   test('tabs expose correct ARIA wiring', async ({ page }) => {
     await page.goto(PAGE_URL);
+    await expect(page.locator('#showcase [role="tab"]')).toHaveCount(5);
+    await expect(page.locator('#agentsApp [role="tab"]')).toHaveCount(6);
     const tabs = page.getByRole('tab');
-    await expect(tabs).toHaveCount(5);
     for (const tab of await tabs.all()) {
       const controls = await tab.getAttribute('aria-controls');
       await expect(page.locator(`#${controls}`)).toHaveAttribute('role', 'tabpanel');

@@ -68,6 +68,12 @@ Based on Emil Kowalski's design-engineering rules.
   action, a mini chat opens, the customer's message lands, the shop types and replies. The
   Dashboard shows the owner's side (an enquiry notification; today's pillar and the total tick up).
   The EMI card's "Send plan" is a real button that writes the visitor's own plan into the chat.
+- **Agent console** (`js/agents.js`): six scripted scenarios (orders, appointments, admissions,
+  payments, reviews, leads). The owner's WhatsApp view plays the conversation while the agent log
+  streams each step with a spinner, tool chip and time, ending in a summary. Autoplay advances
+  every scenario while on screen (Pause / Play all); choosing a tab hands control to the visitor.
+- **Dashboards** tick through a few real-looking events once while on screen (sales feed and
+  sparkline, OPD queue, fee ring, stock with reorder), then stop.
 - **Rendered objects, not icons:** product visuals are live CSS-rendered clay objects (phone, watch,
   earbuds, charger, map pin, coins, pillars) sharing one material (`.clay`, set `--c`). They pop in
   on a spring and sit forward in 3D so they parallax when the card tilts. The coin stack is driven
