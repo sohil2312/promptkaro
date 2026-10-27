@@ -27,6 +27,13 @@ fast and honest: real prices, real terms, no invented proof.
 | Action | `#008069` | WhatsApp's own green. White text 4.9:1. Every CTA |
 | Marigold | `#FFB224` | Brand mark: cursor, ₹0, "our pick", focus ring, selection. Never on body text |
 
+**Product cards are the one place the palette widens:** rani pink `#C2185B`, marigold, peacock
+`#0F5F66` and neem `#CFE7B8`, cycling so no colour repeats side by side. Each card is a saturated
+fill (28px radius, no shadow) holding a white fragment of real UI. The pattern (saturated cards
+with live product UI inside) follows the analysis of clay.com in VoltAgent/awesome-design-md; the
+colours, fragments, motion and copy are PromptKaro's own, and none of Clay's illustrations or
+brand assets are used.
+
 Type: **Anek Gujarati** (Ek Type, Mumbai, OFL), self-hosted, one family for English and
 Gujarati. Five sizes: 15 / 18 / 20–24 / 32–52 / 44–108px. Display weight 640, tracking −0.025 to
 −0.035em. Gujarati gets more line-height and a smaller hero (`html[lang="gu"]` rules). The
@@ -52,7 +59,12 @@ Based on Emil Kowalski's design-engineering rules.
   after another (150ms apart), the note and WhatsApp button arrive last, and the chip flips to
   "Demo ready". About 1.4s, on first view and on each tab switch. Transitions, not keyframes, so
   switching mid-build retargets cleanly. Skipped under reduced motion.
-- **Cards feel physical:** on mouse, a sample card tilts up to 5° toward the pointer through a
+- **Product cards fill themselves in**, once, when 45% visible: the Website card types a search
+  then resolves the shop's result and its chips; the Catalog tiles shimmer then fill one by one
+  before the share button lands; the EMI slider glides 3 → 12 months while the amount rolls (and
+  stays a real, keyboard-usable control); the Dashboard bars grow left to right as the total
+  counts to 38. Grabbing the slider mid-demo stops the demo. Titles and copy are never hidden.
+- **Cards feel physical:** on mouse, a sample card tilts up to 5° (product cards 3°) toward the pointer through a
   damped spring (it lags and settles, never snaps) with a soft sheen; on press, mouse or touch,
   it squishes to 0.98.
 - Scroll: the "how it works" line fills as you read it (goal gradient), plans settle in. CSS

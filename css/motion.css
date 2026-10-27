@@ -169,3 +169,34 @@
   .sample.is-building .sample-note:not(.is-in),
   .sample.is-building .sample-btn:not(.is-in) { transform: none; }
 }
+
+/* ---------- Product cards: each fragment fills itself in once, when it comes into view ---------- */
+.js .product [data-step],
+.js .frag-tiles li > * { transition: opacity 280ms var(--ease-out), transform 280ms var(--ease-out); }
+.js .frag-bars i { transition: transform 560ms var(--ease-out); }
+
+.product.is-armed [data-step]:not(.is-in) { opacity: 0; transform: translateY(6px) scale(0.98); }
+.product.is-armed .frag-chip:not(.is-in) { transform: scale(0.9); }
+.product.is-armed .frag-tiles li:not(.is-in) > * { opacity: 0; transform: translateY(4px); }
+.product.is-armed .frag-tiles li:not(.is-in) {
+  background-image: linear-gradient(90deg, transparent 0, rgb(255 255 255 / 0.75) 50%, transparent 100%);
+  background-size: 200% 100%;
+  background-repeat: no-repeat;
+  animation: shimmer 900ms linear infinite;
+}
+.product.is-armed .frag-tiles li.is-in { opacity: 1; }
+.product.is-armed .frag-tiles li[data-step]:not(.is-in) { opacity: 1; transform: none; } /* tile frame stays as skeleton */
+.product.is-armed .frag-bars li:not(.is-in) i { transform: scaleY(0.04); }
+.frag-searchbar { transition: box-shadow 200ms ease; }
+.product.is-armed .frag-query { clip-path: inset(0 100% 0 0); }
+.product.is-typing .frag-searchbar { box-shadow: inset 0 0 0 2px var(--rani); }
+
+/* Tilt sheen for any tilting card */
+.product .sample-shine { mix-blend-mode: soft-light; }
+.product.is-tilting .sample-shine { opacity: 1; }
+.product { transform-style: preserve-3d; }
+
+@media (prefers-reduced-motion: reduce) {
+  .product.is-armed .frag-tiles li:not(.is-in) { animation: none; }
+  .js .frag-bars i { transition: none; }
+}

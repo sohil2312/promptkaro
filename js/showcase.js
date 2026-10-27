@@ -1,6 +1,6 @@
 /* PromptKaro — showcase.js
    "What your site could look like": pick a business, watch its sample site build
-   itself from the price list, then tilt it around. Without JS every sample is
+   itself from the price list (tilt lives in tilt.js). Without JS every sample is
    listed, complete, one after another. */
 
 (function () {
@@ -12,7 +12,6 @@
   var tabs = Array.prototype.slice.call(root.querySelectorAll('[role="tab"]'));
   var panels = tabs.map(function (t) { return document.getElementById(t.getAttribute('aria-controls')); });
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-  var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
   var EASE_OUT = 'cubic-bezier(0.23, 1, 0.32, 1)';
   var STATUS = {
     en: { building: 'Building from your price list…', ready: 'Demo ready' },
@@ -32,10 +31,6 @@
     chip.dataset.state = 'ready';
     chip.innerHTML = '<span class="sample-status-icon"></span><span class="sample-status-label"></span>';
     sample.querySelector('.sample-head').prepend(chip);
-    var shine = document.createElement('span');
-    shine.className = 'sample-shine';
-    shine.setAttribute('aria-hidden', 'true');
-    sample.appendChild(shine);
     setStatus(sample, 'ready');
   });
 
@@ -142,54 +137,4 @@
     io.observe(root);
   }
 
-  /* ---------- Tactile tilt: a damped spring toward the pointer ---------- */
-  var MAX_TILT = 5; // degrees
-
-  samples.forEach(function (sample) {
-    var target = { x: 0, y: 0 };
-    var pos = { x: 0, y: 0 };
-    var vel = { x: 0, y: 0 };
-    var press = 1, pressTarget = 1;
-    var raf = 0;
-
-    function step() {
-      // Spring: stiffness 0.08, damping 0.78 per frame. Settles in ~0.5s with a hint of overshoot.
-      ['x', 'y'].forEach(function (k) {
-        vel[k] = (vel[k] + (target[k] - pos[k]) * 0.08) * 0.78;
-        pos[k] += vel[k];
-      });
-      press += (pressTarget - press) * 0.35;
-      sample.style.transform = 'rotateX(' + pos.y.toFixed(3) + 'deg) rotateY(' + pos.x.toFixed(3) + 'deg) scale(' + press.toFixed(4) + ')';
-      var moving = Math.abs(target.x - pos.x) + Math.abs(target.y - pos.y) + Math.abs(vel.x) + Math.abs(vel.y) > 0.01 ||
-                   Math.abs(pressTarget - press) > 0.0005;
-      if (moving) raf = requestAnimationFrame(step);
-      else {
-        raf = 0;
-        if (!target.x && !target.y && pressTarget === 1) sample.style.transform = '';
-      }
-    }
-    function kick() { if (!raf) raf = requestAnimationFrame(step); }
-
-    sample.addEventListener('pointermove', function (e) {
-      if (!finePointer.matches || reduce.matches || e.pointerType !== 'mouse') return;
-      var r = sample.getBoundingClientRect();
-      var nx = (e.clientX - r.left) / r.width - 0.5;
-      var ny = (e.clientY - r.top) / r.height - 0.5;
-      target.x = nx * MAX_TILT * 2;
-      target.y = -ny * MAX_TILT * 2;
-      sample.style.setProperty('--mx', ((nx + 0.5) * 100).toFixed(1) + '%');
-      sample.style.setProperty('--my', ((ny + 0.5) * 100).toFixed(1) + '%');
-      sample.classList.add('is-tilting');
-      kick();
-    });
-    sample.addEventListener('pointerleave', function () {
-      target.x = 0; target.y = 0; pressTarget = 1;
-      sample.classList.remove('is-tilting');
-      kick();
-    });
-    // Squish on press, for touch too: the card feels like it has give.
-    sample.addEventListener('pointerdown', function () { if (!reduce.matches) { pressTarget = 0.98; kick(); } });
-    sample.addEventListener('pointerup', function () { pressTarget = 1; kick(); });
-    sample.addEventListener('pointercancel', function () { pressTarget = 1; kick(); });
-  });
 })();

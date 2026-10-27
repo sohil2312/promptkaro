@@ -21,7 +21,7 @@ test.describe('1. Layout', () => {
 
   test('every section has a heading', async ({ page }) => {
     await page.goto(PAGE_URL);
-    for (const id of ['#work', '#how', '#prices', '#about', '#faq']) {
+    for (const id of ['#work', '#how', '#products', '#prices', '#about', '#faq']) {
       await expect(page.locator(`${id} h2`)).toHaveCount(1);
     }
   });
@@ -128,6 +128,33 @@ test.describe('3. Interaction', () => {
     await expect(page.locator('#panel-mobile .sample-status-label')).toHaveText(/ડેમો તૈયાર|ભાવ-પત્રક/);
   });
 
+  test('product cards fill themselves in when scrolled into view', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    for (const demo of ['search', 'catalog', 'emi', 'chart']) {
+      const card = page.locator(`.product[data-demo="${demo}"]`);
+      await card.scrollIntoViewIfNeeded();
+      await expect(card).not.toHaveClass(/is-armed/, { timeout: 6000 });
+    }
+    await expect(page.locator('.frag-chart [data-count]')).toHaveText('38');
+    await expect(page.locator('.frag-chip-wa')).toBeVisible();
+    await expect(page.locator('.frag-share')).toBeVisible();
+  });
+
+  test('EMI calculator works as a real control', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    const range = page.locator('#emiMonths');
+    await range.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(1800); // demo glide finishes
+    await expect(page.locator('#emiMonthsOut')).toHaveText('12');
+    await expect(page.locator('#emiValue')).toHaveText('₹1,167');
+    await range.fill('6');
+    await expect(page.locator('#emiMonthsOut')).toHaveText('6');
+    await expect(page.locator('#emiValue')).toHaveText('₹2,333');
+    await range.focus();
+    await page.keyboard.press('ArrowRight');
+    await expect(page.locator('#emiMonthsOut')).toHaveText('7');
+  });
+
   test('hero chat plays to the end and offers a replay', async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto(PAGE_URL);
@@ -208,6 +235,9 @@ test.describe('5. Robustness', () => {
       await expect(page.locator(id)).toBeVisible();
     }
     await expect(page.locator('.plan')).toHaveCount(3);
+    await expect(page.locator('.frag-tiles li')).toHaveCount(4);
+    await expect(page.locator('.frag-result')).toBeVisible();
+    await expect(page.locator('.frag-chart [data-count]')).toHaveText('38');
     await ctx.close();
   });
 
@@ -220,6 +250,7 @@ test.describe('5. Robustness', () => {
     await expect(page.locator('#chatReplay')).toBeHidden();
     await page.locator('#showcase').scrollIntoViewIfNeeded();
     await expect(page.locator('#panel-mobile .sample')).not.toHaveClass(/is-building/);
+    await expect(page.locator('.product.is-armed')).toHaveCount(0);
     await ctx.close();
   });
 
