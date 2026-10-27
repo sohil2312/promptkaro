@@ -153,11 +153,35 @@ test.describe('3. Interaction', () => {
     await expect(page.locator('#emiCoins .coin')).toHaveCount(1, { timeout: 2000 }); // leaving coins are removed
   });
 
-  test('product visuals are rendered elements, not icon SVGs', async ({ page }) => {
+  test('product visuals are rendered photos that load, not vector icons', async ({ page }) => {
     await page.goto(PAGE_URL);
     await expect(page.locator('.frag-tiles svg')).toHaveCount(0);
-    await expect(page.locator('.frag-tiles .obj')).toHaveCount(4);
-    await expect(page.locator('.map-pin')).toHaveCount(1);
+    const imgs = page.locator('.frag-tiles .turn img');
+    await expect(imgs).toHaveCount(4);
+    await page.locator('.products').scrollIntoViewIfNeeded();
+    for (const img of await imgs.all()) {
+      await expect.poll(() => img.evaluate((i) => i.complete && i.naturalWidth > 0)).toBe(true);
+      expect(await img.getAttribute('width')).toBe('450'); // explicit size, no layout shift
+    }
+    await expect(page.locator('.map-pin img')).toHaveCount(1);
+    await expect(page.locator('#emiCoins img.coin').first()).toBeVisible();
+  });
+
+  test('on desktop the products turn with the mouse (turntable sprites)', async ({ page }, info) => {
+    test.skip(info.project.name !== 'Desktop Chrome', 'turntables load only for a fine pointer');
+    await page.goto(PAGE_URL);
+    const card = page.locator('.product-marigold');
+    await card.scrollIntoViewIfNeeded();
+    const turn = card.locator('.turn').first();
+    await expect(turn).toHaveClass(/is-sprite/, { timeout: 10000 });
+    const box = await card.boundingBox();
+    await page.mouse.move(box.x + 10, box.y + box.height / 2);
+    await page.waitForTimeout(700);
+    const left = await turn.evaluate((t) => t.style.backgroundPosition);
+    await page.mouse.move(box.x + box.width - 10, box.y + box.height / 2, { steps: 8 });
+    await page.waitForTimeout(700);
+    const right = await turn.evaluate((t) => t.style.backgroundPosition);
+    expect(left).not.toBe(right);
   });
 
   test('each product hands off to a WhatsApp conversation', async ({ page }) => {

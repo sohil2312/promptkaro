@@ -27,8 +27,11 @@
     var animate = !reduce.matches && 'animate' in coins;
 
     for (var n = live.length; n < want; n++) {
-      var c = document.createElement('i');
+      var c = document.createElement('img');
       c.className = 'coin';
+      c.src = '/assets/img/coin.webp';
+      c.alt = '';
+      c.width = 120; c.height = 78;
       coins.appendChild(c);
       if (animate) {
         c.animate([

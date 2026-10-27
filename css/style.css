@@ -940,13 +940,10 @@ html:not(.js) .dock { display: none; }
 }
 .frag-tiles b { font-weight: var(--fw-strong); font-variant-numeric: tabular-nums; }
 .frag-thumb {
-  display: grid;
-  place-items: center;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 1;
   margin-bottom: var(--s-1);
   border-radius: 8px;
-  background: var(--marigold-soft);
-  color: #7A4A00;
+  background: radial-gradient(90% 70% at 50% 40%, #FFFFFF 0%, var(--marigold-soft) 100%);
 }
 .frag-share {
   display: flex;
@@ -1037,8 +1034,6 @@ html:not(.js) .dock { display: none; }
 @media (min-width: 1100px) {
   .product { padding: var(--s-7); }
   .product-marigold .frag-tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .product-marigold .frag-thumb { aspect-ratio: 1; }
-  .product-marigold .frag-thumb .obj { scale: 1.35; }
   .product-neem .frag-bars { height: 168px; }
 }
 
@@ -1056,99 +1051,18 @@ html:not(.js) .dock { display: none; }
     inset -2px -3px 5px color-mix(in oklab, var(--c) 62%, black),
     0 4px 8px -3px rgb(19 32 26 / 0.35);
 }
-.obj { position: relative; display: block; transform-style: preserve-3d; }
-.obj i, .obj b, .obj span { display: block; }
-.obj-shadow {
-  position: absolute;
-  left: 50%;
-  bottom: 9%;
-  width: 46%;
-  height: 10px;
-  translate: -50% 0;
-  border-radius: 50%;
-  background: radial-gradient(closest-side, rgb(19 32 26 / 0.28), transparent);
-}
-.frag-thumb { position: relative; transform-style: preserve-3d; }
-.frag-thumb .obj { transform: translateZ(18px); }
-
-/* Phone */
-.phone-body { --c: #1F3A3D; position: relative; width: 34px; height: 60px; padding: 3px; border-radius: 9px; rotate: -12deg; }
-.phone-screen {
-  display: grid !important;
-  grid-template-columns: repeat(2, 1fr);
-  align-content: start;
-  gap: 3px;
+/* Rendered product images (WebP renders, see DESIGN.md). A turntable sprite swaps in on desktop. */
+.frag-thumb { position: relative; display: block; overflow: visible; transform-style: preserve-3d; }
+.turn {
+  display: block;
+  width: 100%;
   height: 100%;
-  padding: 9px 4px 4px;
-  border-radius: 6px;
-  background: radial-gradient(120% 80% at 30% 0%, #2F5960, #0D1A1C 70%);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.06);
+  background-repeat: no-repeat;
+  background-size: 600% 400%;
+  transform: translateZ(18px);
 }
-.phone-screen i { height: 7px; border-radius: 2.5px; box-shadow: inset 0 1px 1px rgb(255 255 255 / 0.45); }
-.phone-screen i:nth-child(1) { background: var(--marigold); }
-.phone-screen i:nth-child(2) { background: #25D366; }
-.phone-screen i:nth-child(3) { background: #E8457E; }
-.phone-screen i:nth-child(4) { background: #5CC8D0; }
-.phone-screen i:nth-child(5) { background: #A9D18A; }
-.phone-screen i:nth-child(6) { background: #F6EFE4; }
-.phone-cam { position: absolute; top: 5px; left: 50%; width: 8px; height: 2.5px; translate: -50% 0; border-radius: 2px; background: #050A0B; }
-
-/* Watch */
-.obj-watch { display: grid !important; justify-items: center; rotate: 8deg; }
-.band { --c: #D63F74; width: 20px; height: 14px; }
-.band-top { border-radius: 6px 6px 2px 2px; margin-bottom: -3px; }
-.band-bottom { border-radius: 2px 2px 6px 6px; margin-top: -3px; }
-.watch-case { --c: #2C3A34; position: relative; z-index: 1; width: 36px; height: 40px; padding: 3px; border-radius: 12px; }
-.watch-face {
-  position: relative;
-  display: grid !important;
-  place-items: center;
-  height: 100%;
-  border-radius: 9px;
-  background: radial-gradient(100% 90% at 30% 10%, #24302B, #070C0A 70%);
-}
-.watch-ring {
-  position: absolute;
-  inset: 4px;
-  border-radius: 50%;
-  background: conic-gradient(#5BE38F 0 72%, rgb(255 255 255 / 0.12) 0);
-  -webkit-mask: radial-gradient(closest-side, transparent 72%, #000 75%);
-          mask: radial-gradient(closest-side, transparent 72%, #000 75%);
-}
-.watch-face b { position: relative; font-size: 8px; font-weight: 700; color: #FFF; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
-
-/* Earbuds in their case */
-.obj-buds { width: 64px; height: 56px; }
-.buds-case { --c: #F4F1EA; position: absolute; left: 6px; bottom: 4px; width: 52px; height: 34px; border-radius: 16px 16px 18px 18px; }
-.buds-seam { position: absolute; left: 6px; right: 6px; top: 11px; height: 1px; background: rgb(19 32 26 / 0.14); border-radius: 1px; }
-.buds-led { position: absolute; left: 50%; top: 18px; width: 4px; height: 4px; translate: -50% 0; border-radius: 50%; background: #25D366; box-shadow: 0 0 4px #25D366; }
-.bud { position: absolute; top: 0; width: 18px; height: 34px; }
-.bud-l { left: 10px; rotate: -14deg; }
-.bud-r { right: 10px; rotate: 14deg; }
-.bud-head { --c: #FFFFFF; width: 18px; height: 18px; border-radius: 50%; }
-.bud-head::after { content: ''; display: block; width: 7px; height: 7px; margin: 5px 0 0 3px; border-radius: 50%; background: #2C3A34; opacity: 0.85; }
-.bud-r .bud-head::after { margin-left: 8px; }
-.bud-stem { --c: #FFFFFF; width: 7px; height: 18px; margin: -3px auto 0; border-radius: 4px; }
-
-/* Charger */
-.obj-plug { display: grid !important; justify-items: center; width: 64px; height: 60px; rotate: -6deg; }
-.plug-prongs { display: flex !important; gap: 8px; margin-bottom: -2px; }
-.plug-prongs i { width: 5px; height: 11px; border-radius: 1.5px 1.5px 0 0; background: linear-gradient(90deg, #9AA19E, #EEF0EF 45%, #8C9390); }
-.plug-body { --c: #F4F1EA; position: relative; z-index: 1; display: grid !important; place-items: center; width: 36px; height: 34px; border-radius: 10px; }
-.plug-body b { font-size: 9px; font-weight: 700; color: var(--ink-3); }
-.plug-cable {
-  position: absolute;
-  top: 40px;
-  left: 30px;
-  width: 26px;
-  height: 18px;
-  border: 4px solid #E6E2D9;
-  border-top: 0;
-  border-right: 0;
-  border-radius: 0 0 0 14px;
-  box-shadow: inset 1px -1px 1px rgb(19 32 26 / 0.12);
-}
-
+.turn img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.turn.is-sprite img { visibility: hidden; }
 /* ---------- Map with a dropping pin (Website card) ---------- */
 .frag-map-wrap { position: relative; margin-top: var(--s-3); transform-style: preserve-3d; }
 .frag-map {
@@ -1177,23 +1091,13 @@ html:not(.js) .dock { display: none; }
 }
 .map-pin {
   position: absolute;
-  left: 46%;
-  top: 22px;
-  width: 26px;
-  height: 34px;
+  left: 45%;
+  top: 12px;
+  width: 30px;
+  height: 48px;
   transform: translateZ(28px);
   transform-style: preserve-3d;
 }
-.pin-head {
-  --c: #E2336E;
-  position: absolute;
-  inset: 0 0 auto;
-  width: 26px;
-  height: 26px;
-  border-radius: 50% 50% 50% 0;
-  rotate: -45deg;
-}
-.pin-head::after { content: ''; position: absolute; inset: 8px; border-radius: 50%; background: #FFF; box-shadow: inset 1px 1px 2px rgb(19 32 26 / 0.25); }
 .pin-shadow { position: absolute; left: 50%; bottom: -4px; width: 16px; height: 5px; translate: -50% 0; border-radius: 50%; background: radial-gradient(closest-side, rgb(19 32 26 / 0.35), transparent); }
 .pin-pulse { position: absolute; left: 50%; bottom: -8px; width: 34px; height: 12px; translate: -50% 0; border-radius: 50%; border: 2px solid #E2336E; opacity: 0; }
 
@@ -1201,23 +1105,9 @@ html:not(.js) .dock { display: none; }
 .frag-emi-result { justify-content: space-between; align-items: flex-end; min-height: 92px; }
 .frag-emi-result p { display: flex; align-items: baseline; gap: var(--s-1); flex-wrap: wrap; }
 .coins { display: flex; flex-direction: column-reverse; align-items: center; padding-bottom: 2px; transform: translateZ(22px); }
-.coin {
-  --c: #F2B528;
-  display: block;
-  width: 38px;
-  height: 13px;
-  margin-top: -7px;
-  border-radius: 50%;
-  background:
-    radial-gradient(60% 55% at 40% 35%, #FFE7A3 0%, transparent 70%),
-    var(--c);
-  box-shadow:
-    inset 0 0 0 2px #E4A417,
-    inset 0 -1px 0 2.5px #FFD66B,
-    0 3px 0 #B98210,
-    0 4px 3px -1px rgb(19 32 26 / 0.3);
-}
+.coin { display: block; width: 44px; height: auto; margin-top: -21px; filter: drop-shadow(0 2px 2px rgb(19 32 26 / 0.25)); }
 .coin:first-child { margin-top: 0; }
+.map-pin img { display: block; width: 30px; height: auto; position: relative; z-index: 1; }
 
 /* ---------- Dashboard pillars ---------- */
 .frag-bars i {
@@ -1293,9 +1183,6 @@ html:not(.js) .dock { display: none; }
 .wa-order b { font-weight: var(--fw-strong); }
 .wa-order small { color: var(--wa-meta); font-size: 0.6875rem; }
 .wa-order-thumb { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 6px; background: var(--marigold-soft); }
-.obj-mini { width: 30px; height: 22px; }
-.obj-mini .buds-case { left: 2px; bottom: 2px; width: 26px; height: 18px; border-radius: 9px; }
-.obj-mini .buds-led { top: 8px; width: 3px; height: 3px; }
 
 .frag-emi-send {
   display: inline-flex;
@@ -1570,3 +1457,12 @@ html[lang="gu"] .dash-head h3 { line-height: 1.2; letter-spacing: 0; }
   .compare { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 .wa-agent .log-icon { background: #2BB673 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M5.2 9.3l2.4 2.3 5.2-5.2' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 14px no-repeat; }
+
+/* Real product photos inside chats and sample sites */
+.wa-order-thumb { overflow: hidden; background: #FFFFFF; }
+.wa-order-thumb img { width: 34px; height: auto; }
+.sample-rows li.has-thumb { align-items: center; }
+.row-thumb { flex: none; width: 40px; height: 40px; object-fit: contain; margin: -4px 0; border-radius: 8px; background: var(--tone-soft); padding: 3px; }
+.sample-rows li.has-thumb > span:first-of-type { margin-right: auto; }
+.msg-link { position: relative; padding-left: 64px !important; min-height: 64px; }
+.msg-link-img { position: absolute; left: 6px; top: 50%; translate: 0 -50%; width: 50px; height: 50px; object-fit: contain; border-radius: 6px; background: #FFFFFF; }

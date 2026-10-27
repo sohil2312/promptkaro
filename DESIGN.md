@@ -81,10 +81,12 @@ Based on Emil Kowalski's design-engineering rules.
   every scenario while on screen (Pause / Play all); choosing a tab hands control to the visitor.
 - **Dashboards** tick through a few real-looking events once while on screen (sales feed and
   sparkline, OPD queue, fee ring, stock with reorder), then stop.
-- **Rendered objects, not icons:** product visuals are live CSS-rendered clay objects (phone, watch,
-  earbuds, charger, map pin, coins, pillars) sharing one material (`.clay`, set `--c`). They pop in
-  on a spring and sit forward in 3D so they parallax when the card tilts. The coin stack is driven
-  by the EMI slider (one coin per ₹420 a month).
+- **Real product imagery, not vectors:** products (phone, smartwatch, earbuds, charger), the EMI
+  coins and the map pin are physically based 3D renders (original, generic designs) made in
+  `tools/render`, shipped as WebP with explicit sizes and lazy loading. On desktop (fine pointer,
+  no data saver, motion allowed) a 24-frame turntable sprite swaps in: the product spins into place
+  and then follows the mouse across its card. Phones get the light stills (about 20 KB each).
+  Sample sites and the hero link preview use the same renders as product photos.
 - **Cards feel physical:** on mouse, a sample card tilts up to 5° (product cards 3°) toward the pointer through a
   damped spring (it lags and settles, never snaps) with a soft sheen; on press, mouse or touch,
   it squishes to 0.98.
