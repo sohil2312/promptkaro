@@ -1018,14 +1018,14 @@ html:not(.js) .dock { display: none; }
 .frag-bars i {
   display: block;
   align-self: end;
-  height: calc(var(--v) / 8 * 100%);
+  height: calc(var(--v) / 9 * 100%);
   border-radius: 6px 6px 3px 3px;
   background: #A9D18A;
   transform-origin: 50% 100%;
 }
 .frag-bars .is-today i { background: var(--action); }
 .frag-bars .is-today span { color: var(--ink); font-weight: var(--fw-strong); }
-.v-3 { --v: 3; } .v-4 { --v: 4; } .v-5 { --v: 5; } .v-6 { --v: 6; } .v-7 { --v: 7; } .v-8 { --v: 8; }
+.v-3 { --v: 3; } .v-4 { --v: 4; } .v-5 { --v: 5; } .v-6 { --v: 6; } .v-7 { --v: 7; } .v-8 { --v: 8; } .v-9 { --v: 9; }
 
 @media (min-width: 720px) {
   .products { grid-template-columns: repeat(12, minmax(0, 1fr)); }
@@ -1246,3 +1246,102 @@ html:not(.js) .dock { display: none; }
 
 /* Depth: product cards keep a 3D context so rendered objects parallax under tilt */
 .product, .product .frag, .product .frag-tiles, .product .frag-tiles li, .product .frag-emi, .product .frag-emi-result { transform-style: preserve-3d; }
+
+/* ---------- WhatsApp hand-off inside product cards ---------- */
+.wa-mini {
+  margin-top: var(--s-3);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--wa-wall);
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  transform: translateZ(10px);
+}
+.wa-mini-head {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: 6px 10px;
+  background: var(--wa-head);
+  color: var(--on-ink);
+}
+.wa-mini-avatar {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--ground);
+  color: var(--wa-head);
+  font-weight: 700;
+  font-size: 0.75rem;
+}
+.wa-mini-who { display: flex; flex-direction: column; line-height: 1.15; }
+.wa-mini-who b { font-weight: var(--fw-strong); font-size: 0.8125rem; }
+.wa-mini-who small { font-size: 0.6875rem; opacity: 0.85; }
+.wa-mini-list { display: flex; flex-direction: column; gap: 5px; padding: 8px; }
+.wa-mini .msg { max-width: 88%; padding: 5px 8px 6px; border-radius: 8px; }
+.wa-mini .msg-meta { margin-top: 4px; font-size: 0.625rem; }
+.wa-mini .ticks { width: 14px; height: 10px; }
+.wa-dots { display: none; gap: 3px; padding: 4px 2px; }
+.wa-dots i { width: 6px; height: 6px; border-radius: 50%; background: #8696A0; }
+.msg.is-typing .wa-dots { display: inline-flex; }
+.msg.is-typing p, .msg.is-typing .msg-meta { visibility: hidden; position: absolute; }
+
+.wa-order { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; padding: 6px; border-radius: 6px; background: rgb(0 0 0 / 0.05); }
+.wa-order > span:last-child { display: flex; flex-direction: column; line-height: 1.2; }
+.wa-order b { font-weight: var(--fw-strong); }
+.wa-order small { color: var(--wa-meta); font-size: 0.6875rem; }
+.wa-order-thumb { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 6px; background: var(--marigold-soft); }
+.obj-mini { width: 30px; height: 22px; }
+.obj-mini .buds-case { left: 2px; bottom: 2px; width: 26px; height: 18px; border-radius: 9px; }
+.obj-mini .buds-led { top: 8px; width: 3px; height: 3px; }
+
+.frag-emi-send {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  min-height: 44px;
+  border-radius: var(--r-1);
+  background: var(--action);
+  color: var(--on-ink);
+  font-size: 0.9375rem;
+  font-weight: var(--fw-strong);
+}
+.frag-emi-send svg { width: 18px; height: 18px; }
+@media (hover: hover) and (pointer: fine) { .frag-emi-send:hover { background: var(--action-hover); } }
+
+.wa-toast {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin-top: var(--s-4);
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: var(--ground);
+  box-shadow: 0 0 0 1px var(--rule), 0 10px 24px -12px rgb(19 32 26 / 0.35);
+  font-size: 0.8125rem;
+  line-height: 1.3;
+  transform: translateZ(24px);
+}
+.wa-toast-icon { display: grid; place-items: center; flex: none; width: 32px; height: 32px; border-radius: 9px; background: #25D366; color: #FFF; }
+.wa-toast-icon svg { width: 18px; height: 18px; }
+.wa-toast-text { display: flex; flex-direction: column; min-width: 0; }
+.wa-toast-text b { font-weight: var(--fw-strong); }
+.wa-toast-text span { color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.wa-toast time { margin-left: auto; align-self: flex-start; color: var(--ink-3); font-size: 0.6875rem; }
+
+/* A fingertip that shows what the visitor would tap */
+.tap {
+  position: absolute;
+  z-index: 5;
+  width: 28px;
+  height: 28px;
+  margin: -14px 0 0 -14px;
+  border-radius: 50%;
+  background: rgb(19 32 26 / 0.22);
+  box-shadow: 0 0 0 2px rgb(255 255 255 / 0.9);
+  pointer-events: none;
+  transform: translateZ(40px);
+}

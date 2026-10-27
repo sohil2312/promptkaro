@@ -133,9 +133,9 @@ test.describe('3. Interaction', () => {
     for (const demo of ['search', 'catalog', 'emi', 'chart']) {
       const card = page.locator(`.product[data-demo="${demo}"]`);
       await card.scrollIntoViewIfNeeded();
-      await expect(card).not.toHaveClass(/is-armed/, { timeout: 6000 });
+      await expect(card).not.toHaveClass(/is-armed/, { timeout: 12000 });
     }
-    await expect(page.locator('.frag-chart [data-count]')).toHaveText('38');
+    await expect(page.locator('.frag-chart [data-count]')).toHaveText('39');
     await expect(page.locator('.frag-chip-wa')).toBeVisible();
     await expect(page.locator('.frag-share')).toBeVisible();
   });
@@ -158,6 +158,36 @@ test.describe('3. Interaction', () => {
     await expect(page.locator('.frag-tiles svg')).toHaveCount(0);
     await expect(page.locator('.frag-tiles .obj')).toHaveCount(4);
     await expect(page.locator('.map-pin')).toHaveCount(1);
+  });
+
+  test('each product hands off to a WhatsApp conversation', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    for (const demo of ['search', 'catalog', 'emi']) {
+      const card = page.locator(`.product[data-demo="${demo}"]`);
+      await card.scrollIntoViewIfNeeded();
+      await expect(card).not.toHaveClass(/is-armed/, { timeout: 12000 });
+      await expect(card.locator('.wa-mini .msg-out')).toBeVisible();
+      await expect(card.locator('.wa-mini .msg-in p')).toBeVisible();
+      await expect(card.locator('.is-typing')).toHaveCount(0);
+      await expect(card.locator('.tap')).toHaveCount(0); // fingertip cleaned up
+    }
+    const dash = page.locator('.product[data-demo="chart"]');
+    await dash.scrollIntoViewIfNeeded();
+    await expect(dash).not.toHaveClass(/is-armed/, { timeout: 12000 });
+    await expect(dash.locator('.wa-toast')).toBeVisible();
+    await expect(dash.locator('[data-count]')).toHaveText('39');
+  });
+
+  test('sending an EMI plan writes the live plan into the chat', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    const card = page.locator('.product[data-demo="emi"]');
+    await card.scrollIntoViewIfNeeded();
+    await expect(card).not.toHaveClass(/is-armed/, { timeout: 12000 });
+    await page.locator('#emiMonths').fill('6');
+    await page.locator('#emiSend').click();
+    await expect(page.locator('.js-plan')).toHaveText('EMI plan: 5G phone, ₹2,333 × 6 months');
+    await page.locator('#langToggle').click();
+    await expect(page.locator('.js-plan')).toHaveText('EMI પ્લાન: 5G ફોન, ₹2,333 × 6 મહિના');
   });
 
   test('EMI calculator works as a real control', async ({ page }) => {
@@ -257,7 +287,7 @@ test.describe('5. Robustness', () => {
     await expect(page.locator('.plan')).toHaveCount(3);
     await expect(page.locator('.frag-tiles li')).toHaveCount(4);
     await expect(page.locator('.frag-result')).toBeVisible();
-    await expect(page.locator('.frag-chart [data-count]')).toHaveText('38');
+    await expect(page.locator('.frag-chart [data-count]')).toHaveText('39');
     await ctx.close();
   });
 

@@ -1,6 +1,7 @@
 /* PromptKaro — products.js
    Each product card holds a small piece of live UI that fills itself in once, when
-   the card comes into view. The EMI calculator stays usable afterwards.
+   the card comes into view, then hands off to WhatsApp: the customer's message goes
+   out and the shop replies. The EMI calculator and its send button stay usable.
    Without JS (or with reduced motion) every fragment is shown complete. */
 
 (function () {
@@ -130,7 +131,7 @@
     chart: function (card) {
       var bars = Array.prototype.slice.call(card.querySelectorAll('.frag-bars li'));
       var total = card.querySelector('[data-count]');
-      var target = Number(total.dataset.count);
+      var target = Number(total.dataset.before || total.dataset.count);
       bars.forEach(function (b, i) { setTimeout(function () { show(b); }, 100 + i * 70); });
       var start = null, duration = 900;
       return new Promise(function (resolve) {
@@ -146,6 +147,143 @@
     }
   };
 
+  /* ---------- WhatsApp hand-off: every product ends in a conversation ---------- */
+
+  // A fingertip glides in, presses the target, and lifts away.
+  function tap(card, target) {
+    if (!target || reduce.matches) return Promise.resolve();
+    var c = card.getBoundingClientRect();
+    var t = target.getBoundingClientRect();
+    var x = t.left - c.left + t.width / 2;
+    var y = t.top - c.top + t.height / 2;
+    var dot = document.createElement('span');
+    dot.className = 'tap';
+    dot.setAttribute('aria-hidden', 'true');
+    dot.style.left = x + 'px';
+    dot.style.top = y + 'px';
+    card.appendChild(dot);
+    var glide = dot.animate([
+      { transform: 'translateZ(40px) translate(46px, 54px) scale(1)', opacity: 0 },
+      { transform: 'translateZ(40px) translate(0, 0) scale(1)', opacity: 1 }
+    ], { duration: 520, easing: 'cubic-bezier(0.23, 1, 0.32, 1)', fill: 'forwards' });
+    return glide.finished.then(function () {
+      target.classList.add('is-pressed');
+      target.animate([{ transform: 'scale(1)' }, { transform: 'scale(0.95)' }, { transform: 'scale(1)' }],
+        { duration: 260, easing: 'ease-out' });
+      return dot.animate([
+        { transform: 'translateZ(40px) scale(1)', opacity: 1 },
+        { transform: 'translateZ(40px) scale(0.75)', opacity: 1, offset: 0.35 },
+        { transform: 'translateZ(40px) scale(1.5)', opacity: 0 }
+      ], { duration: 460, easing: 'ease-out', fill: 'forwards' }).finished;
+    }).then(function () {
+      target.classList.remove('is-pressed');
+      dot.remove();
+    });
+  }
+
+  // The chat opens, the customer's message lands, the shop types, the reply arrives.
+  function converse(mini) {
+    var msgs = mini.querySelectorAll('[data-wa-step]');
+    var out = msgs[0], reply = msgs[1];
+    show(mini);
+    return wait(380).then(function () {
+      show(out);
+      return wait(650);
+    }).then(function () {
+      reply.classList.add('is-typing');
+      show(reply);
+      return wait(1100);
+    }).then(function () {
+      reply.classList.remove('is-typing');
+      return wait(300);
+    });
+  }
+
+  /* EMI plan message, written from the live slider value. */
+  var emiSend = document.getElementById('emiSend');
+  var emiChat = document.getElementById('emiChat');
+  function planText() {
+    var months = range ? Math.round(Number(range.value)) : 12;
+    var amount = emi ? emi.textContent : '';
+    return document.documentElement.lang === 'gu'
+      ? 'EMI પ્લાન: 5G ફોન, ' + amount + ' × ' + months + ' મહિના'
+      : 'EMI plan: 5G phone, ' + amount + ' × ' + months + ' months';
+  }
+  var sentPlan = null; // { months } so a language switch can rewrite the sent message
+  function writePlan() {
+    if (!emiChat) return;
+    emiChat.querySelector('.js-plan').textContent = planText();
+    sentPlan = { months: range ? range.value : '12' };
+  }
+  document.addEventListener('pk:lang', function () {
+    if (!sentPlan || !range) return;
+    var now = range.value;
+    range.value = sentPlan.months; renderEmi(Number(range.value));
+    emiChat.querySelector('.js-plan').textContent = planText();
+    range.value = now; renderEmi(Number(now));
+  });
+
+  // A real button: visitors can change the months and send again; the shop answers each time.
+  function resend() {
+    writePlan();
+    if (reduce.matches || !emiChat) return;
+    var msgs = emiChat.querySelectorAll('.msg');
+    var out = msgs[0], reply = msgs[1];
+    out.animate([{ opacity: 0, transform: 'translateY(6px) scale(0.97)' }, { opacity: 1, transform: 'none' }],
+      { duration: 260, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
+    reply.classList.add('is-typing');
+    setTimeout(function () { reply.classList.remove('is-typing'); }, 1000);
+  }
+  if (emiSend) emiSend.addEventListener('click', resend);
+  if (emiChat) writePlan();
+
+  var handoffs = {
+    search: function (card) {
+      return tap(card, card.querySelector('.frag-chip-wa')).then(function () {
+        return converse(card.querySelector('.wa-mini'));
+      });
+    },
+    catalog: function (card) {
+      var pick = card.querySelectorAll('.frag-tiles li')[2]; // the earbuds
+      return tap(card, pick).then(function () {
+        pick.classList.add('is-picked');
+        return converse(card.querySelector('.wa-mini'));
+      }).then(function () {
+        return wait(600);
+      }).then(function () { pick.classList.remove('is-picked'); });
+    },
+    emi: function (card) {
+      return wait(300).then(function () {
+        return tap(card, emiSend);
+      }).then(function () {
+        writePlan();
+        return converse(card.querySelector('.wa-mini'));
+      });
+    },
+    // The owner's side: an enquiry arrives, today's pillar grows, the total ticks up.
+    chart: function (card) {
+      var toast = card.querySelector('.wa-toast');
+      var today = card.querySelector('.frag-bars [data-before]');
+      var total = card.querySelector('[data-count]');
+      return wait(400).then(function () {
+        show(toast);
+        return wait(500);
+      }).then(function () {
+        var bar = today.querySelector('i');
+        var before = bar.getBoundingClientRect().height;
+        today.classList.remove(today.dataset.before);
+        today.classList.add('v-9');
+        var after = bar.getBoundingClientRect().height;
+        bar.animate([{ transform: 'scaleY(' + (before / after) + ')' }, { transform: 'scaleY(1)' }],
+          { duration: 520, easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)' });
+        total.textContent = total.dataset.count;
+        total.animate([{ transform: 'translateY(-6px)', opacity: 0.4 }, { transform: 'none', opacity: 1 }],
+          { duration: 300, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
+        return wait(520);
+      });
+    }
+  };
+
   // If someone grabs the slider mid-demo, the demo lets go immediately.
   var userTouched = false;
   if (range) {
@@ -157,7 +295,11 @@
   if (reduce.matches || !('IntersectionObserver' in window) || !('animate' in Element.prototype)) return;
 
   // Arm: hide the parts that will fill in. Titles and copy are never hidden.
-  cards.forEach(function (card) { if (card.dataset.demo !== 'emi') card.classList.add('is-armed'); });
+  cards.forEach(function (card) {
+    card.classList.add('is-armed');
+    var today = card.querySelector('.frag-bars [data-before]');
+    if (today) { today.classList.remove('v-9'); today.classList.add(today.dataset.before); }
+  });
 
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
@@ -167,6 +309,8 @@
       var run = demos[card.dataset.demo];
       setTimeout(function () {
         Promise.resolve(run(card)).then(function () {
+          return handoffs[card.dataset.demo] ? handoffs[card.dataset.demo](card) : null;
+        }).then(function () {
           // Leave the finished state clean: no armed rules left behind.
           setTimeout(function () {
             card.classList.remove('is-armed');
