@@ -107,6 +107,27 @@ test.describe('3. Interaction', () => {
     await expect(page.locator('#panel-food')).toBeVisible();
   });
 
+  test('sample card builds itself, then shows "Demo ready"', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    await page.locator('#showcase').scrollIntoViewIfNeeded();
+    const sample = page.locator('#panel-mobile .sample');
+    await expect(sample).toHaveClass(/is-building/);
+    await expect(sample.locator('.sample-status')).toHaveAttribute('data-state', 'ready', { timeout: 4000 });
+    await expect(sample).not.toHaveClass(/is-building/);
+    await expect(sample.locator('.sample-btn')).toBeVisible();
+
+    await page.getByRole('tab', { name: 'Property dealer' }).click();
+    const next = page.locator('#panel-property .sample');
+    await expect(next).toHaveClass(/is-building/);
+    await expect(next.locator('.sample-status')).toHaveAttribute('data-state', 'ready', { timeout: 4000 });
+  });
+
+  test('sample build status follows the language', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    await page.locator('#langToggle').click();
+    await expect(page.locator('#panel-mobile .sample-status-label')).toHaveText(/ડેમો તૈયાર|ભાવ-પત્રક/);
+  });
+
   test('hero chat plays to the end and offers a replay', async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto(PAGE_URL);
@@ -197,6 +218,8 @@ test.describe('5. Robustness', () => {
     await page.waitForTimeout(800);
     await expect(page.locator('#chatList .is-pending')).toHaveCount(0);
     await expect(page.locator('#chatReplay')).toBeHidden();
+    await page.locator('#showcase').scrollIntoViewIfNeeded();
+    await expect(page.locator('#panel-mobile .sample')).not.toHaveClass(/is-building/);
     await ctx.close();
   });
 

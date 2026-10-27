@@ -47,7 +47,14 @@ Based on Emil Kowalski's design-engineering rules.
 - Page load: hero lines rise 16px with 60–70ms stagger, once.
 - Feedback: every pressable scales to 0.97 on `:active` (140ms). Hover effects only under
   `(hover: hover) and (pointer: fine)`.
-- Business picker: 260ms crossfade with a 4px blur bridge.
+- **Sample cards build themselves** (the product-card moment): a chip reads "Building from your
+  price list…", the header wipes in with `clip-path`, rows resolve from shimmering skeletons one
+  after another (150ms apart), the note and WhatsApp button arrive last, and the chip flips to
+  "Demo ready". About 1.4s, on first view and on each tab switch. Transitions, not keyframes, so
+  switching mid-build retargets cleanly. Skipped under reduced motion.
+- **Cards feel physical:** on mouse, a sample card tilts up to 5° toward the pointer through a
+  damped spring (it lags and settles, never snaps) with a soft sheen; on press, mouse or touch,
+  it squishes to 0.98.
 - Scroll: the "how it works" line fills as you read it (goal gradient), plans settle in. CSS
   scroll-driven only, content never fully hidden.
 - Wordmark cursor blinks 3 times on load then holds; hover wakes it. No infinite loops anywhere.
