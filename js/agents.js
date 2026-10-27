@@ -21,9 +21,9 @@
   }
 
   var UI = {
-    handling: { en: 'Agent is handling this chat', gu: 'એજન્ટ જવાબ આપે છે' },
-    typing: { en: 'Agent is typing…', gu: 'એજન્ટ ટાઇપ કરે છે…' },
-    auto: { en: 'Auto-reply', gu: 'ઓટો-રિપ્લાય' },
+    handling: { en: 'AI agent is handling this chat', gu: 'AI એજન્ટ જવાબ આપે છે' },
+    typing: { en: 'AI agent is typing…', gu: 'AI એજન્ટ ટાઇપ કરે છે…' },
+    auto: { en: 'AI agent', gu: 'AI એજન્ટ' },
     working: { en: 'Working…', gu: 'કામ ચાલુ…' },
     done: { en: 'Done in {s}s', gu: '{s} સેકન્ડમાં પૂરું' },
     summary: { en: 'Handled in {s}s, no one had to pick up the phone', gu: '{s} સેકન્ડમાં પૂરું, કોઈએ ફોન ઉપાડવો ન પડ્યો' },
@@ -381,6 +381,67 @@
     }
   }
 
+  /* ============================== Bot vs AI agent ============================== */
+  var compare = document.getElementById('compare');
+  if (compare) initCompare();
+
+  function initCompare() {
+    var replay = document.getElementById('compareReplay');
+    var bot = compare.querySelector('[data-script="bot"]');
+    var agent = compare.querySelector('[data-script="agent"]');
+    var botOutcome = compare.querySelector('.compare-bot .cmp-outcome');
+    var agentOutcome = compare.querySelector('.compare-agent .cmp-outcome');
+    // Same message, two timelines. The agent is done while the bot is still on its menu.
+    var BOT = [400, 1500, 2900, 3700, 5200, 6100];
+    var AGENT = [400, 1050, 1750, 2450, 3200];
+    var timers = [];
+
+    function pop(node) {
+      node.classList.add('is-in');
+      if (reduce.matches) return;
+      var out = node.classList.contains('msg-out');
+      node.style.transformOrigin = out ? '100% 100%' : '0% 100%';
+      node.animate([{ opacity: 0, transform: 'translateY(8px) scale(0.96)' }, { opacity: 1, transform: 'none' }], { duration: 300, easing: EASE_OUT });
+    }
+    function at(ms, fn) { timers.push(setTimeout(fn, ms)); }
+
+    function play() {
+      timers.forEach(clearTimeout); timers = [];
+      if (replay) replay.hidden = true;
+      compare.classList.add('is-armed');
+      compare.querySelectorAll('.is-in, .is-working').forEach(function (n) { n.classList.remove('is-in', 'is-working'); });
+      var b = bot.querySelectorAll('[data-c]');
+      var a = agent.querySelectorAll('[data-c]');
+      BOT.forEach(function (ms, i) { at(ms, function () { pop(b[i]); }); });
+      at(6800, function () { pop(botOutcome); });
+      AGENT.forEach(function (ms, i) {
+        var node = a[i];
+        at(ms, function () {
+          if (node.classList.contains('wa-agent')) {
+            node.classList.add('is-working');
+            pop(node);
+            at(560, function () { node.classList.remove('is-working'); });
+          } else pop(node);
+        });
+      });
+      at(3800, function () { pop(agentOutcome); });
+      at(7400, function () {
+        compare.classList.remove('is-armed');
+        compare.querySelectorAll('.is-in').forEach(function (n) { n.classList.remove('is-in'); });
+        if (replay) replay.hidden = false;
+      });
+    }
+
+    if (replay) replay.addEventListener('click', play);
+    if (reduce.matches || !('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function (entries) {
+      if (!entries[0].isIntersecting) return;
+      io.disconnect();
+      play();
+    }, { threshold: 0.35 });
+    io.observe(compare);
+  }
+
   /* ============================== Dashboards ============================== */
   var dashes = Array.prototype.slice.call(document.querySelectorAll('[data-dash]'));
   if (!dashes.length) return;
@@ -416,6 +477,34 @@
   }
 
   var dashState = { sales: 4, queue: 3, fees: 4, stock: 4 };
+
+  // What each board's automation rule shows at each step: runs today and the last action.
+  function sent(name, gu) { return { en: 'Receipt sent to ' + name, gu: gu + 'ને રસીદ મોકલી' }; }
+  function told(name, gu) { return { en: 'Told ' + name + ': your turn is coming up', gu: gu + 'ને કહ્યું: તમારો વારો આવે છે' }; }
+  var NONE = { en: 'No runs yet today', gu: 'આજે હજી ચાલ્યો નથી' };
+  var ORDERED = { en: 'Ordered 20 earbuds', gu: '20 ઇયરબડ્સનો ઓર્ડર આપ્યો' };
+  var RULES = {
+    sales: [[19, sent('Ajay R.', 'અજય આર.')], [20, sent('Ravi K.', 'રવિ કે.')], [21, sent('Meena P.', 'મીના પી.')], [22, sent('Kiran S.', 'કિરણ એસ.')], [23, sent('Hetal D.', 'હેતલ ડી.')]],
+    queue: [[13, told('Arjun', 'અર્જુન')], [14, told('Fatima', 'ફાતિમા')], [14, told('Fatima', 'ફાતિમા')], [15, told('Jaya', 'જયા')]],
+    fees: [[0, NONE], [1, sent("Dhruv's parents", 'ધ્રુવના વાલી')], [2, sent("Isha's parents", 'ઇશાના વાલી')], [3, sent("Kavya's parents", 'કાવ્યાના વાલી')], [4, sent("Om's parents", 'ઓમના વાલી')]],
+    stock: [[0, NONE], [0, NONE], [0, NONE], [1, ORDERED], [1, ORDERED]]
+  };
+  function setRule(card, key, k, fire) {
+    var rule = card.querySelector('.rule');
+    if (!rule) return;
+    var st = RULES[key][k];
+    var count = rule.querySelector('.rule-count b');
+    var changed = count.textContent !== String(st[0]);
+    count.textContent = st[0];
+    var last = rule.querySelector('.rule-last-text');
+    last.textContent = tr(st[1]);
+    last.removeAttribute('data-gu'); // main.js must not overwrite this live text
+    if (fire && changed && !reduce.matches) {
+      rule.classList.remove('is-firing'); void rule.offsetWidth; rule.classList.add('is-firing');
+      count.animate([{ transform: 'translateY(-6px)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 300, easing: EASE_OUT });
+      last.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, easing: 'ease' });
+    }
+  }
 
   var DASH = {
     sales: {
@@ -568,7 +657,11 @@
 
   // Finished state everywhere first (also the language-switch path).
   function renderAllFinal() {
-    dashes.forEach(function (card) { DASH[card.dataset.dash].render(card, dashState[card.dataset.dash]); });
+    dashes.forEach(function (card) {
+      var key = card.dataset.dash;
+      DASH[key].render(card, dashState[key]);
+      setRule(card, key, dashState[key], false);
+    });
   }
   renderAllFinal();
   document.addEventListener('pk:lang', renderAllFinal);
@@ -576,7 +669,7 @@
   if (reduce.matches || !('IntersectionObserver' in window) || !('animate' in Element.prototype)) return;
 
   // Rewind, then play each board's events once while it's on screen.
-  dashes.forEach(function (card) { dashState[card.dataset.dash] = 0; DASH[card.dataset.dash].render(card, 0); });
+  dashes.forEach(function (card) { var key = card.dataset.dash; dashState[key] = 0; DASH[key].render(card, 0); setRule(card, key, 0, false); });
   var timers = {};
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
@@ -588,6 +681,7 @@
         timers[key] = setTimeout(function () {
           dashState[key]++;
           d.step(card, dashState[key]);
+          setRule(card, key, dashState[key], true);
           tick();
         }, dashState[key] === 0 ? 700 : 1500);
       })();

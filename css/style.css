@@ -1498,3 +1498,75 @@ html[lang="gu"] .dash-head h3 { line-height: 1.2; letter-spacing: 0; }
 .wa-agent.is-working .log-icon { background: none; border: 2px solid rgb(19 32 26 / 0.15); border-top-color: var(--action); }
 .wa-mini .msg-agent { font-size: 0.625rem; }
 .msg .msg-agent { display: flex !important; width: max-content; }
+
+/* ---------- Bot vs AI agent ---------- */
+.compare { display: grid; gap: var(--s-4); margin-bottom: var(--s-3); }
+.compare-card { display: flex; flex-direction: column; gap: var(--s-4); padding: var(--s-5); border-radius: var(--r-3); background: var(--ground-2); min-width: 0; }
+.compare-agent { background: #E4F3EC; }
+.compare-top { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); flex-wrap: wrap; }
+.compare-top h3 { font-size: 1.5rem; line-height: 1.1; letter-spacing: -0.02em; }
+.kind-tag { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px 4px 6px; border-radius: var(--r-pill); font-size: 0.8125rem; font-weight: var(--fw-strong); }
+.kind-tag::before, .msg-bot::before, .msg-agent::before { content: ''; flex: none; width: 14px; height: 14px; border-radius: 4px; background-position: center; background-size: 14px; background-repeat: no-repeat; }
+/* Bot: a menu glyph in slate. Agent: a face with eyes in green. Shapes differ, not just colour. */
+.kind-bot { background: #E3E8F0; color: #3B4A63; }
+.kind-bot::before, .msg-bot::before { background-color: #5A6B87; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M4 4.5h6M4 7h6M4 9.5h4' stroke='white' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E"); }
+.kind-agent { background: var(--action); color: var(--on-ink); }
+.kind-agent::before { background-color: #FFFFFF; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Ccircle cx='5' cy='7' r='1.2' fill='%23008069'/%3E%3Ccircle cx='9' cy='7' r='1.2' fill='%23008069'/%3E%3C/svg%3E"); }
+.msg-agent::before { background-color: var(--action); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Ccircle cx='5' cy='7' r='1.2' fill='white'/%3E%3Ccircle cx='9' cy='7' r='1.2' fill='white'/%3E%3C/svg%3E"); }
+.msg .msg-bot { display: flex !important; align-items: center; gap: 4px; width: max-content; margin-bottom: 2px; font-size: 0.6875rem; font-weight: var(--fw-strong); color: #5A6B87; }
+.msg-menu { display: grid !important; gap: 2px; margin-top: 6px; }
+.msg-menu > span { padding: 5px 8px; border-radius: 6px; background: #F0F2F5; color: #027EB5; font-weight: var(--fw-strong); font-size: 0.8125rem; }
+
+.cmp-chat { display: flex; flex-direction: column; border-radius: 18px; overflow: hidden; background: var(--wa-wall); font-size: 0.875rem; line-height: 1.35; }
+.cmp-head { display: flex; align-items: center; gap: var(--s-2); padding: 8px 12px; background: var(--wa-head); color: var(--on-ink); font-size: 0.875rem; }
+.cmp-head b { font-weight: var(--fw-strong); }
+.cmp-avatar { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: #DFF5EC; color: var(--wa-head); font-weight: 700; font-size: 0.75rem; }
+.cmp-list { display: flex; flex-direction: column; justify-content: flex-end; gap: 6px; min-height: 360px; padding: 10px; }
+.cmp-list .msg { max-width: 86%; padding: 5px 8px 6px; }
+.cmp-list .msg-meta { font-size: 0.625rem; }
+.cmp-list .wa-agent { align-self: flex-start; }
+
+.cmp-outcome { display: flex; align-items: center; gap: var(--s-2); padding: 10px 14px; border-radius: 14px; font-weight: var(--fw-strong); line-height: 1.3; }
+.cmp-outcome::before { content: ''; flex: none; width: 20px; height: 20px; border-radius: 50%; background-position: center; background-size: 20px; background-repeat: no-repeat; }
+.cmp-outcome.is-bad { background: #FBE7EE; color: #9E1149; }
+.cmp-outcome.is-bad::before { background-color: #C2185B; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M7 7l6 6M13 7l-6 6' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E"); }
+.cmp-outcome.is-good { background: var(--action); color: var(--on-ink); }
+.cmp-outcome.is-good::before { background-color: #FFFFFF; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M6 10.4l2.8 2.7L14.2 7.6' fill='none' stroke='%23008069' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+.cmp-points { display: grid; gap: var(--s-2); }
+.cmp-points li { position: relative; padding-left: 26px; color: var(--ink-2); line-height: 1.4; }
+.cmp-points li::before { content: ''; position: absolute; left: 0; top: 0.2em; width: 18px; height: 18px; border-radius: 50%; background: var(--ground) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M5.2 9.3l2.4 2.3 5.2-5.2' fill='none' stroke='%23008069' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 18px no-repeat; }
+.cmp-points li.is-limit::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M6.5 6.5l5 5M11.5 6.5l-5 5' stroke='%239E1149' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E"); }
+.compare-replay { position: static; translate: none; display: block; margin: 0 0 0 auto; }
+.compare-replay[hidden] { display: none; }
+.agents-sub { margin: var(--s-8) 0 var(--s-5); font-size: var(--fs-lead); line-height: 1.25; }
+
+/* ---------- Automation rules on dashboards ---------- */
+.auto-src { color: var(--action); font-weight: var(--fw-strong); }
+.rule {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--s-3);
+  margin-top: auto;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: var(--ink);
+  color: var(--on-ink);
+  font-size: 0.8125rem;
+  line-height: 1.35;
+}
+.rule-icon {
+  width: 28px; height: 28px; border-radius: 9px;
+  background: var(--marigold) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cpath d='M15.5 6l-7 9.5h5.2L12.5 22l7-9.5h-5.2z' fill='%2313201A'/%3E%3C/svg%3E") center / 28px no-repeat;
+}
+.rule-body { display: grid; gap: 2px; min-width: 0; }
+.rule-text { color: #E6ECE8; }
+.rule-last { color: var(--on-ink-2); font-size: 0.75rem; }
+.rule-count { display: grid; justify-items: end; line-height: 1.1; }
+.rule-count b { font-size: 1.25rem; font-weight: var(--fw-head); color: var(--marigold); }
+.rule-count small { font-size: 0.6875rem; color: var(--on-ink-2); white-space: nowrap; }
+
+@media (min-width: 900px) {
+  .compare { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.wa-agent .log-icon { background: #2BB673 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M5.2 9.3l2.4 2.3 5.2-5.2' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 14px no-repeat; }

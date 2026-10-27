@@ -68,6 +68,13 @@ Based on Emil Kowalski's design-engineering rules.
   action, a mini chat opens, the customer's message lands, the shop types and replies. The
   Dashboard shows the owner's side (an enquiry notification; today's pillar and the total tick up).
   The EMI card's "Send plan" is a real button that writes the visitor's own plan into the chat.
+- **Bot vs AI agent** (top of the agents section): the same free-text message goes to both, played
+  side by side. The bot answers from a numbered menu and fails to book; the agent shows its steps
+  and books. Labels are distinct everywhere: slate **Bot** tag with a menu glyph, green **AI agent**
+  tag with a face glyph. Never call agent replies "auto-reply"; a bot is not an agent.
+- **Automated dashboards, not manual ones:** every board names its source ("fills itself from UPI
+  / WhatsApp bookings / billing") and carries a dark rule strip (trigger and action, runs today,
+  last run). Rules fire visibly as events arrive.
 - **Agent console** (`js/agents.js`): six scripted scenarios (orders, appointments, admissions,
   payments, reviews, leads). The owner's WhatsApp view plays the conversation while the agent log
   streams each step with a spinner, tool chip and time, ending in a summary. Autoplay advances

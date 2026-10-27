@@ -247,3 +247,13 @@
   .log-step.is-working .log-icon, .wa-agent.is-working .log-icon { animation: none; }
   .ring { transition: none; }
 }
+
+/* Rules flash when they fire */
+.rule.is-firing .rule-icon { animation: rule-fire 700ms var(--ease-out); }
+@keyframes rule-fire { 0% { transform: scale(1); } 35% { transform: scale(1.18) rotate(-8deg); box-shadow: 0 0 0 6px rgb(255 178 36 / 0.25); } 100% { transform: none; box-shadow: 0 0 0 0 rgb(255 178 36 / 0); } }
+.js .cmp-list [data-c], .js .cmp-outcome { transition: opacity 280ms var(--ease-out), transform 280ms var(--ease-out); }
+.compare.is-armed [data-c]:not(.is-in) { display: none; }
+.compare.is-armed .cmp-outcome:not(.is-in) { display: flex; opacity: 0; transform: translateY(6px); }
+@media (prefers-reduced-motion: reduce) {
+  .rule.is-firing .rule-icon { animation: none; }
+}

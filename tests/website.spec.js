@@ -197,7 +197,7 @@ test.describe('3. Interaction', () => {
     await expect(page.locator('#agentState')).toHaveText(/Done in \d+\.\ds/, { timeout: 12000 });
     await expect(page.locator('#agentLog .log-step.is-done')).toHaveCount(4);
     await expect(page.locator('#agentLog .log-step.is-working')).toHaveCount(0);
-    await expect(page.locator('#agentChat .msg-out .msg-agent').first()).toHaveText('Auto-reply');
+    await expect(page.locator('#agentChat .msg-out .msg-agent').first()).toHaveText('AI agent');
     await expect(page.locator('#agentChat')).toContainText('token is 14');
     await expect(page.locator('#agentCustomer')).toHaveText('Meena P.');
     await expect(page.locator('#agentPause')).toHaveText('Play all'); // clicking a tab hands control to the visitor
@@ -228,6 +228,38 @@ test.describe('3. Interaction', () => {
     await page.locator('[data-dash="stock"]').scrollIntoViewIfNeeded();
     await expect(page.locator('#stockEvents li').nth(1)).toBeVisible({ timeout: 10000 });
     await expect(page.locator('#stockList li.is-low')).toHaveCount(1);
+  });
+
+  test('bot vs AI agent: same message, the agent books and the bot loops', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    await page.locator('#compare').scrollIntoViewIfNeeded();
+    await expect(page.locator('#compareReplay')).toBeVisible({ timeout: 12000 });
+    const bot = page.locator('.compare-bot');
+    const agent = page.locator('.compare-agent');
+    await expect(bot.locator('.msg-bot').first()).toHaveText('Bot');
+    await expect(agent.locator('.msg-agent')).toHaveText('AI agent');
+    await expect(bot.locator('.cmp-outcome')).toHaveClass(/is-bad/);
+    await expect(agent.locator('.cmp-outcome')).toHaveClass(/is-good/);
+    await expect(agent.locator('.wa-agent')).toHaveCount(3);
+    await expect(bot.locator('.msg-menu')).toBeVisible();
+    // labels look different, not just read different
+    const botBg = await bot.locator('.kind-tag').evaluate((e) => getComputedStyle(e).backgroundColor);
+    const agentBg = await agent.locator('.kind-tag').evaluate((e) => getComputedStyle(e).backgroundColor);
+    expect(botBg).not.toBe(agentBg);
+  });
+
+  test('dashboards show automation rules that fire as events arrive', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    await expect(page.locator('.dash .rule')).toHaveCount(4);
+    await expect(page.locator('.dash .auto-src')).toHaveCount(4);
+    const stock = page.locator('[data-dash="stock"]');
+    await stock.scrollIntoViewIfNeeded();
+    await expect(stock.locator('.rule-count b')).toHaveText('1', { timeout: 10000 });
+    await expect(stock.locator('.rule-last-text')).toHaveText('Ordered 20 earbuds');
+    const sales = page.locator('[data-dash="sales"]');
+    await sales.scrollIntoViewIfNeeded();
+    await expect(sales.locator('.rule-count b')).toHaveText('23', { timeout: 10000 });
+    await expect(sales.locator('.rule-last-text')).toHaveText('Receipt sent to Hetal D.');
   });
 
   test('EMI calculator works as a real control', async ({ page }) => {
@@ -332,6 +364,9 @@ test.describe('5. Robustness', () => {
     await expect(page.locator('#agentLog .log-step')).toHaveCount(5);
     await expect(page.locator('#salesTotal')).toHaveText('₹48,620');
     await expect(page.locator('.agent-tabs')).toBeHidden();
+    await expect(page.locator('.compare .cmp-outcome.is-good')).toBeVisible();
+    await expect(page.locator('.compare-bot .msg')).toHaveCount(6);
+    await expect(page.locator('[data-dash="stock"] .rule-count b')).toHaveText('1');
     await ctx.close();
   });
 
