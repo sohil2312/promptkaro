@@ -25,7 +25,8 @@ img{display:block;max-width:100%}a{color:inherit;text-decoration:none}ul,ol{list
 .wrap{max-width:1180px;margin:0 auto;padding:0 32px}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:48px;padding:0 22px;font-weight:600;font-size:15px;white-space:nowrap}
 .wa{background:#008069;color:#fff}
-@media (max-width:700px){.wrap{padding:0 18px}.hide-m{display:none!important}nav{gap:12px!important}nav .brand{white-space:nowrap;font-size:18px!important}nav .btn{font-size:14px!important;padding:0 12px!important}nav .btn svg{width:16px}.offer{font-size:12px!important}}
+.show-m{display:none}
+@media (max-width:700px){.wrap{padding:0 18px}.hide-m{display:none!important}.show-m{display:inline}nav{gap:12px!important}nav .brand{white-space:nowrap;font-size:18px!important}nav .btn{font-size:14px!important;padding:0 12px!important}nav .btn svg{width:16px}.offer{font-size:12px!important}}
 """
 
 
@@ -540,6 +541,13 @@ SITES = {
 }
 
 if __name__ == '__main__':
+    import sys
+    sys.path.insert(0, HERE)
+    from build_more import MORE, PAGES
+    SITES.update(MORE)
+    for key, (title, fonts, css, body) in PAGES.items():
+        with open(os.path.join(HERE, f'{key}.html'), 'w') as f:
+            f.write(doc(title, fonts, css, body))
     for key, (title, fonts, css, body) in SITES.items():
         with open(os.path.join(HERE, f'{key}.html'), 'w') as f:
             f.write(doc(title, fonts, css, body))

@@ -8,7 +8,8 @@ const OUT = path.join(__dirname, 'out');
 (async () => {
   fs.mkdirSync(OUT, { recursive: true });
   const b = await chromium.launch();
-  for (const key of ['mobile', 'clinic', 'coaching', 'food', 'property']) {
+  const only = process.argv[2] ? process.argv[2].split(',') : null;
+  for (const key of ['mobile', 'clinic', 'coaching', 'food', 'property', 'interior', 'boutique', 'wedding', 'handicrafts', 'furniture', 'manufacturer'].filter((k) => !only || only.includes(k))) {
     const url = `http://localhost:4100/tools/samples/${key}`;
     const d = await b.newPage({ viewport: { width: 1280, height: 800 }, deviceScaleFactor: 1.5 });
     await d.goto(url, { waitUntil: 'networkidle' }); await d.evaluate(() => document.fonts.ready);

@@ -486,6 +486,7 @@ function duo(opts = {}) {
   const l = laptop({ screenTex: opts.screenTex, open: 0.22 }).group; g.add(l);
   const p = phone({ screenTex: opts.phoneTex, color: 0x1f2a2e }).group;
   p.scale.setScalar(0.62); p.position.set(1.35, 0, 0.75); p.rotation.y = -0.35; g.add(p);
+  g.userData.screen = l.userData.screen;
   return { group: g, elev: 0.26, fit: 0.98, baseYaw: 0.25 };
 }
 

@@ -1,0 +1,1827 @@
+{
+ "int-living": {
+  "w": 1600,
+  "h": 1000,
+  "samples": 56,
+  "mode": "room",
+  "exposure": -1.3,
+  "room": {
+   "wall": "#E4D9CA",
+   "floor": "wood"
+  },
+  "rugs": [
+   {
+    "w": 2.6,
+    "d": 1.7,
+    "x": 0.2,
+    "y": 0.8,
+    "color": "#B9A88C"
+   }
+  ],
+  "tables": [
+   {
+    "x": 1.15,
+    "y": 1.75,
+    "h": 0.55,
+    "r": 0.24
+   }
+  ],
+  "items": [
+   {
+    "model": "GlamVelvetSofa",
+    "height": 0.82,
+    "x": -0.1,
+    "y": 1.55
+   },
+   {
+    "model": "SpecularSilkPouf",
+    "height": 0.34,
+    "x": 0.45,
+    "y": 0.5
+   },
+   {
+    "model": "DiffuseTransmissionPlant",
+    "height": 1.05,
+    "x": -1.6,
+    "y": 1.85
+   },
+   {
+    "model": "ChairDamaskPurplegold",
+    "height": 0.84,
+    "x": 1.9,
+    "y": 0.7,
+    "rot": -40
+   },
+   {
+    "model": "IridescenceLamp",
+    "height": 0.55,
+    "x": 1.15,
+    "y": 1.75,
+    "z": 0.55
+   },
+   {
+    "model": "AnisotropyBarnLamp",
+    "height": 0.32,
+    "x": -1.1,
+    "y": 2.05,
+    "z": 1.55
+   }
+  ],
+  "cam": {
+   "yaw": -12,
+   "elev": 9,
+   "lens": 30,
+   "fit": 0.62,
+   "target": [
+    0.15,
+    1.2,
+    0.75
+   ]
+  },
+  "light": {
+   "key": [
+    -2,
+    -2.5,
+    3.5
+   ],
+   "power": 260,
+   "fill": 60,
+   "rim": 120,
+   "window": [
+    -3.2,
+    0.4,
+    2.2
+   ],
+   "window_power": 900
+  }
+ },
+ "int-lounge": {
+  "w": 1600,
+  "h": 1000,
+  "samples": 56,
+  "mode": "room",
+  "exposure": -1.2,
+  "room": {
+   "wall": "#C8CCB6",
+   "floor": "wood"
+  },
+  "rugs": [
+   {
+    "w": 2.8,
+    "d": 1.8,
+    "x": 0,
+    "y": 0.8,
+    "color": "#A8583A"
+   }
+  ],
+  "tables": [
+   {
+    "x": -1.45,
+    "y": 1.7,
+    "h": 0.5,
+    "r": 0.22
+   }
+  ],
+  "items": [
+   {
+    "model": "SheenWoodLeatherSofa",
+    "height": 0.95,
+    "x": 0,
+    "y": 1.5
+   },
+   {
+    "model": "SheenChair",
+    "height": 0.8,
+    "x": 1.55,
+    "y": 0.55,
+    "rot": -50
+   },
+   {
+    "model": "SpecularSilkPouf",
+    "height": 0.32,
+    "x": -0.5,
+    "y": 0.35
+   },
+   {
+    "model": "GlassVaseFlowers",
+    "height": 0.32,
+    "x": -1.45,
+    "y": 1.7,
+    "z": 0.5
+   },
+   {
+    "model": "DiffuseTransmissionPlant",
+    "height": 1.15,
+    "x": 2.1,
+    "y": 1.85
+   }
+  ],
+  "cam": {
+   "yaw": 10,
+   "elev": 10,
+   "lens": 30,
+   "fit": 0.62,
+   "target": [
+    0.1,
+    1.1,
+    0.7
+   ]
+  },
+  "light": {
+   "key": [
+    2,
+    -2.5,
+    3.5
+   ],
+   "power": 260,
+   "fill": 60,
+   "rim": 120,
+   "window": [
+    3.4,
+    0.4,
+    2.2
+   ],
+   "window_power": 900
+  }
+ },
+ "int-reading": {
+  "w": 1200,
+  "h": 1500,
+  "samples": 56,
+  "mode": "room",
+  "exposure": -1.1,
+  "room": {
+   "wall": "#40513F",
+   "floor": "wood"
+  },
+  "tables": [
+   {
+    "x": 0.62,
+    "y": 1.5,
+    "h": 0.56,
+    "r": 0.22
+   }
+  ],
+  "items": [
+   {
+    "model": "SheenChair",
+    "height": 0.82,
+    "x": 0,
+    "y": 1.3,
+    "rot": -15
+   },
+   {
+    "model": "IridescenceLamp",
+    "height": 0.55,
+    "x": 0.62,
+    "y": 1.5,
+    "z": 0.56
+   },
+   {
+    "model": "AnisotropyBarnLamp",
+    "height": 0.32,
+    "x": -0.6,
+    "y": 2.05,
+    "z": 1.5
+   },
+   {
+    "model": "DiffuseTransmissionPlant",
+    "height": 0.9,
+    "x": -0.85,
+    "y": 1.75
+   }
+  ],
+  "cam": {
+   "yaw": -6,
+   "elev": 8,
+   "lens": 35,
+   "fit": 0.7,
+   "target": [
+    0,
+    1.4,
+    0.8
+   ]
+  },
+  "light": {
+   "key": [
+    -2,
+    -2.5,
+    3.5
+   ],
+   "power": 220,
+   "fill": 50,
+   "rim": 120,
+   "window": [
+    -3.0,
+    0.6,
+    2.0
+   ],
+   "window_power": 1100
+  }
+ },
+ "arch-model": {
+  "w": 1600,
+  "h": 1000,
+  "samples": 56,
+  "mode": "sweep",
+  "bg": "#D9D6CF",
+  "exposure": -0.5,
+  "boxes": [
+   {
+    "loc": [
+     0,
+     0,
+     0.02
+    ],
+    "size": [
+     1.1,
+     0.75,
+     0.04
+    ],
+    "color": "#A07A55",
+    "wood": true,
+    "plain": true
+   }
+  ],
+  "towers": [
+   {
+    "x": -0.22,
+    "y": 0.08,
+    "w": 0.26,
+    "d": 0.2,
+    "floors": 9
+   },
+   {
+    "x": 0.14,
+    "y": -0.06,
+    "w": 0.3,
+    "d": 0.22,
+    "floors": 5
+   },
+   {
+    "x": 0.38,
+    "y": 0.17,
+    "w": 0.16,
+    "d": 0.16,
+    "floors": 12
+   }
+  ],
+  "maquette": [
+   {
+    "loc": [
+     -0.05,
+     -0.27,
+     0.045
+    ],
+    "size": [
+     0.7,
+     0.06,
+     0.01
+    ],
+    "color": "#E6E2D8"
+   },
+   {
+    "loc": [
+     -0.38,
+     -0.2,
+     0.05
+    ],
+    "size": [
+     0.1,
+     0.1,
+     0.02
+    ]
+   }
+  ],
+  "items": [
+   {
+    "model": "DiffuseTransmissionPlant",
+    "height": 0.08,
+    "x": -0.42,
+    "y": -0.06,
+    "z": 0.04
+   },
+   {
+    "model": "DiffuseTransmissionPlant",
+    "height": 0.07,
+    "x": 0.4,
+    "y": -0.22,
+    "z": 0.04
+   }
+  ],
+  "cam": {
+   "yaw": -32,
+   "elev": 24,
+   "lens": 60,
+   "target": [
+    0,
+    0,
+    0.2
+   ],
+   "dist": 2.5,
+   "dof": 4
+  },
+  "light": {
+   "key": [
+    -2.5,
+    -2,
+    3
+   ],
+   "power": 500,
+   "fill": 120,
+   "rim": 200
+  }
+ },
+ "fur-hero": {
+  "w": 1600,
+  "h": 1000,
+  "samples": 56,
+  "mode": "sweep",
+  "bg": "#D8C6AE",
+  "exposure": -0.6,
+  "items": [
+   {
+    "model": "SheenWoodLeatherSofa",
+    "height": 0.95,
+    "x": -0.3,
+    "y": 0.2
+   },
+   {
+    "model": "ChairDamaskPurplegold",
+    "height": 0.84,
+    "x": 1.55,
+    "y": -0.15,
+    "rot": -35
+   },
+   {
+    "model": "SpecularSilkPouf",
+    "height": 0.32,
+    "x": 0.75,
+    "y": -0.75
+   }
+  ],
+  "cam": {
+   "yaw": -14,
+   "elev": 10,
+   "lens": 40,
+   "fit": 0.78
+  },
+  "light": {
+   "power": 700,
+   "fill": 110,
+   "rim": 200
+  }
+ },
+ "fur-velvet": {
+  "w": 900,
+  "h": 900,
+  "samples": 40,
+  "mode": "cutout",
+  "items": [
+   {
+    "model": "GlamVelvetSofa",
+    "height": 0.82,
+    "rot": -20
+   }
+  ],
+  "cam": {
+   "yaw": 0,
+   "elev": 12,
+   "lens": 60
+  },
+  "light": {
+   "power": 700
+  }
+ },
+ "fur-leather": {
+  "w": 900,
+  "h": 900,
+  "samples": 40,
+  "mode": "cutout",
+  "items": [
+   {
+    "model": "SheenWoodLeatherSofa",
+    "height": 0.95,
+    "rot": -20
+   }
+  ],
+  "cam": {
+   "yaw": 0,
+   "elev": 12,
+   "lens": 60
+  },
+  "light": {
+   "power": 700
+  }
+ },
+ "fur-chair": {
+  "w": 900,
+  "h": 900,
+  "samples": 40,
+  "mode": "cutout",
+  "items": [
+   {
+    "model": "SheenChair",
+    "height": 0.82,
+    "rot": -30
+   }
+  ],
+  "cam": {
+   "yaw": 0,
+   "elev": 12,
+   "lens": 60
+  },
+  "light": {
+   "power": 700
+  }
+ },
+ "fur-damask": {
+  "w": 900,
+  "h": 900,
+  "samples": 40,
+  "mode": "cutout",
+  "items": [
+   {
+    "model": "ChairDamaskPurplegold",
+    "height": 0.84,
+    "rot": -30
+   }
+  ],
+  "cam": {
+   "yaw": 0,
+   "elev": 12,
+   "lens": 60
+  },
+  "light": {
+   "power": 700
+  }
+ },
+ "fur-pouf": {
+  "w": 900,
+  "h": 900,
+  "samples": 40,
+  "mode": "cutout",
+  "items": [
+   {
+    "model": "SpecularSilkPouf",
+    "height": 0.34
+   }
+  ],
+  "cam": {
+   "yaw": 0,
+   "elev": 24,
+   "lens": 60
+  },
+  "light": {
+   "power": 700
+  }
+ },
+ "fur-lamp": {
+  "w": 900,
+  "h": 900,
+  "samples": 40,
+  "mode": "cutout",
+  "items": [
+   {
+    "model": "IridescenceLamp",
+    "height": 0.55
+   }
+  ],
+  "cam": {
+   "yaw": 0,
+   "elev": 10,
+   "lens": 60,
+   "fit": 1.45
+  },
+  "light": {
+   "power": 700
+  }
+ },
+ "bou-hero": {
+  "w": 1600,
+  "h": 1000,
+  "samples": 56,
+  "mode": "sweep",
+  "bg": "#E8C9C1",
+  "exposure": -0.5,
+  "boxes": [
+   {
+    "loc": [
+     0.32,
+     -0.05,
+     0.06
+    ],
+    "size": [
+     0.28,
+     0.22,
+     0.12
+    ],
+    "color": "#F3EEE8"
+   },
+   {
+    "loc": [
+     -0.34,
+     -0.12,
+     0.04
+    ],
+    "size": [
+     0.24,
+     0.2,
+     0.08
+    ],
+    "color": "#F3EEE8"
+   }
+  ],
+  "items": [
+   {
+    "model": "Corset",
+    "height": 0.62,
+    "x": 0,
+    "y": 0.15
+   },
+   {
+    "model": "MaterialsVariantsShoe",
+    "height": 0.1,
+    "x": -0.34,
+    "y": -0.12,
+    "z": 0.08,
+    "rot": -30
+   },
+   {
+    "model": "SunglassesKhronos",
+    "height": 0.045,
+    "x": 0.32,
+    "y": -0.05,
+    "z": 0.12,
+    "rot": -15
+   }
+  ],
+  "cam": {
+   "yaw": -8,
+   "elev": 10,
+   "lens": 55,
+   "fit": 0.62,
+   "dof": 5,
+   "target": [
+    0,
+    0.05,
+    0.3
+   ]
+  },
+  "light": {
+   "power": 600,
+   "fill": 120,
+   "rim": 220
+  }
+ },
+ "bou-shoe": {
+  "w": 900,
+  "h": 900,
+  "samples": 40,
+  "mode": "cutout",
+  "items": [
+   {
+    "model": "MaterialsVariantsShoe",
+    "height": 0.12,
+    "rot": -25
+   }
+  ],
+  "cam": {
+   "yaw": 0,
+   "elev": 14,
+   "lens": 85
+  },
+  "light": {
+   "power": 700
+  }
+ },
+ "bou-sunglasses": {
+  "w": 900,
+  "h": 900,
+  "samples": 40,
+  "mode": "cutout",
+  "items": [
+   {
+    "model": "SunglassesKhronos",
+    "height": 0.05,
+    "rot": -20
+   }
+  ],
+  "cam": {
+   "yaw": 0,
+   "elev": 18,
+   "lens": 85
+  },
+  "light": {
+   "power": 700
+  }
+ },
+ "bou-corset": {
+  "w": 900,
+  "h": 900,
+  "samples": 40,
+  "mode": "cutout",
+  "items": [
+   {
+    "model": "Corset",
+    "height": 0.62,
+    "rot": -10
+   }
+  ],
+  "cam": {
+   "yaw": 0,
+   "elev": 8,
+   "lens": 70
+  },
+  "light": {
+   "power": 700
+  }
+ },
+ "bou-watch": {
+  "w": 900,
+  "h": 900,
+  "samples": 40,
+  "mode": "cutout",
+  "items": [
+   {
+    "model": "ChronographWatch",
+    "height": 0.05,
+    "rot": -20
+   }
+  ],
+  "cam": {
+   "yaw": 0,
+   "elev": 32,
+   "lens": 85
+  },
+  "light": {
+   "power": 700
+  }
+ },
+ "wed-hero": {
+  "w": 1600,
+  "h": 1000,
+  "samples": 64,
+  "mode": "sweep",
+  "bg": "#6E2228",
+  "exposure": -0.2,
+  "ambient": 0.12,
+  "garlands": [
+   {
+    "from": [
+     -1.2,
+     0.7,
+     2.0
+    ],
+    "to": [
+     -1.2,
+     0.7,
+     0.9
+    ],
+    "sag": 0,
+    "n": 21,
+    "r": 0.034
+   },
+   {
+    "from": [
+     -0.9,
+     0.75,
+     2.0
+    ],
+    "to": [
+     -0.9,
+     0.75,
+     1.1
+    ],
+    "sag": 0,
+    "n": 17,
+    "r": 0.034
+   },
+   {
+    "from": [
+     -0.6,
+     0.8,
+     2.0
+    ],
+    "to": [
+     -0.6,
+     0.8,
+     1.25
+    ],
+    "sag": 0,
+    "n": 14,
+    "r": 0.034
+   },
+   {
+    "from": [
+     0.6,
+     0.8,
+     2.0
+    ],
+    "to": [
+     0.6,
+     0.8,
+     1.25
+    ],
+    "sag": 0,
+    "n": 14,
+    "r": 0.034
+   },
+   {
+    "from": [
+     0.9,
+     0.75,
+     2.0
+    ],
+    "to": [
+     0.9,
+     0.75,
+     1.1
+    ],
+    "sag": 0,
+    "n": 17,
+    "r": 0.034
+   },
+   {
+    "from": [
+     1.2,
+     0.7,
+     2.0
+    ],
+    "to": [
+     1.2,
+     0.7,
+     0.9
+    ],
+    "sag": 0,
+    "n": 21,
+    "r": 0.034
+   },
+   {
+    "from": [
+     -1.3,
+     0.65,
+     1.95
+    ],
+    "to": [
+     1.3,
+     0.65,
+     1.95
+    ],
+    "sag": 0.35,
+    "n": 58,
+    "colors": [
+     "#F97316",
+     "#FBBF24",
+     "#F59E0B",
+     "#DC2626"
+    ],
+    "r": 0.034
+   }
+  ],
+  "pots": [
+   {
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.03,
+      0
+     ],
+     [
+      0.045,
+      0.012
+     ],
+     [
+      0.05,
+      0.03
+     ],
+     [
+      0.046,
+      0.032
+     ],
+     [
+      0.03,
+      0.02
+     ],
+     [
+      0,
+      0.018
+     ]
+    ],
+    "loc": [
+     -0.45,
+     -0.2,
+     0
+    ],
+    "color": "#C9A44C",
+    "metal": 1,
+    "rough": 0.3,
+    "bumpy": 0,
+    "flame": 0.024
+   },
+   {
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.03,
+      0
+     ],
+     [
+      0.045,
+      0.012
+     ],
+     [
+      0.05,
+      0.03
+     ],
+     [
+      0.046,
+      0.032
+     ],
+     [
+      0.03,
+      0.02
+     ],
+     [
+      0,
+      0.018
+     ]
+    ],
+    "loc": [
+     -0.15,
+     -0.32,
+     0
+    ],
+    "color": "#B5653A",
+    "flame": 0.024
+   },
+   {
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.03,
+      0
+     ],
+     [
+      0.045,
+      0.012
+     ],
+     [
+      0.05,
+      0.03
+     ],
+     [
+      0.046,
+      0.032
+     ],
+     [
+      0.03,
+      0.02
+     ],
+     [
+      0,
+      0.018
+     ]
+    ],
+    "loc": [
+     0.15,
+     -0.32,
+     0
+    ],
+    "color": "#C9A44C",
+    "metal": 1,
+    "rough": 0.3,
+    "bumpy": 0,
+    "flame": 0.024
+   },
+   {
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.03,
+      0
+     ],
+     [
+      0.045,
+      0.012
+     ],
+     [
+      0.05,
+      0.03
+     ],
+     [
+      0.046,
+      0.032
+     ],
+     [
+      0.03,
+      0.02
+     ],
+     [
+      0,
+      0.018
+     ]
+    ],
+    "loc": [
+     0.45,
+     -0.2,
+     0
+    ],
+    "color": "#B5653A",
+    "flame": 0.024
+   }
+  ],
+  "candles": [
+   {
+    "x": -0.75,
+    "y": 0.1,
+    "h": 0.32,
+    "r": 0.035
+   },
+   {
+    "x": -0.62,
+    "y": 0.18,
+    "h": 0.22,
+    "r": 0.03
+   },
+   {
+    "x": 0.7,
+    "y": 0.1,
+    "h": 0.36,
+    "r": 0.035
+   },
+   {
+    "x": 0.58,
+    "y": 0.2,
+    "h": 0.24,
+    "r": 0.03
+   }
+  ],
+  "items": [
+   {
+    "model": "GlassVaseFlowers",
+    "height": 0.45,
+    "x": 0,
+    "y": 0.25
+   }
+  ],
+  "cam": {
+   "yaw": 0,
+   "elev": 5,
+   "lens": 38,
+   "target": [
+    0,
+    0.4,
+    0.88
+   ],
+   "dist": 3.9,
+   "dof": 2.4
+  },
+  "light": {
+   "power": 110,
+   "fill": 25,
+   "rim": 140,
+   "color": "#FFD7A8",
+   "wash": [
+    0,
+    -1.5,
+    2.6
+   ],
+   "wash_power": 160
+  }
+ },
+ "wed-table": {
+  "w": 1200,
+  "h": 900,
+  "samples": 64,
+  "mode": "sweep",
+  "bg": "#6B2B2C",
+  "exposure": -0.2,
+  "ambient": 0.12,
+  "boxes": [
+   {
+    "loc": [
+     0,
+     0,
+     0.37
+    ],
+    "size": [
+     1.6,
+     0.9,
+     0.74
+    ],
+    "color": "#F2E8DA",
+    "rough": 0.9
+   }
+  ],
+  "candles": [
+   {
+    "x": -0.35,
+    "y": 0.05,
+    "z": 0.74,
+    "h": 0.28,
+    "r": 0.03
+   },
+   {
+    "x": -0.25,
+    "y": 0.12,
+    "z": 0.74,
+    "h": 0.18,
+    "r": 0.028
+   },
+   {
+    "x": 0.3,
+    "y": 0.05,
+    "z": 0.74,
+    "h": 0.3,
+    "r": 0.03
+   },
+   {
+    "x": 0.42,
+    "y": 0.13,
+    "z": 0.74,
+    "h": 0.2,
+    "r": 0.028
+   }
+  ],
+  "garlands": [
+   {
+    "from": [
+     -0.78,
+     -0.49,
+     0.74
+    ],
+    "to": [
+     0.78,
+     -0.49,
+     0.74
+    ],
+    "sag": 0.16,
+    "r": 0.034,
+    "n": 36
+   },
+   {
+    "from": [
+     -0.78,
+     -0.49,
+     0.74
+    ],
+    "to": [
+     -0.78,
+     -0.49,
+     0.4
+    ],
+    "sag": 0,
+    "r": 0.034,
+    "n": 8
+   },
+   {
+    "from": [
+     0.78,
+     -0.49,
+     0.74
+    ],
+    "to": [
+     0.78,
+     -0.49,
+     0.4
+    ],
+    "sag": 0,
+    "r": 0.034,
+    "n": 8
+   }
+  ],
+  "items": [
+   {
+    "model": "GlassVaseFlowers",
+    "height": 0.42,
+    "x": 0,
+    "y": 0.1,
+    "z": 0.74
+   },
+   {
+    "model": "DiffuseTransmissionTeacup",
+    "height": 0.075,
+    "x": -0.12,
+    "y": -0.22,
+    "z": 0.74
+   },
+   {
+    "model": "IridescentDishWithOlives",
+    "height": 0.06,
+    "x": 0.16,
+    "y": -0.2,
+    "z": 0.74
+   }
+  ],
+  "cam": {
+   "yaw": -8,
+   "elev": 16,
+   "lens": 50,
+   "target": [
+    0,
+    0,
+    0.78
+   ],
+   "dist": 2.0,
+   "dof": 2.2
+  },
+  "light": {
+   "power": 110,
+   "fill": 25,
+   "rim": 160,
+   "wash": [
+    0,
+    -1.5,
+    2.6
+   ],
+   "wash_power": 140
+  }
+ },
+ "craft-hero": {
+  "w": 1600,
+  "h": 1000,
+  "samples": 56,
+  "mode": "sweep",
+  "bg": "#D9C3A5",
+  "exposure": -0.5,
+  "pots": [
+   {
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.06,
+      0.002
+     ],
+     [
+      0.12,
+      0.04
+     ],
+     [
+      0.155,
+      0.12
+     ],
+     [
+      0.15,
+      0.2
+     ],
+     [
+      0.11,
+      0.27
+     ],
+     [
+      0.07,
+      0.3
+     ],
+     [
+      0.075,
+      0.32
+     ],
+     [
+      0.088,
+      0.335
+     ],
+     [
+      0.08,
+      0.34
+     ],
+     [
+      0.066,
+      0.33
+     ],
+     [
+      0.06,
+      0.31
+     ]
+    ],
+    "loc": [
+     -0.42,
+     0.15,
+     0
+    ],
+    "color": "#B8673F"
+   },
+   {
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.05,
+      0
+     ],
+     [
+      0.06,
+      0.02
+     ],
+     [
+      0.075,
+      0.1
+     ],
+     [
+      0.07,
+      0.2
+     ],
+     [
+      0.045,
+      0.3
+     ],
+     [
+      0.035,
+      0.36
+     ],
+     [
+      0.046,
+      0.4
+     ],
+     [
+      0.04,
+      0.405
+     ],
+     [
+      0.03,
+      0.39
+     ]
+    ],
+    "loc": [
+     0.02,
+     0.25,
+     0
+    ],
+    "s": 1.3,
+    "color": "#2F4F5F",
+    "rough": 0.35,
+    "coat": 0.8,
+    "bumpy": 0
+   },
+   {
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.04,
+      0
+     ],
+     [
+      0.08,
+      0.03
+     ],
+     [
+      0.1,
+      0.07
+     ],
+     [
+      0.095,
+      0.072
+     ],
+     [
+      0.075,
+      0.035
+     ],
+     [
+      0,
+      0.01
+     ]
+    ],
+    "loc": [
+     0.32,
+     -0.05,
+     0
+    ],
+    "color": "#C9A44C",
+    "metal": 1,
+    "rough": 0.28,
+    "bumpy": 0
+   },
+   {
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.03,
+      0
+     ],
+     [
+      0.045,
+      0.012
+     ],
+     [
+      0.05,
+      0.03
+     ],
+     [
+      0.046,
+      0.032
+     ],
+     [
+      0.03,
+      0.02
+     ],
+     [
+      0,
+      0.018
+     ]
+    ],
+    "loc": [
+     -0.12,
+     -0.25,
+     0
+    ],
+    "color": "#B5653A"
+   },
+   {
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.05,
+      0
+     ],
+     [
+      0.09,
+      0.05
+     ],
+     [
+      0.11,
+      0.13
+     ],
+     [
+      0.1,
+      0.2
+     ],
+     [
+      0.07,
+      0.24
+     ],
+     [
+      0.075,
+      0.255
+     ],
+     [
+      0.068,
+      0.26
+     ]
+    ],
+    "loc": [
+     0.5,
+     0.3,
+     0
+    ],
+    "color": "#A65A36"
+   }
+  ],
+  "items": [
+   {
+    "model": "DiffuseTransmissionTeacup",
+    "height": 0.075,
+    "x": 0.15,
+    "y": -0.22
+   }
+  ],
+  "cam": {
+   "yaw": -8,
+   "elev": 12,
+   "lens": 50,
+   "target": [
+    0.04,
+    0.06,
+    0.12
+   ],
+   "dist": 1.85,
+   "dof": 4
+  },
+  "light": {
+   "power": 520,
+   "fill": 110,
+   "rim": 220
+  }
+ },
+ "craft-matka": {
+  "w": 900,
+  "h": 900,
+  "samples": 40,
+  "mode": "cutout",
+  "pots": [
+   {
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.06,
+      0.002
+     ],
+     [
+      0.12,
+      0.04
+     ],
+     [
+      0.155,
+      0.12
+     ],
+     [
+      0.15,
+      0.2
+     ],
+     [
+      0.11,
+      0.27
+     ],
+     [
+      0.07,
+      0.3
+     ],
+     [
+      0.075,
+      0.32
+     ],
+     [
+      0.088,
+      0.335
+     ],
+     [
+      0.08,
+      0.34
+     ],
+     [
+      0.066,
+      0.33
+     ],
+     [
+      0.06,
+      0.31
+     ]
+    ],
+    "loc": [
+     0,
+     0,
+     0
+    ],
+    "color": "#B8673F"
+   }
+  ],
+  "items": [],
+  "cam": {
+   "yaw": 0,
+   "elev": 14,
+   "lens": 70,
+   "target": [
+    0,
+    0,
+    0.17
+   ],
+   "dist": 1.45
+  },
+  "light": {
+   "power": 700
+  }
+ },
+ "craft-vase": {
+  "w": 900,
+  "h": 900,
+  "samples": 40,
+  "mode": "cutout",
+  "pots": [
+   {
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.05,
+      0
+     ],
+     [
+      0.06,
+      0.02
+     ],
+     [
+      0.075,
+      0.1
+     ],
+     [
+      0.07,
+      0.2
+     ],
+     [
+      0.045,
+      0.3
+     ],
+     [
+      0.035,
+      0.36
+     ],
+     [
+      0.046,
+      0.4
+     ],
+     [
+      0.04,
+      0.405
+     ],
+     [
+      0.03,
+      0.39
+     ]
+    ],
+    "loc": [
+     0,
+     0,
+     0
+    ],
+    "color": "#2F4F5F",
+    "rough": 0.35,
+    "coat": 0.8,
+    "bumpy": 0
+   }
+  ],
+  "items": [],
+  "cam": {
+   "yaw": 0,
+   "elev": 10,
+   "lens": 70,
+   "target": [
+    0,
+    0,
+    0.2
+   ],
+   "dist": 1.6
+  },
+  "light": {
+   "power": 700
+  }
+ },
+ "craft-bowl": {
+  "w": 900,
+  "h": 900,
+  "samples": 40,
+  "mode": "cutout",
+  "pots": [
+   {
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.04,
+      0
+     ],
+     [
+      0.08,
+      0.03
+     ],
+     [
+      0.1,
+      0.07
+     ],
+     [
+      0.095,
+      0.072
+     ],
+     [
+      0.075,
+      0.035
+     ],
+     [
+      0,
+      0.01
+     ]
+    ],
+    "loc": [
+     0,
+     0,
+     0
+    ],
+    "color": "#C9A44C",
+    "metal": 1,
+    "rough": 0.28,
+    "bumpy": 0
+   }
+  ],
+  "items": [],
+  "cam": {
+   "yaw": 0,
+   "elev": 30,
+   "lens": 70,
+   "target": [
+    0,
+    0,
+    0.035
+   ],
+   "dist": 0.95
+  },
+  "light": {
+   "power": 700
+  }
+ },
+ "craft-teacup": {
+  "w": 900,
+  "h": 900,
+  "samples": 40,
+  "mode": "cutout",
+  "items": [
+   {
+    "model": "DiffuseTransmissionTeacup",
+    "height": 0.075
+   }
+  ],
+  "cam": {
+   "yaw": 0,
+   "elev": 24,
+   "lens": 85
+  },
+  "light": {
+   "power": 700
+  }
+ },
+ "craft-diya": {
+  "w": 900,
+  "h": 900,
+  "samples": 40,
+  "mode": "cutout",
+  "pots": [
+   {
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.03,
+      0
+     ],
+     [
+      0.045,
+      0.012
+     ],
+     [
+      0.05,
+      0.03
+     ],
+     [
+      0.046,
+      0.032
+     ],
+     [
+      0.03,
+      0.02
+     ],
+     [
+      0,
+      0.018
+     ]
+    ],
+    "loc": [
+     0,
+     0,
+     0
+    ],
+    "color": "#C9A44C",
+    "metal": 1,
+    "rough": 0.3,
+    "bumpy": 0,
+    "flame": 0.024
+   }
+  ],
+  "items": [],
+  "cam": {
+   "yaw": 0,
+   "elev": 22,
+   "lens": 85,
+   "target": [
+    0,
+    0,
+    0.03
+   ],
+   "dist": 0.55
+  },
+  "light": {
+   "power": 400
+  }
+ },
+ "mfg-hero": {
+  "w": 1600,
+  "h": 1000,
+  "samples": 56,
+  "mode": "sweep",
+  "bg": "#BFC4C6",
+  "exposure": -0.4,
+  "items": [
+   {
+    "model": "CommercialRefrigerator",
+    "height": 2.0,
+    "x": -1.0,
+    "y": 0.4
+   },
+   {
+    "model": "CommercialRefrigerator",
+    "height": 2.0,
+    "x": 0,
+    "y": 0.4
+   },
+   {
+    "model": "CommercialRefrigerator",
+    "height": 2.0,
+    "x": 1.0,
+    "y": 0.4
+   }
+  ],
+  "cam": {
+   "yaw": -22,
+   "elev": 8,
+   "lens": 35,
+   "fit": 0.8
+  },
+  "light": {
+   "power": 600,
+   "fill": 140,
+   "rim": 260
+  }
+ },
+ "mfg-fridge": {
+  "w": 900,
+  "h": 900,
+  "samples": 40,
+  "mode": "cutout",
+  "items": [
+   {
+    "model": "CommercialRefrigerator",
+    "height": 2.0,
+    "rot": -25
+   }
+  ],
+  "cam": {
+   "yaw": 0,
+   "elev": 8,
+   "lens": 60
+  },
+  "light": {
+   "power": 700
+  }
+ }
+}

@@ -70,55 +70,73 @@
           <p class="hero-note" data-gu="ગુજરાતી, હિન્દી કે અંગ્રેજી, જે ફાવે તેમાં વાત કરો.">Talk to us in Gujarati, Hindi or English.</p>
         </div>
 
-        <figure class="hero-chat" aria-labelledby="chat-caption">
-          <figcaption id="chat-caption" class="visually-hidden" data-gu="ઉદાહરણ: WhatsApp પર મોબાઇલ દુકાનનો માલિક વેબસાઇટ માંગે છે, ડેમો જુએ છે અને તે લાઇવ કરવા કહે છે.">Example: a mobile shop owner asks for a website on WhatsApp, sees the demo and asks for it to go live.</figcaption>
-          <div class="chat" id="chat" aria-hidden="true" data-ui>
-            <div class="chat-head">
-              <span class="chat-avatar" translate="no">›</span>
-              <span class="chat-who">
-                <span class="chat-name" translate="no">PromptKaro</span>
-                <span class="chat-status" id="chatStatus" data-gu="ઓનલાઇન">online</span>
-              </span>
+        <div class="hero-stage" id="heroStage">
+          <p class="visually-hidden" id="stageCaption" data-gu="ઉદાહરણો બદલાતા રહે છે: વેબસાઇટ, ઓટોમેટેડ ડેશબોર્ડ અને WhatsApp AI એજન્ટ, જુદા જુદા બિઝનેસ માટે.">Rotating examples: websites, an automated dashboard and WhatsApp AI agents, for different businesses.</p>
+          <figure class="stage-browser" aria-hidden="true" data-ui>
+            <div class="stage-bar"><span class="stage-lights"><i></i><i></i><i></i></span><span class="stage-url" id="stageUrl" translate="no">shreejimobile.in</span><span class="stage-kind" id="stageKind" data-gu="વેબસાઇટ">Website</span></div>
+            <div class="stage-view" id="stageView">
+              <img class="stage-shot" src="/assets/img/site-mobile.webp" width="1100" height="1802" alt="" decoding="async" fetchpriority="high">
             </div>
-            <div class="chat-body">
-              <ol class="chat-list" id="chatList">
-                <li class="msg msg-out" data-step>
-                  <p data-gu="નમસ્તે! મારી મોબાઇલની દુકાન છે. વેબસાઇટ જોઈએ છે.">Hi! I have a mobile shop. I need a website.</p>
-                  <span class="msg-meta">10:02 <svg class="ticks" viewBox="0 0 16 11"><use href="#i-ticks"/></svg></span>
-                </li>
-                <li class="msg msg-in" data-step data-typing>
-                  <p data-gu="ચોક્કસ. દુકાનનું નામ, થોડા ફોટા અને ભાવ-પત્રક મોકલો. અમે મફત ડેમો બનાવીશું.">Sure. Send your shop name, a few photos and your price list. We will make a free demo.</p>
-                  <span class="msg-meta">10:04</span>
-                </li>
-                <li class="msg msg-out" data-step>
-                  <span class="msg-doc">
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-doc"/></svg>
-                    <span><span class="msg-doc-name" data-gu="ભાવ-પત્રક.pdf">Price list.pdf</span><span class="msg-doc-size" data-gu="2 પાનાં">2 pages</span></span>
-                  </span>
-                  <p data-gu="શ્રીજી મોબાઇલ. ફોટા પણ મોકલું છું.">Shreeji Mobile. Sending photos too.</p>
-                  <span class="msg-meta">10:11 <svg class="ticks" viewBox="0 0 16 11"><use href="#i-ticks"/></svg></span>
-                </li>
-                <li class="chat-day" data-step><span data-gu="ડેમો તૈયાર">Demo ready</span></li>
-                <li class="msg msg-in" data-step data-typing>
-                  <span class="msg-link">
-                    <img class="msg-link-img" src="/assets/img/phone-thumb.webp" alt="" width="162" height="160" decoding="async">
-                    <span class="msg-link-title" data-gu="શ્રીજી મોબાઇલ">Shreeji Mobile</span>
-                    <span class="msg-link-desc" data-gu="ફોન, ઘડિયાળ અને એક્સેસરીઝ. WhatsApp પર ઓર્ડર.">Phones, watches and accessories. Order on WhatsApp.</span>
-                    <span class="msg-link-url">shreejimobile.in</span>
-                  </span>
-                  <p data-gu="તમારો ડેમો તૈયાર છે. ફોનમાં ખોલીને જુઓ, જે બદલવું હોય તે કહો.">Your demo is ready. Open it on your phone and tell us what to change.</p>
-                  <span class="msg-meta">09:40</span>
-                </li>
-                <li class="msg msg-out" data-step>
-                  <p data-gu="સરસ છે! લાઇવ કરી દો 👍">Looks great. Make it live 👍</p>
-                  <span class="msg-meta">09:52 <svg class="ticks" viewBox="0 0 16 11"><use href="#i-ticks"/></svg></span>
-                </li>
-                <li class="msg msg-typing" id="chatTyping" hidden><span></span><span></span><span></span></li>
-              </ol>
-            </div>
+          </figure>
+          <div class="stage-product" id="stageProduct" aria-hidden="true" data-ui>
+            <span class="stage-product-ph"><img src="/assets/img/phone-450.webp" alt="" width="450" height="450" decoding="async"></span>
+            <span class="stage-product-txt"><b id="stageProductName" data-gu="5G ફોન, 128 GB">5G phone, 128 GB</b><small id="stageProductSub" translate="no">Shreeji Mobile</small></span>
+            <strong class="num" id="stageProductPrice">₹13,999</strong>
           </div>
-          <button class="chat-replay" id="chatReplay" type="button" hidden data-gu="ફરી ચલાવો">Play again</button>
-        </figure>
+          <figure class="hero-chat stage-phone" aria-labelledby="chat-caption">
+            <figcaption id="chat-caption" class="visually-hidden" data-gu="ઉદાહરણ: WhatsApp પર મોબાઇલ દુકાનનો માલિક વેબસાઇટ માંગે છે, ડેમો જુએ છે અને તે લાઇવ કરવા કહે છે.">Example: a mobile shop owner asks for a website on WhatsApp, sees the demo and asks for it to go live.</figcaption>
+            <div class="chat" id="chat" aria-hidden="true" data-ui>
+              <div class="chat-head">
+                <span class="chat-avatar" id="chatAvatar" translate="no">›</span>
+                <span class="chat-who">
+                  <span class="chat-name" id="chatName" translate="no">PromptKaro</span>
+                  <span class="chat-status" id="chatStatus" data-gu="ઓનલાઇન">online</span>
+                </span>
+              </div>
+              <div class="chat-body">
+                <ol class="chat-list" id="chatList">
+                  <li class="msg msg-out" data-step>
+                    <p data-gu="નમસ્તે! મારી મોબાઇલની દુકાન છે. વેબસાઇટ જોઈએ છે.">Hi! I have a mobile shop. I need a website.</p>
+                    <span class="msg-meta">10:02 <svg class="ticks" viewBox="0 0 16 11"><use href="#i-ticks"/></svg></span>
+                  </li>
+                  <li class="msg msg-in" data-step data-typing>
+                    <p data-gu="ચોક્કસ. દુકાનનું નામ, થોડા ફોટા અને ભાવ-પત્રક મોકલો. અમે મફત ડેમો બનાવીશું.">Sure. Send your shop name, a few photos and your price list. We will make a free demo.</p>
+                    <span class="msg-meta">10:04</span>
+                  </li>
+                  <li class="msg msg-out" data-step>
+                    <span class="msg-doc">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-doc"/></svg>
+                      <span><span class="msg-doc-name" data-gu="ભાવ-પત્રક.pdf">Price list.pdf</span><span class="msg-doc-size" data-gu="2 પાનાં">2 pages</span></span>
+                    </span>
+                    <p data-gu="શ્રીજી મોબાઇલ. ફોટા પણ મોકલું છું.">Shreeji Mobile. Sending photos too.</p>
+                    <span class="msg-meta">10:11 <svg class="ticks" viewBox="0 0 16 11"><use href="#i-ticks"/></svg></span>
+                  </li>
+                  <li class="chat-day" data-step><span data-gu="ડેમો તૈયાર">Demo ready</span></li>
+                  <li class="msg msg-in" data-step data-typing>
+                    <span class="msg-link">
+                      <img class="msg-link-img" src="/assets/img/phone-thumb.webp" alt="" width="162" height="160" decoding="async">
+                      <span class="msg-link-title" data-gu="શ્રીજી મોબાઇલ">Shreeji Mobile</span>
+                      <span class="msg-link-desc" data-gu="ફોન, ઘડિયાળ અને એક્સેસરીઝ. WhatsApp પર ઓર્ડર.">Phones, watches and accessories. Order on WhatsApp.</span>
+                      <span class="msg-link-url">shreejimobile.in</span>
+                    </span>
+                    <p data-gu="તમારો ડેમો તૈયાર છે. ફોનમાં ખોલીને જુઓ, જે બદલવું હોય તે કહો.">Your demo is ready. Open it on your phone and tell us what to change.</p>
+                    <span class="msg-meta">09:40</span>
+                  </li>
+                  <li class="msg msg-out" data-step>
+                    <p data-gu="સરસ છે! લાઇવ કરી દો 👍">Looks great. Make it live 👍</p>
+                    <span class="msg-meta">09:52 <svg class="ticks" viewBox="0 0 16 11"><use href="#i-ticks"/></svg></span>
+                  </li>
+                  <li class="msg msg-typing" id="chatTyping" hidden><span></span><span></span><span></span></li>
+                </ol>
+              </div>
+            </div>
+          </figure>
+          <div class="stage-controls" id="stageControls" hidden>
+            <button class="stage-pause" id="stagePause" type="button" aria-pressed="false" data-gu-label="ઉદાહરણો રોકો" aria-label="Pause the examples"><svg viewBox="0 0 16 16" aria-hidden="true"><path class="i-pause" d="M5 3h2v10H5zM9 3h2v10H9z"/><path class="i-play" d="M5 3l8 5-8 5z"/></svg></button>
+            <span class="stage-dots" id="stageDots"></span>
+            <span class="stage-label" id="stageLabel" aria-live="polite"></span>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -132,13 +150,19 @@
 
         <div class="showcase" id="showcase">
           <div class="tabs" role="tablist" aria-label="Type of business" data-gu-label="બિઝનેસનો પ્રકાર">
-            <button role="tab" id="tab-mobile" aria-controls="panel-mobile" aria-selected="true" data-gu="મોબાઇલ શોપ">Mobile shop</button>
-            <button role="tab" id="tab-coaching" aria-controls="panel-coaching" aria-selected="false" tabindex="-1" data-gu="કોચિંગ ક્લાસ">Coaching class</button>
-            <button role="tab" id="tab-clinic" aria-controls="panel-clinic" aria-selected="false" tabindex="-1" data-gu="ક્લિનિક">Clinic</button>
-            <button role="tab" id="tab-property" aria-controls="panel-property" aria-selected="false" tabindex="-1" data-gu="પ્રોપર્ટી">Property</button>
-            <button role="tab" id="tab-food" aria-controls="panel-food" aria-selected="false" tabindex="-1" data-gu="રેસ્ટોરન્ટ">Restaurant</button>
+            <button role="tab" id="tab-mobile" aria-controls="panel-mobile" aria-selected="true"><span class="tab-name" data-gu="મોબાઇલ શોપ">Mobile shop</span><span class="tab-desc" data-gu="સ્ટોક સાથે દુકાન">Storefront with stock</span></button>
+            <button role="tab" id="tab-furniture" aria-controls="panel-furniture" aria-selected="false" tabindex="-1"><span class="tab-name" data-gu="ફર્નિચર">Furniture</span><span class="tab-desc" data-gu="કેટલોગ અને રૂમમાં પ્રિવ્યૂ">Catalogue and room preview</span></button>
+            <button role="tab" id="tab-interior" aria-controls="panel-interior" aria-selected="false" tabindex="-1"><span class="tab-name" data-gu="ઇન્ટિરિયર અને આર્કિટેક્ચર">Interior &amp; architecture</span><span class="tab-desc" data-gu="પોર્ટફોલિયો અને સાઇટ વિઝિટ">Portfolio and site visits</span></button>
+            <button role="tab" id="tab-boutique" aria-controls="panel-boutique" aria-selected="false" tabindex="-1"><span class="tab-name" data-gu="બુટિક">Boutique</span><span class="tab-desc" data-gu="કલેક્શન અને ઘરે ટ્રાય">Collections and try at home</span></button>
+            <button role="tab" id="tab-property" aria-controls="panel-property" aria-selected="false" tabindex="-1"><span class="tab-name" data-gu="રિયલ એસ્ટેટ બિલ્ડર">Real estate builder</span><span class="tab-desc" data-gu="ફ્લોર પ્લાન અને વિઝિટ">Floor plans and visits</span></button>
+            <button role="tab" id="tab-manufacturer" aria-controls="panel-manufacturer" aria-selected="false" tabindex="-1"><span class="tab-name" data-gu="મેન્યુફેક્ચરર">Manufacturer</span><span class="tab-desc" data-gu="મોડેલ, સ્પેક્સ અને ભાવ">Models, specs and quotes</span></button>
+            <button role="tab" id="tab-wedding" aria-controls="panel-wedding" aria-selected="false" tabindex="-1"><span class="tab-name" data-gu="વેડિંગ પ્લાનર">Wedding planner</span><span class="tab-desc" data-gu="સેવાઓ અને લગ્નનું અઠવાડિયું">Services and wedding week</span></button>
+            <button role="tab" id="tab-handicrafts" aria-controls="panel-handicrafts" aria-selected="false" tabindex="-1"><span class="tab-name" data-gu="હસ્તકલા">Handicrafts</span><span class="tab-desc" data-gu="દુકાન અને કારીગરો">Shop and the makers</span></button>
+            <button role="tab" id="tab-clinic" aria-controls="panel-clinic" aria-selected="false" tabindex="-1"><span class="tab-name" data-gu="ક્લિનિક">Clinic</span><span class="tab-desc" data-gu="લાઇવ OPD બુકિંગ">Live OPD booking</span></button>
+            <button role="tab" id="tab-coaching" aria-controls="panel-coaching" aria-selected="false" tabindex="-1"><span class="tab-name" data-gu="કોચિંગ ક્લાસ">Coaching class</span><span class="tab-desc" data-gu="ટાઇમટેબલ અને પરિણામ">Timetable and results</span></button>
+            <button role="tab" id="tab-food" aria-controls="panel-food" aria-selected="false" tabindex="-1"><span class="tab-name" data-gu="રેસ્ટોરન્ટ">Restaurant</span><span class="tab-desc" data-gu="મેનુ અને ટેબલ બુકિંગ">Menu and table booking</span></button>
           </div>
-
+          <div class="panels">
           <div class="panel" role="tabpanel" id="panel-mobile" aria-labelledby="tab-mobile">
             <figure class="site-preview" data-ui>
               <div class="site-bar"><span class="site-url" translate="no">shreejimobile.in</span></div>
@@ -149,7 +173,7 @@
             <div class="panel-copy">
               <h3 data-gu="આ સાઇટમાં શું છે">What's on this site</h3>
               <ul class="ticks-list">
-                <li data-gu="ઓફર બાર અને ભાવ સાથે આ અઠવાડિયાનો ફોન">Offer bar and this week's phone with price</li>
+                <li data-gu="ઓફર બાર અને ભાવ સાથે આ અઠવાડિયાનો ફોન">Offer bar and this week&#x27;s phone with price</li>
                 <li data-gu="કેટેગરી અને સ્ટોક સાથે પ્રોડક્ટ">Categories and products with live stock</li>
                 <li data-gu="સેટઅપ, એક્સચેન્જ અને વોરંટી">Setup, exchange and warranty</li>
                 <li data-gu="દુકાન અત્યારે ખુલ્લી છે કે નહીં">Shows if the shop is open right now</li>
@@ -158,6 +182,190 @@
               <a class="btn btn-ink js-wa" target="_blank" rel="noopener noreferrer"
                  href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20I%20run%20a%20mobile%20shop.%20I%27d%20like%20a%20site%20like%20your%20sample."
                  data-msg-en="Hi PromptKaro, I run a mobile shop. I&#x27;d like a site like your sample." data-msg-gu="નમસ્તે PromptKaro, મારી મોબાઇલ શોપ છે. તમારા નમૂના જેવી સાઇટ જોઈએ છે.">
+                <span data-gu="આવી સાઇટ માંગો">Ask for a site like this</span>
+              </a>
+            </div>
+          </div>
+          <div class="panel" role="tabpanel" id="panel-furniture" aria-labelledby="tab-furniture">
+            <figure class="site-preview" data-ui>
+              <div class="site-bar"><span class="site-url" translate="no">sheeshamhouse.in</span></div>
+              <div class="site-view" tabindex="0" role="img" aria-label="Sample website for a furniture store: a showroom hero, categories, bestsellers with fabric colours and prices, and a see-it-in-your-room service." data-gu-label="ફર્નિચર સ્ટોરની નમૂના વેબસાઇટ: શોરૂમ હીરો, કેટેગરી, કાપડના રંગ અને ભાવ સાથે બેસ્ટસેલર, અને તમારા રૂમમાં જોવાની સેવા.">
+                <picture><source media="(max-width: 700px)" srcset="/assets/img/site-furniture-m.webp" width="640" height="4640"><img src="/assets/img/site-furniture.webp" width="1100" height="1914" alt="" loading="lazy" decoding="async"></picture>
+              </div>
+            </figure>
+            <div class="panel-copy">
+              <h3 data-gu="આ સાઇટમાં શું છે">What's on this site</h3>
+              <ul class="ticks-list">
+                <li data-gu="આગળ શોરૂમના ફોટા">Showroom photos up front</li>
+                <li data-gu="કાપડ અને ભાવ સાથે બેસ્ટસેલર">Bestsellers with fabrics and prices</li>
+                <li data-gu="વોરંટી, ડિલિવરી અને કસ્ટમ સાઇઝ">Warranty, delivery and custom sizes</li>
+                <li data-gu="તમારા રૂમમાં જુઓ">See it in your room</li>
+                <li data-gu="WhatsApp પર કેટલોગ">Catalogue on WhatsApp</li>
+              </ul>
+              <a class="btn btn-ink js-wa" target="_blank" rel="noopener noreferrer"
+                 href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20I%20run%20a%20furniture%20store.%20I%27d%20like%20a%20site%20like%20your%20sample."
+                 data-msg-en="Hi PromptKaro, I run a furniture store. I&#x27;d like a site like your sample." data-msg-gu="નમસ્તે PromptKaro, મારો ફર્નિચર સ્ટોર છે. તમારા નમૂના જેવી સાઇટ જોઈએ છે.">
+                <span data-gu="આવી સાઇટ માંગો">Ask for a site like this</span>
+              </a>
+            </div>
+          </div>
+          <div class="panel" role="tabpanel" id="panel-interior" aria-labelledby="tab-interior">
+            <figure class="site-preview" data-ui>
+              <div class="site-bar"><span class="site-url" translate="no">studioaakar.in</span></div>
+              <div class="site-view" tabindex="0" role="img" aria-label="Sample website for an interior and architecture studio: a full-width room photo, services, selected projects with photos, the process and a consultation booking." data-gu-label="ઇન્ટિરિયર અને આર્કિટેક્ચર સ્ટુડિયોની નમૂના વેબસાઇટ: મોટો રૂમનો ફોટો, સેવાઓ, ફોટા સાથે પ્રોજેક્ટ, કામની રીત અને કન્સલ્ટેશન બુકિંગ.">
+                <picture><source media="(max-width: 700px)" srcset="/assets/img/site-interior-m.webp" width="640" height="5560"><img src="/assets/img/site-interior.webp" width="1100" height="2672" alt="" loading="lazy" decoding="async"></picture>
+              </div>
+            </figure>
+            <div class="panel-copy">
+              <h3 data-gu="આ સાઇટમાં શું છે">What's on this site</h3>
+              <ul class="ticks-list">
+                <li data-gu="તમારા રૂમના મોટા ફોટા">Full-width photos of your rooms</li>
+                <li data-gu="ઇન્ટિરિયર, આર્કિટેક્ચર અને ટર્નકી">Interiors, architecture and turnkey</li>
+                <li data-gu="વિગતો સાથે પસંદગીના પ્રોજેક્ટ">Selected projects with details</li>
+                <li data-gu="તમારી કામની રીત, પગલે પગલે">Your process, step by step</li>
+                <li data-gu="WhatsApp પર ફોટા કે પ્લાન">Photos or plans sent on WhatsApp</li>
+              </ul>
+              <a class="btn btn-ink js-wa" target="_blank" rel="noopener noreferrer"
+                 href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20I%20run%20an%20interior%20and%20architecture%20studio.%20I%27d%20like%20a%20site%20like%20your%20sample."
+                 data-msg-en="Hi PromptKaro, I run an interior and architecture studio. I&#x27;d like a site like your sample." data-msg-gu="નમસ્તે PromptKaro, મારો ઇન્ટિરિયર અને આર્કિટેક્ચર સ્ટુડિયો છે. તમારા નમૂના જેવી સાઇટ જોઈએ છે.">
+                <span data-gu="આવી સાઇટ માંગો">Ask for a site like this</span>
+              </a>
+            </div>
+          </div>
+          <div class="panel" role="tabpanel" id="panel-boutique" aria-labelledby="tab-boutique">
+            <figure class="site-preview" data-ui>
+              <div class="site-bar"><span class="site-url" translate="no">rangrez.in</span></div>
+              <div class="site-view" tabindex="0" role="img" aria-label="Sample website for a boutique: a festive collection hero, new arrivals with sizes and prices, try-at-home and alterations, and a trial booking." data-gu-label="બુટિકની નમૂના વેબસાઇટ: તહેવારનું કલેક્શન, સાઇઝ અને ભાવ સાથે નવી વસ્તુઓ, ઘરે ટ્રાય અને ઓલ્ટરેશન, અને ટ્રાયલ બુકિંગ.">
+                <picture><source media="(max-width: 700px)" srcset="/assets/img/site-boutique-m.webp" width="640" height="4105"><img src="/assets/img/site-boutique.webp" width="1100" height="1558" alt="" loading="lazy" decoding="async"></picture>
+              </div>
+            </figure>
+            <div class="panel-copy">
+              <h3 data-gu="આ સાઇટમાં શું છે">What's on this site</h3>
+              <ul class="ticks-list">
+                <li data-gu="આગળ જ નવું કલેક્શન">A new collection, front and centre</li>
+                <li data-gu="સાઇઝ અને ભાવ સાથે પ્રોડક્ટ">Products with sizes and prices</li>
+                <li data-gu="ઘરે ટ્રાય અને મફત ઓલ્ટરેશન">Try at home and free alterations</li>
+                <li data-gu="કેટેગરી ફિલ્ટર">Category filters</li>
+                <li data-gu="WhatsApp પર ઓર્ડર અને ટ્રાયલ">Order and trial booking on WhatsApp</li>
+              </ul>
+              <a class="btn btn-ink js-wa" target="_blank" rel="noopener noreferrer"
+                 href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20I%20run%20a%20boutique.%20I%27d%20like%20a%20site%20like%20your%20sample."
+                 data-msg-en="Hi PromptKaro, I run a boutique. I&#x27;d like a site like your sample." data-msg-gu="નમસ્તે PromptKaro, મારું બુટિક છે. તમારા નમૂના જેવી સાઇટ જોઈએ છે.">
+                <span data-gu="આવી સાઇટ માંગો">Ask for a site like this</span>
+              </a>
+            </div>
+          </div>
+          <div class="panel" role="tabpanel" id="panel-property" aria-labelledby="tab-property">
+            <figure class="site-preview" data-ui>
+              <div class="site-bar"><span class="site-url" translate="no">aanganhomes.in</span></div>
+              <div class="site-view" tabindex="0" role="img" aria-label="Sample website for a property project: a hero with the starting price, key facts, a floor plan with room sizes, homes left in each type, amenities and site visit booking." data-gu-label="પ્રોપર્ટી પ્રોજેક્ટની નમૂના વેબસાઇટ: શરૂઆતના ભાવ સાથે હીરો, મુખ્ય માહિતી, રૂમના માપ સાથે ફ્લોર પ્લાન, દરેક પ્રકારમાં બાકી ઘર, સુવિધાઓ અને સાઇટ વિઝિટ બુકિંગ.">
+                <picture><source media="(max-width: 700px)" srcset="/assets/img/site-property-m.webp" width="640" height="4871"><img src="/assets/img/site-property.webp" width="1100" height="1777" alt="" loading="lazy" decoding="async"></picture>
+              </div>
+            </figure>
+            <div class="panel-copy">
+              <h3 data-gu="આ સાઇટમાં શું છે">What's on this site</h3>
+              <ul class="ticks-list">
+                <li data-gu="શરૂઆતના ભાવ સાથે હીરો">Hero with the starting price</li>
+                <li data-gu="રૂમના માપ સાથે ફ્લોર પ્લાન">Floor plan with room sizes</li>
+                <li data-gu="દરેક પ્રકારમાં કેટલા ઘર બાકી">Homes left in each type</li>
+                <li data-gu="સુવિધાઓ">Amenities</li>
+                <li data-gu="દિવસ પસંદ કરી સાઇટ વિઝિટ">Site visit on the day you pick</li>
+              </ul>
+              <a class="btn btn-ink js-wa" target="_blank" rel="noopener noreferrer"
+                 href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20I%27m%20a%20real%20estate%20builder.%20I%27d%20like%20a%20site%20like%20your%20sample."
+                 data-msg-en="Hi PromptKaro, I&#x27;m a real estate builder. I&#x27;d like a site like your sample." data-msg-gu="નમસ્તે PromptKaro, હું રિયલ એસ્ટેટ બિલ્ડર છું. તમારા નમૂના જેવી સાઇટ જોઈએ છે.">
+                <span data-gu="આવી સાઇટ માંગો">Ask for a site like this</span>
+              </a>
+            </div>
+          </div>
+          <div class="panel" role="tabpanel" id="panel-manufacturer" aria-labelledby="tab-manufacturer">
+            <figure class="site-preview" data-ui>
+              <div class="site-bar"><span class="site-url" translate="no">himalcooling.in</span></div>
+              <div class="site-view" tabindex="0" role="img" aria-label="Sample website for a manufacturer: a product hero, factory numbers, a model table with capacities, industries served and a quote request." data-gu-label="મેન્યુફેક્ચરરની નમૂના વેબસાઇટ: પ્રોડક્ટ હીરો, ફેક્ટરીના આંકડા, ક્ષમતા સાથે મોડેલ ટેબલ, ઉદ્યોગો અને ભાવ માટેની વિનંતી.">
+                <picture><source media="(max-width: 700px)" srcset="/assets/img/site-manufacturer-m.webp" width="640" height="5166"><img src="/assets/img/site-manufacturer.webp" width="1100" height="1844" alt="" loading="lazy" decoding="async"></picture>
+              </div>
+            </figure>
+            <div class="panel-copy">
+              <h3 data-gu="આ સાઇટમાં શું છે">What's on this site</h3>
+              <ul class="ticks-list">
+                <li data-gu="મુખ્ય વચનો સાથે પ્રોડક્ટ હીરો">Product hero with key promises</li>
+                <li data-gu="સ્પેક્સ સાથે મોડેલ ટેબલ">Model table with specs</li>
+                <li data-gu="તમે સપ્લાય કરતા ઉદ્યોગો">Industries you supply</li>
+                <li data-gu="ફેક્ટરી ક્ષમતા અને વોરંટી">Factory capacity and warranty</li>
+                <li data-gu="WhatsApp પર ભાવની વિનંતી">Quote requests on WhatsApp</li>
+              </ul>
+              <a class="btn btn-ink js-wa" target="_blank" rel="noopener noreferrer"
+                 href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20I%27m%20a%20manufacturer.%20I%27d%20like%20a%20site%20like%20your%20sample."
+                 data-msg-en="Hi PromptKaro, I&#x27;m a manufacturer. I&#x27;d like a site like your sample." data-msg-gu="નમસ્તે PromptKaro, હું મેન્યુફેક્ચરર છું. તમારા નમૂના જેવી સાઇટ જોઈએ છે.">
+                <span data-gu="આવી સાઇટ માંગો">Ask for a site like this</span>
+              </a>
+            </div>
+          </div>
+          <div class="panel" role="tabpanel" id="panel-wedding" aria-labelledby="tab-wedding">
+            <figure class="site-preview" data-ui>
+              <div class="site-bar"><span class="site-url" translate="no">shubhutsav.in</span></div>
+              <div class="site-view" tabindex="0" role="img" aria-label="Sample website for a wedding planner: a marigold decor hero, services, a sample wedding week and a short enquiry that sends a plan on WhatsApp." data-gu-label="વેડિંગ પ્લાનરની નમૂના વેબસાઇટ: ગલગોટાની સજાવટ, સેવાઓ, લગ્નના અઠવાડિયાનો નમૂનો અને WhatsApp પર પ્લાન મોકલતી પૂછપરછ.">
+                <picture><source media="(max-width: 700px)" srcset="/assets/img/site-wedding-m.webp" width="640" height="4528"><img src="/assets/img/site-wedding.webp" width="1100" height="1927" alt="" loading="lazy" decoding="async"></picture>
+              </div>
+            </figure>
+            <div class="panel-copy">
+              <h3 data-gu="આ સાઇટમાં શું છે">What's on this site</h3>
+              <ul class="ticks-list">
+                <li data-gu="તમારી સજાવટ બતાવતો હીરો">A hero that shows your decor</li>
+                <li data-gu="સજાવટ, વેન્યુ, ભોજન અને મહેમાન">Decor, venues, food and guests</li>
+                <li data-gu="લગ્નના અઠવાડિયાનો નમૂનો">A sample wedding week</li>
+                <li data-gu="ત્રણ પ્રશ્નોની પૂછપરછ">Three-question enquiry</li>
+                <li data-gu="WhatsApp પર પ્લાન અને ભાવ">Plans and quotes on WhatsApp</li>
+              </ul>
+              <a class="btn btn-ink js-wa" target="_blank" rel="noopener noreferrer"
+                 href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20I%27m%20a%20wedding%20planner.%20I%27d%20like%20a%20site%20like%20your%20sample."
+                 data-msg-en="Hi PromptKaro, I&#x27;m a wedding planner. I&#x27;d like a site like your sample." data-msg-gu="નમસ્તે PromptKaro, હું વેડિંગ પ્લાનર છું. તમારા નમૂના જેવી સાઇટ જોઈએ છે.">
+                <span data-gu="આવી સાઇટ માંગો">Ask for a site like this</span>
+              </a>
+            </div>
+          </div>
+          <div class="panel" role="tabpanel" id="panel-handicrafts" aria-labelledby="tab-handicrafts">
+            <figure class="site-preview" data-ui>
+              <div class="site-bar"><span class="site-url" translate="no">kalahaat.in</span></div>
+              <div class="site-view" tabindex="0" role="img" aria-label="Sample website for a handicrafts shop: handmade pottery and brass with prices, the artisan families who make them and gifting hampers." data-gu-label="હસ્તકલાની દુકાનની નમૂના વેબસાઇટ: ભાવ સાથે હાથબનાવટનાં માટીકામ અને પિત્તળ, તે બનાવતા કારીગર પરિવારો અને ગિફ્ટ હેમ્પર.">
+                <picture><source media="(max-width: 700px)" srcset="/assets/img/site-handicrafts-m.webp" width="640" height="5529"><img src="/assets/img/site-handicrafts.webp" width="1100" height="1668" alt="" loading="lazy" decoding="async"></picture>
+              </div>
+            </figure>
+            <div class="panel-copy">
+              <h3 data-gu="આ સાઇટમાં શું છે">What's on this site</h3>
+              <ul class="ticks-list">
+                <li data-gu="ભાવ સાથે હાથબનાવટની વસ્તુઓ">Handmade products with prices</li>
+                <li data-gu="ઓર્ડર પર બનાવવાનો સમય">Made-to-order times</li>
+                <li data-gu="દરેક વસ્તુના કારીગર">The makers behind each piece</li>
+                <li data-gu="કોર્પોરેટ અને લગ્નની ભેટ">Corporate and wedding gifting</li>
+                <li data-gu="WhatsApp પર ઓર્ડર">Order on WhatsApp</li>
+              </ul>
+              <a class="btn btn-ink js-wa" target="_blank" rel="noopener noreferrer"
+                 href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20I%20sell%20handicrafts.%20I%27d%20like%20a%20site%20like%20your%20sample."
+                 data-msg-en="Hi PromptKaro, I sell handicrafts. I&#x27;d like a site like your sample." data-msg-gu="નમસ્તે PromptKaro, હું હસ્તકલાની વસ્તુઓ વેચું છું. તમારા નમૂના જેવી સાઇટ જોઈએ છે.">
+                <span data-gu="આવી સાઇટ માંગો">Ask for a site like this</span>
+              </a>
+            </div>
+          </div>
+          <div class="panel" role="tabpanel" id="panel-clinic" aria-labelledby="tab-clinic">
+            <figure class="site-preview" data-ui>
+              <div class="site-bar"><span class="site-url" translate="no">shanticlinic.in</span></div>
+              <div class="site-view" tabindex="0" role="img" aria-label="Sample website for a clinic: a live OPD card with free time slots and tokens booked, services with fees and time, the doctor&#x27;s introduction and how booking on WhatsApp works." data-gu-label="ક્લિનિકની નમૂના વેબસાઇટ: ખાલી સમય અને ટોકન સાથે લાઇવ OPD કાર્ડ, ફી અને સમય સાથે સેવાઓ, ડૉક્ટરનો પરિચય અને WhatsApp પર બુકિંગ કેવી રીતે થાય.">
+                <picture><source media="(max-width: 700px)" srcset="/assets/img/site-clinic-m.webp" width="640" height="5040"><img src="/assets/img/site-clinic.webp" width="1100" height="1684" alt="" loading="lazy" decoding="async"></picture>
+              </div>
+            </figure>
+            <div class="panel-copy">
+              <h3 data-gu="આ સાઇટમાં શું છે">What's on this site</h3>
+              <ul class="ticks-list">
+                <li data-gu="ખાલી સમય સાથે લાઇવ OPD કાર્ડ">Live OPD card with free slots</li>
+                <li data-gu="ફી અને સમય સાથે સેવાઓ">Services with fees and time</li>
+                <li data-gu="ડૉક્ટરનો પરિચય અને સમય">Doctor&#x27;s introduction and hours</li>
+                <li data-gu="WhatsApp પર ટોકન બુકિંગ">Token booking on WhatsApp</li>
+                <li data-gu="વારો આવે તે પહેલાં યાદી">Reminder before your turn</li>
+              </ul>
+              <a class="btn btn-ink js-wa" target="_blank" rel="noopener noreferrer"
+                 href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20I%20run%20a%20clinic.%20I%27d%20like%20a%20site%20like%20your%20sample."
+                 data-msg-en="Hi PromptKaro, I run a clinic. I&#x27;d like a site like your sample." data-msg-gu="નમસ્તે PromptKaro, મારું ક્લિનિક છે. તમારા નમૂના જેવી સાઇટ જોઈએ છે.">
                 <span data-gu="આવી સાઇટ માંગો">Ask for a site like this</span>
               </a>
             </div>
@@ -185,52 +393,6 @@
               </a>
             </div>
           </div>
-          <div class="panel" role="tabpanel" id="panel-clinic" aria-labelledby="tab-clinic">
-            <figure class="site-preview" data-ui>
-              <div class="site-bar"><span class="site-url" translate="no">shanticlinic.in</span></div>
-              <div class="site-view" tabindex="0" role="img" aria-label="Sample website for a clinic: a live OPD card with free time slots and tokens booked, services with fees and time, the doctor&#x27;s introduction and how booking on WhatsApp works." data-gu-label="ક્લિનિકની નમૂના વેબસાઇટ: ખાલી સમય અને ટોકન સાથે લાઇવ OPD કાર્ડ, ફી અને સમય સાથે સેવાઓ, ડૉક્ટરનો પરિચય અને WhatsApp પર બુકિંગ કેવી રીતે થાય.">
-                <picture><source media="(max-width: 700px)" srcset="/assets/img/site-clinic-m.webp" width="640" height="5040"><img src="/assets/img/site-clinic.webp" width="1100" height="1684" alt="" loading="lazy" decoding="async"></picture>
-              </div>
-            </figure>
-            <div class="panel-copy">
-              <h3 data-gu="આ સાઇટમાં શું છે">What's on this site</h3>
-              <ul class="ticks-list">
-                <li data-gu="ખાલી સમય સાથે લાઇવ OPD કાર્ડ">Live OPD card with free slots</li>
-                <li data-gu="ફી અને સમય સાથે સેવાઓ">Services with fees and time</li>
-                <li data-gu="ડૉક્ટરનો પરિચય અને સમય">Doctor's introduction and hours</li>
-                <li data-gu="WhatsApp પર ટોકન બુકિંગ">Token booking on WhatsApp</li>
-                <li data-gu="વારો આવે તે પહેલાં યાદી">Reminder before your turn</li>
-              </ul>
-              <a class="btn btn-ink js-wa" target="_blank" rel="noopener noreferrer"
-                 href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20I%20run%20a%20clinic.%20I%27d%20like%20a%20site%20like%20your%20sample."
-                 data-msg-en="Hi PromptKaro, I run a clinic. I&#x27;d like a site like your sample." data-msg-gu="નમસ્તે PromptKaro, મારું ક્લિનિક છે. તમારા નમૂના જેવી સાઇટ જોઈએ છે.">
-                <span data-gu="આવી સાઇટ માંગો">Ask for a site like this</span>
-              </a>
-            </div>
-          </div>
-          <div class="panel" role="tabpanel" id="panel-property" aria-labelledby="tab-property">
-            <figure class="site-preview" data-ui>
-              <div class="site-bar"><span class="site-url" translate="no">aanganhomes.in</span></div>
-              <div class="site-view" tabindex="0" role="img" aria-label="Sample website for a property project: a hero with the starting price, key facts, a floor plan with room sizes, homes left in each type, amenities and site visit booking." data-gu-label="પ્રોપર્ટી પ્રોજેક્ટની નમૂના વેબસાઇટ: શરૂઆતના ભાવ સાથે હીરો, મુખ્ય માહિતી, રૂમના માપ સાથે ફ્લોર પ્લાન, દરેક પ્રકારમાં બાકી ઘર, સુવિધાઓ અને સાઇટ વિઝિટ બુકિંગ.">
-                <picture><source media="(max-width: 700px)" srcset="/assets/img/site-property-m.webp" width="640" height="4871"><img src="/assets/img/site-property.webp" width="1100" height="1777" alt="" loading="lazy" decoding="async"></picture>
-              </div>
-            </figure>
-            <div class="panel-copy">
-              <h3 data-gu="આ સાઇટમાં શું છે">What's on this site</h3>
-              <ul class="ticks-list">
-                <li data-gu="શરૂઆતના ભાવ સાથે હીરો">Hero with the starting price</li>
-                <li data-gu="રૂમના માપ સાથે ફ્લોર પ્લાન">Floor plan with room sizes</li>
-                <li data-gu="દરેક પ્રકારમાં કેટલા ઘર બાકી">Homes left in each type</li>
-                <li data-gu="સુવિધાઓ">Amenities</li>
-                <li data-gu="દિવસ પસંદ કરી સાઇટ વિઝિટ">Site visit on the day you pick</li>
-              </ul>
-              <a class="btn btn-ink js-wa" target="_blank" rel="noopener noreferrer"
-                 href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20I%27m%20a%20property%20developer.%20I%27d%20like%20a%20site%20like%20your%20sample."
-                 data-msg-en="Hi PromptKaro, I&#x27;m a property developer. I&#x27;d like a site like your sample." data-msg-gu="નમસ્તે PromptKaro, હું પ્રોપર્ટી ડેવલપર છું. તમારા નમૂના જેવી સાઇટ જોઈએ છે.">
-                <span data-gu="આવી સાઇટ માંગો">Ask for a site like this</span>
-              </a>
-            </div>
-          </div>
           <div class="panel" role="tabpanel" id="panel-food" aria-labelledby="tab-food">
             <figure class="site-preview" data-ui>
               <div class="site-bar"><span class="site-url" translate="no">annapurnadining.in</span></div>
@@ -243,7 +405,7 @@
               <ul class="ticks-list">
                 <li data-gu="થાળી સાથે મોટો હીરો">Big hero with your thali</li>
                 <li data-gu="ભાવ સાથે મેનુ">Menu with prices</li>
-                <li data-gu="આજની સ્પેશિયલ">Today's special</li>
+                <li data-gu="આજની સ્પેશિયલ">Today&#x27;s special</li>
                 <li data-gu="દિવસ, સમય અને લોકો પસંદ કરી બુકિંગ">Book by day, time and guests</li>
                 <li data-gu="WhatsApp પર ખાતરી">Confirmed on WhatsApp</li>
               </ul>
@@ -253,6 +415,7 @@
                 <span data-gu="આવી સાઇટ માંગો">Ask for a site like this</span>
               </a>
             </div>
+          </div>
           </div>
         </div>
       </div>
@@ -502,6 +665,12 @@
             <button role="tab" id="atab-3" aria-controls="agentStage" aria-selected="false" tabindex="-1" data-gu="પેમેન્ટ">Payments</button>
             <button role="tab" id="atab-4" aria-controls="agentStage" aria-selected="false" tabindex="-1" data-gu="રિવ્યૂ">Reviews</button>
             <button role="tab" id="atab-5" aria-controls="agentStage" aria-selected="false" tabindex="-1" data-gu="લીડ">Leads</button>
+            <button role="tab" id="atab-6" aria-controls="agentStage" aria-selected="false" tabindex="-1" data-gu="કસ્ટમ સોફા">Custom sofa</button>
+            <button role="tab" id="atab-7" aria-controls="agentStage" aria-selected="false" tabindex="-1" data-gu="સાઇટ વિઝિટ">Site visit</button>
+            <button role="tab" id="atab-8" aria-controls="agentStage" aria-selected="false" tabindex="-1" data-gu="ઘરે ટ્રાય">Try at home</button>
+            <button role="tab" id="atab-9" aria-controls="agentStage" aria-selected="false" tabindex="-1" data-gu="બલ્ક ભાવ">Bulk quote</button>
+            <button role="tab" id="atab-10" aria-controls="agentStage" aria-selected="false" tabindex="-1" data-gu="લગ્નની પૂછપરછ">Wedding enquiry</button>
+            <button role="tab" id="atab-11" aria-controls="agentStage" aria-selected="false" tabindex="-1" data-gu="ગિફ્ટ હેમ્પર">Gift hampers</button>
           </div>
 
           <div class="agent-stage" id="agentStage" role="tabpanel" aria-labelledby="atab-0">
@@ -681,6 +850,44 @@
             </div>
           </div>
         </div>
+
+        <div class="dash-more" data-tabset>
+          <h3 class="agents-sub" data-gu="બીજા બિઝનેસ માટે ડેશબોર્ડ">Dashboards for other businesses</h3>
+          <div class="tabs dash-tabs" role="tablist" aria-label="Dashboard examples" data-gu-label="ડેશબોર્ડનાં ઉદાહરણ">
+            <button role="tab" id="dtab-furniture" aria-controls="dpanel-furniture" aria-selected="true" data-gu="ફર્નિચર સ્ટોર">Furniture store</button>
+            <button role="tab" id="dtab-manufacturer" aria-controls="dpanel-manufacturer" aria-selected="false" tabindex="-1" data-gu="મેન્યુફેક્ચરર">Manufacturer</button>
+            <button role="tab" id="dtab-wedding" aria-controls="dpanel-wedding" aria-selected="false" tabindex="-1" data-gu="વેડિંગ પ્લાનર">Wedding planner</button>
+            <button role="tab" id="dtab-interior" aria-controls="dpanel-interior" aria-selected="false" tabindex="-1" data-gu="ઇન્ટિરિયર સ્ટુડિયો">Interior studio</button>
+          </div>
+          <div class="dash-panel" role="tabpanel" id="dpanel-furniture" aria-labelledby="dtab-furniture">
+            <figure class="site-preview dash-shot" data-ui>
+              <div class="site-bar"><span class="site-url" translate="no">dashboard.sheeshamhouse.in</span></div>
+              <img src="/assets/img/dash-furniture.webp" width="1800" height="1125" alt="Production board from design approval to delivery, fabric stock with an AI reorder hint, and WhatsApp enquiries with what the agent did." data-gu-alt="ડિઝાઇનથી ડિલિવરી સુધીનું પ્રોડક્શન બોર્ડ, AI સૂચન સાથે કાપડનો સ્ટોક અને એજન્ટે સંભાળેલી WhatsApp પૂછપરછ." loading="lazy" decoding="async">
+            </figure>
+            <p class="dash-cap" data-gu="ડિઝાઇનથી ડિલિવરી સુધીનું પ્રોડક્શન બોર્ડ, AI સૂચન સાથે કાપડનો સ્ટોક અને એજન્ટે સંભાળેલી WhatsApp પૂછપરછ.">Production board from design approval to delivery, fabric stock with an AI reorder hint, and WhatsApp enquiries with what the agent did.</p>
+          </div>
+          <div class="dash-panel" role="tabpanel" id="dpanel-manufacturer" aria-labelledby="dtab-manufacturer" hidden>
+            <figure class="site-preview dash-shot" data-ui>
+              <div class="site-bar"><span class="site-url" translate="no">dashboard.himalcooling.in</span></div>
+              <img src="/assets/img/dash-manufacturer.webp" width="1800" height="1125" alt="Quote pipeline with the AI agent sending quote PDFs, units dispatched by week, production lines and follow-up insights." data-gu-alt="AI એજન્ટ ક્વોટ PDF મોકલે તેવી પાઇપલાઇન, અઠવાડિયા પ્રમાણે ડિસ્પેચ, પ્રોડક્શન લાઇન અને ફોલો-અપ સૂચનો." loading="lazy" decoding="async">
+            </figure>
+            <p class="dash-cap" data-gu="AI એજન્ટ ક્વોટ PDF મોકલે તેવી પાઇપલાઇન, અઠવાડિયા પ્રમાણે ડિસ્પેચ, પ્રોડક્શન લાઇન અને ફોલો-અપ સૂચનો.">Quote pipeline with the AI agent sending quote PDFs, units dispatched by week, production lines and follow-up insights.</p>
+          </div>
+          <div class="dash-panel" role="tabpanel" id="dpanel-wedding" aria-labelledby="dtab-wedding" hidden>
+            <figure class="site-preview dash-shot" data-ui>
+              <div class="site-bar"><span class="site-url" translate="no">dashboard.shubhutsav.in</span></div>
+              <img src="/assets/img/dash-wedding.webp" width="1800" height="1125" alt="The wedding week as a run sheet, vendors and payments, RSVPs and rooms, with the AI agent answering guests." data-gu-alt="લગ્નનું અઠવાડિયું રન-શીટ તરીકે, વેન્ડર અને પેમેન્ટ, RSVP અને રૂમ, અને મહેમાનોને જવાબ આપતો AI એજન્ટ." loading="lazy" decoding="async">
+            </figure>
+            <p class="dash-cap" data-gu="લગ્નનું અઠવાડિયું રન-શીટ તરીકે, વેન્ડર અને પેમેન્ટ, RSVP અને રૂમ, અને મહેમાનોને જવાબ આપતો AI એજન્ટ.">The wedding week as a run sheet, vendors and payments, RSVPs and rooms, with the AI agent answering guests.</p>
+          </div>
+          <div class="dash-panel" role="tabpanel" id="dpanel-interior" aria-labelledby="dtab-interior" hidden>
+            <figure class="site-preview dash-shot" data-ui>
+              <div class="site-bar"><span class="site-url" translate="no">dashboard.studioaakar.in</span></div>
+              <img src="/assets/img/dash-interior.webp" width="1800" height="1125" alt="Active projects with stage and progress, site visits booked by the AI agent, and payments due by milestone." data-gu-alt="સ્ટેજ અને પ્રગતિ સાથે ચાલુ પ્રોજેક્ટ, AI એજન્ટે બુક કરેલી સાઇટ વિઝિટ અને માઇલસ્ટોન પ્રમાણે બાકી પેમેન્ટ." loading="lazy" decoding="async">
+            </figure>
+            <p class="dash-cap" data-gu="સ્ટેજ અને પ્રગતિ સાથે ચાલુ પ્રોજેક્ટ, AI એજન્ટે બુક કરેલી સાઇટ વિઝિટ અને માઇલસ્ટોન પ્રમાણે બાકી પેમેન્ટ.">Active projects with stage and progress, site visits booked by the AI agent, and payments due by milestone.</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -692,33 +899,45 @@
           <p data-gu="કોઈ નક્કી પેકેજ નથી. નજીકનો પ્રકાર પસંદ કરો, તમારા બિઝનેસ વિશે જણાવો, અમે WhatsApp પર સ્પષ્ટ ભાવ મોકલીશું. ડેમો ગમે પછી જ ચુકવણી.">No fixed packages. Pick the closest type, tell us about your business and we send a clear quote on WhatsApp. You pay only after you like the demo.</p>
         </div>
         <div class="types">
-          <article class="type-card type-basic" aria-labelledby="type-basic">
-            <div class="type-visual"><img src="/assets/img/device-basic.webp" width="1200" height="900" alt="Phone showing a sample clinic landing page" data-gu-alt="નમૂનાની ક્લિનિક લેન્ડિંગ પેજ બતાવતો ફોન" loading="lazy" decoding="async"></div>
-            <h3 id="type-basic" data-gu="બેઝિક લેન્ડિંગ પેજ">Basic landing page</h3>
-            <p data-gu="લોકો જે શોધે તે બધું એક પાનામાં: તમે કોણ છો, શું આપો છો, સમય, સરનામું અને WhatsApp બટન.">One page with everything people look for: who you are, what you offer, timings, location and a WhatsApp button.</p>
+          <article class="type-card type-onepage" aria-labelledby="type-onepage">
+            <div class="type-visual type-live" data-quad="0.3865,0.1242,0.6238,0.1282,0.5994,0.8730,0.3658,0.8407" data-screen="390x844" data-play="scroll">
+              <img src="/assets/img/device-basic.webp" width="1200" height="900" alt="Phone scrolling through a sample one-page clinic website" data-gu-alt="એક પાનાની નમૂના ક્લિનિક વેબસાઇટ સ્ક્રોલ કરતો ફોન" loading="lazy" decoding="async">
+              <div class="type-screen" aria-hidden="true"><img class="type-scroll" src="/assets/img/site-clinic-m.webp" width="640" height="5040" alt="" loading="lazy" decoding="async"></div>
+            </div>
+            <h3 id="type-onepage" data-gu="એક પાનાની વેબસાઇટ">One-page website</h3>
+            <p data-gu="એક જ સ્ક્રોલમાં બધું: તમે કોણ છો, શું આપો છો, ભાવ, સમય, સરનામું અને WhatsApp બટન.">Everything in one scroll: who you are, what you offer, prices, timings, location and a WhatsApp button.</p>
             <ul class="ticks-list">
-              <li data-gu="દરેક ફોનમાં બરાબર">Works on every phone</li>
+              <li data-gu="દરેક ફોનમાં ઝડપી">Fast on every phone</li>
               <li data-gu="WhatsApp અને કોલ બટન">WhatsApp and call buttons</li>
-              <li data-gu="નકશો અને સમય">Map and timings</li>
+              <li data-gu="નકશો, સમય અને સેવાઓ">Map, timings and services</li>
             </ul>
             <a class="btn btn-outline js-wa" target="_blank" rel="noopener noreferrer"
-               href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20I%27d%20like%20a%20quote%20for%20a%20basic%20landing%20page."
-               data-msg-en="Hi PromptKaro, I&#x27;d like a quote for a basic landing page." data-msg-gu="નમસ્તે PromptKaro, મને બેઝિક લેન્ડિંગ પેજનો ભાવ જોઈએ છે.">
+               href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20I%27d%20like%20a%20quote%20for%20a%20one-page%20website."
+               data-msg-en="Hi PromptKaro, I&#x27;d like a quote for a one-page website." data-msg-gu="નમસ્તે PromptKaro, મને એક પાનાની વેબસાઇટનો ભાવ જોઈએ છે.">
               <span data-gu="ભાવ પૂછો">Ask for a quote</span>
             </a>
           </article>
-          <article class="type-card type-premium" aria-labelledby="type-premium">
-            <div class="type-visual"><img src="/assets/img/device-premium.webp" width="1200" height="900" alt="Laptop showing a sample restaurant landing page" data-gu-alt="નમૂનાની રેસ્ટોરન્ટ લેન્ડિંગ પેજ બતાવતું લેપટોપ" loading="lazy" decoding="async"></div>
-            <h3 id="type-premium" data-gu="પ્રીમિયમ લેન્ડિંગ પેજ">Premium landing page</h3>
-            <p data-gu="તમારી બ્રાન્ડ માટે ખાસ દેખાવ: તમારા ફોટા, વધુ વિભાગો અને તમારા માટે પસંદ કરેલા ફોન્ટ.">A custom look for your brand: your photos, richer sections and type chosen for you.</p>
+          <article class="type-card type-multipage" aria-labelledby="type-multipage">
+            <div class="type-visual type-live" data-quad="0.1156,0.1417,0.6860,0.0909,0.7080,0.5658,0.1465,0.6487" data-screen="1280x800" data-play="pages">
+              <img src="/assets/img/device-premium.webp" width="1200" height="900" alt="Laptop moving through four pages of a sample furniture website" data-gu-alt="નમૂના ફર્નિચર વેબસાઇટનાં ચાર પાનાં બતાવતું લેપટોપ" loading="lazy" decoding="async">
+              <div class="type-screen" aria-hidden="true">
+                <img class="type-page is-on" src="/assets/img/mp-home.webp" width="1280" height="800" alt="" loading="lazy" decoding="async">
+                <img class="type-page" src="/assets/img/mp-sofas.webp" width="1280" height="800" alt="" loading="lazy" decoding="async">
+                <img class="type-page" src="/assets/img/mp-custom.webp" width="1280" height="800" alt="" loading="lazy" decoding="async">
+                <img class="type-page" src="/assets/img/mp-visit.webp" width="1280" height="800" alt="" loading="lazy" decoding="async">
+              </div>
+              <ol class="type-pages" aria-hidden="true"><li class="is-on" data-gu="હોમ">Home</li><li data-gu="સોફા">Sofas</li><li data-gu="કસ્ટમ">Custom</li><li data-gu="મુલાકાત">Visit</li></ol>
+            </div>
+            <h3 id="type-multipage" data-gu="ઘણાં પાનાંની વેબસાઇટ">Multi-page website</h3>
+            <p data-gu="દરેક વાત માટે અલગ પાનું: હોમ, પ્રોડક્ટ, સેવાઓ, અમારા વિશે અને સંપર્ક. Google પર વધુ શોધમાં દેખાય.">A page for each thing: home, products, services, about and contact. Shows up in more Google searches.</p>
             <ul class="ticks-list">
-              <li data-gu="ખાસ ડિઝાઇન અને ફોન્ટ">Custom design and fonts</li>
-              <li data-gu="મેનુ, ગેલેરી અને વાર્તા વિભાગ">Menu, gallery and story sections</li>
-              <li data-gu="Google સર્ચ માટે તૈયાર">Google search basics</li>
+              <li data-gu="તમારી બ્રાન્ડ માટે ખાસ ડિઝાઇન">A design made for your brand</li>
+              <li data-gu="દરેક સેવા કે કેટેગરીનું પાનું">A page for each service or category</li>
+              <li data-gu="Google શોધ માટે તૈયાર">Ready for Google search</li>
             </ul>
             <a class="btn btn-outline js-wa" target="_blank" rel="noopener noreferrer"
-               href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20I%27d%20like%20a%20quote%20for%20a%20premium%20landing%20page."
-               data-msg-en="Hi PromptKaro, I&#x27;d like a quote for a premium landing page." data-msg-gu="નમસ્તે PromptKaro, મને પ્રીમિયમ લેન્ડિંગ પેજનો ભાવ જોઈએ છે.">
+               href="https://wa.me/919429051036?text=Hi%20PromptKaro%2C%20I%27d%20like%20a%20quote%20for%20a%20multi-page%20website."
+               data-msg-en="Hi PromptKaro, I&#x27;d like a quote for a multi-page website." data-msg-gu="નમસ્તે PromptKaro, મને ઘણાં પાનાંની વેબસાઇટનો ભાવ જોઈએ છે.">
               <span data-gu="ભાવ પૂછો">Ask for a quote</span>
             </a>
           </article>
@@ -729,7 +948,7 @@
                 <source src="/assets/video/motion.mp4" type="video/mp4">
               </video>
             </div>
-            <h3 id="type-motion" data-gu="મોશન સાથે લેન્ડિંગ પેજ">Landing page with motion</h3>
+            <h3 id="type-motion" data-gu="મોશન અને એનિમેશનવાળી વેબસાઇટ">Website with motion and animation</h3>
             <p data-gu="નજર ખેંચે તેવું મોશન: એનિમેટેડ હીરો, તરતા પ્રોડક્ટ ફોટા અને સ્મૂધ એન્ટ્રી.">Movement that guides the eye: an animated hero, floating product shots and smooth reveals.</p>
             <ul class="ticks-list">
               <li data-gu="એનિમેટેડ હીરો અને વિભાગ">Animated hero and sections</li>
@@ -899,6 +1118,7 @@
           <a href="mailto:hello@promptkaro.in" data-gu="ઇમેઇલ">Email</a>
           <a href="/privacy.html" data-gu="પ્રાઇવસી">Privacy</a>
           <a href="/terms.html" data-gu="શરતો">Terms</a>
+          <a href="/credits.html" data-gu="ઇમેજ ક્રેડિટ">Image credits</a>
         </nav>
       </div>
     </div>
@@ -920,12 +1140,14 @@
   </svg>
 
   <script src="/js/main.js" defer></script>
-  <script src="/js/chat.js" defer></script>
+  <script src="/js/vendor/gsap.min.js" defer></script>
+  <script src="/js/hero.js" defer></script>
   <script src="/js/showcase.js" defer></script>
   <script src="/js/products.js" defer></script>
   <script src="/js/agents.js" defer></script>
   <script src="/js/turntable.js" defer></script>
   <script src="/js/tilt.js" defer></script>
   <script src="/js/types.js" defer></script>
+  <script src="/js/tabs.js" defer></script>
 </body>
 </html>

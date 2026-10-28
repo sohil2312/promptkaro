@@ -103,8 +103,9 @@
     tab.addEventListener('click', function () { select(i, false); });
     tab.addEventListener('keydown', function (e) {
       var to = null;
-      if (e.key === 'ArrowRight') to = (i + 1) % tabs.length;
-      else if (e.key === 'ArrowLeft') to = (i - 1 + tabs.length) % tabs.length;
+      // The list is a row of chips on phones and a column beside the preview on wider screens.
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') to = (i + 1) % tabs.length;
+      else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') to = (i - 1 + tabs.length) % tabs.length;
       else if (e.key === 'Home') to = 0;
       else if (e.key === 'End') to = tabs.length - 1;
       if (to === null) return;

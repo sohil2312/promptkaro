@@ -121,16 +121,18 @@ test.describe('3. Interaction', () => {
     await expect(page.locator('#panel-mobile')).toBeVisible();
     await expect(page.locator('#panel-coaching')).toBeHidden();
 
-    await page.getByRole('tab', { name: 'Coaching class' }).click();
+    await page.locator('#tab-coaching').click();
     await expect(page.locator('#panel-coaching')).toBeVisible();
     await expect(page.locator('#panel-mobile')).toBeHidden();
-    await expect(page.getByRole('tab', { name: 'Coaching class' })).toHaveAttribute('aria-selected', 'true');
+    await expect(page.locator('#tab-coaching')).toHaveAttribute('aria-selected', 'true');
 
     await page.keyboard.press('ArrowRight');
-    await expect(page.getByRole('tab', { name: 'Clinic' })).toBeFocused();
-    await expect(page.locator('#panel-clinic')).toBeVisible();
-    await page.keyboard.press('End');
+    await expect(page.locator('#tab-food')).toBeFocused();
     await expect(page.locator('#panel-food')).toBeVisible();
+    await page.keyboard.press('ArrowUp'); // the list runs down the side on wide screens
+    await expect(page.locator('#panel-coaching')).toBeVisible();
+    await page.keyboard.press('Home');
+    await expect(page.locator('#panel-mobile')).toBeVisible();
   });
 
   test('examples are full landing pages that tour themselves, then hand over', async ({ page }) => {
@@ -145,7 +147,7 @@ test.describe('3. Interaction', () => {
     await page.mouse.wheel(0, 10);
     await expect(view).toHaveAttribute('data-toured', 'user');
     // every preview is a long page, taller than its window
-    for (const key of ['mobile', 'coaching', 'clinic', 'property', 'food']) {
+    for (const key of ['mobile', 'furniture', 'interior', 'boutique', 'property', 'manufacturer', 'wedding', 'handicrafts', 'clinic', 'coaching', 'food']) {
       const h = await page.locator(`#panel-${key} .site-view img`).getAttribute('height');
       expect(Number(h)).toBeGreaterThan(1500);
     }
@@ -243,8 +245,8 @@ test.describe('3. Interaction', () => {
     await page.goto(PAGE_URL);
     await page.getByRole('tab', { name: 'Orders' }).focus();
     await page.keyboard.press('End');
-    await expect(page.getByRole('tab', { name: 'Leads' })).toHaveAttribute('aria-selected', 'true');
-    await expect(page.locator('#agentBiz')).toHaveText('Aangan Homes');
+    await expect(page.locator('#atab-11')).toHaveAttribute('aria-selected', 'true');
+    await expect(page.locator('#agentBiz')).toHaveText('Kala Haat');
   });
 
   test('automated dashboard fills itself: orders arrive, numbers and rules update', async ({ page }) => {
@@ -293,7 +295,7 @@ test.describe('3. Interaction', () => {
     await expect(cards).toHaveCount(6);
     await page.locator('#types').scrollIntoViewIfNeeded();
     for (const card of await cards.all()) {
-      const img = card.locator('.type-visual img');
+      const img = card.locator('.type-visual > img');
       await img.scrollIntoViewIfNeeded();
       await expect.poll(() => img.evaluate((i) => i.complete && i.naturalWidth > 0)).toBe(true);
       expect(await img.getAttribute('src')).toMatch(/\/assets\/img\/device-[a-z]+\.webp$/);
@@ -313,12 +315,52 @@ test.describe('3. Interaction', () => {
     await expect.poll(() => video.evaluate((v) => v.paused)).toBe(true);
   });
 
-  test('hero chat plays to the end and offers a replay', async ({ page }) => {
+  test('hero stage plays the PromptKaro story, then turns into the next business', async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto(PAGE_URL);
-    await expect(page.locator('#chatReplay')).toBeVisible({ timeout: 15000 });
-    await expect(page.locator('#chatList .is-pending')).toHaveCount(0);
-    await expect(page.locator('#chatTyping')).toBeHidden();
+    // the stage starts on the headline's top line
+    const h1 = await page.locator('.hero-title').boundingBox();
+    const stage = await page.locator('.stage-browser').boundingBox();
+    expect(Math.abs(stage.y - h1.y)).toBeLessThan(16);
+    await expect(page.locator('#chatList .msg-out').last()).toBeVisible({ timeout: 12000 });
+    await expect(page.locator('#stageUrl')).toHaveText('sheeshamhouse.in', { timeout: 15000 });
+    await expect(page.locator('#chatName')).toHaveText('Sheesham House');
+    await expect(page.locator('#stageProductName')).toHaveText('Curve velvet sofa');
+    await expect(page.locator('#chatList .msg-agent').last()).toBeVisible({ timeout: 8000 });
+    await expect(page.locator('#stageDots button')).toHaveCount(7);
+    await expect(page.locator('#stageDots button').nth(1)).toHaveAttribute('aria-current', 'true');
+    // pause holds the scene; a dot jumps to any example
+    await page.locator('#stagePause').click();
+    await expect(page.locator('#stagePause')).toHaveAttribute('aria-pressed', 'true');
+    await page.locator('#stageDots button').nth(2).click();
+    await expect(page.locator('#stageUrl')).toHaveText('dashboard.shreejimobile.in');
+    await expect(page.locator('#stageKind')).toHaveText('Automated dashboard');
+  });
+
+  test('site types show live screens warped onto the rendered devices', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto(PAGE_URL);
+    for (const sel of ['.type-onepage .type-live', '.type-multipage .type-live']) {
+      const box = page.locator(sel);
+      await box.scrollIntoViewIfNeeded();
+      await expect(box).toHaveClass(/is-mapped/);
+      const t = await box.locator('.type-screen').evaluate((e) => getComputedStyle(e).transform);
+      expect(t).toContain('matrix3d');
+    }
+    const chips = page.locator('.type-multipage .type-pages li.is-on');
+    const first = await chips.textContent();
+    await expect.poll(() => chips.textContent(), { timeout: 6000 }).not.toBe(first);
+  });
+
+  test('dashboards for other businesses switch with tabs', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    await expect(page.locator('.dash-more [role="tab"]')).toHaveCount(4);
+    await expect(page.locator('#dpanel-furniture')).toBeVisible();
+    await page.locator('#dtab-wedding').click();
+    await expect(page.locator('#dpanel-wedding')).toBeVisible();
+    await expect(page.locator('#dpanel-furniture')).toBeHidden();
+    const img = page.locator('#dpanel-wedding img');
+    await expect.poll(() => img.evaluate((i) => i.complete && i.naturalWidth)).toBe(1800);
   });
 
   test('FAQ items open', async ({ page }) => {
@@ -389,11 +431,12 @@ test.describe('5. Robustness', () => {
     await page.goto(PAGE_URL);
     await expect(page.locator('h1')).toBeVisible();
     await expect(page.locator('.chat-list .msg:not(.msg-typing)')).toHaveCount(5);
-    for (const id of ['#panel-mobile', '#panel-coaching', '#panel-clinic', '#panel-property', '#panel-food']) {
+    for (const id of ['#panel-mobile', '#panel-furniture', '#panel-interior', '#panel-boutique', '#panel-property', '#panel-manufacturer', '#panel-wedding', '#panel-handicrafts', '#panel-clinic', '#panel-coaching', '#panel-food']) {
       await expect(page.locator(id)).toBeVisible();
     }
     await expect(page.locator('#types .type-card')).toHaveCount(6);
-    await expect(page.locator('.site-view img')).toHaveCount(5);
+    await expect(page.locator('.site-view img')).toHaveCount(11);
+    await expect(page.locator('.dash-panel')).toHaveCount(4);
     await expect(page.locator('.ai-pick')).toHaveCount(3);
     await expect(page.locator('.frag-tiles li')).toHaveCount(4);
     await expect(page.locator('.frag-result')).toBeVisible();
@@ -467,8 +510,8 @@ test.describe('6. Accessibility', () => {
 
   test('tabs expose correct ARIA wiring', async ({ page }) => {
     await page.goto(PAGE_URL);
-    await expect(page.locator('#showcase [role="tab"]')).toHaveCount(5);
-    await expect(page.locator('#agentsApp [role="tab"]')).toHaveCount(6);
+    await expect(page.locator('#showcase [role="tab"]')).toHaveCount(11);
+    await expect(page.locator('#agentsApp [role="tab"]')).toHaveCount(12);
     const tabs = page.getByRole('tab');
     for (const tab of await tabs.all()) {
       const controls = await tab.getAttribute('aria-controls');
@@ -535,7 +578,7 @@ test.describe('7. Content', () => {
   });
 
   test('sample sites each have their own layout and never repeat a photo in a row', () => {
-    const keys = ['mobile', 'clinic', 'coaching', 'food', 'property'];
+    const keys = ['mobile', 'clinic', 'coaching', 'food', 'property', 'interior', 'boutique', 'wedding', 'handicrafts', 'furniture', 'manufacturer'];
     const pages = keys.map((k) => read(`tools/samples/${k}.html`));
     const bodies = pages.map((h) => h.replace(/<style>[\s\S]*?<\/style>/, '').replace(/>[^<]*</g, '><'));
     expect(new Set(bodies).size).toBe(keys.length); // different markup, not one template recoloured
@@ -554,8 +597,17 @@ test.describe('7. Content', () => {
     await expect.poll(() => img.evaluate((i) => i.currentSrc)).toContain('site-mobile-m.webp');
   });
 
+  test('image credits name every open model with its licence', async ({ page }) => {
+    await page.goto('/credits.html');
+    await expect(page.locator('h1')).toHaveText('Image credits');
+    await expect(page.locator('main li')).toHaveCount(16);
+    await expect(page.locator('main li a[href*="creativecommons.org"]')).toHaveCount(16);
+    await page.goto(PAGE_URL);
+    await expect(page.locator('a[href="/credits.html"]')).toHaveCount(1);
+  });
+
   test('legal pages use the new system and load', async ({ page }) => {
-    for (const url of ['/privacy.html', '/terms.html']) {
+    for (const url of ['/privacy.html', '/terms.html', '/credits.html', '/404.html']) {
       await page.goto(url);
       await expect(page.locator('h1')).toBeVisible();
       await expect(page.locator('.legal-header .wordmark')).toBeVisible();

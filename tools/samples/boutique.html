@@ -1,0 +1,66 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Rangrez Boutique</title><style>@font-face{font-family:'Bodoni';src:url(fonts/bodoni-moda.woff2) format('woff2');font-weight:100 900;font-display:block}@font-face{font-family:'Jost';src:url(fonts/jost.woff2) format('woff2');font-weight:100 900;font-display:block}*{box-sizing:border-box;margin:0;padding:0}html{-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}a{color:inherit;text-decoration:none}ul,ol{list-style:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:48px;padding:0 22px;font-weight:600;font-size:15px;white-space:nowrap}
+.wa{background:#008069;color:#fff}
+.show-m{display:none}
+@media (max-width:700px){.wrap{padding:0 18px}.hide-m{display:none!important}.show-m{display:inline}nav{gap:12px!important}nav .brand{white-space:nowrap;font-size:18px!important}nav .btn{font-size:14px!important;padding:0 12px!important}nav .btn svg{width:16px}.offer{font-size:12px!important}}
+
+body{font-family:'Jost';color:#1E1A1D;background:#FFFCFA;font-size:16px;line-height:1.55}
+.bar{background:#1E1A1D;color:#F7E7E2;text-align:center;font-size:13px;letter-spacing:.06em;padding:9px}
+nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:80px;border-bottom:1px solid #EFE3DF}
+.links{display:flex;gap:26px;font-size:14px;letter-spacing:.04em}
+.brand{font-family:'Bodoni';font-size:34px;font-weight:500;letter-spacing:.14em}
+nav .btn{justify-self:end;border-radius:999px;height:42px}
+.hero{display:grid;grid-template-columns:1.35fr 1fr;gap:0;margin:24px 0 64px;background:#F6E4DF}
+.hero img{width:100%;height:100%;object-fit:cover;aspect-ratio:16/10}
+.hero .txt{padding:56px 48px;display:flex;flex-direction:column;justify-content:center}
+.hero small{letter-spacing:.2em;font-size:12px;color:#9B4A52}
+.hero h1{font-family:'Bodoni';font-weight:400;font-size:64px;line-height:1;margin:14px 0 16px}
+.hero h1 i{font-style:italic}
+.hero p{color:#5E5458;margin-bottom:26px}
+.hero .btn{border-radius:999px;align-self:flex-start}
+.cats{display:flex;gap:10px;justify-content:center;margin-bottom:28px}
+.cats span{padding:9px 18px;border:1px solid #E4D3CE;border-radius:999px;font-size:14px}
+.cats span.on{background:#1E1A1D;color:#fff;border-color:#1E1A1D}
+h2{font-family:'Bodoni';font-weight:400;font-size:44px;text-align:center;margin-bottom:8px}
+.sub{text-align:center;color:#5E5458;margin-bottom:28px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-bottom:72px}
+.item .ph{background:#F4EDEA;aspect-ratio:3/4;display:grid;place-items:center;position:relative}
+.item .ph img{width:86%}
+.item .tag{position:absolute;left:12px;top:12px;background:#fff;font-size:12px;padding:4px 10px;border-radius:999px}
+.item b{display:block;font-weight:500;margin-top:12px}
+.item .p{display:flex;gap:10px;align-items:baseline}.item .p strong{font-weight:600}.item .p s{color:#9A8F93;font-size:14px}
+.sizes{display:flex;gap:6px;margin-top:8px}.sizes span{width:30px;height:30px;border:1px solid #E4D3CE;display:grid;place-items:center;font-size:12px;border-radius:50%}
+.perks{display:grid;grid-template-columns:repeat(3,1fr);text-align:center;border-top:1px solid #EFE3DF;border-bottom:1px solid #EFE3DF;margin-bottom:64px}
+.perks div{padding:30px}.perks div+div{box-shadow:inset 1px 0 0 #EFE3DF}
+.perks b{font-family:'Bodoni';font-weight:500;font-size:22px;display:block}
+.perks span{color:#5E5458;font-size:14px}
+.visit{display:flex;align-items:center;justify-content:space-between;background:#1E1A1D;color:#fff;padding:40px 48px;margin-bottom:48px}
+.visit h3{font-family:'Bodoni';font-weight:400;font-size:36px}
+.visit p{color:#CDBFC3}
+.visit .btn{border-radius:999px}
+footer{display:flex;justify-content:space-between;padding-bottom:36px;color:#5E5458;font-size:13px}
+@media (max-width:700px){
+ nav{grid-template-columns:auto 1fr;height:64px}.links{display:none}.brand{font-size:24px!important}
+ .hero{grid-template-columns:1fr}.hero .txt{padding:26px}.hero h1{font-size:44px}
+ .cats{flex-wrap:wrap}h2{font-size:34px}.grid{grid-template-columns:1fr 1fr;gap:14px}
+ .perks{grid-template-columns:1fr}.perks div+div{box-shadow:inset 0 1px 0 #EFE3DF}
+ .visit{flex-direction:column;align-items:flex-start;gap:16px;padding:26px}footer{flex-direction:column;gap:4px}
+}
+</style></head><body class=""><div class="bar">THE FESTIVE EDIT IS HERE · FREE ALTERATIONS ON EVERY ORDER</div>
+<div class="wrap">
+<nav><span class="links"><a>New in</a><a>Women</a><a>Footwear</a><a>Accessories</a></span><span class="brand">RANGREZ</span><a class="btn wa"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.13c-.25.69-1.44 1.32-2 1.41-.51.08-1.16.11-1.87-.12-.43-.14-.98-.32-1.69-.62-2.98-1.29-4.93-4.29-5.08-4.49-.15-.2-1.21-1.61-1.21-3.07s.77-2.18 1.04-2.48c.27-.3.6-.37.8-.37h.57c.18.01.43-.07.67.51.25.6.84 2.06.92 2.21.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.45.52-.15.15-.3.31-.13.6.17.3.77 1.27 1.65 2.06 1.13 1.01 2.09 1.32 2.39 1.47.3.15.47.13.64-.08.18-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.74.82 2.04.97.3.15.5.22.57.35.08.12.08.72-.17 1.41Z"/></svg>Order on WhatsApp</a></nav>
+<header class="hero"><img src="img/bou-hero.webp" alt=""><div class="txt"><small>FESTIVE 2026</small><h1>The <i>festive</i> edit</h1><p>Hand-embroidered pieces, comfortable footwear and the accessories that finish the look. Try them at the boutique or at home.</p><a class="btn wa"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.13c-.25.69-1.44 1.32-2 1.41-.51.08-1.16.11-1.87-.12-.43-.14-.98-.32-1.69-.62-2.98-1.29-4.93-4.29-5.08-4.49-.15-.2-1.21-1.61-1.21-3.07s.77-2.18 1.04-2.48c.27-.3.6-.37.8-.37h.57c.18.01.43-.07.67.51.25.6.84 2.06.92 2.21.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.45.52-.15.15-.3.31-.13.6.17.3.77 1.27 1.65 2.06 1.13 1.01 2.09 1.32 2.39 1.47.3.15.47.13.64-.08.18-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.74.82 2.04.97.3.15.5.22.57.35.08.12.08.72-.17 1.41Z"/></svg>See the collection</a></div></header>
+<h2>New this week</h2><p class="sub">Every piece altered to fit you, free.</p>
+<div class="cats"><span class="on">All</span><span>Tops</span><span>Footwear</span><span>Eyewear</span><span>Watches</span></div>
+<div class="grid">
+ <div class="item"><div class="ph"><span class="tag">New</span><img src="img/bou-corset.webp" alt=""></div><b>Embroidered corset top</b><div class="p"><strong>₹3,499</strong><s>₹4,200</s></div><div class="sizes"><span>S</span><span>M</span><span>L</span><span>XL</span></div></div>
+ <div class="item"><div class="ph"><img src="img/bou-shoe.webp" alt=""></div><b>Knit sneakers, sky blue</b><div class="p"><strong>₹2,299</strong></div><div class="sizes"><span>5</span><span>6</span><span>7</span><span>8</span></div></div>
+ <div class="item"><div class="ph"><span class="tag">2 left</span><img src="img/bou-sunglasses.webp" alt=""></div><b>Mirror aviators</b><div class="p"><strong>₹1,199</strong></div></div>
+ <div class="item"><div class="ph"><img src="img/bou-watch.webp" alt=""></div><b>Chronograph watch, gold</b><div class="p"><strong>₹4,999</strong></div></div>
+</div>
+<div class="perks"><div><b>Try at home</b><span>We bring three sizes. Keep what fits.</span></div><div><b>Alterations in 2 days</b><span>Free on every purchase.</span></div><div><b>Order on WhatsApp</b><span>Photos, sizes and payment in one chat.</span></div></div>
+<div class="visit"><div><h3>Visit the boutique</h3><p>Main Road, open 11 am to 9 pm, closed Tuesdays.</p></div><a class="btn wa"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.13c-.25.69-1.44 1.32-2 1.41-.51.08-1.16.11-1.87-.12-.43-.14-.98-.32-1.69-.62-2.98-1.29-4.93-4.29-5.08-4.49-.15-.2-1.21-1.61-1.21-3.07s.77-2.18 1.04-2.48c.27-.3.6-.37.8-.37h.57c.18.01.43-.07.67.51.25.6.84 2.06.92 2.21.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.45.52-.15.15-.3.31-.13.6.17.3.77 1.27 1.65 2.06 1.13 1.01 2.09 1.32 2.39 1.47.3.15.47.13.64-.08.18-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.74.82 2.04.97.3.15.5.22.57.35.08.12.08.72-.17 1.41Z"/></svg>Book a trial slot</a></div>
+<footer><span>© 2026 Rangrez Boutique</span><span>Clothing, footwear and accessories</span></footer>
+</div></body></html>
