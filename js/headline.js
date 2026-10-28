@@ -3,8 +3,9 @@
    online store, catalogue. Split-flap transition: the old letters flip up and blur away one by
    one, the new ones flip in from below, the slot eases to the new word's width (so "first."
    glides instead of jumping), and a marigold underline redraws under the new word.
-   Screen readers get the static sentence (visually hidden copy in the h1).
-   Reduced motion or no GSAP: the word stays "website". Pauses off screen and in hidden tabs. */
+   The hero stage (hero.js) sets the pace: it fires `pk:scene` when it changes, so the word always
+   names what the stage shows. Screen readers get the static sentence (visually hidden copy in the h1).
+   Reduced motion or no GSAP: the word swaps without animation. */
 
 (function () {
   'use strict';
@@ -12,7 +13,7 @@
   var slot = document.getElementById('heroWord');
   var gsap = window.gsap;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if (!slot || !gsap || reduce.matches) return;
+  if (!slot) return;
 
   var WORDS = [
     { en: 'website', gu: 'વેબસાઇટ' },
@@ -21,8 +22,8 @@
     { en: 'online store', gu: 'ઓનલાઇન સ્ટોર' },
     { en: 'catalogue', gu: 'કેટલોગ' }
   ];
-  var HOLD = 2400;
-  var i = 0, timer = 0, busy = false, onScreen = true;
+  var i = 0, busy = false, wanted = null;
+  var animate = !!gsap && !reduce.matches;
 
   function lang() { return document.documentElement.lang === 'gu' ? 'gu' : 'en'; }
 
@@ -49,11 +50,13 @@
   line.className = 'rot-line';
   slot.appendChild(line);
 
-  function swap() {
-    if (busy) return;
-    busy = true;
-    i = (i + 1) % WORDS.length;
+  function swap(index) {
+    if (index === i) return;
+    if (busy) { wanted = index; return; }
+    i = index;
     var oldWord = slot.querySelector('.rot-word');
+    if (!animate) { oldWord.replaceWith(build(WORDS[i][lang()])); return; }
+    busy = true;
     var next = build(WORDS[i][lang()]);
     next.classList.add('is-next');
     slot.appendChild(next);
@@ -64,9 +67,11 @@
       onComplete: function () {
         oldWord.remove();
         next.classList.remove('is-next');
+        // The language may have changed mid-flip.
+        if (next.textContent !== WORDS[i][lang()]) next.replaceWith(build(WORDS[i][lang()]));
         gsap.set(slot, { clearProps: 'width' });
         busy = false;
-        queue();
+        if (wanted !== null) { var w = wanted; wanted = null; swap(w); }
       }
     });
     gsap.set(slot, { width: from });
@@ -78,23 +83,12 @@
     tl.fromTo(line, { scaleX: 0, transformOrigin: '0% 50%' }, { scaleX: 1, duration: 0.5, ease: 'expo.out' }, 0.5);
   }
 
-  function queue() {
-    clearTimeout(timer);
-    if (!onScreen || document.hidden) return;
-    timer = setTimeout(swap, HOLD);
-  }
-
   // Language switch: show the current word in the new language straight away.
   document.addEventListener('pk:lang', function () {
     var w = slot.querySelector('.rot-word');
     if (w && !busy) { w.replaceWith(build(WORDS[i][lang()])); }
   });
 
-  new IntersectionObserver(function (e) {
-    onScreen = e[0].isIntersecting;
-    if (onScreen) queue(); else clearTimeout(timer);
-  }).observe(slot);
-  document.addEventListener('visibilitychange', queue);
-  slot.classList.add('is-live');
-  queue();
+  document.addEventListener('pk:scene', function (e) { swap(e.detail.index % WORDS.length); });
+  if (animate) slot.classList.add('is-live');
 })();

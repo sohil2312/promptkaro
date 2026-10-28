@@ -1,158 +1,99 @@
 /* PromptKaro — hero.js
-   The hero stage: a website and its WhatsApp agent, changing together.
-   Scene 1 is the PromptKaro story itself (a shop owner asks for a site and gets a demo).
-   Every scene after that is one business: that business's website opens as a growing circle, the site scrolls itself, and the business's AI
-   agent answers a customer in the phone. GSAP runs the timelines (js/vendor/gsap.min.js).
-   Without JS, or with reduced motion, scene 1 is shown complete and the dots switch scenes
-   instantly. Autoplay pauses off screen, in a hidden tab and on the pause button. */
+   The hero stage shows exactly what the headline names, one thing at a time:
+   website → a site in the browser, AI agent → the browser folds into a phone and a WhatsApp
+   agent works, dashboard → the live dashboard, online store → a shop, catalogue → a catalogue page.
+   The stage leads; it tells headline.js which word to show (the `pk:scene` event), so the word
+   and the picture always change together. GSAP runs the timelines (js/vendor/gsap.min.js).
+   Without JS the website shows with the chat under it. With reduced motion or no GSAP, scenes
+   switch instantly from the dots. Autoplay pauses off screen, in a hidden tab and on the pause button. */
 
 (function () {
   'use strict';
 
   var stage = document.getElementById('heroStage');
+  var device = document.getElementById('stageDevice');
   var list = document.getElementById('chatList');
-  if (!stage || !list) return;
+  if (!stage || !device || !list) return;
 
+  var browser = device.querySelector('.stage-browser');
+  var phone = device.querySelector('.stage-phone');
   var view = document.getElementById('stageView');
   var url = document.getElementById('stageUrl');
   var kind = document.getElementById('stageKind');
-  var chatName = document.getElementById('chatName');
-  var chatAvatar = document.getElementById('chatAvatar');
   var status = document.getElementById('chatStatus');
-  var typing = document.getElementById('chatTyping');
   var controls = document.getElementById('stageControls');
   var pauseBtn = document.getElementById('stagePause');
   var dotsWrap = document.getElementById('stageDots');
   var label = document.getElementById('stageLabel');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var narrow = window.matchMedia('(max-width: 700px)');
   var gsap = window.gsap;
 
   function lang() { return document.documentElement.lang === 'gu' ? 'gu' : 'en'; }
   function tr(o) { return o == null ? '' : typeof o === 'string' ? o : (o[lang()] || o.en); }
   var T = {
-    online: { en: 'online', gu: 'ઓનલાઇન' },
-    typing: { en: 'typing…', gu: 'ટાઇપ કરે છે…' },
     agent: { en: 'AI agent replies', gu: 'AI એજન્ટ જવાબ આપે છે' },
-    agentTag: { en: 'AI agent', gu: 'AI એજન્ટ' },
+    typing: { en: 'typing…', gu: 'ટાઇપ કરે છે…' },
     pause: { en: 'Pause the examples', gu: 'ઉદાહરણો રોકો' },
     play: { en: 'Play the examples', gu: 'ઉદાહરણો ચલાવો' },
     show: { en: 'Show example', gu: 'ઉદાહરણ બતાવો' }
   };
-  var WEB = { en: 'Website', gu: 'વેબસાઇટ' };
 
-  /* ---------- Scenes ---------- */
+  /* ---------- Scenes, in the same order as the headline words ---------- */
   var SCENES = [
-    { key: 'promptkaro', url: 'shreejimobile.in', shot: '/assets/img/site-mobile.webp', kind: WEB,
-      label: { en: 'Website for a mobile shop, made from one WhatsApp chat', gu: 'એક WhatsApp ચેટથી બનેલી મોબાઇલ શોપની વેબસાઇટ' },
-      story: true },
-    { key: 'furniture', url: 'sheeshamhouse.in', shot: '/assets/img/site-furniture.webp', kind: WEB,
-      label: { en: 'Furniture store: website and WhatsApp AI agent', gu: 'ફર્નિચર સ્ટોર: વેબસાઇટ અને WhatsApp AI એજન્ટ' },
-      chat: { name: 'Sheesham House', avatar: 'S', msgs: [
-        { out: { en: 'Does the blue sofa come in 2.1 metres?', gu: 'વાદળી સોફા 2.1 મીટરમાં મળશે?' }, at: '11:02' },
-        { step: { en: 'Checked custom sizes and fabric stock', gu: 'કસ્ટમ સાઇઝ અને કાપડનો સ્ટોક ચેક કર્યો' } },
-        { in: { en: 'Yes. 2.1 m in the same blue velvet is ₹39,500, delivered in 12 days. Shall I send a photo in your room?', gu: 'હા. એ જ વાદળી વેલ્વેટમાં 2.1 મી ₹39,500, 12 દિવસમાં ડિલિવરી. તમારા રૂમમાં ફોટો મોકલું?' }, at: '11:02' }
-      ] } },
-    { key: 'dashboard', url: 'dashboard.shreejimobile.in', shot: '/assets/img/hero-dashboard.webp', kind: { en: 'Automated dashboard', gu: 'ઓટોમેટેડ ડેશબોર્ડ' },
-      label: { en: 'Automated dashboard that fills itself from WhatsApp, UPI and billing', gu: 'WhatsApp, UPI અને બિલિંગથી જાતે ભરાતું ડેશબોર્ડ' },
-      chat: { name: 'Shreeji Mobile', avatar: 'S', status: { en: 'automations', gu: 'ઓટોમેશન' }, msgs: [
-        { step: { en: 'UPI payment matched to order #1042', gu: 'UPI પેમેન્ટ ઓર્ડર #1042 સાથે મેળવ્યું' } },
-        { in: { en: 'Receipt sent to Hetal D. Earbuds are down to 2, so I sent the supplier a reorder for 20.', gu: 'હેતલ ડી.ને રસીદ મોકલી. ઇયરબડ્સ 2 બાકી છે, એટલે સપ્લાયરને 20નો ઓર્ડર મોકલ્યો.' }, at: '18:40' },
-        { in: { en: 'Today so far: 23 orders, ₹48,620. 54 of 61 chats handled by the AI agent.', gu: 'આજે અત્યાર સુધી: 23 ઓર્ડર, ₹48,620. 61માંથી 54 ચેટ AI એજન્ટે સંભાળી.' }, at: '18:41' }
-      ] } },
-    { key: 'interior', url: 'studioaakar.in', shot: '/assets/img/site-interior.webp', kind: WEB,
-      label: { en: 'Interior and architecture studio: website and WhatsApp AI agent', gu: 'ઇન્ટિરિયર અને આર્કિટેક્ચર સ્ટુડિયો: વેબસાઇટ અને WhatsApp AI એજન્ટ' },
-      chat: { name: 'Studio Aakar', avatar: 'A', msgs: [
-        { out: { en: 'We need our 3 BHK living room designed. Can you visit?', gu: 'અમારા 3 BHKનો લિવિંગ રૂમ ડિઝાઇન કરાવવો છે. મુલાકાત લઈ શકો?' }, at: '16:15' },
-        { step: { en: 'Found a free slot in the designer’s calendar', gu: 'ડિઝાઇનરના કેલેન્ડરમાં ખાલી સમય શોધ્યો' } },
-        { in: { en: 'Our designer can visit on Saturday at 11 am. Please send the floor plan or a few photos before that.', gu: 'અમારા ડિઝાઇનર શનિવારે સવારે 11 વાગ્યે આવી શકે. તે પહેલાં ફ્લોર પ્લાન કે થોડા ફોટા મોકલજો.' }, at: '16:15' }
-      ] } },
-    { key: 'boutique', url: 'rangrez.in', shot: '/assets/img/site-boutique.webp', kind: WEB,
-      label: { en: 'Boutique: website and WhatsApp AI agent', gu: 'બુટિક: વેબસાઇટ અને WhatsApp AI એજન્ટ' },
-      chat: { name: 'Rangrez Boutique', avatar: 'R', msgs: [
-        { out: { en: 'Is the corset top available in M?', gu: 'કોર્સેટ ટોપ M સાઇઝમાં છે?' }, at: '20:31' },
-        { step: { en: 'Checked sizes in stock', gu: 'સ્ટોકમાં સાઇઝ ચેક કરી' } },
-        { in: { en: 'Yes, M is in stock. We can bring S, M and L to your home tomorrow evening to try.', gu: 'હા, M સ્ટોકમાં છે. કાલે સાંજે S, M અને L ઘરે ટ્રાય કરવા લાવી શકીએ.' }, at: '20:31' }
-      ] } },
-    { key: 'manufacturer', url: 'himalcooling.in', shot: '/assets/img/site-manufacturer.webp', kind: WEB,
-      label: { en: 'Manufacturer: website and WhatsApp AI agent for quotes', gu: 'મેન્યુફેક્ચરર: વેબસાઇટ અને ક્વોટ માટે WhatsApp AI એજન્ટ' },
-      chat: { name: 'Himal Cooling', avatar: 'H', msgs: [
-        { out: { en: 'Quote for 50 HC-330 coolers with our logo?', gu: 'અમારા લોગો સાથે 50 HC-330 કૂલરનો ભાવ?' }, at: '10:08' },
-        { step: { en: 'Applied bulk price and branding cost', gu: 'બલ્ક ભાવ અને બ્રાન્ડિંગ ખર્ચ ગણ્યો' } },
-        { in: { en: '₹28,400 each for 50, branded, delivery in 3 weeks. I have sent the quote PDF to this chat.', gu: '50 માટે બ્રાન્ડિંગ સાથે એક નંગ ₹28,400, 3 અઠવાડિયામાં ડિલિવરી. ક્વોટની PDF આ ચેટમાં મોકલી છે.' }, at: '10:09' }
-      ] } },
-    { key: 'wedding', url: 'shubhutsav.in', shot: '/assets/img/site-wedding.webp', kind: WEB,
-      label: { en: 'Wedding planner: website and WhatsApp AI agent', gu: 'વેડિંગ પ્લાનર: વેબસાઇટ અને WhatsApp AI એજન્ટ' },
-      chat: { name: 'Shubh Utsav', avatar: 'U', msgs: [
-        { out: { en: 'Wedding on 14 February, about 300 guests. Are you free?', gu: '14 ફેબ્રુઆરીએ લગ્ન છે, લગભગ 300 મહેમાન. તમે ફ્રી છો?' }, at: '21:12' },
-        { step: { en: 'Checked the team calendar for 12 to 15 Feb', gu: '12 થી 15 ફેબ્રુઆરીનું કેલેન્ડર ચેક કર્યું' } },
-        { in: { en: '14 February is open. I am sending three decor plans and a sample week plan now.', gu: '14 ફેબ્રુઆરી ખાલી છે. ત્રણ સજાવટના પ્લાન અને અઠવાડિયાનો પ્લાન હમણાં મોકલું છું.' }, at: '21:12' }
-      ] } }
+    { mode: 'browser', url: 'studioaakar.in', shot: '/assets/img/site-interior.webp', kind: { en: 'Website', gu: 'વેબસાઇટ' },
+      label: { en: 'Website for an interior and architecture studio', gu: 'ઇન્ટિરિયર અને આર્કિટેક્ચર સ્ટુડિયોની વેબસાઇટ' } },
+    { mode: 'phone',
+      label: { en: 'WhatsApp AI agent for a furniture store: checks stock, books a visit', gu: 'ફર્નિચર સ્ટોરનો WhatsApp AI એજન્ટ: સ્ટોક તપાસે, વિઝિટ બુક કરે' } },
+    { mode: 'browser', url: 'dashboard.shreejimobile.in', shot: '/assets/img/hero-dashboard.webp', fit: true,
+      kind: { en: 'Dashboard', gu: 'ડેશબોર્ડ' },
+      label: { en: 'Dashboard that fills itself from WhatsApp, UPI and billing', gu: 'WhatsApp, UPI અને બિલિંગથી જાતે ભરાતું ડેશબોર્ડ' } },
+    { mode: 'browser', url: 'rangrez.in', shot: '/assets/img/site-boutique.webp', kind: { en: 'Online store', gu: 'ઓનલાઇન સ્ટોર' },
+      label: { en: 'Online store for a boutique, orders on WhatsApp', gu: 'બુટિકનો ઓનલાઇન સ્ટોર, WhatsApp પર ઓર્ડર' } },
+    { mode: 'browser', url: 'sheeshamhouse.in/sofas', shot: '/assets/img/mp-sofas.webp', mshot: '/assets/img/mp-sofas.webp', fit: 'always',
+      kind: { en: 'Catalogue', gu: 'કેટલોગ' },
+      label: { en: 'Catalogue for a furniture maker, every sofa with its price', gu: 'ફર્નિચર બનાવનારનું કેટલોગ, દરેક સોફા ભાવ સાથે' } }
   ];
 
-  var storySteps = Array.prototype.slice.call(list.querySelectorAll('[data-step]'));
+  var steps = Array.prototype.slice.call(list.querySelectorAll('[data-step]'));
   var current = 0;
   var tl = null, pan = null, timer = 0;
   var paused = false, onScreen = true, started = false;
 
-  /* ---------- Static setters (used by both the animated and the instant path) ---------- */
-
-  function setHead(s) {
-    var c = s.chat;
-    chatName.textContent = c ? c.name : 'PromptKaro';
-    chatAvatar.textContent = c ? c.avatar : '›';
-    status.textContent = c ? tr(c.status || T.agent) : tr(T.online);
-  }
-  function setFrame(s) {
-    url.textContent = s.url;
-    kind.textContent = tr(s.kind);
-    label.textContent = tr(s.label);
-    Array.prototype.forEach.call(dotsWrap.children, function (d, i) { d.setAttribute('aria-current', i === current ? 'true' : 'false'); });
-  }
-  // Phones get the phone-width screenshot of each site, so the stage is readable there too.
-  var narrow = window.matchMedia('(max-width: 700px)');
-  function srcFor(s) { return narrow.matches ? s.shot.replace('.webp', '-m.webp') : s.shot; }
+  // Phones get the phone-width screenshot, which scrolls instead of being cropped
+  // (the catalogue page is one screen, so it is cropped from its top left everywhere).
+  function srcFor(s) { return narrow.matches ? (s.mshot || s.shot.replace('.webp', '-m.webp')) : s.shot; }
+  function fits(s) { return s.fit === 'always' || (s.fit && !narrow.matches); }
   function shotFor(s) {
     var img = new Image();
-    img.className = 'stage-shot';
+    img.className = 'stage-shot' + (fits(s) ? ' is-fit' : '');
     img.alt = '';
     img.decoding = 'async';
     img.src = srcFor(s);
     return img;
   }
   if (narrow.matches) view.querySelector('.stage-shot').src = srcFor(SCENES[0]);
-  function msgNode(m) {
-    var li = document.createElement('li');
-    if (m.step) {
-      li.className = 'wa-agent';
-      li.innerHTML = '<span class="log-icon"></span><span></span>';
-      li.lastChild.textContent = tr(m.step);
-    } else {
-      li.className = 'msg ' + (m.out ? 'msg-out' : 'msg-in');
-      if (m.in) {
-        var tag = document.createElement('span'); tag.className = 'msg-agent'; tag.textContent = tr(T.agentTag); li.appendChild(tag);
-        var dots = document.createElement('span'); dots.className = 'wa-dots'; dots.innerHTML = '<i></i><i></i><i></i>'; li.appendChild(dots);
-      }
-      var p = document.createElement('p'); p.textContent = tr(m.out || m.in); li.appendChild(p);
-      var meta = document.createElement('span'); meta.className = 'msg-meta'; meta.textContent = m.at; li.appendChild(meta);
-    }
-    li.dataset.scene = '1';
-    return li;
-  }
-  function clearSceneMessages() {
-    Array.prototype.forEach.call(list.querySelectorAll('[data-scene]'), function (n) { n.remove(); });
-  }
 
-  // Instant switch: reduced motion, no GSAP, or a dot clicked while things are paused.
+  function setFrame(s) {
+    if (s.url) { url.textContent = s.url; kind.textContent = tr(s.kind); }
+    label.textContent = tr(s.label);
+    Array.prototype.forEach.call(dotsWrap.children, function (d, i) { d.setAttribute('aria-current', i === current ? 'true' : 'false'); });
+  }
+  function announce(i) { document.dispatchEvent(new CustomEvent('pk:scene', { detail: { index: i } })); }
+
+  // Instant switch: reduced motion, no GSAP, or a dot clicked while paused.
   function show(i) {
+    if (tl) { tl.kill(); tl = null; }
+    if (pan) { pan.kill(); pan = null; }
     current = i;
     var s = SCENES[i];
-    view.textContent = '';
-    view.appendChild(shotFor(s));
-    setHead(s); setFrame(s);
-    clearSceneMessages();
-    typing.hidden = true;
-    storySteps.forEach(function (st) { st.hidden = !s.story; st.classList.remove('is-pending'); });
-    if (!s.story) s.chat.msgs.forEach(function (m) { list.insertBefore(msgNode(m), typing); });
+    gsap && gsap.set([browser, phone, device], { clearProps: 'all' });
+    device.dataset.mode = s.mode;
+    if (s.url) { view.textContent = ''; view.appendChild(shotFor(s)); }
+    steps.forEach(function (st) { st.classList.remove('is-pending', 'is-working', 'is-typing'); });
+    status.textContent = tr(T.agent);
+    setFrame(s);
+    announce(i);
   }
 
   /* ---------- Dots and pause ---------- */
@@ -180,23 +121,13 @@
   pauseBtn.addEventListener('click', function () { setPaused(!paused); });
 
   document.addEventListener('pk:lang', function () {
-    var s = SCENES[current];
-    setHead(s); setFrame(s);
-    if (!s.story) {
-      var nodes = list.querySelectorAll('[data-scene]');
-      var msgs = s.chat.msgs;
-      Array.prototype.forEach.call(nodes, function (n, k) {
-        var m = msgs[k]; if (!m) return;
-        if (m.step) n.lastChild.textContent = tr(m.step);
-        else { n.querySelector('p').textContent = tr(m.out || m.in); var t = n.querySelector('.msg-agent'); if (t) t.textContent = tr(T.agentTag); }
-      });
-    }
+    setFrame(SCENES[current]);
+    if (status.textContent !== tr(T.typing)) status.textContent = tr(T.agent);
     Array.prototype.forEach.call(dotsWrap.children, function (b, i) { b.setAttribute('aria-label', tr(T.show) + ' ' + (i + 1) + ': ' + tr(SCENES[i].label)); });
     pauseBtn.setAttribute('aria-label', tr(paused ? T.play : T.pause));
   });
 
   if (reduce.matches || !gsap) {
-    // Show everything at once; the dots still let people look at each example.
     pauseBtn.hidden = true;
     return;
   }
@@ -204,116 +135,114 @@
   /* ---------- Animated path ---------- */
   gsap.defaults({ ease: 'expo.out' });
 
-  // The site scrolls itself: a slow ease down the page and back, while the scene holds.
-  function startPan(img) {
+  // A long page scrolls itself slowly while its scene holds; a one-screen page breathes a little.
+  function startPan(img, hold) {
     if (pan) pan.kill();
-    var go = function () {
-      var travel = Math.max(0, img.getBoundingClientRect().height - view.clientHeight);
-      pan = gsap.to(img, { y: -travel, duration: Math.min(9, 3 + travel / 220), ease: 'sine.inOut', delay: 0.8, yoyo: true, repeat: 1, repeatDelay: 0.6 });
+    var run = function () {
+      var travel = Math.min(700, Math.max(0, img.getBoundingClientRect().height - view.clientHeight));
+      pan = travel > 40
+        ? gsap.to(img, { y: -travel, duration: hold - 1.2, ease: 'sine.inOut', delay: 1.4 })
+        : gsap.fromTo(img, { scale: 1 }, { scale: 1.035, transformOrigin: '50% 0%', duration: hold + 1, ease: 'sine.inOut' });
       if (paused) pan.pause();
     };
-    if (img.complete) go(); else img.addEventListener('load', go, { once: true });
+    if (img.complete) run(); else img.addEventListener('load', run, { once: true });
   }
 
-  // Bottom-anchored chat: add a node and slide older messages up (FLIP), new one rises in.
+  // Bottom-anchored chat: add a message and slide the older ones up (FLIP); the new one rises in.
   function reveal(node) {
     var before = list.getBoundingClientRect().top;
-    if (node === typing) node.hidden = false;
-    else if (node.parentNode !== list) list.insertBefore(node, typing);
-    else node.classList.remove('is-pending');
+    node.classList.remove('is-pending');
     var shift = before - list.getBoundingClientRect().top;
     if (shift) gsap.fromTo(list, { y: shift }, { y: 0, duration: 0.32 });
-    if (node !== typing) {
-      var out = node.classList.contains('msg-out');
-      gsap.fromTo(node, { opacity: 0, y: 10, scale: 0.96, transformOrigin: out ? '100% 100%' : node.classList.contains('wa-agent') || node.classList.contains('chat-day') ? '50% 50%' : '0% 100%' },
-        { opacity: 1, y: 0, scale: 1, duration: 0.34, clearProps: 'transform,opacity' });
-    }
+    var out = node.classList.contains('msg-out');
+    gsap.fromTo(node, { opacity: 0, y: 10, scale: 0.96, transformOrigin: out ? '100% 100%' : node.classList.contains('wa-agent') ? '50% 50%' : '0% 100%' },
+      { opacity: 1, y: 0, scale: 1, duration: 0.34, clearProps: 'transform,opacity' });
   }
 
-  // Scene 1: the PromptKaro story, message by message.
-  function storyTimeline(t) {
-    storySteps.forEach(function (st) { st.hidden = false; st.classList.add('is-pending'); });
-    var at = 0.5;
-    storySteps.forEach(function (st, i) {
-      if (st.hasAttribute('data-typing')) {
-        t.call(function () { status.textContent = tr(T.typing); reveal(typing); }, null, at);
-        at += 1.0;
-        t.call(function () { typing.hidden = true; reveal(st); status.textContent = tr(T.online); }, null, at);
+  // The agent at work: customer message, agent step (spinner, then a tick), typing, reply.
+  function chatTimeline(t, at) {
+    steps.forEach(function (st) {
+      if (st.hasAttribute('data-work')) {
+        t.call(function () { st.classList.add('is-working'); reveal(st); }, null, at);
+        at += 0.9;
+        t.call(function () { st.classList.remove('is-working'); }, null, at);
+        at += 0.35;
+      } else if (st.hasAttribute('data-typing')) {
+        t.call(function () { st.classList.add('is-typing'); reveal(st); status.textContent = tr(T.typing); }, null, at);
+        at += 0.9;
+        t.call(function () { st.classList.remove('is-typing'); status.textContent = tr(T.agent); }, null, at);
+        at += 1.4;
       } else {
         t.call(function () { reveal(st); }, null, at);
-      }
-      at += i === 0 ? 0.9 : 1.0;
-    });
-    return at;
-  }
-
-  // A business scene: customer message, agent step (spinner, then a tick), typing, reply.
-  function chatTimeline(t, s, at) {
-    s.chat.msgs.forEach(function (m) {
-      var node = msgNode(m);
-      if (m.step) {
-        node.classList.add('is-working');
-        t.call(function () { reveal(node); }, null, at);
-        at += 0.9;
-        t.call(function () { node.classList.remove('is-working'); }, null, at);
-        at += 0.3;
-      } else if (m.in) {
-        node.classList.add('is-typing');
-        t.call(function () { reveal(node); status.textContent = tr(T.typing); }, null, at);
-        at += 0.9;
-        t.call(function () { node.classList.remove('is-typing'); status.textContent = tr(s.chat.status || T.agent); }, null, at);
-        at += 1.2;
-      } else {
-        t.call(function () { reveal(node); }, null, at);
         at += 1.0;
       }
     });
     return at;
   }
+
+  // Width the device takes in each mode (CSS holds the resting values; this is for the morph).
+  function widthFor(mode) {
+    var full = device.parentNode.clientWidth;
+    return mode === 'phone' ? Math.min(parseFloat(getComputedStyle(device).getPropertyValue('--phone-w')) || 320, full) : full;
+  }
+
+  var HOLD = 4.2;
 
   function go(next) {
     clearTimeout(timer);
     if (tl) tl.kill();
-    var s = SCENES[next];
+    var s = SCENES[next], prev = SCENES[current];
     var first = !started;
     started = true;
     current = next;
     var t = gsap.timeline({ paused: paused });
     tl = t;
+    var at = 0;
 
     if (!first) {
-      // 1. The next website opens as a circle growing from the lower left of the screen.
-      var old = view.querySelector('.stage-shot');
-      var img = shotFor(s);
-      var cx = '20%', cy = '85%';
       t.call(function () {
-        img.style.clipPath = 'circle(0% at ' + cx + ' ' + cy + ')';
-        view.appendChild(img);
-        setFrame(s);
-      }, null, 0.45);
-      t.to(img, { clipPath: 'circle(150% at ' + cx + ' ' + cy + ')', duration: 1.1, ease: 'power3.inOut' }, 0.5);
-      if (old) {
-        t.to(old, { scale: 0.94, opacity: 0.4, filter: 'blur(3px)', transformOrigin: '50% 0%', duration: 1.0, ease: 'power2.inOut' }, 0.5);
-        t.call(function () { old.remove(); img.style.clipPath = ''; startPan(img); }, null, 1.65);
+        announce(next); setFrame(s);
+        if (prev.mode !== s.mode && pan) pan.kill();
+        // The agent's chat starts empty every time it comes round.
+        if (s.mode === 'phone') { steps.forEach(function (st) { st.classList.add('is-pending'); }); gsap.set(list, { clearProps: 'transform' }); status.textContent = tr(T.agent); }
+      }, null, 0);
+      if (prev.mode !== s.mode) {
+        // The window folds into a phone (or opens back out): content out, frame morphs, content in.
+        var from = prev.mode === 'phone' ? phone : browser;
+        var to = s.mode === 'phone' ? phone : browser;
+        if (s.url) t.call(function () { if (pan) pan.kill(); view.textContent = ''; view.appendChild(shotFor(s)); }, null, 0.3);
+        // The browser keeps the slot's full width while the frame closes or opens around it.
+        var full = widthFor('browser');
+        t.call(function () { gsap.set(browser, { width: full, left: '50%', xPercent: -50 }); }, null, 0);
+        t.to(from, { autoAlpha: 0, filter: 'blur(4px)', duration: 0.35, ease: 'power2.in' }, 0.05);
+        t.fromTo(device, { width: widthFor(prev.mode) }, { width: widthFor(s.mode), borderRadius: s.mode === 'phone' ? 24 : 16, duration: 0.8, ease: 'power3.inOut' }, 0.1);
+        t.fromTo(to, { autoAlpha: 0, filter: 'blur(4px)' }, { autoAlpha: 1, filter: 'blur(0px)', duration: 0.5, ease: 'power2.out' }, 0.35);
+        t.call(function () {
+          device.dataset.mode = s.mode;
+          gsap.set([browser, phone, device], { clearProps: 'all' });
+        }, null, 0.95);
+        at = 0.95;
+      } else {
+        // Browser to browser: the new page settles in from a soft blur over the old one.
+        var old = view.querySelector('.stage-shot');
+        var img = shotFor(s);
+        t.call(function () { if (pan) pan.pause(); view.appendChild(img); }, null, 0.05);
+        t.fromTo(img, { opacity: 0, scale: 1.04, filter: 'blur(8px)' }, { opacity: 1, scale: 1, filter: 'blur(0px)', duration: 0.8, ease: 'power2.out' }, 0.1);
+        if (old) t.to(old, { opacity: 0, scale: 0.98, duration: 0.6, ease: 'power2.inOut' }, 0.1);
+        t.call(function () { if (old) old.remove(); gsap.set(img, { clearProps: 'filter,scale,opacity,transform' }); }, null, 0.95);
+        at = 0.95;
       }
-      t.fromTo(url, { opacity: 0, y: -6 }, { opacity: 1, y: 0, duration: 0.4 }, 0.55);
-
-      // 2. The phone switches to this business: old messages lift away, the header changes.
-      t.to(list.children, { opacity: 0, y: -16, duration: 0.3, stagger: 0.02, ease: 'power2.in' }, 0.2);
-      t.call(function () {
-        clearSceneMessages();
-        storySteps.forEach(function (st) { st.hidden = true; });
-        gsap.set(list.children, { clearProps: 'opacity,transform' });
-        typing.hidden = true;
-        setHead(s);
-      }, null, 0.6);
-      t.fromTo([chatName, chatAvatar, status], { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.05 }, 0.62);
-    } else {
-      startPan(view.querySelector('.stage-shot'));
+      t.fromTo([url, kind], { opacity: 0, y: -6 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.06 }, 0.15);
     }
 
-    var end = s.story ? storyTimeline(t) : chatTimeline(t, s, first ? 0.4 : 1.4);
-    t.call(function () { tl = null; queueNext(2600); }, null, end);
+    var end;
+    if (s.mode === 'phone') {
+      end = chatTimeline(t, at + 0.3) + 1.2;
+    } else {
+      t.call(function () { startPan(view.querySelector('.stage-shot:last-child'), HOLD); }, null, at);
+      end = at + HOLD;
+    }
+    t.call(function () { tl = null; queueNext(0); }, null, end);
   }
 
   function queueNext(ms) {
@@ -328,7 +257,7 @@
       onScreen = entries[0].isIntersecting;
       if (!onScreen) { clearTimeout(timer); if (tl) tl.pause(); if (pan) pan.pause(); return; }
       if (paused) return;
-      if (!started) { storySteps.forEach(function (st) { st.classList.add('is-pending'); }); setTimeout(function () { go(0); }, 350); }
+      if (!started) setTimeout(function () { go(0); }, 350);
       else if (tl) { tl.resume(); if (pan) pan.resume(); }
       else queueNext(1500);
     }, { threshold: 0.35 }).observe(stage);

@@ -53,13 +53,13 @@
 .js .hero-lead,
 .js .hero-actions,
 .js .hero-note,
-.js .hero-chat {
+.js .stage-slot {
   animation: rise var(--t-enter) var(--ease-out) both;
 }
 .js .hero-lead    { animation-delay: 70ms; }
 .js .hero-actions { animation-delay: 140ms; }
 .js .hero-note    { animation-delay: 200ms; }
-.js .hero-chat    { animation-delay: 120ms; animation-duration: 700ms; }
+.js .stage-slot   { animation-delay: 120ms; animation-duration: 700ms; }
 @keyframes rise { from { opacity: 0; transform: translateY(16px); } }
 
 /* ---------- Chat: typing dots move only while someone is "typing" ---------- */
@@ -100,7 +100,7 @@
 
 /* ---------- Reduced motion: keep fades that explain, drop all travel ---------- */
 @media (prefers-reduced-motion: reduce) {
-  .js .hero-title, .js .hero-lead, .js .hero-actions, .js .hero-note, .js .hero-chat { animation-name: fade; animation-duration: 240ms; }
+  .js .hero-title, .js .hero-lead, .js .hero-actions, .js .hero-note, .js .stage-slot { animation-name: fade; animation-duration: 240ms; }
   .btn:active, .tabs [role="tab"]:active, .lang-toggle:active, .chat-replay:active, .dock:active { transform: none; }
   .msg-typing span { animation: none; opacity: 0.6; }
   .faq-list details[open] p { animation-name: fade; }
