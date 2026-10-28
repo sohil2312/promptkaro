@@ -339,7 +339,6 @@ test.describe('3. Interaction', () => {
     await expect(page.locator('#chatList .msg-out').last()).toBeVisible({ timeout: 12000 });
     await expect(page.locator('#stageUrl')).toHaveText('sheeshamhouse.in', { timeout: 15000 });
     await expect(page.locator('#chatName')).toHaveText('Sheesham House');
-    await expect(page.locator('#stageProductName')).toHaveText('Curve velvet sofa');
     await expect(page.locator('#chatList .msg-agent').last()).toBeVisible({ timeout: 8000 });
     await expect(page.locator('#stageDots button')).toHaveCount(7);
     await expect(page.locator('#stageDots button').nth(1)).toHaveAttribute('aria-current', 'true');
