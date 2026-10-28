@@ -1,90 +1,99 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Aangan Homes</title><style>@font-face{font-family:'Syne';src:url(fonts/syne.woff2) format('woff2');font-weight:100 900;font-display:block}
-@font-face{font-family:'Fig';src:url(fonts/figtree.woff2) format('woff2');font-weight:100 900;font-display:block}:root{--display:'Syne';--body:'Fig';--ink:#1D2410;--muted:#5E664D;--bg:#F5F4EE;--soft:#E7EAD8;--panel:radial-gradient(90% 80% at 50% 40%, #FFFFFF, #DDE3C6);--card:#FFFFFF;--accent:#3F4A1E;--accent-ink:#3F4A1E;--on-accent:#F5F4EE;--line:#E2E3D6;--r-sm:4px;--r-md:6px;--r-lg:10px;--r-btn:6px;--track:-0.035em;--h-weight:700;--card-shadow:0 1px 2px rgba(29,36,16,.06)}
-*{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-font-smoothing:antialiased}
-body{font-family:var(--body);color:var(--ink);background:var(--bg);line-height:1.55;font-size:17px}
-img{display:block;max-width:100%}
-a{color:inherit;text-decoration:none}
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Aangan Homes</title><style>@font-face{font-family:'Syne';src:url(fonts/syne.woff2) format('woff2');font-weight:100 900;font-display:block}@font-face{font-family:'Fig';src:url(fonts/figtree.woff2) format('woff2');font-weight:100 900;font-display:block}*{box-sizing:border-box;margin:0;padding:0}html{-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}a{color:inherit;text-decoration:none}ul,ol{list-style:none}
 .wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:48px;padding:0 22px;font-weight:600;font-size:15px;white-space:nowrap}
+.wa{background:#008069;color:#fff}
+@media (max-width:700px){.wrap{padding:0 18px}.hide-m{display:none!important}nav{gap:12px!important}nav .brand{white-space:nowrap;font-size:18px!important}nav .btn{font-size:14px!important;padding:0 12px!important}nav .btn svg{width:16px}.offer{font-size:12px!important}}
+
+body{font-family:'Fig';color:#1D2410;background:#F5F4EE;font-size:16px;line-height:1.55}
 nav{display:flex;align-items:center;gap:28px;height:76px}
-.brand{font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
-.brand i{width:30px;height:30px;border-radius:var(--r-sm);background:var(--accent);display:inline-block}
-.links{display:flex;gap:26px;margin-left:auto;font-size:15px;color:var(--muted)}
-.btn{display:inline-flex;align-items:center;gap:8px;height:46px;padding:0 20px;border-radius:var(--r-btn);font-weight:600;font-size:15px;white-space:nowrap}
-.btn-wa{background:#008069;color:#fff}
-.btn-alt{box-shadow:inset 0 0 0 1.5px currentColor}
-.hero{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center;padding:36px 0 72px}
-.eyebrow-chip{display:inline-flex;gap:8px;align-items:center;padding:6px 12px;border-radius:999px;background:var(--soft);color:var(--accent-ink);font-size:14px;font-weight:600}
-h1{font-family:var(--display);font-size:62px;line-height:1.02;letter-spacing:var(--track);margin:18px 0 18px;font-weight:var(--h-weight)}
-.lead{font-size:20px;color:var(--muted);max-width:30ch}
-.ctas{display:flex;gap:14px;margin-top:28px}
-.hero-art{position:relative;border-radius:var(--r-lg);background:var(--panel);aspect-ratio:1/0.86;display:grid;place-items:center;overflow:hidden}
-.hero-art img{width:84%;filter:drop-shadow(0 30px 40px rgba(0,0,0,.18))}
-.tag{position:absolute;padding:10px 14px;border-radius:14px;background:#fff;box-shadow:0 10px 30px -12px rgba(0,0,0,.3);font-size:14px;line-height:1.3}
-.tag b{display:block;font-size:16px}
-.strip{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:0 0 72px}
-.strip div{padding:22px;border-radius:var(--r-md);background:var(--soft)}
-.strip b{display:block;font-family:var(--display);font-size:19px;margin-bottom:4px}
-.strip span{color:var(--muted);font-size:15px}
-section h2{font-family:var(--display);font-size:40px;line-height:1.08;letter-spacing:var(--track);font-weight:var(--h-weight);margin-bottom:10px}
-.sub{color:var(--muted);margin-bottom:28px}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;padding-bottom:80px}
-.card{border-radius:var(--r-md);background:var(--card);padding:14px;box-shadow:var(--card-shadow)}
-.card .ph{aspect-ratio:1;border-radius:calc(var(--r-md) - 6px);background:var(--panel);display:grid;place-items:center;margin-bottom:12px}
-.card .ph img{width:78%}
-.card b{display:block;font-weight:600}
-.card .price{font-weight:700;margin-top:2px}
-.card small{color:var(--muted)}
-.card .mini{margin-top:10px;display:flex;justify-content:space-between;align-items:center}
-.card .mini span{font-size:13px;color:#008069;font-weight:600}
-.chips{display:flex;gap:10px;margin-bottom:22px}
-.chips span{padding:8px 14px;border-radius:999px;background:var(--soft);font-size:14px;font-weight:600}
-.chips span:first-child{background:var(--ink);color:var(--bg)}
-.split{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;padding-bottom:80px}
-.panel{border-radius:var(--r-lg);background:var(--panel);padding:36px}
-.rows{display:grid;gap:0}
-.rows div{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line)}
-.rows div b{font-weight:600}
-.band{border-radius:var(--r-lg);background:var(--accent);color:var(--on-accent);padding:44px;display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:56px}
-.band h2{color:inherit;margin:0;font-size:36px}
-.band .btn-wa{background:#fff;color:#0b5c4b}
-footer{padding:28px 0 40px;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;border-top:1px solid var(--line)}
-.grid .card:nth-child(4n+2) .ph img{transform:scaleX(-1) rotate(-5deg) scale(.92)}
-.grid .card:nth-child(4n+3) .ph img{transform:rotate(7deg) scale(1.06)}
-.grid .card:nth-child(4n+4) .ph img{transform:scaleX(-1) rotate(4deg) scale(.86)}
-.grid .card:nth-child(4n+2) .ph{filter:hue-rotate(-14deg) saturate(1.1)}
-.grid .card:nth-child(4n+3) .ph{filter:hue-rotate(12deg)}
-.grid .card:nth-child(4n+4) .ph{filter:saturate(.85) brightness(1.03)}
+.brand{font-family:'Syne';font-weight:700;font-size:21px;display:flex;align-items:center;gap:10px}
+.brand i{width:26px;height:26px;background:#3F4A1E;clip-path:polygon(50% 0,100% 40%,100% 100%,0 100%,0 40%)}
+.links{display:flex;gap:26px;margin-left:auto;color:#5E664D;font-size:15px}
+nav .btn{border-radius:6px;height:44px}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:0;background:#E7EAD8;border-radius:10px;overflow:hidden;min-height:520px}
+.hero-copy{padding:56px 48px;display:flex;flex-direction:column}
+.chip{align-self:flex-start;font-size:13px;font-weight:600;border:1px solid #3F4A1E;border-radius:4px;padding:4px 10px}
+h1{font-family:'Syne';font-weight:700;font-size:56px;line-height:1.02;letter-spacing:-.04em;margin:20px 0 16px}
+.hero p{color:#5E664D;font-size:18px;max-width:34ch}
+.hero .ctas{display:flex;gap:12px;margin-top:auto;padding-top:28px}
+.hero .btn{border-radius:6px}.ghost{box-shadow:inset 0 0 0 1.5px #1D2410}
+.hero-art{background:linear-gradient(180deg,#CFE0EA 0%,#E9EFE2 70%);position:relative;display:grid;place-items:end center}
+.hero-art img{width:88%;margin-bottom:-10px}
+.price-tag{position:absolute;left:24px;top:24px;background:#1D2410;color:#F5F4EE;border-radius:6px;padding:12px 16px;font-size:13px;line-height:1.3}
+.price-tag b{display:block;font-family:'Syne';font-size:22px}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);margin:18px 0 72px;background:#fff;border-radius:10px}
+.facts div{padding:22px 24px}.facts div+div{box-shadow:inset 1px 0 0 #E2E3D6}
+.facts small{color:#5E664D;font-size:13px}.facts b{display:block;font-family:'Syne';font-size:20px;margin-top:2px}
+h2{font-family:'Syne';font-weight:700;font-size:40px;letter-spacing:-.04em;line-height:1.05;margin-bottom:8px}
+.sub{color:#5E664D;margin-bottom:24px}
+.tabs{display:flex;gap:8px;margin-bottom:18px}
+.tabs span{border-radius:4px;padding:8px 14px;font-size:14px;font-weight:600;background:#E7EAD8}
+.tabs span.on{background:#1D2410;color:#F5F4EE}
+.plan-wrap{display:grid;grid-template-columns:1.3fr .7fr;gap:18px;margin-bottom:72px}
+.plan{background:#fff;border-radius:10px;padding:28px}
+.fp{display:grid;grid-template-columns:1.2fr 1fr 1fr;grid-template-rows:150px 120px 110px;gap:0;border:4px solid #1D2410;background:#FBFBF7}
+.fp div{border:1.5px solid #1D2410;margin:-.75px;display:flex;flex-direction:column;justify-content:center;align-items:center;font-size:13px;color:#5E664D;text-align:center}
+.fp div b{color:#1D2410;font-size:14px;font-weight:600}
+.fp .living{grid-row:1/3;background:#F2F4EA}.fp .bal{background:#E9F1F6}.fp .kit{background:#FBF4E8}
+.fp .b2{grid-column:2/4}
+.plan-note{display:flex;justify-content:space-between;margin-top:14px;font-size:14px;color:#5E664D}
+.units{display:grid;gap:10px;align-content:start}
+.unit{background:#fff;border-radius:10px;padding:18px 20px;display:grid;grid-template-columns:1fr auto;gap:2px 12px}
+.unit b{font-family:'Syne';font-size:18px}.unit strong{font-family:'Syne';font-size:18px}
+.unit span{color:#5E664D;font-size:14px}.unit em{font-style:normal;font-size:13px;font-weight:600;color:#15803D;text-align:right}
+.unit em.low{color:#B45309}
+.unit.on{box-shadow:inset 0 0 0 2px #1D2410}
+.amen{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid #D6D8C8;margin-bottom:72px}
+.amen div{padding:22px 20px 22px 0}
+.amen b{display:block;font-family:'Syne';font-size:18px;margin-bottom:4px}
+.amen span{color:#5E664D;font-size:15px}
+.visit{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;background:#3F4A1E;color:#F5F4EE;border-radius:10px;padding:40px;margin-bottom:56px}
+.visit h2{color:#F5F4EE;margin-bottom:6px;font-size:34px}
+.visit p{color:#D6DBC0}
+.days{display:flex;gap:8px;margin-top:18px}
+.days span{border-radius:6px;background:rgba(245,244,238,.12);padding:8px 12px;font-size:14px;text-align:center;line-height:1.2}
+.days span.on{background:#F5F4EE;color:#1D2410}
+.days b{display:block;font-size:17px}
+.visit .wa{border-radius:6px}
+footer{padding:22px 0 36px;color:#5E664D;font-size:14px;display:flex;justify-content:space-between;border-top:1px solid #D6D8C8}
 @media (max-width:700px){
-  body{font-size:16px}
-  .wrap{padding:0 18px}
-  nav{height:64px}
-  .links{display:none}
-  nav .btn{margin-left:auto;height:40px;padding:0 14px}
-  .hero{grid-template-columns:1fr;gap:24px;padding:12px 0 40px}
-  h1{font-size:40px}
-  .lead{font-size:17px}
-  .ctas{flex-wrap:wrap}
-  .strip{grid-template-columns:1fr;padding-bottom:44px}
-  section h2{font-size:30px}
-  .grid{grid-template-columns:repeat(2,1fr);gap:12px;padding-bottom:48px}
-  .split{grid-template-columns:1fr;padding-bottom:48px}
-  .panel{padding:22px}
-  .band{flex-direction:column;align-items:flex-start;padding:28px}
-  .band h2{font-size:28px}
-  footer{flex-direction:column;gap:6px}
+ nav{height:62px}.links{display:none}nav .btn{margin-left:auto;height:40px;padding:0 14px}
+ .hero{grid-template-columns:1fr;min-height:0}.hero-copy{padding:28px 22px}h1{font-size:38px}.hero p{font-size:17px}.hero .ctas{flex-wrap:wrap}
+ .hero-art{height:300px}
+ .facts{grid-template-columns:1fr 1fr;margin-bottom:44px}.facts div:nth-child(3){box-shadow:inset 0 1px 0 #E2E3D6}.facts div:nth-child(4){box-shadow:inset 1px 1px 0 #E2E3D6}
+ h2{font-size:30px}.plan-wrap{grid-template-columns:1fr;margin-bottom:44px}.plan{padding:16px}
+ .fp{grid-template-rows:120px 100px 90px}.fp div{font-size:11px}.fp div b{font-size:12px}
+ .amen{grid-template-columns:1fr 1fr;margin-bottom:44px}
+ .visit{grid-template-columns:1fr;padding:26px}.visit h2{font-size:28px}.days{flex-wrap:wrap}
+ footer{flex-direction:column;gap:4px}
 }
-.hero-art img{width:80%}.card .ph img{width:86%}</style></head>
-<body class=""><div class="wrap">
-<nav><span class="brand"><i></i>Aangan Homes</span><span class="links"><a>Homes</a><a>Amenities</a><a>Location</a><a>Visit</a></span><a class="btn btn-wa"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.13c-.25.69-1.44 1.32-2 1.41-.51.08-1.16.11-1.87-.12-.43-.14-.98-.32-1.69-.62-2.98-1.29-4.93-4.29-5.08-4.49-.15-.2-1.21-1.61-1.21-3.07s.77-2.18 1.04-2.48c.27-.3.6-.37.8-.37h.57c.18.01.43-.07.67.51.25.6.84 2.06.92 2.21.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.45.52-.15.15-.3.31-.13.6.17.3.77 1.27 1.65 2.06 1.13 1.01 2.09 1.32 2.39 1.47.3.15.47.13.64-.08.18-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.74.82 2.04.97.3.15.5.22.57.35.08.12.08.72-.17 1.41Z"/></svg>Book a site visit</a></nav>
-<header class="hero"><div class="hero-copy"><span class="eyebrow-chip">Possession from March</span><h1>2 and 3 BHK homes with room to breathe.</h1><p class="lead">Seven floors, a garden on the ground, sunlight on every side. Book a visit on WhatsApp.</p>
-<div class="ctas"><a class="btn btn-wa"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.13c-.25.69-1.44 1.32-2 1.41-.51.08-1.16.11-1.87-.12-.43-.14-.98-.32-1.69-.62-2.98-1.29-4.93-4.29-5.08-4.49-.15-.2-1.21-1.61-1.21-3.07s.77-2.18 1.04-2.48c.27-.3.6-.37.8-.37h.57c.18.01.43-.07.67.51.25.6.84 2.06.92 2.21.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.45.52-.15.15-.3.31-.13.6.17.3.77 1.27 1.65 2.06 1.13 1.01 2.09 1.32 2.39 1.47.3.15.47.13.64-.08.18-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.74.82 2.04.97.3.15.5.22.57.35.08.12.08.72-.17 1.41Z"/></svg>Book a site visit</a><a class="btn btn-alt">See floor plans</a></div></div>
-<div class="hero-art"><img src="img/building.webp" alt=""><span class="tag" style="right:5%;bottom:10%"><b>From ₹28 lakh</b>2 BHK, 1,050 sq ft</span></div></header>
-<div class="strip"><div><b>Garden and play area</b><span>On the ground floor.</span></div><div><b>Lift and power backup</b><span>For every tower.</span></div><div><b>Loan help</b><span>We work with major banks.</span></div></div>
-<section><h2>Available homes</h2><p class="sub">Prices are all-inclusive. Floor plans shared on WhatsApp.</p><div class="chips"><span>All</span><span>2 BHK</span><span>3 BHK</span><span>Shops</span></div><div class="grid"><div class="card"><div class="ph"><img src="img/building.webp" alt=""></div><b>2 BHK, east facing</b><small>1,050 sq ft, 3rd floor</small><div class="mini"><span class="price">₹28 lakh</span><span>Plan</span></div></div><div class="card"><div class="ph"><img src="img/building.webp" alt=""></div><b>2 BHK, garden view</b><small>1,120 sq ft, 1st floor</small><div class="mini"><span class="price">₹30 lakh</span><span>Plan</span></div></div><div class="card"><div class="ph"><img src="img/building.webp" alt=""></div><b>3 BHK, corner</b><small>1,480 sq ft, 5th floor</small><div class="mini"><span class="price">₹41 lakh</span><span>Plan</span></div></div><div class="card"><div class="ph"><img src="img/building.webp" alt=""></div><b>Shop, ground floor</b><small>320 sq ft, road facing</small><div class="mini"><span class="price">₹22 lakh</span><span>Plan</span></div></div></div></section>
-<section class="split"><div><h2>Built to last, priced to make sense</h2><p class="sub" style="max-width:44ch">RCC frame, branded fittings and a clear title. Visit the site any day; we show you the work in progress.</p></div>
-<div class="panel"><div class="rows"><div><span>Possession</span><b>March</b></div><div><span>Floors</span><b>Ground plus 7</b></div><div><span>Parking</span><b>One per home</b></div><div><span>Site visits</span><b>Every day, 9 am to 7 pm</b></div></div></div></section>
-<div class="band"><h2>See the site this week.</h2><a class="btn btn-wa"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.13c-.25.69-1.44 1.32-2 1.41-.51.08-1.16.11-1.87-.12-.43-.14-.98-.32-1.69-.62-2.98-1.29-4.93-4.29-5.08-4.49-.15-.2-1.21-1.61-1.21-3.07s.77-2.18 1.04-2.48c.27-.3.6-.37.8-.37h.57c.18.01.43-.07.67.51.25.6.84 2.06.92 2.21.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.45.52-.15.15-.3.31-.13.6.17.3.77 1.27 1.65 2.06 1.13 1.01 2.09 1.32 2.39 1.47.3.15.47.13.64-.08.18-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.74.82 2.04.97.3.15.5.22.57.35.08.12.08.72-.17 1.41Z"/></svg>Book a visit on WhatsApp</a></div>
+</style></head><body class=""><div class="wrap">
+<nav><span class="brand"><i></i>Aangan Homes</span><span class="links"><a>Floor plans</a><a>Amenities</a><a>Location</a><a>Visit</a></span><a class="btn wa"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.13c-.25.69-1.44 1.32-2 1.41-.51.08-1.16.11-1.87-.12-.43-.14-.98-.32-1.69-.62-2.98-1.29-4.93-4.29-5.08-4.49-.15-.2-1.21-1.61-1.21-3.07s.77-2.18 1.04-2.48c.27-.3.6-.37.8-.37h.57c.18.01.43-.07.67.51.25.6.84 2.06.92 2.21.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.45.52-.15.15-.3.31-.13.6.17.3.77 1.27 1.65 2.06 1.13 1.01 2.09 1.32 2.39 1.47.3.15.47.13.64-.08.18-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.74.82 2.04.97.3.15.5.22.57.35.08.12.08.72-.17 1.41Z"/></svg>Book a site visit</a></nav>
+<header class="hero">
+ <div class="hero-copy"><span class="chip">Possession from March</span><h1>2 and 3 BHK homes with room to breathe.</h1>
+ <p>Seven floors, a garden on the ground and sunlight on every side. Walk through the site any day of the week.</p>
+ <div class="ctas"><a class="btn wa"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.13c-.25.69-1.44 1.32-2 1.41-.51.08-1.16.11-1.87-.12-.43-.14-.98-.32-1.69-.62-2.98-1.29-4.93-4.29-5.08-4.49-.15-.2-1.21-1.61-1.21-3.07s.77-2.18 1.04-2.48c.27-.3.6-.37.8-.37h.57c.18.01.43-.07.67.51.25.6.84 2.06.92 2.21.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.45.52-.15.15-.3.31-.13.6.17.3.77 1.27 1.65 2.06 1.13 1.01 2.09 1.32 2.39 1.47.3.15.47.13.64-.08.18-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.74.82 2.04.97.3.15.5.22.57.35.08.12.08.72-.17 1.41Z"/></svg>Book a site visit</a><a class="btn ghost">See floor plans</a></div></div>
+ <div class="hero-art"><div class="price-tag">2 BHK from<b>₹28 lakh</b>All-inclusive</div><img src="img/building.webp" alt=""></div>
+</header>
+<div class="facts"><div><small>Homes</small><b>56 in 2 towers</b></div><div><small>Sizes</small><b>1,050 to 1,480 sq ft</b></div><div><small>Floors</small><b>Ground plus 7</b></div><div><small>Booked so far</small><b>38 of 56</b></div></div>
+<h2>Floor plans</h2><p class="sub">Every home has cross ventilation and a balcony facing the garden.</p>
+<div class="tabs"><span class="on">2 BHK, 1,050 sq ft</span><span>2 BHK, 1,120 sq ft</span><span>3 BHK, 1,480 sq ft</span></div>
+<div class="plan-wrap">
+ <div class="plan"><div class="fp">
+ <div class="living"><b>Living and dining</b>14 × 18 ft</div><div><b>Bedroom 1</b>12 × 12 ft</div><div><b>Bath</b>5 × 8 ft</div>
+ <div class="kit"><b>Kitchen</b>8 × 10 ft</div><div><b>Bath</b>5 × 8 ft</div>
+ <div class="bal"><b>Balcony</b>Garden facing</div><div class="b2"><b>Bedroom 2</b>11 × 12 ft</div></div>
+ <div class="plan-note"><span>Carpet area 760 sq ft</span><span>East facing</span></div></div>
+ <div class="units">
+ <div class="unit on"><b>2 BHK, east</b><strong>₹28 lakh</strong><span>1,050 sq ft, floors 1 to 7</span><em>9 left</em></div>
+ <div class="unit"><b>2 BHK, garden view</b><strong>₹30 lakh</strong><span>1,120 sq ft, floors 1 to 4</span><em class="low">3 left</em></div>
+ <div class="unit"><b>3 BHK, corner</b><strong>₹41 lakh</strong><span>1,480 sq ft, floors 3 to 7</span><em>6 left</em></div>
+ <div class="unit"><b>Shop, ground floor</b><strong>₹22 lakh</strong><span>320 sq ft, road facing</span><em class="low">2 left</em></div></div>
+</div>
+<div class="amen"><div><b>Garden</b><span>Play area and walking track</span></div><div><b>Lift and backup</b><span>In both towers</span></div><div><b>Parking</b><span>One covered spot per home</span></div><div><b>Loan help</b><span>We work with major banks</span></div></div>
+<div class="visit"><div><h2>See the site this week</h2><p>Pick a day. We meet you at the gate and show you a finished sample flat.</p>
+ <div class="days"><span>Thu<b>14</b></span><span class="on">Fri<b>15</b></span><span>Sat<b>16</b></span><span>Sun<b>17</b></span></div></div>
+ <a class="btn wa"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.13c-.25.69-1.44 1.32-2 1.41-.51.08-1.16.11-1.87-.12-.43-.14-.98-.32-1.69-.62-2.98-1.29-4.93-4.29-5.08-4.49-.15-.2-1.21-1.61-1.21-3.07s.77-2.18 1.04-2.48c.27-.3.6-.37.8-.37h.57c.18.01.43-.07.67.51.25.6.84 2.06.92 2.21.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.45.52-.15.15-.3.31-.13.6.17.3.77 1.27 1.65 2.06 1.13 1.01 2.09 1.32 2.39 1.47.3.15.47.13.64-.08.18-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.74.82 2.04.97.3.15.5.22.57.35.08.12.08.72-.17 1.41Z"/></svg>Book Friday on WhatsApp</a></div>
 <footer><span>© 2026 Aangan Homes</span><span>Residential homes and shops</span></footer>
 </div></body></html>

@@ -41,6 +41,32 @@ test.describe('1. Layout', () => {
     });
   }
 
+  for (const width of [320, 360, 768]) {
+    test(`nothing spills past the screen at ${width}px, in English and Gujarati`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 900 });
+      for (const lang of ['en', 'gu']) {
+        await page.goto(PAGE_URL);
+        if (lang === 'gu') await page.locator('#langToggle').click();
+        const spill = await page.evaluate(() => [...document.querySelectorAll('main *')].filter((e) => {
+          const r = e.getBoundingClientRect();
+          if (!(r.width > 0 && (r.right > innerWidth + 1 || r.left < -1))) return false;
+          for (let a = e.parentElement; a && a !== document.body; a = a.parentElement) {
+            if (getComputedStyle(a).overflowX !== 'visible') return false; // inside a scroller on purpose
+          }
+          return true;
+        }).map((e) => e.className).slice(0, 5));
+        expect(spill, lang).toEqual([]);
+      }
+    });
+  }
+
+  test('contact details never break mid-word on tablets', async ({ page }) => {
+    await page.setViewportSize({ width: 768, height: 1000 });
+    await page.goto(PAGE_URL);
+    const narrow = await page.locator('.contact-list > div').evaluateAll((els) => els.filter((e) => e.getBoundingClientRect().width < 200).length);
+    expect(narrow).toBe(0);
+  });
+
   test('hero headline, sentence and primary action fit in 1280x800', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto(PAGE_URL);
@@ -499,6 +525,33 @@ test.describe('7. Content', () => {
     await expect(page.locator('.footer-base')).toContainText('© 2026 PromptKaro');
     await expect(page.locator('a[href="/privacy.html"]')).toHaveCount(1);
     await expect(page.locator('a[href="/terms.html"]')).toHaveCount(1);
+  });
+
+  test('a missing page shows the branded 404 with a way back', () => {
+    const notFound = read('404.html');
+    expect(notFound).toContain('href="/"');
+    expect(notFound).toContain('wa.me/919429051036');
+    expect(notFound).toContain('wordmark');
+  });
+
+  test('sample sites each have their own layout and never repeat a photo in a row', () => {
+    const keys = ['mobile', 'clinic', 'coaching', 'food', 'property'];
+    const pages = keys.map((k) => read(`tools/samples/${k}.html`));
+    const bodies = pages.map((h) => h.replace(/<style>[\s\S]*?<\/style>/, '').replace(/>[^<]*</g, '><'));
+    expect(new Set(bodies).size).toBe(keys.length); // different markup, not one template recoloured
+    for (const [i, h] of pages.entries()) {
+      const imgs = [...h.matchAll(/<img[^>]+src="([^"]+)"/g)].map((m) => m[1]);
+      const counts = imgs.reduce((c, src) => ({ ...c, [src]: (c[src] || 0) + 1 }), {});
+      expect(Math.max(...Object.values(counts)), keys[i]).toBeLessThanOrEqual(2);
+    }
+  });
+
+  test('previews use a phone-sized screenshot on phones', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(PAGE_URL);
+    const img = page.locator('#panel-mobile .site-view img');
+    await img.scrollIntoViewIfNeeded();
+    await expect.poll(() => img.evaluate((i) => i.currentSrc)).toContain('site-mobile-m.webp');
   });
 
   test('legal pages use the new system and load', async ({ page }) => {

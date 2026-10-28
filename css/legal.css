@@ -22,3 +22,7 @@
 .legal-footer .container { display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-5); }
 .legal-footer a { color: var(--ink-2); }
 
+
+.not-found { min-height: 60vh; }
+.not-found-actions { display: flex; flex-wrap: wrap; gap: var(--s-3); margin-top: var(--s-6); }
+.legal .not-found-actions a { color: var(--btn-fg); text-decoration: none; }
