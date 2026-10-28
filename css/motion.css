@@ -1,0 +1,259 @@
+/* PromptKaro — motion.css
+   One orchestrated moment (the hero chat), feedback on every control, nothing that loops forever.
+   Transform and opacity only. Content is visible without JS and under reduced motion. */
+
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --t-press: 140ms;
+  --t-ui: 200ms;
+  --t-enter: 520ms;
+}
+
+/* ---------- Feedback on controls ---------- */
+.btn {
+  transition: background-color var(--t-ui) ease, color var(--t-ui) ease,
+              box-shadow var(--t-ui) ease, transform var(--t-press) var(--ease-out);
+}
+.btn:active,
+.tabs [role="tab"]:active,
+.lang-toggle:active,
+.chat-replay:active,
+.dock:active { transform: scale(0.97); }
+
+.tabs [role="tab"],
+.lang-toggle,
+.chat-replay,
+.dock { transition: background-color var(--t-ui) ease, color var(--t-ui) ease, box-shadow var(--t-ui) ease, transform var(--t-press) var(--ease-out); }
+.lang-toggle span { transition: background-color var(--t-ui) ease, color var(--t-ui) ease, box-shadow var(--t-ui) ease; }
+
+.link-quiet,
+.header-nav a,
+.footer-links a { transition: color var(--t-ui) ease, text-decoration-color var(--t-ui) ease; }
+
+.site-header { transition: box-shadow var(--t-ui) ease; }
+
+.faq-list summary svg { transition: rotate var(--t-ui) var(--ease-out), color var(--t-ui) ease; }
+.faq-list details[open] p { animation: faq-in 240ms var(--ease-out); }
+@keyframes faq-in { from { opacity: 0; transform: translateY(-4px); } }
+
+/* Focus ring appears instantly: no transition on outline. */
+
+/* ---------- Wordmark cursor: blinks three times on load, then holds. Hover wakes it. ---------- */
+.wordmark .wordmark-cursor { animation: cursor-blink 1s steps(1, end) 0.6s 3; }
+@media (hover: hover) and (pointer: fine) {
+  .wordmark:hover .wordmark-cursor { animation: cursor-blink-hover 1s steps(1, end) 0s 2; }
+}
+@keyframes cursor-blink { 50% { opacity: 0; } }
+@keyframes cursor-blink-hover { 50% { opacity: 0; } }
+
+/* ---------- Page load: the hero arrives once, in order ---------- */
+.js .hero-title,
+.js .hero-lead,
+.js .hero-actions,
+.js .hero-note,
+.js .hero-chat {
+  animation: rise var(--t-enter) var(--ease-out) both;
+}
+.js .hero-lead    { animation-delay: 70ms; }
+.js .hero-actions { animation-delay: 140ms; }
+.js .hero-note    { animation-delay: 200ms; }
+.js .hero-chat    { animation-delay: 120ms; animation-duration: 700ms; }
+@keyframes rise { from { opacity: 0; transform: translateY(16px); } }
+
+/* ---------- Chat: typing dots move only while someone is "typing" ---------- */
+.msg-typing span { animation: typing 1.2s var(--ease-in-out) infinite; }
+.msg-typing span:nth-child(2) { animation-delay: 0.15s; }
+.msg-typing span:nth-child(3) { animation-delay: 0.3s; }
+.msg-typing[hidden] span { animation: none; }
+@keyframes typing { 0%, 60%, 100% { opacity: 0.35; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-3px); } }
+.js .chat-list [data-step].is-pending { display: none; }
+
+/* ---------- Mobile dock slides in from its own edge ---------- */
+.dock { transition: translate 360ms var(--ease-drawer), visibility 0s linear 360ms, transform var(--t-press) var(--ease-out); }
+.dock.is-shown { transition: translate 420ms var(--ease-drawer), visibility 0s, transform var(--t-press) var(--ease-out); }
+
+/* ---------- Scroll: the timeline fills as you read it (goal gradient) ---------- */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .timeline-step::after {
+      transform-origin: left center;
+      background: linear-gradient(var(--ink), var(--ink)) no-repeat 0 0 / 100% 100%, var(--ground-2);
+      animation: fill-x linear both;
+      animation-timeline: view();
+      animation-range: entry 60% cover 45%;
+    }
+    .plan, .timeline-step {
+      animation: settle linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+    .plan:nth-child(2) { animation-range: entry 4% entry 44%; }
+    .plan:nth-child(3) { animation-range: entry 8% entry 48%; }
+  }
+}
+@keyframes fill-x { from { background-size: 0% 100%, auto; } to { background-size: 100% 100%, auto; } }
+@keyframes settle { from { opacity: 0.35; transform: translateY(24px); } }
+@media (max-width: 719px) {
+  @keyframes fill-x { from { background-size: 100% 0%, auto; } to { background-size: 100% 100%, auto; } }
+}
+
+/* ---------- Reduced motion: keep fades that explain, drop all travel ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .js .hero-title, .js .hero-lead, .js .hero-actions, .js .hero-note, .js .hero-chat { animation-name: fade; animation-duration: 240ms; }
+  .btn:active, .tabs [role="tab"]:active, .lang-toggle:active, .chat-replay:active, .dock:active { transform: none; }
+  .msg-typing span { animation: none; opacity: 0.6; }
+  .faq-list details[open] p { animation-name: fade; }
+  .dock, .dock.is-shown { transition: opacity 200ms ease, visibility 0s; translate: 0 0; opacity: 0; }
+  .dock.is-shown { opacity: 1; }
+  .wordmark .wordmark-cursor, .wordmark:hover .wordmark-cursor { animation: none; }
+}
+@keyframes fade { from { opacity: 0; } }
+
+/* ---------- Sample cards: the site builds itself from the price list ----------
+   Transitions, not keyframes, so a tab switch mid-build retargets smoothly. */
+.js .sample-head { transition: clip-path 460ms var(--ease-in-out); }
+.js .sample-lead,
+.js .sample-note,
+.js .sample-btn { transition: opacity 280ms var(--ease-out), transform 280ms var(--ease-out); }
+.js .sample-rows li > span {
+  transition: color 220ms ease, background-color 220ms ease, filter 220ms ease;
+  border-radius: 6px;
+}
+.js .sample-status { transition: background-color 200ms ease; }
+.js .sample-status-label { transition: opacity 160ms ease; }
+
+.sample.is-building .sample-head:not(.is-in) { clip-path: inset(0 100% 0 0 round var(--r-2)); }
+.sample.is-building .sample-lead:not(.is-in),
+.sample.is-building .sample-note:not(.is-in) { opacity: 0; transform: translateY(6px); }
+.sample.is-building .sample-btn:not(.is-in) { opacity: 0; transform: scale(0.94); }
+.sample.is-building .sample-rows li:not(.is-in) > span {
+  color: transparent;
+  background-color: var(--ground-2);
+  filter: blur(1px);
+}
+/* Skeleton shimmer runs only while the card is building */
+.sample.is-building .sample-rows li:not(.is-in) > span {
+  background-image: linear-gradient(90deg, transparent 0, rgb(255 255 255 / 0.7) 50%, transparent 100%);
+  background-size: 200% 100%;
+  background-repeat: no-repeat;
+  animation: shimmer 900ms linear infinite;
+}
+@keyframes shimmer { from { background-position: 150% 0; } to { background-position: -50% 0; } }
+
+.sample-status[data-state="building"] .sample-status-icon::before { animation: spin 700ms linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.sample-status[data-state="ready"] .sample-status-icon { animation: pop 320ms var(--ease-out); }
+@keyframes pop { from { transform: scale(0.6); opacity: 0; } }
+
+/* Tactile: the card tilts toward the pointer (springy, set by JS) and squishes on press */
+.sample { transform-style: preserve-3d; will-change: transform; }
+.sample-shine {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 240ms ease;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 0%), rgb(255 255 255 / 0.35), transparent 55%);
+  mix-blend-mode: soft-light;
+}
+.sample.is-tilting .sample-shine { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sample.is-building .sample-rows li:not(.is-in) > span,
+  .sample-status[data-state="building"] .sample-status-icon::before { animation: none; }
+  .sample.is-building .sample-head:not(.is-in) { clip-path: none; }
+  .sample.is-building .sample-lead:not(.is-in),
+  .sample.is-building .sample-note:not(.is-in),
+  .sample.is-building .sample-btn:not(.is-in) { transform: none; }
+}
+
+/* ---------- Product cards: each fragment fills itself in once, when it comes into view ---------- */
+.js .product [data-step],
+.js .frag-tiles li > * { transition: opacity 280ms var(--ease-out), transform 280ms var(--ease-out); }
+.js .frag-bars i { transition: transform 560ms var(--ease-out); }
+
+.product.is-armed [data-step]:not(.is-in) { opacity: 0; transform: translateY(6px) scale(0.98); }
+.product.is-armed .frag-chip:not(.is-in) { transform: scale(0.9); }
+.product.is-armed .frag-tiles li:not(.is-in) > * { opacity: 0; transform: translateY(4px); }
+.product.is-armed .frag-tiles li:not(.is-in) {
+  background-image: linear-gradient(90deg, transparent 0, rgb(255 255 255 / 0.75) 50%, transparent 100%);
+  background-size: 200% 100%;
+  background-repeat: no-repeat;
+  animation: shimmer 900ms linear infinite;
+}
+.product.is-armed .frag-tiles li.is-in { opacity: 1; }
+.product.is-armed .frag-tiles li[data-step]:not(.is-in) { opacity: 1; transform: none; } /* tile frame stays as skeleton */
+.product.is-armed .frag-bars li:not(.is-in) i { transform: scaleY(0.04); }
+.frag-searchbar { transition: box-shadow 200ms ease; }
+.product.is-armed .frag-query { clip-path: inset(0 100% 0 0); }
+.product.is-typing .frag-searchbar { box-shadow: inset 0 0 0 2px var(--rani); }
+
+/* Tilt sheen for any tilting card */
+.product .sample-shine { mix-blend-mode: soft-light; }
+.product.is-tilting .sample-shine { opacity: 1; }
+.product { transform-style: preserve-3d; }
+
+@media (prefers-reduced-motion: reduce) {
+  .product.is-armed .frag-tiles li:not(.is-in) { animation: none; }
+  .js .frag-bars i { transition: none; }
+}
+
+/* ---------- Rendered objects arrive with a little spring ---------- */
+:root { --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1); }
+.js .frag-thumb .turn { transition: transform 520ms var(--ease-spring), opacity 240ms ease; }
+.product.is-armed .frag-tiles li:not(.is-in) .turn { opacity: 0; transform: translateZ(18px) translateY(12px) scale(0.7); }
+
+.js .map-pin { transition: transform 620ms var(--ease-spring) 180ms, opacity 160ms ease 180ms; }
+.product.is-armed .frag-map-wrap:not(.is-in) .map-pin { opacity: 0; transform: translateZ(28px) translateY(-34px); }
+.frag-map-wrap.is-in .pin-pulse { animation: pin-pulse 900ms var(--ease-out) 700ms 1 both; }
+@keyframes pin-pulse { from { opacity: 0.9; transform: scale(0.4); } to { opacity: 0; transform: scale(1.8); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .js .frag-thumb .turn, .js .map-pin { transition: opacity 200ms ease; }
+  .product.is-armed .frag-tiles li:not(.is-in) .turn,
+  .product.is-armed .frag-map-wrap:not(.is-in) .map-pin { transform: translateZ(18px); }
+  .frag-map-wrap.is-in .pin-pulse { animation: none; }
+}
+
+/* ---------- WhatsApp hand-off motion ---------- */
+.js .wa-mini, .js .wa-toast { transition: opacity 300ms var(--ease-out), transform 360ms var(--ease-out); }
+.js [data-wa-step] { transition: opacity 260ms var(--ease-out), transform 260ms var(--ease-out); }
+.product.is-armed [data-wa]:not(.is-in) { opacity: 0; transform: translateZ(10px) translateY(14px); }
+.product.is-armed .wa-toast:not(.is-in) { transform: translateZ(24px) translateY(-10px) scale(0.96); }
+.product.is-armed [data-wa-step]:not(.is-in) { opacity: 0; transform: translateY(6px) scale(0.97); }
+.msg-out[data-wa-step] { transform-origin: 100% 100%; }
+.msg-in[data-wa-step] { transform-origin: 0% 100%; }
+.msg.is-typing .wa-dots i { animation: typing 1.2s var(--ease-in-out) infinite; }
+.msg.is-typing .wa-dots i:nth-child(2) { animation-delay: 0.15s; }
+.msg.is-typing .wa-dots i:nth-child(3) { animation-delay: 0.3s; }
+.frag-emi-send { transition: background-color var(--t-ui) ease, transform var(--t-press) var(--ease-out); }
+.frag-emi-send:active, .frag-emi-send.is-pressed { transform: scale(0.97); }
+.frag-tiles li.is-picked { box-shadow: inset 0 0 0 2px var(--action); transition: box-shadow 200ms ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .product.is-armed [data-wa]:not(.is-in), .product.is-armed [data-wa-step]:not(.is-in) { transform: none; }
+  .msg.is-typing .wa-dots i { animation: none; opacity: 0.6; }
+}
+
+/* Agents: spinners spin only while a step is working; the fee ring fills smoothly */
+.log-step.is-working .log-icon, .wa-agent.is-working .log-icon { animation: spin 700ms linear infinite; }
+.ring { transition: --p 700ms var(--ease-out); }
+.agent-pause { transition: background-color var(--t-ui) ease, transform var(--t-press) var(--ease-out); }
+.agent-pause:active { transform: scale(0.97); }
+@media (prefers-reduced-motion: reduce) {
+  .log-step.is-working .log-icon, .wa-agent.is-working .log-icon { animation: none; }
+  .ring { transition: none; }
+}
+
+/* Rules flash when they fire */
+.rule.is-firing .rule-icon { animation: rule-fire 700ms var(--ease-out); }
+@keyframes rule-fire { 0% { transform: scale(1); } 35% { transform: scale(1.18) rotate(-8deg); box-shadow: 0 0 0 6px rgb(255 178 36 / 0.25); } 100% { transform: none; box-shadow: 0 0 0 0 rgb(255 178 36 / 0); } }
+.js .cmp-list [data-c], .js .cmp-outcome { transition: opacity 280ms var(--ease-out), transform 280ms var(--ease-out); }
+.compare.is-armed [data-c]:not(.is-in) { display: none; }
+.compare.is-armed .cmp-outcome:not(.is-in) { display: flex; opacity: 0; transform: translateY(6px); }
+@media (prefers-reduced-motion: reduce) {
+  .rule.is-firing .rule-icon { animation: none; }
+}

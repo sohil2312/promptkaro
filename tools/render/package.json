@@ -1,0 +1,6 @@
+{
+  "name": "promptkaro-render",
+  "private": true,
+  "description": "Offline product render studio (three.js, rendered in headless Chromium) for assets/img",
+  "dependencies": { "three": "0.186.1", "sharp": "0.35.5" }
+}

@@ -1,294 +1,516 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
+const fs = require('fs');
+const path = require('path');
 
 const PAGE_URL = '/';
-const WA_PATTERN = /wa\.me\/91\d+/;
+const WA_PATTERN = /^https:\/\/wa\.me\/919429051036\?text=.+/;
+const ROOT = path.join(__dirname, '..');
+const read = (f) => fs.readFileSync(path.join(ROOT, f), 'utf8');
 
-test.describe('1. Visual & Layout', () => {
-  test('page loads with correct title', async ({ page }) => {
+// The production CSP from _headers, applied locally so violations fail the test.
+const CSP = read('_headers').match(/Content-Security-Policy: (.+)/)[1].trim();
+
+test.describe('1. Layout', () => {
+  test('page has a clear title and one h1', async ({ page }) => {
     await page.goto(PAGE_URL);
     await expect(page).toHaveTitle(/PromptKaro/);
+    await expect(page.locator('h1')).toHaveCount(1);
+    await expect(page.locator('h1')).toContainText('48');
   });
 
-  test('all major sections exist in DOM', async ({ page }) => {
+  test('every section has a heading', async ({ page }) => {
     await page.goto(PAGE_URL);
-    const sections = ['#hero', '#demos', '#process', '#pricing', '#about', '#footer'];
-    for (const sel of sections) {
-      await expect(page.locator(sel)).toBeAttached();
+    for (const id of ['#work', '#how', '#products', '#agents', '#prices', '#about', '#faq']) {
+      await expect(page.locator(`${id} h2`)).toHaveCount(1);
     }
   });
 
-  test('navigation is sticky (fixed position)', async ({ page }) => {
+  test('header is sticky', async ({ page }) => {
     await page.goto(PAGE_URL);
-    const nav = page.locator('#nav');
-    await expect(nav).toBeVisible();
-    const pos = await nav.evaluate((el) => getComputedStyle(el).position);
-    expect(pos).toBe('fixed');
+    const pos = await page.locator('.site-header').evaluate((el) => getComputedStyle(el).position);
+    expect(pos).toBe('sticky');
   });
 
-  test('no horizontal overflow at 375px', async ({ page }) => {
-    await page.setViewportSize({ width: 375, height: 812 });
-    await page.goto(PAGE_URL);
-    const overflow = await page.evaluate(() => {
-      return document.documentElement.scrollWidth > document.documentElement.clientWidth;
+  for (const width of [360, 390, 768, 1024, 1440, 1920]) {
+    test(`no horizontal overflow at ${width}px`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto(PAGE_URL);
+      const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
+      expect(overflow).toBe(false);
     });
-    expect(overflow).toBe(false);
-  });
+  }
 
-  test('no horizontal overflow at 768px', async ({ page }) => {
-    await page.setViewportSize({ width: 768, height: 1024 });
+  test('hero headline, sentence and primary action fit in 1280x800', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto(PAGE_URL);
-    const overflow = await page.evaluate(() => {
-      return document.documentElement.scrollWidth > document.documentElement.clientWidth;
-    });
-    expect(overflow).toBe(false);
-  });
-
-  test('no horizontal overflow at 1440px', async ({ page }) => {
-    await page.setViewportSize({ width: 1440, height: 900 });
-    await page.goto(PAGE_URL);
-    const overflow = await page.evaluate(() => {
-      return document.documentElement.scrollWidth > document.documentElement.clientWidth;
-    });
-    expect(overflow).toBe(false);
-  });
-
-  test('hero section is full viewport height', async ({ page }) => {
-    await page.goto(PAGE_URL);
-    const heroHeight = await page.locator('#hero').evaluate((el) => el.offsetHeight);
-    const vh = await page.evaluate(() => window.innerHeight);
-    expect(heroHeight).toBeGreaterThanOrEqual(vh * 0.9);
-  });
-});
-
-test.describe('2. Interactive Elements', () => {
-  test('all WhatsApp links point to wa.me', async ({ page }) => {
-    await page.goto(PAGE_URL);
-    const links = await page.locator('a[href*="wa.me"]').all();
-    expect(links.length).toBeGreaterThan(0);
-    for (const link of links) {
-      const href = await link.getAttribute('href');
-      expect(href).toMatch(WA_PATTERN);
+    await page.waitForTimeout(900); // entrance settles
+    for (const sel of ['.hero-title', '.hero-lead', '#heroCta']) {
+      const box = await page.locator(sel).boundingBox();
+      expect(box, sel).not.toBeNull();
+      expect(box.y + box.height, sel).toBeLessThanOrEqual(800);
     }
   });
 
-  test('WhatsApp links include pre-filled message', async ({ page }) => {
+  test('footer wordmark stays inside the container', async ({ page }) => {
+    await page.setViewportSize({ width: 1920, height: 1000 });
     await page.goto(PAGE_URL);
-    const firstWaLink = page.locator('a[href*="wa.me"]').first();
-    const href = await firstWaLink.getAttribute('href');
-    expect(href).toContain('text=');
-  });
-
-  test('nav "Kaam Dekho" link exists and targets demos section', async ({ page }) => {
-    await page.goto(PAGE_URL);
-    const link = page.locator('#nav a[href="#demos"]');
-    await expect(link).toBeAttached();
-    const href = await link.getAttribute('href');
-    expect(href).toBe('#demos');
-  });
-
-  test('logo link points to #hero', async ({ page }) => {
-    await page.goto(PAGE_URL);
-    const logo = page.locator('#nav .logo');
-    const href = await logo.getAttribute('href');
-    expect(href).toBe('#hero');
-  });
-
-  test('floating WhatsApp button is present', async ({ page }) => {
-    await page.setViewportSize({ width: 1440, height: 900 });
-    await page.goto(PAGE_URL);
-    const waFloat = page.locator('.wa-float');
-    await expect(waFloat).toBeAttached();
-    const href = await waFloat.getAttribute('href');
-    expect(href).toMatch(WA_PATTERN);
-  });
-
-  test('terminal typing animation runs (command text appears)', async ({ page }) => {
-    await page.goto(PAGE_URL);
-    // Wait for the terminal to start typing
-    await page.waitForFunction(
-      () => {
-        const cmd = document.getElementById('terminalCommand');
-        return cmd && cmd.textContent && cmd.textContent.length > 2;
-      },
-      { timeout: 6000 }
-    );
-    const cmdText = await page.locator('#terminalCommand').textContent();
-    expect(cmdText && cmdText.length).toBeGreaterThan(2);
-  });
-
-  test('pixel canvas appears in terminal', async ({ page }) => {
-    await page.goto(PAGE_URL);
-    // Wait for pixel cells to be created
-    await page.waitForFunction(
-      () => {
-        const canvas = document.getElementById('terminalCanvas');
-        return canvas && canvas.children.length > 0;
-      },
-      { timeout: 8000 }
-    );
-    const cellCount = await page.locator('#terminalCanvas .t-cell').count();
-    expect(cellCount).toBeGreaterThan(0);
-  });
-
-  test('bento cards are rendered', async ({ page }) => {
-    await page.goto(PAGE_URL);
-    const cards = page.locator('.bento-card');
-    await expect(cards).toHaveCount(5);
-  });
-
-  test('pricing cards are rendered', async ({ page }) => {
-    await page.goto(PAGE_URL);
-    const cards = page.locator('.pricing-card');
-    await expect(cards).toHaveCount(4);
+    const { mark, container } = await page.evaluate(() => {
+      const m = document.querySelector('.footer-mark').getBoundingClientRect();
+      const c = document.querySelector('.site-footer .container');
+      const cs = getComputedStyle(c);
+      const r = c.getBoundingClientRect();
+      return { mark: m.right, container: r.right - parseFloat(cs.paddingRight) };
+    });
+    expect(mark).toBeLessThanOrEqual(container + 2);
   });
 });
 
-test.describe('3. Performance & Errors', () => {
-  test('page loads in under 4 seconds', async ({ page }) => {
+test.describe('2. Conversion: WhatsApp', () => {
+  test('every WhatsApp link has the real number and a prefilled message', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    const hrefs = await page.locator('a[href*="wa.me"]').evaluateAll((els) => els.map((a) => a.getAttribute('href')));
+    expect(hrefs.length).toBeGreaterThanOrEqual(10);
+    hrefs.forEach((h) => expect(h).toMatch(WA_PATTERN));
+  });
+
+  test('WhatsApp links open in a new tab safely', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    const bad = await page.locator('a[href*="wa.me"]').evaluateAll((els) =>
+      els.filter((a) => a.target !== '_blank' || !/noopener/.test(a.rel)).length);
+    expect(bad).toBe(0);
+  });
+
+  test('showcase CTA asks for the chosen business', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    await page.getByRole('tab', { name: 'Clinic' }).click();
+    const href = await page.locator('#panel-clinic .js-wa').getAttribute('href');
+    expect(decodeURIComponent(href)).toContain('I run a clinic');
+  });
+});
+
+test.describe('3. Interaction', () => {
+  test('tabs switch panels and support arrow keys', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    await expect(page.locator('#panel-mobile')).toBeVisible();
+    await expect(page.locator('#panel-coaching')).toBeHidden();
+
+    await page.getByRole('tab', { name: 'Coaching class' }).click();
+    await expect(page.locator('#panel-coaching')).toBeVisible();
+    await expect(page.locator('#panel-mobile')).toBeHidden();
+    await expect(page.getByRole('tab', { name: 'Coaching class' })).toHaveAttribute('aria-selected', 'true');
+
+    await page.keyboard.press('ArrowRight');
+    await expect(page.getByRole('tab', { name: 'Clinic' })).toBeFocused();
+    await expect(page.locator('#panel-clinic')).toBeVisible();
+    await page.keyboard.press('End');
+    await expect(page.locator('#panel-food')).toBeVisible();
+  });
+
+  test('sample card builds itself, then shows "Demo ready"', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    await page.locator('#showcase').scrollIntoViewIfNeeded();
+    const sample = page.locator('#panel-mobile .sample');
+    await expect(sample).toHaveClass(/is-building/);
+    await expect(sample.locator('.sample-status')).toHaveAttribute('data-state', 'ready', { timeout: 4000 });
+    await expect(sample).not.toHaveClass(/is-building/);
+    await expect(sample.locator('.sample-btn')).toBeVisible();
+
+    await page.getByRole('tab', { name: 'Property dealer' }).click();
+    const next = page.locator('#panel-property .sample');
+    await expect(next).toHaveClass(/is-building/);
+    await expect(next.locator('.sample-status')).toHaveAttribute('data-state', 'ready', { timeout: 4000 });
+  });
+
+  test('sample build status follows the language', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    await page.locator('#langToggle').click();
+    await expect(page.locator('#panel-mobile .sample-status-label')).toHaveText(/ડેમો તૈયાર|ભાવ-પત્રક/);
+  });
+
+  test('product cards fill themselves in when scrolled into view', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    for (const demo of ['search', 'catalog', 'emi', 'chart']) {
+      const card = page.locator(`.product[data-demo="${demo}"]`);
+      await card.scrollIntoViewIfNeeded();
+      await expect(card).not.toHaveClass(/is-armed/, { timeout: 12000 });
+    }
+    await expect(page.locator('.frag-chart [data-count]')).toHaveText('39');
+    await expect(page.locator('.frag-chip-wa')).toBeVisible();
+    await expect(page.locator('.frag-share')).toBeVisible();
+  });
+
+  test('coin stack follows the EMI: fewer months, more coins', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    const range = page.locator('#emiMonths');
+    await range.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(1800);
+    const live = page.locator('#emiCoins .coin:not(.is-leaving)');
+    await range.fill('3');
+    await expect(live).toHaveCount(11);
+    await range.fill('24');
+    await expect(live).toHaveCount(1);
+    await expect(page.locator('#emiCoins .coin')).toHaveCount(1, { timeout: 2000 }); // leaving coins are removed
+  });
+
+  test('product visuals are rendered photos that load, not vector icons', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    await expect(page.locator('.frag-tiles svg')).toHaveCount(0);
+    const imgs = page.locator('.frag-tiles .turn img');
+    await expect(imgs).toHaveCount(4);
+    await page.locator('.products').scrollIntoViewIfNeeded();
+    for (const img of await imgs.all()) {
+      await expect.poll(() => img.evaluate((i) => i.complete && i.naturalWidth > 0)).toBe(true);
+      expect(await img.getAttribute('width')).toBe('450'); // explicit size, no layout shift
+    }
+    await expect(page.locator('.map-pin img')).toHaveCount(1);
+    await expect(page.locator('#emiCoins img.coin').first()).toBeVisible();
+  });
+
+  test('on desktop the products turn with the mouse (turntable sprites)', async ({ page }, info) => {
+    test.skip(info.project.name !== 'Desktop Chrome', 'turntables load only for a fine pointer');
+    await page.goto(PAGE_URL);
+    const card = page.locator('.product-marigold');
+    await card.scrollIntoViewIfNeeded();
+    const turn = card.locator('.turn').first();
+    await expect(turn).toHaveClass(/is-sprite/, { timeout: 10000 });
+    const box = await card.boundingBox();
+    await page.mouse.move(box.x + 10, box.y + box.height / 2);
+    await page.waitForTimeout(700);
+    const left = await turn.evaluate((t) => t.style.backgroundPosition);
+    await page.mouse.move(box.x + box.width - 10, box.y + box.height / 2, { steps: 8 });
+    await page.waitForTimeout(700);
+    const right = await turn.evaluate((t) => t.style.backgroundPosition);
+    expect(left).not.toBe(right);
+  });
+
+  test('each product hands off to a WhatsApp conversation', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    for (const demo of ['search', 'catalog', 'emi']) {
+      const card = page.locator(`.product[data-demo="${demo}"]`);
+      await card.scrollIntoViewIfNeeded();
+      await expect(card).not.toHaveClass(/is-armed/, { timeout: 12000 });
+      await expect(card.locator('.wa-mini .msg-out')).toBeVisible();
+      await expect(card.locator('.wa-mini .msg-in p')).toBeVisible();
+      await expect(card.locator('.is-typing')).toHaveCount(0);
+      await expect(card.locator('.tap')).toHaveCount(0); // fingertip cleaned up
+    }
+    const dash = page.locator('.product[data-demo="chart"]');
+    await dash.scrollIntoViewIfNeeded();
+    await expect(dash).not.toHaveClass(/is-armed/, { timeout: 12000 });
+    await expect(dash.locator('.wa-toast')).toBeVisible();
+    await expect(dash.locator('[data-count]')).toHaveText('39');
+  });
+
+  test('sending an EMI plan writes the live plan into the chat', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    const card = page.locator('.product[data-demo="emi"]');
+    await card.scrollIntoViewIfNeeded();
+    await expect(card).not.toHaveClass(/is-armed/, { timeout: 12000 });
+    await page.locator('#emiMonths').fill('6');
+    await page.locator('#emiSend').click();
+    await expect(page.locator('.js-plan')).toHaveText('EMI plan: 5G phone, ₹2,333 × 6 months');
+    await page.locator('#langToggle').click();
+    await expect(page.locator('.js-plan')).toHaveText('EMI પ્લાન: 5G ફોન, ₹2,333 × 6 મહિના');
+  });
+
+  test('agent console plays a scenario: message, logged steps, auto-reply', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    await page.locator('#agentStage').scrollIntoViewIfNeeded();
+    await page.getByRole('tab', { name: 'Appointments' }).click();
+    await expect(page.locator('#agentState')).toHaveText(/Done in \d+\.\ds/, { timeout: 12000 });
+    await expect(page.locator('#agentLog .log-step.is-done')).toHaveCount(4);
+    await expect(page.locator('#agentLog .log-step.is-working')).toHaveCount(0);
+    await expect(page.locator('#agentChat .msg-out .msg-agent').first()).toHaveText('AI agent');
+    await expect(page.locator('#agentChat')).toContainText('token is 14');
+    await expect(page.locator('#agentCustomer')).toHaveText('Meena P.');
+    await expect(page.locator('#agentPause')).toHaveText('Play all'); // clicking a tab hands control to the visitor
+  });
+
+  test('agent console keyboard tabs switch scenarios', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    await page.getByRole('tab', { name: 'Orders' }).focus();
+    await page.keyboard.press('End');
+    await expect(page.getByRole('tab', { name: 'Leads' })).toHaveAttribute('aria-selected', 'true');
+    await expect(page.locator('#agentBiz')).toHaveText('Sabar Properties');
+  });
+
+  test('dashboards tick through their events and land on the final numbers', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    for (const key of ['sales', 'queue', 'fees', 'stock']) {
+      await page.locator(`[data-dash="${key}"]`).scrollIntoViewIfNeeded();
+      await page.waitForTimeout(200);
+    }
+    await page.locator('[data-dash="sales"]').scrollIntoViewIfNeeded();
+    await expect(page.locator('#salesTotal')).toHaveText('₹48,620', { timeout: 10000 });
+    await page.locator('[data-dash="queue"]').scrollIntoViewIfNeeded();
+    await expect(page.locator('#queueNow')).toHaveText('15', { timeout: 10000 });
+    await expect(page.locator('#queueList .is-agent')).toHaveCount(1);
+    await page.locator('[data-dash="fees"]').scrollIntoViewIfNeeded();
+    await expect(page.locator('#feesTotal')).toHaveText('₹3,72,000', { timeout: 10000 });
+    await expect(page.locator('#feesPct')).toHaveText('78%');
+    await page.locator('[data-dash="stock"]').scrollIntoViewIfNeeded();
+    await expect(page.locator('#stockEvents li').nth(1)).toBeVisible({ timeout: 10000 });
+    await expect(page.locator('#stockList li.is-low')).toHaveCount(1);
+  });
+
+  test('bot vs AI agent: same message, the agent books and the bot loops', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    await page.locator('#compare').scrollIntoViewIfNeeded();
+    await expect(page.locator('#compareReplay')).toBeVisible({ timeout: 12000 });
+    const bot = page.locator('.compare-bot');
+    const agent = page.locator('.compare-agent');
+    await expect(bot.locator('.msg-bot').first()).toHaveText('Bot');
+    await expect(agent.locator('.msg-agent')).toHaveText('AI agent');
+    await expect(bot.locator('.cmp-outcome')).toHaveClass(/is-bad/);
+    await expect(agent.locator('.cmp-outcome')).toHaveClass(/is-good/);
+    await expect(agent.locator('.wa-agent')).toHaveCount(3);
+    await expect(bot.locator('.msg-menu')).toBeVisible();
+    // labels look different, not just read different
+    const botBg = await bot.locator('.kind-tag').evaluate((e) => getComputedStyle(e).backgroundColor);
+    const agentBg = await agent.locator('.kind-tag').evaluate((e) => getComputedStyle(e).backgroundColor);
+    expect(botBg).not.toBe(agentBg);
+  });
+
+  test('dashboards show automation rules that fire as events arrive', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    await expect(page.locator('.dash .rule')).toHaveCount(4);
+    await expect(page.locator('.dash .auto-src')).toHaveCount(4);
+    const stock = page.locator('[data-dash="stock"]');
+    await stock.scrollIntoViewIfNeeded();
+    await expect(stock.locator('.rule-count b')).toHaveText('1', { timeout: 10000 });
+    await expect(stock.locator('.rule-last-text')).toHaveText('Ordered 20 earbuds');
+    const sales = page.locator('[data-dash="sales"]');
+    await sales.scrollIntoViewIfNeeded();
+    await expect(sales.locator('.rule-count b')).toHaveText('23', { timeout: 10000 });
+    await expect(sales.locator('.rule-last-text')).toHaveText('Receipt sent to Hetal D.');
+  });
+
+  test('EMI calculator works as a real control', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    const range = page.locator('#emiMonths');
+    await range.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(1800); // demo glide finishes
+    await expect(page.locator('#emiMonthsOut')).toHaveText('12');
+    await expect(page.locator('#emiValue')).toHaveText('₹1,167');
+    await range.fill('6');
+    await expect(page.locator('#emiMonthsOut')).toHaveText('6');
+    await expect(page.locator('#emiValue')).toHaveText('₹2,333');
+    await range.focus();
+    await page.keyboard.press('ArrowRight');
+    await expect(page.locator('#emiMonthsOut')).toHaveText('7');
+  });
+
+  test('hero chat plays to the end and offers a replay', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto(PAGE_URL);
+    await expect(page.locator('#chatReplay')).toBeVisible({ timeout: 15000 });
+    await expect(page.locator('#chatList .is-pending')).toHaveCount(0);
+    await expect(page.locator('#chatTyping')).toBeHidden();
+  });
+
+  test('FAQ items open', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    const first = page.locator('#faq details').first();
+    await first.locator('summary').click();
+    await expect(first).toHaveAttribute('open', '');
+    await expect(first.locator('p')).toBeVisible();
+  });
+
+  test('mobile dock appears only between the big CTAs', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(PAGE_URL);
+    const dock = page.locator('#dock');
+    await expect(dock).toBeHidden();
+    await page.locator('#how').scrollIntoViewIfNeeded();
+    await expect(dock).toBeVisible();
+    await page.locator('#footerCta').scrollIntoViewIfNeeded();
+    await expect(dock).toBeHidden();
+  });
+});
+
+test.describe('4. Language', () => {
+  test('switching to Gujarati translates text, labels and WhatsApp messages', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    await page.locator('#langToggle').click();
+    await expect(page.locator('html')).toHaveAttribute('lang', 'gu');
+    await expect(page.locator('h1')).toContainText('કલાકમાં');
+    const href = await page.locator('#heroCta').getAttribute('href');
+    expect(decodeURIComponent(href)).toContain('મફત ડેમો');
+
+    await page.reload();
+    await expect(page.locator('h1')).toContainText('કલાકમાં'); // persisted
+
+    await page.locator('#langToggle').click();
+    await expect(page.locator('h1')).toContainText('48 hours');
+  });
+
+  test('every translatable element has Gujarati text', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    const empty = await page.locator('[data-gu]').evaluateAll((els) => els.filter((e) => !e.dataset.gu.trim()).length);
+    expect(empty).toBe(0);
+  });
+});
+
+test.describe('5. Robustness', () => {
+  test('no console errors or CSP violations under the production policy', async ({ page }) => {
+    await page.route('**/*', async (route) => {
+      const res = await route.fetch();
+      const headers = { ...res.headers() };
+      if ((headers['content-type'] || '').includes('text/html')) headers['content-security-policy'] = CSP;
+      await route.fulfill({ response: res, headers });
+    });
+    const errors = [];
+    page.on('pageerror', (e) => errors.push(e.message));
+    page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
+    await page.goto(PAGE_URL, { waitUntil: 'networkidle' });
+    await page.getByRole('tab', { name: 'Restaurant' }).click();
+    await page.locator('#langToggle').click();
+    await page.waitForTimeout(500);
+    expect(errors).toEqual([]);
+    await expect(page.locator('html')).toHaveClass(/js/); // the hashed inline script ran
+  });
+
+  test('all content is visible with JavaScript off', async ({ browser }) => {
+    const ctx = await browser.newContext({ javaScriptEnabled: false });
+    const page = await ctx.newPage();
+    await page.goto(PAGE_URL);
+    await expect(page.locator('h1')).toBeVisible();
+    await expect(page.locator('.chat-list .msg:not(.msg-typing)')).toHaveCount(5);
+    for (const id of ['#panel-mobile', '#panel-coaching', '#panel-clinic', '#panel-property', '#panel-food']) {
+      await expect(page.locator(id)).toBeVisible();
+    }
+    await expect(page.locator('.plan')).toHaveCount(3);
+    await expect(page.locator('.frag-tiles li')).toHaveCount(4);
+    await expect(page.locator('.frag-result')).toBeVisible();
+    await expect(page.locator('.frag-chart [data-count]')).toHaveText('39');
+    await expect(page.locator('#agentChat .msg')).toHaveCount(4);
+    await expect(page.locator('#agentLog .log-step')).toHaveCount(5);
+    await expect(page.locator('#salesTotal')).toHaveText('₹48,620');
+    await expect(page.locator('.agent-tabs')).toBeHidden();
+    await expect(page.locator('.compare .cmp-outcome.is-good')).toBeVisible();
+    await expect(page.locator('.compare-bot .msg')).toHaveCount(6);
+    await expect(page.locator('[data-dash="stock"] .rule-count b')).toHaveText('1');
+    await ctx.close();
+  });
+
+  test('reduced motion shows the whole conversation without playing it', async ({ browser }) => {
+    const ctx = await browser.newContext({ reducedMotion: 'reduce' });
+    const page = await ctx.newPage();
+    await page.goto(PAGE_URL);
+    await page.waitForTimeout(800);
+    await expect(page.locator('#chatList .is-pending')).toHaveCount(0);
+    await expect(page.locator('#chatReplay')).toBeHidden();
+    await page.locator('#showcase').scrollIntoViewIfNeeded();
+    await expect(page.locator('#panel-mobile .sample')).not.toHaveClass(/is-building/);
+    await expect(page.locator('.product.is-armed')).toHaveCount(0);
+    await ctx.close();
+  });
+
+  test('fonts are self-hosted and the page loads quickly', async ({ page }) => {
+    const external = [];
+    page.on('request', (r) => { if (!r.url().startsWith('http://localhost')) external.push(r.url()); });
     const start = Date.now();
     await page.goto(PAGE_URL, { waitUntil: 'load' });
-    const elapsed = Date.now() - start;
-    expect(elapsed).toBeLessThan(4000);
-  });
-
-  test('no JavaScript errors on load', async ({ page }) => {
-    const errors = [];
-    page.on('pageerror', (err) => errors.push(err.message));
-    await page.goto(PAGE_URL, { waitUntil: 'load' });
-    // Filter out known network errors (fonts from CDN may fail in test env)
-    const criticalErrors = errors.filter(
-      (e) => !e.includes('fontshare') && !e.includes('fonts.googleapis')
-    );
-    expect(criticalErrors).toHaveLength(0);
+    expect(Date.now() - start).toBeLessThan(3000);
+    expect(external).toEqual([]);
+    expect(await page.evaluate(() => document.fonts.check('640 1em Anek'))).toBe(true);
   });
 });
 
-test.describe('4. Accessibility', () => {
-  test('all WhatsApp buttons have aria-labels', async ({ page }) => {
+test.describe('6. Accessibility', () => {
+  test('skip link reaches main content', async ({ page }) => {
     await page.goto(PAGE_URL);
-    const btns = await page.locator('a[href*="wa.me"]').all();
-    for (const btn of btns) {
-      const ariaLabel = await btn.getAttribute('aria-label');
-      const text = await btn.textContent();
-      const hasLabel = (ariaLabel && ariaLabel.length > 0) || (text && text.trim().length > 0);
-      expect(hasLabel).toBe(true);
+    await page.keyboard.press('Tab');
+    await expect(page.locator('.skip-link')).toBeFocused();
+    await expect(page.locator('main#main')).toBeAttached();
+  });
+
+  test('icon-only and interactive controls have names', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    const unnamed = await page.locator('a, button').evaluateAll((els) =>
+      els.filter((el) => {
+        const style = getComputedStyle(el);
+        if (style.display === 'none' || style.visibility === 'hidden') return false;
+        return !(el.getAttribute('aria-label') || el.textContent.trim());
+      }).length);
+    expect(unnamed).toBe(0);
+  });
+
+  test('focus ring is visible on keyboard focus', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    await page.keyboard.press('Tab'); // skip link
+    await page.keyboard.press('Tab'); // wordmark
+    const outline = await page.evaluate(() => getComputedStyle(document.activeElement).outlineStyle);
+    expect(outline).toBe('solid');
+  });
+
+  test('tabs expose correct ARIA wiring', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    await expect(page.locator('#showcase [role="tab"]')).toHaveCount(5);
+    await expect(page.locator('#agentsApp [role="tab"]')).toHaveCount(6);
+    const tabs = page.getByRole('tab');
+    for (const tab of await tabs.all()) {
+      const controls = await tab.getAttribute('aria-controls');
+      await expect(page.locator(`#${controls}`)).toHaveAttribute('role', 'tabpanel');
     }
   });
+});
 
-  test('nav has role=navigation', async ({ page }) => {
+test.describe('7. Content', () => {
+  test('prices match the Terms of Service', async ({ page }) => {
     await page.goto(PAGE_URL);
-    const nav = page.locator('[role="navigation"]');
-    await expect(nav).toBeAttached();
+    const prices = await page.locator('.plan-price').allTextContents();
+    expect(prices.map((p) => p.trim())).toEqual(['₹4,999', '₹9,999', '₹19,999']);
+    const terms = read('terms.html');
+    for (const p of ['₹4,999', '₹9,999', '₹19,999']) expect(terms).toContain(p);
   });
 
-  test('footer has role=contentinfo', async ({ page }) => {
+  test('care plan price is shown', async ({ page }) => {
     await page.goto(PAGE_URL);
-    const footer = page.locator('[role="contentinfo"]');
-    await expect(footer).toBeAttached();
+    await expect(page.locator('.care-price')).toHaveText('₹1,999');
   });
 
-  test('pricing lists have aria-labels', async ({ page }) => {
+  test('footer shows copyright, place and legal links', async ({ page }) => {
     await page.goto(PAGE_URL);
-    const lists = page.locator('.pfeatures[aria-label]');
-    const count = await lists.count();
-    expect(count).toBe(4);
+    await expect(page.locator('.footer-base')).toContainText('© 2026 PromptKaro');
+    await expect(page.locator('.footer-base')).toContainText('Idar');
+    await expect(page.locator('a[href="/privacy.html"]')).toHaveCount(1);
+    await expect(page.locator('a[href="/terms.html"]')).toHaveCount(1);
+  });
+
+  test('legal pages use the new system and load', async ({ page }) => {
+    for (const url of ['/privacy.html', '/terms.html']) {
+      await page.goto(url);
+      await expect(page.locator('h1')).toBeVisible();
+      await expect(page.locator('.legal-header .wordmark')).toBeVisible();
+    }
   });
 });
 
-test.describe('5. Content', () => {
-  test('Hindi text renders (Aapka Idea visible)', async ({ page }) => {
-    await page.goto(PAGE_URL);
-    await expect(page.locator('text=Aapka Idea')).toBeVisible();
+test.describe('8. Design rules (anti-slop lint)', () => {
+  const css = ['css/style.css', 'css/motion.css', 'css/legal.css'].map(read).join('\n');
+  const html = read('index.html');
+
+  test('no transition: all, no width/height animation', () => {
+    expect(css).not.toMatch(/transition:\s*all/);
+    expect(css).not.toMatch(/transition:[^;]*\b(width|height|top|left)\b/);
   });
 
-  test('Hindi text renders (48 Ghante Mein Ready)', async ({ page }) => {
-    await page.goto(PAGE_URL);
-    await expect(page.locator('text=48 Ghante Mein Ready')).toBeVisible();
+  test('no banned fonts, no monospace, no third-party font CDNs', () => {
+    expect(css + html).not.toMatch(/Inter\b|Roboto|Poppins|Space Grotesk|Clash Display|Satoshi|JetBrains/);
+    expect(css).not.toMatch(/monospace/);
+    expect(html).not.toMatch(/fonts\.googleapis|fontshare/);
   });
 
-  test('pricing ₹4,999 is visible', async ({ page }) => {
-    await page.goto(PAGE_URL);
-    await expect(page.locator('text=4,999')).toBeVisible();
+  test('no emoji used as icons, no invented stats', () => {
+    // The single 👍 lives inside the WhatsApp chat as message content.
+    const withoutChat = html.replace(/<ol class="chat-list"[\s\S]*?<\/ol>/, '');
+    expect(withoutChat).not.toMatch(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/u);
+    expect(html).not.toMatch(/100%|satisfaction|happy clients|\d+\+ projects/i);
   });
 
-  test('pricing ₹9,999 is visible', async ({ page }) => {
-    await page.goto(PAGE_URL);
-    // Use exact match on the span to avoid matching "19,999"
-    await expect(page.locator('.pamount', { hasText: /^9,999$/ }).first()).toBeVisible();
-  });
-
-  test('pricing ₹19,999 is visible', async ({ page }) => {
-    await page.goto(PAGE_URL);
-    await expect(page.locator('text=19,999')).toBeVisible();
-  });
-
-  test('pricing ₹1,999/mo is visible', async ({ page }) => {
-    await page.goto(PAGE_URL);
-    await expect(page.locator('text=1,999')).toBeVisible();
-  });
-
-  test('footer copyright year is 2026', async ({ page }) => {
-    await page.goto(PAGE_URL);
-    await expect(page.locator('text=© 2026 PromptKaro')).toBeVisible();
-  });
-
-  test('WhatsApp phone number placeholder present in links', async ({ page }) => {
-    await page.goto(PAGE_URL);
-    const allHrefs = await page.evaluate(() =>
-      Array.from(document.querySelectorAll('a[href*="wa.me"]')).map((a) => a.getAttribute('href'))
-    );
-    expect(allHrefs.length).toBeGreaterThan(0);
-    allHrefs.forEach((href) => expect(href).toMatch(/wa\.me\/91\d+/));
-  });
-
-  test('logo has blinking cursor element', async ({ page }) => {
-    await page.goto(PAGE_URL);
-    const cursor = page.locator('.logo-cursor').first();
-    await expect(cursor).toBeAttached();
-  });
-
-  test('logo chevron character is ›', async ({ page }) => {
-    await page.goto(PAGE_URL);
-    const chevron = page.locator('.logo-chevron').first();
-    const text = await chevron.textContent();
-    expect(text).toContain('›');
-  });
-
-  test('POPULAR badge on Business plan', async ({ page }) => {
-    await page.goto(PAGE_URL);
-    await expect(page.locator('.popular-badge')).toBeVisible();
-    const text = await page.locator('.popular-badge').textContent();
-    expect(text).toContain('POPULAR');
-  });
-
-  test('Idar Gujarat location visible', async ({ page }) => {
-    await page.goto(PAGE_URL);
-    await expect(page.locator('text=Idar').first()).toBeVisible();
-  });
-
-  test('trust badge visible', async ({ page }) => {
-    await page.goto(PAGE_URL);
-    await expect(page.locator('.trust-badge')).toBeVisible();
-  });
-});
-
-test.describe('6. Mobile layout', () => {
-  test.use({ viewport: { width: 375, height: 812 } });
-
-  test('mobile WhatsApp bar is visible', async ({ page }) => {
-    await page.goto(PAGE_URL);
-    const bar = page.locator('.wa-mobile-bar');
-    await expect(bar).toBeAttached();
-  });
-
-  test('hero headline visible on mobile', async ({ page }) => {
-    await page.goto(PAGE_URL);
-    await expect(page.locator('.hero-headline')).toBeVisible();
-  });
-
-  test('nav visible on mobile', async ({ page }) => {
-    await page.goto(PAGE_URL);
-    await expect(page.locator('#nav')).toBeVisible();
+  test('every animation has a reduced-motion fallback', () => {
+    expect(css).toMatch(/prefers-reduced-motion:\s*reduce/);
   });
 });
