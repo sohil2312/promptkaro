@@ -340,7 +340,7 @@ nav{display:flex;align-items:center;gap:32px;height:76px}
 .brand small{font-weight:500;font-size:13px;letter-spacing:0;color:#5E676C}
 .links{display:flex;gap:28px;margin-left:auto;color:#3F474C;font-size:15px}
 nav .btn{border-radius:8px;height:44px}
-/* Hero: the product in a dark studio, with callouts to the parts that matter */
+/* Hero: the product in a dark studio */
 .hero{position:relative;border-radius:16px;overflow:hidden;background:#23272A;color:#EEF2F3}
 .hero img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:60% 50%}
 .hero .copy{position:absolute;left:48px;top:48px;max-width:430px}
@@ -348,11 +348,6 @@ nav .btn{border-radius:8px;height:44px}
 .hero p{color:#B9C2C6;font-size:18px;margin:16px 0 26px;max-width:34ch}
 .hero .btn{border-radius:8px}
 .hero .ghost{box-shadow:inset 0 0 0 1.5px #5E676C;color:#EEF2F3;margin-left:8px}
-.call{position:absolute;display:flex;align-items:center;gap:10px;font-size:13px;color:#DDE4E6}
-.call:before{content:'';width:9px;height:9px;border-radius:50%;background:#7FD3E6;box-shadow:0 0 0 4px rgba(127,211,230,.25)}
-.call b{display:block;color:#fff;font-size:14px}
-.call>span{background:rgba(20,23,25,.78);padding:6px 10px;border-radius:8px;backdrop-filter:blur(4px)}
-.c1{left:71%;top:12%}.c2{left:71%;top:44%}.c3{left:71%;top:86%}
 /* Lineup: every model, to scale */
 .sec{padding:96px 0 0}
 h2{font-weight:800;font-size:44px;line-height:1.05;letter-spacing:-.03em;max-width:18ch}
@@ -391,7 +386,7 @@ footer{display:flex;justify-content:space-between;padding:0 0 36px;color:#5E676C
 @media (max-width:700px){
  nav{height:62px}.links{display:none}nav .btn{margin-left:auto}.brand small{display:none}
  .hero{display:flex;flex-direction:column-reverse}.hero img{aspect-ratio:4/3;object-position:78% 50%}.hero .copy{position:static;padding:26px 22px 4px;max-width:none}.hero h1{font-size:38px}.hero p{font-size:16px}
- .hero .ghost{display:none}.call{display:none}
+ .hero .ghost{display:none}
  .sec{padding-top:64px}h2{font-size:30px}
  .specs{grid-template-columns:1fr 1fr;row-gap:8px}.brandrow{grid-template-columns:1fr;gap:24px}
  .weeks{grid-template-columns:1fr 1fr}.quote{grid-template-columns:1fr;padding:26px;gap:24px;margin-top:64px}
@@ -404,9 +399,6 @@ MFG_BODY = f"""<div class="wrap">
  <div class="copy"><h1>Cold drinks, even at 43&nbsp;°C outside.</h1>
  <p>Visi coolers for beverage brands, dairies and shops. Built in our own factory, with your name on the canopy.</p>
  <a class="btn wa">{WA}Ask for a quote</a><a class="btn ghost">See the models</a></div>
- <span class="call c1"><span><b>Lit canopy</b>Your logo, LED backlit</span></span>
- <span class="call c2"><span><b>Double-glazed door</b>No fog in humid shops</span></span>
- <span class="call c3"><span><b>R290 compressor</b>Lower power bills</span></span>
 </header>
 <section class="sec"><h2>Five sizes, from a corner shop to a supermarket</h2><p class="lede">Shown to scale. Every model holds 2 to 8 °C, uses LED lighting inside and comes with a 2-year compressor warranty.</p>
 <div class="lineup"><img src="img/mfg-lineup.webp" alt=""></div>
