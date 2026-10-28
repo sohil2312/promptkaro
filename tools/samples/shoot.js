@@ -17,6 +17,7 @@ const OUT = path.join(__dirname, 'out');
     const m = await b.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2.5 });
     await m.goto(url, { waitUntil: 'networkidle' }); await m.evaluate(() => document.fonts.ready);
     await m.screenshot({ path: `${OUT}/${key}-mob.png` });
+    await m.screenshot({ path: `${OUT}/${key}-mobfull.png`, fullPage: true });
     await d.close(); await m.close();
     console.log('shot', key);
   }

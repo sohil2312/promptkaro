@@ -67,7 +67,7 @@
   --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px; --s-10: 144px;
   --gutter: clamp(16px, 4vw, 40px);
   --container: 1200px;
-  --section-y: clamp(80px, 11vw, 160px);
+  --section-y: clamp(64px, 11vw, 160px);
   --header-h: 64px;
 
   /* Radius by nesting level */
@@ -249,6 +249,7 @@ p { text-wrap: pretty; }
   color: var(--ink-2);
   text-decoration: none;
   padding-block: var(--s-2);
+  white-space: nowrap;
 }
 @media (hover: hover) and (pointer: fine) {
   .header-nav a:hover { color: var(--ink); }
@@ -356,8 +357,9 @@ html[lang="gu"] .hero-title { font-size: calc(var(--fs-h1) * 0.8); line-height: 
   justify-content: flex-end;
   overflow: hidden;
   padding: var(--s-3);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 28px);
-          mask-image: linear-gradient(to bottom, transparent 0, #000 28px);
+  /* Older messages scroll off under a soft fade, like a real chat, not a hard cut. */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 64px);
+          mask-image: linear-gradient(to bottom, transparent 0, #000 64px);
 }
 .chat-list { display: flex; flex-direction: column; gap: 6px; }
 .msg {
@@ -691,15 +693,16 @@ html[lang="gu"] .footer-line { line-height: 1.25; letter-spacing: 0; }
 html:not(.js) .dock { display: none; }
 
 /* ---------- Breakpoints ---------- */
-@media (min-width: 720px) {
+/* The nav needs about 900px next to the language switch and WhatsApp button. */
+@media (min-width: 900px) {
   .header-nav { display: flex; }
   .header-actions { margin-left: 0; }
-  .care { flex-direction: row; align-items: center; justify-content: space-between; gap: var(--s-6); }
+}
+@media (min-width: 720px) {
   .timeline { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-6); }
   .timeline-step { padding-left: 0; padding-top: var(--s-7); }
   .timeline-step::before { top: 0; }
   .timeline-step::after { left: 18px; right: calc(-1 * var(--s-6) + 6px); top: 5px; bottom: auto; width: auto; height: 2px; }
-  .about-grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: start; }
   .contact-list { grid-template-columns: 1fr 1fr; }
   .dock { display: none; }
 }
@@ -710,11 +713,10 @@ html:not(.js) .dock { display: none; }
   .hero-chat { justify-self: end; }
   .chat { height: 540px; }
   .panel { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: var(--s-9); }
-  .sample { justify-self: start; max-width: 440px; }
   .promise-grid { grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: var(--s-8); }
-  .plans { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .faq-grid { grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: var(--s-9); align-items: start; }
   .faq-grid h2 { position: sticky; top: calc(var(--header-h) + var(--s-6)); }
+  .about-grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: start; }
   .contact-list { grid-template-columns: 1fr; }
 }
 
@@ -735,7 +737,8 @@ html:not(.js) .dock { display: none; }
   --peacock: #0F5F66;   --peacock-soft: #D4F0F2;
   --neem: #CFE7B8;
 }
-.products { display: grid; gap: var(--s-4); perspective: 1400px; }
+.products { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-4); perspective: 1400px; }
+.product, .product > *, .frag { min-width: 0; }
 .product {
   --card-bg: var(--ground-2);
   --card-fg: var(--ink);
@@ -868,6 +871,10 @@ html:not(.js) .dock { display: none; }
   .product:nth-child(2) { grid-column: span 7; }
   .product:nth-child(3) { grid-column: span 7; }
   .product:nth-child(4) { grid-column: span 5; }
+}
+/* On tablets the assistant and dashboard are too unequal to sit side by side: each takes the row. */
+@media (min-width: 720px) and (max-width: 1099px) {
+  .product:nth-child(3), .product:nth-child(4) { grid-column: 1 / -1; }
 }
 @media (min-width: 1100px) {
   .product { padding: var(--s-7); }
@@ -1044,7 +1051,7 @@ html:not(.js) .agent-tabs, html:not(.js) .agent-controls { display: none; }
 .agent-stage { display: grid; gap: var(--s-4); }
 .agent-chat, .agent-log { border-radius: var(--r-3); overflow: hidden; }
 
-.agent-chat { display: flex; flex-direction: column; height: 460px; background: var(--wa-wall); font-size: 0.9375rem; line-height: 1.38; }
+.agent-chat { display: flex; flex-direction: column; height: 400px; background: var(--wa-wall); font-size: 0.9375rem; line-height: 1.38; }
 .agent-chat-head { display: flex; align-items: center; gap: var(--s-3); padding: var(--s-3) var(--s-4); background: var(--wa-head); color: var(--on-ink); }
 .agent-chat-avatar { display: grid; place-items: center; flex: none; width: 36px; height: 36px; border-radius: 50%; background: #DFF5EC; color: var(--wa-head); font-weight: 700; }
 .agent-chat-who { display: flex; flex-direction: column; min-width: 0; line-height: 1.2; }
@@ -1146,7 +1153,9 @@ html[lang="gu"] .dash-head h3 { line-height: 1.2; letter-spacing: 0; }
 .cmp-head { display: flex; align-items: center; gap: var(--s-2); padding: 8px 12px; background: var(--wa-head); color: var(--on-ink); font-size: 0.875rem; }
 .cmp-head b { font-weight: var(--fw-strong); }
 .cmp-avatar { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: #DFF5EC; color: var(--wa-head); font-weight: 700; font-size: 0.75rem; }
-.cmp-list { display: flex; flex-direction: column; justify-content: flex-end; gap: 6px; min-height: 360px; padding: 10px; }
+.cmp-list { display: flex; flex-direction: column; justify-content: flex-end; gap: 6px; padding: 10px; }
+/* Side by side, both chats share a height so the outcomes line up; stacked on phones they fit their content. */
+@media (min-width: 900px) { .cmp-list { min-height: 360px; } }
 .cmp-list .msg { max-width: 86%; padding: 5px 8px 6px; }
 .cmp-list .msg-meta { font-size: 0.625rem; }
 .cmp-list .wa-agent { align-self: flex-start; }
@@ -1190,7 +1199,7 @@ html[lang="gu"] .dash-head h3 { line-height: 1.2; letter-spacing: 0; }
 .frag-ai { display: grid; gap: var(--s-3); }
 .ai-ask { display: flex; align-items: center; gap: var(--s-2); padding: 10px 12px; border-radius: 14px; background: var(--peacock-soft); color: var(--peacock); font-weight: var(--fw-strong); }
 .ai-avatar { flex: none; width: 26px; height: 26px; border-radius: 8px; background: var(--peacock) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Cpath d='M13 5l1.8 4.6L19.5 11l-4.7 1.6L13 17l-1.8-4.4L6.5 11l4.7-1.4z' fill='white'/%3E%3Ccircle cx='19' cy='18.5' r='1.6' fill='white'/%3E%3C/svg%3E") center / 26px no-repeat; }
-.ai-query { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ai-query { min-width: 0; }
 .ai-steps { display: grid; gap: 4px; }
 .ai-steps .wa-agent { align-self: flex-start; justify-self: start; background: var(--ground-2); box-shadow: none; }
 .ai-picks { display: grid; gap: 6px; }
@@ -1243,10 +1252,10 @@ html[lang="gu"] .dash-head h3 { line-height: 1.2; letter-spacing: 0; }
 .db-delta.is-up { background: #E4F3EC; color: var(--action); }
 .db-note { color: var(--ink-3); font-size: 0.75rem; }
 .db-row { display: grid; gap: var(--s-3); min-width: 0; }
-.db-card-head { display: flex; justify-content: space-between; align-items: center; gap: var(--s-2); margin-bottom: var(--s-2); }
+.db-card-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 4px var(--s-2); margin-bottom: var(--s-2); }
 .db-card-head b { font-weight: var(--fw-strong); }
 .db-card-head small { color: var(--ink-3); font-size: 0.75rem; }
-.db-legend { display: inline-flex; align-items: center; gap: 6px; color: var(--ink-3); font-size: 0.75rem; }
+.db-legend { display: inline-flex; align-items: center; gap: 6px; color: var(--ink-3); font-size: 0.75rem; white-space: nowrap; }
 .db-legend i { width: 14px; height: 3px; border-radius: 2px; margin-left: 6px; }
 .lg-today { background: var(--action); }
 .lg-last { background: repeating-linear-gradient(90deg, #A8B0AB 0 4px, transparent 4px 7px); }
@@ -1330,4 +1339,9 @@ html[lang="gu"] .dash-head h3 { line-height: 1.2; letter-spacing: 0; }
   /* Orders get the full width; context sits in three columns beneath them. */
   .db-row-b { grid-template-columns: minmax(0, 1fr); }
   .db-row-b .db-col { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* Narrow screens: the orders table drops its payment column so the amount stays in view. */
+@media (max-width: 899px) {
+  .db-orders th:nth-child(5), .db-orders td:nth-child(5) { display: none; }
 }
