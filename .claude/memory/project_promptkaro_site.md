@@ -15,7 +15,7 @@ repos, Fonts, Galleries...) explored and used. Stock-photo hosts are blocked in 
 raw.githubusercontent.com and npm work.
 
 **File structure:**
-- index.html: hero stage (site + product + agent chat), examples (11 businesses, side list), how it works, products
+- index.html: hero stage (one device that follows the headline word: website, AI agent phone, dashboard, online store, catalogue; hero.js fires `pk:scene`, headline.js follows), examples (11 businesses, side list), how it works, products
   (search, catalog, AI shopping assistant, dashboard), agents (bot vs agent, console, detailed
   automated dashboard), site types (#types, quote-based), promise, about, FAQ, footer
 - css/style.css: tokens + components; css/motion.css: all motion; css/legal.css: privacy/terms

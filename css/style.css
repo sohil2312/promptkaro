@@ -344,6 +344,21 @@ html[lang="gu"] .hero-title { font-size: calc(var(--fs-h1) * 0.8); line-height: 
 .stage-kind { padding: 3px 10px; border-radius: var(--r-pill); background: var(--ink); color: var(--on-ink); font-size: 0.75rem; font-weight: var(--fw-strong); white-space: nowrap; }
 .stage-view { position: relative; height: 300px; overflow: hidden; background: #FFFFFF; }
 .stage-shot { position: absolute; left: 0; top: 0; width: 100%; height: auto; }
+.stage-shot.is-fit { height: 100%; object-fit: cover; object-position: 50% 0; }
+@media (max-width: 700px) { .stage-shot.is-fit { object-position: 0 0; } }
+/* One device on the stage. It is a browser window for sites and dashboards and folds into a
+   phone for the WhatsApp agent; hero.js morphs the width between the two. */
+.js .stage-slot { position: relative; height: 460px; }
+.js .stage-device { --phone-w: 320px; position: absolute; inset: 0; width: 100%; margin-inline: auto; border-radius: 16px; overflow: hidden; background: #FFFFFF; box-shadow: var(--float); }
+.js .stage-device[data-mode="phone"] { width: min(var(--phone-w), 100%); border-radius: 24px; }
+.js .stage-device > figure { position: absolute; inset: 0; max-width: none; margin: 0; }
+.js .stage-device .stage-browser { display: flex; flex-direction: column; border-radius: 0; box-shadow: none; }
+.js .stage-device .stage-view { flex: 1; height: auto; }
+.js .stage-device .chat { height: 100%; border-radius: 0; box-shadow: none; }
+/* The phone screen keeps its width while the frame narrows around it, so nothing reflows mid-morph. */
+.js .stage-device .stage-phone { right: 0; left: 0; width: min(var(--phone-w), 100%); margin-inline: auto; }
+.js .stage-device[data-mode="browser"] .stage-phone,
+.js .stage-device[data-mode="phone"] .stage-browser { visibility: hidden; opacity: 0; }
 .stage-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--s-3); }
 .stage-pause { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--ground-2); color: var(--ink); }
 .stage-pause svg { width: 14px; height: 14px; fill: currentColor; }
@@ -784,12 +799,9 @@ html:not(.js) .dock { display: none; }
   /* The stage starts on the headline's cap line and ends near the hero's last line. */
   .hero-title { font-size: clamp(3.25rem, 1rem + 3.9vw, 4.75rem); max-width: 10ch; }
   html[lang="gu"] .hero-title { font-size: clamp(2.75rem, 0.9rem + 3.1vw, 3.9rem); }
-  .hero-stage { display: block; height: 600px; margin-top: var(--s-2); }
-  .stage-browser { position: absolute; top: 0; left: 0; right: 120px; }
+  .hero-stage { margin-top: var(--s-2); }
   .stage-view { height: 400px; }
-  .stage-phone { position: absolute; right: 0; top: 150px; width: 300px; max-width: none; z-index: 1; }
-  .stage-phone .chat { height: 420px; }
-  .stage-controls { position: absolute; left: 0; right: 316px; top: 452px; }
+  .js .stage-slot { height: 500px; }
   .panel { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: var(--s-9); }
   .promise-grid { grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: var(--s-8); }
   .faq-grid { grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: var(--s-9); align-items: start; }
@@ -801,6 +813,7 @@ html:not(.js) .dock { display: none; }
 @media (min-width: 720px) and (max-width: 959px) {
   .stage-view { height: 380px; }
   .stage-phone { max-width: 420px; }
+  .js .stage-slot { height: 520px; }
 }
 .sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
 

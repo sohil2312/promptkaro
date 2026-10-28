@@ -320,8 +320,8 @@ test.describe('3. Interaction', () => {
     await page.goto(PAGE_URL);
     const h1 = page.locator('h1');
     const before = (await h1.boundingBox()).height;
-    await expect(page.locator('#heroWord .rot-word').first()).toHaveText('AI agent', { timeout: 6000 });
-    await expect(page.locator('#heroWord .rot-word').first()).toHaveText('dashboard', { timeout: 6000 });
+    await expect(page.locator('#heroWord .rot-word').first()).toHaveText('AI agent', { timeout: 9000 });
+    await expect(page.locator('#heroWord .rot-word').first()).toHaveText('dashboard', { timeout: 15000 });
     expect(Math.abs((await h1.boundingBox()).height - before)).toBeLessThan(2);
     await expect(h1.locator('.visually-hidden')).toHaveText('See your website first. Pay only if you like it.');
     // the text column uses the phone's width
@@ -329,25 +329,36 @@ test.describe('3. Interaction', () => {
     expect(lead.width).toBeGreaterThan(412 - 2 * 16 - 8);
   });
 
-  test('hero stage plays the PromptKaro story, then turns into the next business', async ({ page }) => {
+  test('hero stage shows what the headline names, one thing at a time', async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto(PAGE_URL);
-    // the stage starts on the headline's top line
+    const word = page.locator('#heroWord .rot-word').last();
+    const device = page.locator('#stageDevice');
+    // the stage starts on the headline's top line (measured after the entrance settles)
+    await page.waitForTimeout(1000);
     const h1 = await page.locator('.hero-title').boundingBox();
-    const stage = await page.locator('.stage-browser').boundingBox();
+    const stage = await device.boundingBox();
     expect(Math.abs(stage.y - h1.y)).toBeLessThan(16);
-    await expect(page.locator('#chatList .msg-out').last()).toBeVisible({ timeout: 12000 });
-    await expect(page.locator('#stageUrl')).toHaveText('sheeshamhouse.in', { timeout: 15000 });
-    await expect(page.locator('#chatName')).toHaveText('Sheesham House');
-    await expect(page.locator('#chatList .msg-agent').last()).toBeVisible({ timeout: 8000 });
-    await expect(page.locator('#stageDots button')).toHaveCount(7);
+    // website: a site in the browser
+    await expect(word).toHaveText('website');
+    await expect(device).toHaveAttribute('data-mode', 'browser');
+    await expect(page.locator('#stageUrl')).toHaveText('studioaakar.in');
+    // AI agent: the browser folds into the phone and the agent works
+    await expect(word).toHaveText('AI agent', { timeout: 9000 });
+    await expect(device).toHaveAttribute('data-mode', 'phone', { timeout: 3000 });
+    await expect(page.locator('.stage-browser')).toBeHidden();
+    await expect(page.locator('#chatList .msg-agent').last()).toBeVisible({ timeout: 12000 });
+    await expect(page.locator('#stageDots button')).toHaveCount(5);
     await expect(page.locator('#stageDots button').nth(1)).toHaveAttribute('aria-current', 'true');
-    // pause holds the scene; a dot jumps to any example
+    // pause holds the scene; a dot jumps to any example and the word follows
     await page.locator('#stagePause').click();
     await expect(page.locator('#stagePause')).toHaveAttribute('aria-pressed', 'true');
     await page.locator('#stageDots button').nth(2).click();
+    await expect(device).toHaveAttribute('data-mode', 'browser');
     await expect(page.locator('#stageUrl')).toHaveText('dashboard.shreejimobile.in');
-    await expect(page.locator('#stageKind')).toHaveText('Automated dashboard');
+    await expect(page.locator('#stageKind')).toHaveText('Dashboard');
+    await expect(word).toHaveText('dashboard', { timeout: 3000 });
+    await expect(page.locator('.stage-phone')).toBeHidden();
   });
 
   test('site types show live screens warped onto the rendered devices', async ({ page }) => {
@@ -443,7 +454,9 @@ test.describe('5. Robustness', () => {
     const page = await ctx.newPage();
     await page.goto(PAGE_URL);
     await expect(page.locator('h1')).toBeVisible();
-    await expect(page.locator('.chat-list .msg:not(.msg-typing)')).toHaveCount(5);
+    await expect(page.locator('.stage-browser')).toBeVisible();
+    await expect(page.locator('#chatList .msg')).toHaveCount(4);
+    await expect(page.locator('#chatList .msg').last()).toBeVisible();
     for (const id of ['#panel-mobile', '#panel-furniture', '#panel-interior', '#panel-boutique', '#panel-property', '#panel-manufacturer', '#panel-wedding', '#panel-handicrafts', '#panel-clinic', '#panel-coaching', '#panel-food']) {
       await expect(page.locator(id)).toBeVisible();
     }
@@ -472,6 +485,10 @@ test.describe('5. Robustness', () => {
     await page.waitForTimeout(800);
     await expect(page.locator('#chatList .is-pending')).toHaveCount(0);
     await expect(page.locator('#chatReplay')).toBeHidden();
+    // the dots still switch the stage, and the headline word follows without animating
+    await page.locator('#stageDots button').nth(1).click();
+    await expect(page.locator('#stageDevice')).toHaveAttribute('data-mode', 'phone');
+    await expect(page.locator('#heroWord .rot-word')).toHaveText('AI agent');
     await page.locator('#showcase').scrollIntoViewIfNeeded();
     await page.waitForTimeout(1200);
     expect(await page.locator('#panel-mobile .site-view').evaluate((v) => v.scrollTop)).toBe(0); // no auto tour
