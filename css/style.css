@@ -28,6 +28,9 @@
 
 /* ---------- Tokens ---------- */
 :root {
+  --mac-close: #FF5F57;
+  --mac-min: #FEBC2E;
+  --mac-max: #28C840;
   /* Colour: one ground, one ink, one action. Marigold is the brand mark, used twice. */
   --ground: #FFFFFF;
   --ground-2: #F4F4EF;        /* tone step between sections, never a line */
@@ -334,7 +337,9 @@ html[lang="gu"] .hero-title { font-size: calc(var(--fs-h1) * 0.8); line-height: 
 .stage-browser { position: relative; margin: 0; border-radius: 16px; background: #FFFFFF; box-shadow: var(--float); overflow: hidden; }
 .stage-bar { display: flex; align-items: center; gap: var(--s-3); height: 40px; padding: 0 var(--s-3); background: #F1F2EE; }
 .stage-lights { display: flex; gap: 6px; }
-.stage-lights i { width: 10px; height: 10px; border-radius: 50%; background: #D7D9D2; }
+.stage-lights i { width: 12px; height: 12px; border-radius: 50%; background: var(--mac-close); box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.12); }
+.stage-lights i:nth-child(2) { background: var(--mac-min); }
+.stage-lights i:nth-child(3) { background: var(--mac-max); }
 .stage-url { flex: 1; min-width: 0; max-width: 260px; margin-inline: auto; padding: 4px 12px; border-radius: var(--r-pill); background: #FFFFFF; color: var(--ink-2); font-size: 0.8125rem; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .stage-kind { padding: 3px 10px; border-radius: var(--r-pill); background: var(--ink); color: var(--on-ink); font-size: 0.75rem; font-weight: var(--fw-strong); white-space: nowrap; }
 .stage-view { position: relative; height: 300px; overflow: hidden; background: #FFFFFF; }
@@ -1265,7 +1270,15 @@ html[lang="gu"] .dash-head h3 { line-height: 1.2; letter-spacing: 0; }
 
 /* ---------- Website previews (Examples) ---------- */
 .site-preview { width: 100%; max-width: 640px; border-radius: var(--r-2); background: var(--ground); box-shadow: var(--float); overflow: hidden; }
-.site-bar { display: flex; align-items: center; justify-content: center; height: 40px; background: #EEEFEA; }
+.site-bar { position: relative; display: flex; align-items: center; justify-content: center; height: 40px; padding-inline: 76px; background: #EEEFEA; }
+/* Mac window buttons: close, minimise, full screen */
+.site-bar::before {
+  content: ''; position: absolute; left: 12px; top: 50%; width: 48px; height: 12px; margin-top: -6px;
+  background:
+    radial-gradient(circle at 6px 6px, var(--mac-close) 5.75px, transparent 6px),
+    radial-gradient(circle at 24px 6px, var(--mac-min) 5.75px, transparent 6px),
+    radial-gradient(circle at 42px 6px, var(--mac-max) 5.75px, transparent 6px);
+}
 .site-url { display: inline-flex; align-items: center; gap: 6px; padding: 4px 14px; border-radius: var(--r-pill); background: var(--ground); color: var(--ink-3); font-size: 0.8125rem; font-weight: var(--fw-strong); }
 .site-url::before { content: ''; width: 8px; height: 10px; border: 1.5px solid currentColor; border-top-width: 4px; border-radius: 2px 2px 2px 2px; opacity: 0.7; }
 .site-view { position: relative; height: clamp(340px, 52vw, 520px); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
