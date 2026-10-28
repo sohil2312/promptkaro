@@ -1,0 +1,6 @@
+{
+ "t-cooler": {"w":900,"h":1100,"samples":32,"mode":"sweep","bg":"#2B3034","exposure":-0.3,"ambient":0.05,
+   "coolers":[{"doors":1}],"items":[],
+   "cam":{"yaw":-24,"elev":6,"lens":50,"target":[0,0,0.98],"dist":4.6},
+   "light":{"key":[-2.5,-3,3.5],"power":220,"fill":40,"rim":260}}
+}

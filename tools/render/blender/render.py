@@ -39,6 +39,8 @@ def reset(spec):
     sc.cycles.max_bounces = 8
     sc.cycles.transmission_bounces = 8
     sc.cycles.transparent_max_bounces = 8
+    sc.cycles.caustics_reflective = False
+    sc.cycles.caustics_refractive = False
     sc.render.resolution_x = spec.get('w', 1200)
     sc.render.resolution_y = spec.get('h', 900)
     sc.render.resolution_percentage = 100
@@ -266,6 +268,169 @@ def flame(loc, scale=1.0):
     o.location = (loc[0], loc[1], loc[2] + 0.03 * scale)
 
 
+# ---------------------------------------------------------------- Visi cooler (modelled here)
+def _box(name, size, loc, mat, bevel=0.004, parent=None):
+    bpy.ops.mesh.primitive_cube_add(size=1, location=loc)
+    o = bpy.context.active_object
+    o.name = name
+    o.scale = size
+    if bevel:
+        b = o.modifiers.new('b', 'BEVEL'); b.width = bevel; b.segments = 3
+    o.data.materials.append(mat)
+    if parent:
+        o.parent = parent
+    return o
+
+
+_COOLER_MATS = {}
+
+
+def _cooler_mats():
+    if _COOLER_MATS:
+        return _COOLER_MATS
+    m = _COOLER_MATS
+    m['body'] = pbr('PowderCoat', '#E9ECEE', 0.38, coat=0.3)
+    m['liner'] = pbr('Liner', '#F4F6F7', 0.5)
+    m['alu'] = pbr('Aluminium', '#2A2F33', 0.32, metal=0.9)
+    m['grille'] = pbr('Grille', '#1E2226', 0.6, metal=0.4)
+    m['wire'] = pbr('Wire', '#C9CED2', 0.25, metal=1.0)
+    g = bpy.data.materials.new('DoorGlass'); g.use_nodes = True
+    gp = g.node_tree.nodes['Principled BSDF']
+    gp.inputs['Base Color'].default_value = hex_rgb('#EAF4F8')
+    gp.inputs['Transmission Weight'].default_value = 1.0
+    gp.inputs['Roughness'].default_value = 0.02
+    gp.inputs['IOR'].default_value = 1.5
+    m['glass'] = g
+    m['led'] = pbr('LED', '#F2FAFF', 0.5, emit=6)
+    m['rubber'] = pbr('Rubber', '#15181A', 0.8)
+    return m
+
+
+def _bottle_mesh():
+    """One PET bottle (0.5 L), shared by every bottle instance."""
+    o = lathe([(0, 0), (0.028, 0.0), (0.033, 0.01), (0.033, 0.13), (0.03, 0.15), (0.032, 0.16), (0.032, 0.17),
+               (0.022, 0.2), (0.013, 0.215), (0.012, 0.225)], 32)
+    return o.data
+
+
+def _bottle_mats(color, label):
+    liquid = bpy.data.materials.new('Liquid' + color); liquid.use_nodes = True
+    lp = liquid.node_tree.nodes['Principled BSDF']
+    lp.inputs['Base Color'].default_value = hex_rgb(color)
+    lp.inputs['Transmission Weight'].default_value = 0.85
+    lp.inputs['Roughness'].default_value = 0.05
+    return liquid, pbr('Label' + label, label, 0.35, coat=0.6)
+
+
+def cooler(c):
+    """A commercial visi cooler: powder-coated cabinet, lit brand canopy, glass door(s) in
+    aluminium frames, wire shelves stocked with unbranded bottles and cans, a lit interior."""
+    M = _cooler_mats()
+    doors = c.get('doors', 1)
+    W = c.get('w', 0.6 * doors)
+    D = 0.62
+    H = c.get('h', 1.95)
+    can_h = 0.16
+    body_h = H - can_h
+    root = bpy.data.objects.new('Cooler', None)
+    bpy.context.collection.objects.link(root)
+    t = 0.035  # wall thickness
+    # Cabinet shell: sides, back, top, plinth with grille
+    plinth = 0.14
+    _box('SideL', (t, D, body_h - plinth), (-W / 2 + t / 2, 0, plinth + (body_h - plinth) / 2), M['body'], parent=root)
+    _box('SideR', (t, D, body_h - plinth), (W / 2 - t / 2, 0, plinth + (body_h - plinth) / 2), M['body'], parent=root)
+    _box('Back', (W, t, body_h - plinth), (0, D / 2 - t / 2, plinth + (body_h - plinth) / 2), M['liner'], parent=root)
+    _box('Top', (W, D, t), (0, 0, body_h - t / 2), M['body'], parent=root)
+    _box('Floor', (W, D, t), (0, 0, plinth + t / 2), M['liner'], parent=root)
+    _box('Plinth', (W, D - 0.02, plinth), (0, 0.01, plinth / 2), M['grille'], parent=root)
+    for i in range(7):
+        _box('Slat', (W - 0.08, 0.006, 0.008), (0, -D / 2 + 0.002, 0.025 + i * 0.016), M['wire'], bevel=0, parent=root)
+    # Brand canopy: a lit panel with the brand name
+    cm = pbr('Canopy' + c.get('canopy', '#0F5B6B'), c.get('canopy', '#0F5B6B'), 0.4, coat=0.5)
+    _box('Canopy', (W, D, can_h), (0, 0, body_h + can_h / 2), cm, bevel=0.01, parent=root)
+    bpy.ops.object.text_add(location=(0, -D / 2 - 0.002, body_h + can_h / 2), rotation=(math.pi / 2, 0, 0))
+    tx = bpy.context.active_object
+    tx.data.body = c.get('brand', 'HIMAL')
+    tx.data.align_x = 'CENTER'; tx.data.align_y = 'CENTER'
+    tx.data.size = can_h * 0.5 * min(1.0, 6 / max(len(tx.data.body), 1))
+    tx.data.extrude = 0.002
+    tx.data.space_character = 1.15
+    tx.data.materials.append(pbr('BrandText', c.get('text', '#FFFFFF'), 0.4, emit=c.get('glow', 3.0)))
+    tx.parent = root
+    # Shelves and stock
+    inner_w = W - 2 * t
+    levels = [plinth + 0.06 + k * (body_h - plinth - 0.14) / 5 for k in range(5)]
+    palettes = c.get('stock', ['#3B1408', '#F7A21B', '#9BD34B', '#E3F1F7', '#F9C80E', '#B5121B'])
+    labels = c.get('labels', ['#C4161C', '#F28C1B', '#0E7C3A', '#1E5AA8', '#2B2B2B', '#F7F2E8'])
+    bm = _bottle_mesh()
+    bpy.data.objects.remove(next(o for o in bpy.data.objects if o.data == bm))  # keep the mesh, drop the template object
+    bm.materials.append(_cooler_mats()['liner'])  # one slot; each bottle links its own material to it
+    mats = [_bottle_mats(palettes[i % len(palettes)], labels[i % len(labels)]) for i in range(len(palettes))]
+    cap_mats = [pbr('Cap' + col, col, 0.4) for col in ['#C4161C', '#1E5AA8', '#0E7C3A', '#F7F7F7']]
+    can_mats = [pbr('Can' + col, col, 0.22, metal=0.9, coat=0.8) for col in ['#C4161C', '#1E5AA8', '#F28C1B', '#0E7C3A', '#7A1FA2']]
+    import random
+    rnd = random.Random(c.get('seed', 7))
+    for li, z in enumerate(levels):
+        _box('Shelf', (inner_w - 0.01, D - 0.12, 0.008), (0, 0.03, z), M['wire'], bevel=0, parent=root)
+        cans = li == len(levels) - 1
+        pitch = 0.074 if cans else 0.072
+        n = int((inner_w - 0.02) // pitch)
+        x0 = -(n - 1) * pitch / 2
+        group = rnd.randrange(len(mats))
+        for row in range(3 if cans else 2):
+            for k in range(n):
+                if rnd.random() < 0.06:
+                    continue  # a gap where something sold
+                if k % 4 == 0:
+                    group = (group + 1) % len(mats)
+                x = x0 + k * pitch + rnd.uniform(-0.004, 0.004)
+                y = -D / 2 + 0.12 + row * 0.085
+                if cans:
+                    bpy.ops.mesh.primitive_cylinder_add(radius=0.033, depth=0.122, location=(x, y, z + 0.065), vertices=32)
+                    o = bpy.context.active_object; o.data.materials.append(can_mats[(k // 3 + row) % len(can_mats)]); o.parent = root
+                    for o2 in o.data.polygons: o2.use_smooth = True
+                else:
+                    o = bpy.data.objects.new('Bottle', bm)
+                    bpy.context.collection.objects.link(o)
+                    o.location = (x, y, z + 0.004)
+                    o.rotation_euler = (0, 0, rnd.uniform(0, 6.28))
+                    o.parent = root
+                    liquid, label = mats[group]
+                    o.material_slots[0].link = 'OBJECT'  # the mesh is shared; the liquid colour is per bottle
+                    o.material_slots[0].material = liquid
+                    bpy.ops.mesh.primitive_cylinder_add(radius=0.0336, depth=0.07, location=(x, y, z + 0.004 + 0.085), vertices=32)
+                    lb = bpy.context.active_object; lb.data.materials.append(label); lb.parent = root
+                    bpy.ops.mesh.primitive_cylinder_add(radius=0.0135, depth=0.016, location=(x, y, z + 0.004 + 0.232), vertices=20)
+                    cp = bpy.context.active_object; cp.data.materials.append(cap_mats[group % len(cap_mats)]); cp.parent = root
+    # Interior light: LED strips down both sides, plus soft fill so the stock reads through the glass
+    for sx in (-1, 1):
+        _box('LEDStrip', (0.012, 0.012, body_h - plinth - 0.1), (sx * (inner_w / 2 - 0.01), -D / 2 + 0.06, plinth + (body_h - plinth) / 2), M['led'], bevel=0, parent=root)
+    d = bpy.data.lights.new('Inside', 'AREA'); d.energy = c.get('inside', 60) * doors; d.size = inner_w
+    d.color = hex_rgb('#EEF7FF')[:3]
+    li_o = bpy.data.objects.new('Inside', d); bpy.context.collection.objects.link(li_o)
+    li_o.location = (0, -D / 2 + 0.05, body_h - 0.06); li_o.rotation_euler = (0, 0, 0); li_o.parent = root
+    # Door(s): aluminium frame, glass pane, full-height handle
+    dw = W / doors
+    for k in range(doors):
+        cx = -W / 2 + dw * (k + 0.5)
+        fy = -D / 2 - 0.02
+        fz0, fz1 = plinth, body_h - 0.005
+        fh = fz1 - fz0
+        fw = 0.045
+        _box('FrameL', (fw, 0.04, fh), (cx - dw / 2 + fw / 2, fy, fz0 + fh / 2), M['alu'], parent=root)
+        _box('FrameR', (fw, 0.04, fh), (cx + dw / 2 - fw / 2, fy, fz0 + fh / 2), M['alu'], parent=root)
+        _box('FrameT', (dw, 0.04, fw), (cx, fy, fz1 - fw / 2), M['alu'], parent=root)
+        _box('FrameB', (dw, 0.04, fw * 1.6), (cx, fy, fz0 + fw * 0.8), M['alu'], parent=root)
+        _box('Glass', (dw - 2 * fw + 0.01, 0.012, fh - 2.6 * fw), (cx, fy, fz0 + fh / 2 + 0.3 * fw), M['glass'], bevel=0, parent=root)
+        hx = cx + (dw / 2 - fw / 2) * (1 if (k % 2 == 0 and doors == 1) or k == 1 else -1)
+        _box('Handle', (0.022, 0.03, fh * 0.5), (hx, fy - 0.035, fz0 + fh * 0.55), M['alu'], bevel=0.008, parent=root)
+        _box('Gasket', (dw - 0.01, 0.006, 0.01), (cx, fy + 0.022, fz0 + 0.004), M['rubber'], bevel=0, parent=root)
+    root.location = (c.get('x', 0), c.get('y', 0), 0)
+    root.rotation_euler = (0, 0, math.radians(c.get('rot', 0)))
+    return root
+
+
+
 def procedural(spec):
     for p in spec.get('pots', []):
         o = lathe([tuple(v) for v in p['profile']])
@@ -324,6 +489,8 @@ def procedural(spec):
             for cy in (-0.45, 0.45):
                 bpy.ops.mesh.primitive_cylinder_add(radius=0.003, depth=n * fh, location=(x + cx * w, y + cy * d, 0.04 + n * fh / 2), vertices=12)
                 bpy.context.active_object.data.materials.append(card)
+    for c in spec.get('coolers', []):
+        cooler(c)
     for m in spec.get('maquette', []):
         bpy.ops.mesh.primitive_cube_add(size=1, location=m['loc'])
         o = bpy.context.active_object; o.scale = m['size']
@@ -384,6 +551,7 @@ def area_light(name, loc, target, power, size, color='#FFF4E6'):
 
 def render(name, spec, out):
     sc = reset(spec)
+    _COOLER_MATS.clear()  # materials die with the reset scene
     mode = spec.get('mode', 'cutout')
     if mode == 'sweep':
         sweep(spec.get('bg', '#E9E3DA'))
