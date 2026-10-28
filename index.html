@@ -19,8 +19,8 @@
 
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="/assets/fonts/anek-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/css/motion.css">
+  <link rel="stylesheet" href="/css/style.css?v=8ce810c537">
+  <link rel="stylesheet" href="/css/motion.css?v=87d56bc94b">
   <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -592,6 +592,20 @@
                 <time data-gu="હમણાં">now</time>
               </div>
             </div>
+            <div class="frag frag-today" data-ui aria-hidden="true">
+              <div class="today-kpis">
+                <span><small data-gu="આજની આવક">Revenue today</small><b class="num">₹48,620</b><em>+12%</em></span>
+                <span><small data-gu="ઓર્ડર">Orders</small><b class="num">23</b><em>+4</em></span>
+                <span><small data-gu="AI એજન્ટે સંભાળી">AI agent chats</small><b class="num">54/61</b><em data-gu="88%">88%</em></span>
+              </div>
+              <h4 data-gu="આજના ટોપ વેચાણ">Top sellers today</h4>
+              <ol class="today-top">
+                <li><img src="/assets/img/phone-thumb.webp" alt="" width="95" height="160" loading="lazy" decoding="async"><span data-gu="5G ફોન, 128 GB">5G phone, 128 GB</span><b class="num">6</b></li>
+                <li><img src="/assets/img/earbuds-thumb.webp" alt="" width="160" height="160" loading="lazy" decoding="async"><span data-gu="ઇયરબડ્સ">Earbuds</span><b class="num">5</b></li>
+                <li><img src="/assets/img/watch-thumb.webp" alt="" width="160" height="160" loading="lazy" decoding="async"><span data-gu="સ્માર્ટ વોચ">Smart watch</span><b class="num">4</b></li>
+              </ol>
+              <p class="today-insight"><b data-gu="AI સૂચન:">AI insight:</b> <span data-gu="ઇયરબડ્સ 2 બાકી. શુક્રવાર પહેલાં 20 મંગાવો.">Earbuds are down to 2. Reorder 20 before Friday.</span></p>
+            </div>
           </article>
         </div>
       </div>
@@ -858,6 +872,9 @@
             <button role="tab" id="dtab-manufacturer" aria-controls="dpanel-manufacturer" aria-selected="false" tabindex="-1" data-gu="મેન્યુફેક્ચરર">Manufacturer</button>
             <button role="tab" id="dtab-wedding" aria-controls="dpanel-wedding" aria-selected="false" tabindex="-1" data-gu="વેડિંગ પ્લાનર">Wedding planner</button>
             <button role="tab" id="dtab-interior" aria-controls="dpanel-interior" aria-selected="false" tabindex="-1" data-gu="ઇન્ટિરિયર સ્ટુડિયો">Interior studio</button>
+            <button role="tab" id="dtab-boutique" aria-controls="dpanel-boutique" aria-selected="false" tabindex="-1" data-gu="બુટિક">Boutique</button>
+            <button role="tab" id="dtab-handicrafts" aria-controls="dpanel-handicrafts" aria-selected="false" tabindex="-1" data-gu="હસ્તકલા">Handicrafts</button>
+            <button role="tab" id="dtab-realestate" aria-controls="dpanel-realestate" aria-selected="false" tabindex="-1" data-gu="રિયલ એસ્ટેટ બિલ્ડર">Real estate builder</button>
           </div>
           <div class="dash-panel" role="tabpanel" id="dpanel-furniture" aria-labelledby="dtab-furniture">
             <figure class="site-preview dash-shot" data-ui>
@@ -865,6 +882,7 @@
               <img src="/assets/img/dash-furniture.webp" width="1800" height="1125" alt="Production board from design approval to delivery, fabric stock with an AI reorder hint, and WhatsApp enquiries with what the agent did." data-gu-alt="ડિઝાઇનથી ડિલિવરી સુધીનું પ્રોડક્શન બોર્ડ, AI સૂચન સાથે કાપડનો સ્ટોક અને એજન્ટે સંભાળેલી WhatsApp પૂછપરછ." loading="lazy" decoding="async">
             </figure>
             <p class="dash-cap" data-gu="ડિઝાઇનથી ડિલિવરી સુધીનું પ્રોડક્શન બોર્ડ, AI સૂચન સાથે કાપડનો સ્ટોક અને એજન્ટે સંભાળેલી WhatsApp પૂછપરછ.">Production board from design approval to delivery, fabric stock with an AI reorder hint, and WhatsApp enquiries with what the agent did.</p>
+            <a class="dash-full" href="/assets/img/dash-furniture.webp" target="_blank" rel="noopener" data-gu="પૂરા કદમાં જુઓ">Open full size</a>
           </div>
           <div class="dash-panel" role="tabpanel" id="dpanel-manufacturer" aria-labelledby="dtab-manufacturer" hidden>
             <figure class="site-preview dash-shot" data-ui>
@@ -872,6 +890,7 @@
               <img src="/assets/img/dash-manufacturer.webp" width="1800" height="1125" alt="Quote pipeline with the AI agent sending quote PDFs, units dispatched by week, production lines and follow-up insights." data-gu-alt="AI એજન્ટ ક્વોટ PDF મોકલે તેવી પાઇપલાઇન, અઠવાડિયા પ્રમાણે ડિસ્પેચ, પ્રોડક્શન લાઇન અને ફોલો-અપ સૂચનો." loading="lazy" decoding="async">
             </figure>
             <p class="dash-cap" data-gu="AI એજન્ટ ક્વોટ PDF મોકલે તેવી પાઇપલાઇન, અઠવાડિયા પ્રમાણે ડિસ્પેચ, પ્રોડક્શન લાઇન અને ફોલો-અપ સૂચનો.">Quote pipeline with the AI agent sending quote PDFs, units dispatched by week, production lines and follow-up insights.</p>
+            <a class="dash-full" href="/assets/img/dash-manufacturer.webp" target="_blank" rel="noopener" data-gu="પૂરા કદમાં જુઓ">Open full size</a>
           </div>
           <div class="dash-panel" role="tabpanel" id="dpanel-wedding" aria-labelledby="dtab-wedding" hidden>
             <figure class="site-preview dash-shot" data-ui>
@@ -879,6 +898,7 @@
               <img src="/assets/img/dash-wedding.webp" width="1800" height="1125" alt="The wedding week as a run sheet, vendors and payments, RSVPs and rooms, with the AI agent answering guests." data-gu-alt="લગ્નનું અઠવાડિયું રન-શીટ તરીકે, વેન્ડર અને પેમેન્ટ, RSVP અને રૂમ, અને મહેમાનોને જવાબ આપતો AI એજન્ટ." loading="lazy" decoding="async">
             </figure>
             <p class="dash-cap" data-gu="લગ્નનું અઠવાડિયું રન-શીટ તરીકે, વેન્ડર અને પેમેન્ટ, RSVP અને રૂમ, અને મહેમાનોને જવાબ આપતો AI એજન્ટ.">The wedding week as a run sheet, vendors and payments, RSVPs and rooms, with the AI agent answering guests.</p>
+            <a class="dash-full" href="/assets/img/dash-wedding.webp" target="_blank" rel="noopener" data-gu="પૂરા કદમાં જુઓ">Open full size</a>
           </div>
           <div class="dash-panel" role="tabpanel" id="dpanel-interior" aria-labelledby="dtab-interior" hidden>
             <figure class="site-preview dash-shot" data-ui>
@@ -886,6 +906,31 @@
               <img src="/assets/img/dash-interior.webp" width="1800" height="1125" alt="Active projects with stage and progress, site visits booked by the AI agent, and payments due by milestone." data-gu-alt="સ્ટેજ અને પ્રગતિ સાથે ચાલુ પ્રોજેક્ટ, AI એજન્ટે બુક કરેલી સાઇટ વિઝિટ અને માઇલસ્ટોન પ્રમાણે બાકી પેમેન્ટ." loading="lazy" decoding="async">
             </figure>
             <p class="dash-cap" data-gu="સ્ટેજ અને પ્રગતિ સાથે ચાલુ પ્રોજેક્ટ, AI એજન્ટે બુક કરેલી સાઇટ વિઝિટ અને માઇલસ્ટોન પ્રમાણે બાકી પેમેન્ટ.">Active projects with stage and progress, site visits booked by the AI agent, and payments due by milestone.</p>
+            <a class="dash-full" href="/assets/img/dash-interior.webp" target="_blank" rel="noopener" data-gu="પૂરા કદમાં જુઓ">Open full size</a>
+          </div>
+          <div class="dash-panel" role="tabpanel" id="dpanel-boutique" aria-labelledby="dtab-boutique" hidden>
+            <figure class="site-preview dash-shot" data-ui>
+              <div class="site-bar"><span class="site-url" translate="no">dashboard.rangrez.in</span></div>
+              <img src="/assets/img/dash-boutique.webp" width="1800" height="1125" alt="Best sellers with sizes left, try-at-home visits booked by the AI agent, and the alterations queue with ready messages." data-gu-alt="બાકી સાઇઝ સાથે બેસ્ટ સેલર, AI એજન્ટે બુક કરેલી ઘરે ટ્રાયલ અને તૈયાર થયાના મેસેજ સાથે ઓલ્ટરેશનની યાદી." loading="lazy" decoding="async">
+            </figure>
+            <p class="dash-cap" data-gu="બાકી સાઇઝ સાથે બેસ્ટ સેલર, AI એજન્ટે બુક કરેલી ઘરે ટ્રાયલ અને તૈયાર થયાના મેસેજ સાથે ઓલ્ટરેશનની યાદી.">Best sellers with sizes left, try-at-home visits booked by the AI agent, and the alterations queue with ready messages.</p>
+            <a class="dash-full" href="/assets/img/dash-boutique.webp" target="_blank" rel="noopener" data-gu="પૂરા કદમાં જુઓ">Open full size</a>
+          </div>
+          <div class="dash-panel" role="tabpanel" id="dpanel-handicrafts" aria-labelledby="dtab-handicrafts" hidden>
+            <figure class="site-preview dash-shot" data-ui>
+              <div class="site-bar"><span class="site-url" translate="no">dashboard.kalahaat.in</span></div>
+              <img src="/assets/img/dash-handicrafts.webp" width="1800" height="1125" alt="Orders split to each maker family with progress, photos sent before shipping, and corporate gifting quotes." data-gu-alt="દરેક કારીગર પરિવારને વહેંચેલા ઓર્ડર અને પ્રગતિ, મોકલતા પહેલાં ફોટા અને કોર્પોરેટ ગિફ્ટિંગના ભાવ." loading="lazy" decoding="async">
+            </figure>
+            <p class="dash-cap" data-gu="દરેક કારીગર પરિવારને વહેંચેલા ઓર્ડર અને પ્રગતિ, મોકલતા પહેલાં ફોટા અને કોર્પોરેટ ગિફ્ટિંગના ભાવ.">Orders split to each maker family with progress, photos sent before shipping, and corporate gifting quotes.</p>
+            <a class="dash-full" href="/assets/img/dash-handicrafts.webp" target="_blank" rel="noopener" data-gu="પૂરા કદમાં જુઓ">Open full size</a>
+          </div>
+          <div class="dash-panel" role="tabpanel" id="dpanel-realestate" aria-labelledby="dtab-realestate" hidden>
+            <figure class="site-preview dash-shot" data-ui>
+              <div class="site-bar"><span class="site-url" translate="no">dashboard.aanganhomes.in</span></div>
+              <img src="/assets/img/dash-realestate.webp" width="1800" height="1125" alt="Units by floor (booked, available, on hold), hot leads sorted by the AI agent, and site visits it booked." data-gu-alt="માળ પ્રમાણે ઘર (બુક, ખાલી, હોલ્ડ), AI એજન્ટે ગોઠવેલી હોટ લીડ અને તેણે બુક કરેલી સાઇટ વિઝિટ." loading="lazy" decoding="async">
+            </figure>
+            <p class="dash-cap" data-gu="માળ પ્રમાણે ઘર (બુક, ખાલી, હોલ્ડ), AI એજન્ટે ગોઠવેલી હોટ લીડ અને તેણે બુક કરેલી સાઇટ વિઝિટ.">Units by floor (booked, available, on hold), hot leads sorted by the AI agent, and site visits it booked.</p>
+            <a class="dash-full" href="/assets/img/dash-realestate.webp" target="_blank" rel="noopener" data-gu="પૂરા કદમાં જુઓ">Open full size</a>
           </div>
         </div>
       </div>
@@ -1139,15 +1184,15 @@
     <symbol id="i-plus" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M12 5v14M5 12h14"/></symbol>
   </svg>
 
-  <script src="/js/main.js" defer></script>
-  <script src="/js/vendor/gsap.min.js" defer></script>
-  <script src="/js/hero.js" defer></script>
-  <script src="/js/showcase.js" defer></script>
-  <script src="/js/products.js" defer></script>
-  <script src="/js/agents.js" defer></script>
-  <script src="/js/turntable.js" defer></script>
-  <script src="/js/tilt.js" defer></script>
-  <script src="/js/types.js" defer></script>
-  <script src="/js/tabs.js" defer></script>
+  <script src="/js/main.js?v=874d8aa56e" defer></script>
+  <script src="/js/vendor/gsap.min.js?v=92bb9a9647" defer></script>
+  <script src="/js/hero.js?v=200d61ad10" defer></script>
+  <script src="/js/showcase.js?v=bd2c1402e9" defer></script>
+  <script src="/js/products.js?v=4a265cc12e" defer></script>
+  <script src="/js/agents.js?v=c48ed0cc28" defer></script>
+  <script src="/js/turntable.js?v=4cd3d157f0" defer></script>
+  <script src="/js/tilt.js?v=fea04f5b06" defer></script>
+  <script src="/js/types.js?v=2132b8b412" defer></script>
+  <script src="/js/tabs.js?v=c6760a7b75" defer></script>
 </body>
 </html>

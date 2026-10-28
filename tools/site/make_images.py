@@ -22,9 +22,10 @@ if __name__ == '__main__':
     for k in SITES:
         wide(O + f'{k}-full.png', A + f'site-{k}.webp', 1100, 80)
         wide(O + f'{k}-mobfull.png', A + f'site-{k}-m.webp', 640, 78)
-    for k in ['furniture', 'manufacturer', 'wedding', 'interior']:
+    for k in ['furniture', 'manufacturer', 'wedding', 'interior', 'boutique', 'handicrafts', 'realestate']:
         wide(O + f'dash-{k}.png', A + f'dash-{k}.webp', 1800, 80)
     wide(O + 'dashboard-desk.png', A + 'hero-dashboard.webp', 1100, 82)
+    wide(O + 'dashboard-mob.png', A + 'hero-dashboard-m.webp', 640, 80)
     for src, dst in [('furniture', 'home'), ('furniture-sofas', 'sofas'), ('furniture-custom', 'custom'), ('furniture-visit', 'visit')]:
         wide(O + f'{src}-first.png', A + f'mp-{dst}.webp', 1280, 80)
     print('images written')

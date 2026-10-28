@@ -172,7 +172,86 @@ INTERIOR = page('Studio Aakar dashboard', '#8A6B4E', '#1F1A15', 'A', 'Studio Aak
   <div class="insight" style="margin-top:12px"><b>AI insight:</b> enquiries with photos book a visit 3x more often. The agent now asks for photos first.</div></div>
 </div>""")
 
-DASHES = {'dash-furniture': FURNITURE, 'dash-manufacturer': MANUFACTURER, 'dash-wedding': WEDDING, 'dash-interior': INTERIOR}
+BOUTIQUE = page('Rangrez dashboard', '#9B4A52', '#1E1A1D', 'R', 'Rangrez',
+    ['Overview', 'Orders', 'Trials', 'Alterations', 'Stock'],
+    [('Send size chart when asked', 58), ('Book try-at-home from WhatsApp', 21), ('Tell customer when alteration is ready', 34)],
+    """
+<div class="top"><div><h1>Festive season</h1><small>October, compared with September</small></div><span class="live"><i></i>Live, synced just now</span></div>
+<div class="kpis">
+ <div class="kpi"><small>Orders</small><b>186</b><span class="up">+34%</span></div>
+ <div class="kpi"><small>Revenue</small><b>₹5.9 L</b><span class="up">+28%</span></div>
+ <div class="kpi"><small>Try-at-home trials</small><b>21</b><span class="up">17 bought</span></div>
+ <div class="kpi"><small>Alterations due</small><b>12</b><span class="p-n pill">avg 2 days</span></div>
+</div>
+<div class="row" style="grid-template-columns:1.4fr 1fr">
+ <div class="card"><h3>Best sellers <small>this week</small></h3><table><tr><th>Product</th><th>Sizes left</th><th>Sold</th><th>Stock</th></tr>""" + ''.join(
+      f'<tr><td><span class="t"><img src="img/{img}.webp">{n}</span></td><td>{sz}</td><td>{sold}</td><td><span class="pill {c}">{st}</span></td></tr>' for img, n, sz, sold, c, st in [
+          ('bou-corset', 'Embroidered corset top', 'S · M · L', 42, 'p-y', '6 left'), ('bou-shoe', 'Knit sneakers, sky blue', '5 · 6 · 7 · 8', 31, 'p-g', 'In stock'),
+          ('bou-sunglasses', 'Mirror aviators', 'One size', 27, 'p-r', '2 left'), ('bou-watch', 'Chronograph watch, gold', 'One size', 12, 'p-g', 'In stock')]) + """</table>
+  <div class="insight" style="margin-top:12px"><b>AI insight:</b> M is 48% of corset top sales. Reorder 20 in M before Diwali week.</div></div>
+ <div class="card"><h3>Try-at-home today</h3>""" + ''.join(f'<div style="display:grid;grid-template-columns:54px 1fr auto;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid #F1F2EF"><img src="img/{img}.webp" style="width:54px;height:54px;object-fit:contain;background:#F6EEEB;border-radius:10px"><div><b style="font-size:13px">{w}</b><small style="display:block;color:#6B7771">{t}</small></div><span class="pill {c}">{s}</span></div>' for img, w, t, s, c in [
+      ('bou-corset', 'Sneha P.', '6 pm · S, M, L', 'Booked by AI', 'p-g'), ('bou-shoe', 'Ritu K.', '7 pm · size 6, 7', 'On the way', 'p-b'), ('bou-watch', 'Aman S.', '8 pm · gift wrap', 'Packed', 'p-y')]) + """</div>
+</div>
+<div class="row" style="grid-template-columns:1.4fr 1fr">
+ <div class="card"><h3>Alterations <small>tailor queue</small></h3><table><tr><th>Customer</th><th>Piece</th><th>Change</th><th>Ready</th></tr>""" + ''.join(f'<tr><td>{a}</td><td>{b}</td><td>{c}</td><td><span class="pill {d}">{e}</span></td></tr>' for a, b, c, d, e in [
+      ('Kavya R.', 'Corset top, M', 'Take in waist 2 cm', 'p-g', 'Today, told on WhatsApp'), ('Nisha T.', 'Lehenga blouse', 'Shorten sleeves', 'p-y', 'Tomorrow'), ('Pooja M.', 'Corset top, L', 'Lengthen 3 cm', 'p-y', 'Tomorrow'), ('Divya S.', 'Kurta set', 'Hem trousers', 'p-n', 'Fri')]) + """</table></div>
+ <div class="card"><h3>Live activity</h3><ul class="feed"><li><span>AI agent sent the size chart to Ishita</span><small>1m</small></li><li><span>UPI ₹3,499 matched to Sneha P.</span><small>6m</small></li><li><span>Try-at-home booked for Aman S.</span><small>18m</small></li><li><span>Alteration ready message sent to Kavya R.</span><small>40m</small></li></ul></div>
+</div>""")
+
+HANDICRAFT = page('Kala Haat dashboard', '#B8673F', '#2B2118', 'K', 'Kala Haat',
+    ['Overview', 'Orders', 'Makers', 'Gifting', 'Shipping'],
+    [('Photo of the piece before it ships', 64), ('Order split to the right maker', 64), ('Gifting quote within 1 hour', 9)],
+    """
+<div class="top"><div><h1>Workshop orders</h1><small>This month · 12 maker families</small></div><span class="live"><i></i>Live, synced just now</span></div>
+<div class="kpis">
+ <div class="kpi"><small>Orders</small><b>64</b><span class="up">+22%</span></div>
+ <div class="kpi"><small>Paid to makers</small><b>₹1.8 L</b><span class="p-n pill">this month</span></div>
+ <div class="kpi"><small>Gift hampers</small><b>340</b><span class="up">3 companies</span></div>
+ <div class="kpi"><small>Ready to ship</small><b>18</b><span class="p-y pill">photos sent</span></div>
+</div>
+<div class="row" style="grid-template-columns:1fr 1.3fr">
+ <div class="card"><h3>Makers this week</h3>""" + ''.join(f'<div style="display:grid;grid-template-columns:40px 1fr auto;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid #F1F2EF"><span style="width:40px;height:40px;border-radius:50%;background:#B8673F;color:#fff;display:grid;place-items:center;font-weight:700">{i}</span><div><b style="font-size:13px">{n}</b><small style="display:block;color:#6B7771">{c}</small></div><div style="width:110px"><div class="bar"><i style="width:{w}%"></i></div><small style="color:#6B7771">{d} of {t} done</small></div></div>' for i, n, c, w, d, t in [
+      ('RP', 'Ramesh Prajapati', 'Terracotta matkas', 70, 14, 20), ('SK', 'Salma Kazi', 'Glazed vases', 45, 9, 20), ('MK', 'Mohan Kansara', 'Brass diyas, bowls', 88, 120, 136)]) + """
+  <div class="insight" style="margin-top:12px"><b>AI insight:</b> brass diyas will be short by 16 for the office hamper order. Ask Mohan for 2 extra days?</div></div>
+ <div class="card"><h3>Orders <small>with the photo sent to the buyer</small></h3><table><tr><th>Piece</th><th>Buyer</th><th>Maker</th><th>Status</th></tr>""" + ''.join(
+      f'<tr><td><span class="t"><img src="img/{img}.webp">{p}</span></td><td>{b}</td><td>{m}</td><td><span class="pill {c}">{s}</span></td></tr>' for img, p, b, m, c, s in [
+          ('craft-matka', 'Terracotta matka', 'Asha V.', 'Ramesh', 'p-y', 'Photo sent'), ('craft-vase', 'Indigo bottle vase', 'Studio Aakar', 'Salma', 'p-b', 'Glazing'),
+          ('craft-bowl', 'Brass bowl × 4', 'Neel D.', 'Mohan', 'p-g', 'Shipped'), ('craft-diya', 'Diya set × 120', 'Riya S. (office)', 'Mohan', 'p-y', 'In progress'), ('craft-teacup', 'Painted teacup', 'Farah M.', 'Salma', 'p-g', 'Delivered')]) + """</table></div>
+</div>
+<div class="row" style="grid-template-columns:1.4fr 1fr">
+ <div class="card"><h3>Gifting pipeline</h3><table><tr><th>Company</th><th>Hamper</th><th>Qty</th><th>Status</th></tr>""" + ''.join(f'<tr><td>{a}</td><td>{b}</td><td>{c}</td><td><span class="pill {d}">{e}</span></td></tr>' for a, b, c, d, e in [
+      ('Riya S. (office)', 'Brass diya set and bowl', 120, 'p-y', 'Sample approved'), ('Patel Builders', 'Terracotta and brass', 150, 'p-b', 'Quote sent by AI'), ('Shubh Utsav', 'Wedding return gifts', 70, 'p-g', 'Paid 50%')]) + """</table></div>
+ <div class="card"><h3>Live activity</h3><ul class="feed"><li><span>Photo of matka sent to Asha V.</span><small>3m</small></li><li><span>Order #212 assigned to Salma</span><small>11m</small></li><li><span>Gifting quote sent to Patel Builders</span><small>26m</small></li><li><span>₹9,600 paid to Mohan for diyas</span><small>1h</small></li></ul></div>
+</div>""")
+
+REALESTATE = page('Aangan Homes dashboard', '#3F4A1E', '#1D2410', 'A', 'Aangan Homes',
+    ['Overview', 'Leads', 'Site visits', 'Inventory', 'Payments'],
+    [('Floor plan PDF on enquiry', 148), ('Site visit booking from WhatsApp', 39), ('Payment reminders by milestone', 22)],
+    """
+<div class="top"><div><h1>Sales and site visits</h1><small>Aangan Homes · 56 homes in 2 towers</small></div><span class="live"><i></i>Live, synced just now</span></div>
+<div class="kpis">
+ <div class="kpi"><small>New leads</small><b>148</b><span class="up">this month</span></div>
+ <div class="kpi"><small>Site visits</small><b>39</b><span class="up">31 by the AI agent</span></div>
+ <div class="kpi"><small>Homes booked</small><b>38 of 56</b><span class="up">+5 this month</span></div>
+ <div class="kpi"><small>Payments due</small><b>₹62 L</b><span class="p-n pill">7 milestones</span></div>
+</div>
+<div class="row" style="grid-template-columns:1fr 1.25fr">
+ <div class="card"><h3>Units by floor <small>tower A</small></h3>
+  <div style="display:grid;grid-template-columns:28px repeat(4,1fr);gap:5px;font-size:11.5px">""" + ''.join(
+      f'<span style="color:#6B7771;align-self:center">{7-f}</span>' + ''.join(
+          f'<span style="border-radius:6px;padding:7px 0;text-align:center;font-weight:700;{st}">{u}</span>'
+          for u, st in [((f'{7-f}0{n}'), ('background:#E4F5EC;color:#0B7A47' if (f * 4 + n) % 3 else 'background:#3F4A1E;color:#fff') if (f * 4 + n) % 5 else 'background:#FFF3D6;color:#8A5A00') for n in range(1, 5)])
+      for f in range(7)) + """</div>
+  <div style="display:flex;gap:12px;margin-top:10px;font-size:12px;color:#6B7771"><span><b style="color:#3F4A1E">■</b> Booked</span><span><b style="color:#0B7A47">■</b> Available</span><span><b style="color:#8A5A00">■</b> On hold</span></div></div>
+ <div class="card"><h3>Hot leads <small>sorted by the AI agent</small></h3><table><tr><th>Lead</th><th>Looking for</th><th>Budget</th><th>Next</th></tr>""" + ''.join(
+      f'<tr><td>{n}</td><td>{w}</td><td>{b}</td><td><span class="pill {c}">{x}</span></td></tr>' for n, w, b, c, x in [
+          ('Ajay R.', '2 BHK, east facing', '₹25–35 L', 'p-g', 'Visit Fri 11 am'), ('Pooja M.', '3 BHK, corner', '₹40 L+', 'p-y', 'Floor plan sent'),
+          ('Kunal S.', 'Shop, ground floor', '₹22 L', 'p-b', 'Loan call'), ('Dev P.', '2 BHK, garden view', '₹30 L', 'p-g', 'Visit Sat 10 am'), ('Meera J.', '2 BHK', 'Under ₹25 L', 'p-n', 'Nurture')]) + """</table>
+  <img src="img/building.webp" style="width:100%;height:120px;object-fit:contain;margin-top:10px">
+  <div class="insight"><b>AI insight:</b> leads who see the floor plan PDF book a visit 2.4x more often.</div></div>
+</div>""")
+
+DASHES = {'dash-boutique': BOUTIQUE, 'dash-handicrafts': HANDICRAFT, 'dash-realestate': REALESTATE, 'dash-furniture': FURNITURE, 'dash-manufacturer': MANUFACTURER, 'dash-wedding': WEDDING, 'dash-interior': INTERIOR}
 
 if __name__ == '__main__':
     for k, html in DASHES.items():
