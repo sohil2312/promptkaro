@@ -1,0 +1,37 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI agent chat</title>
+<style>
+@font-face{font-family:'Fig';src:url(fonts/figtree.woff2) format('woff2');font-weight:100 900}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Fig',sans-serif;background:#EFEAE2;height:100vh;display:flex;flex-direction:column;font-size:15px;color:#111B21}
+.top{background:#008069;color:#fff;padding:44px 14px 12px;display:flex;align-items:center;gap:12px}
+.av{width:38px;height:38px;border-radius:50%;background:#DFF5EC;color:#008069;display:grid;place-items:center;font-weight:700}
+.top b{display:block;font-weight:600}.top small{opacity:.9;font-size:13px}
+.list{flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:7px;padding:12px}
+.m{max-width:82%;padding:7px 10px 8px;border-radius:10px;box-shadow:0 1px .5px rgba(11,20,26,.13);line-height:1.35}
+.in{align-self:flex-start;background:#fff;border-top-left-radius:3px}
+.out{align-self:flex-end;background:#D9FDD3;border-top-right-radius:3px}
+.t{float:right;margin:6px 0 -3px 10px;font-size:11px;color:#667781}
+.ag{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#008069;margin-bottom:2px}
+.ag i{width:13px;height:13px;border-radius:4px;background:#008069 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Ccircle cx='5' cy='7' r='1.2' fill='white'/%3E%3Ccircle cx='9' cy='7' r='1.2' fill='white'/%3E%3C/svg%3E") center/13px no-repeat}
+.step{align-self:center;display:flex;gap:6px;align-items:center;padding:4px 10px 4px 5px;border-radius:999px;background:rgba(255,255,255,.9);font-size:12px;font-weight:600;color:#3E4943}
+.step i{width:15px;height:15px;border-radius:50%;background:#2BB673 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M5.2 9.3l2.4 2.3 5.2-5.2' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/15px no-repeat}
+.btns{display:flex;gap:5px;margin-top:7px}.btns span{flex:1;text-align:center;padding:7px;border-radius:8px;background:#F0F2F5;color:#027EB5;font-weight:700;font-size:13px}
+.day{align-self:center;background:#fff;color:#54656F;font-size:12px;padding:4px 10px;border-radius:8px}
+.bar{background:#F0F2F5;padding:10px 12px 26px;display:flex;gap:10px}
+.bar span{flex:1;background:#fff;border-radius:22px;padding:10px 14px;color:#8696A0}
+.bar i{width:42px;height:42px;border-radius:50%;background:#008069}
+</style></head><body>
+<div class="top"><span class="av">S</span><span><b>Shanti Clinic</b><small>AI agent is handling this chat</small></span></div>
+<div class="list">
+  <span class="day">Today</span>
+  <div class="m out">Kal evening doctor available? Son has fever<span class="t">9:12 pm</span></div>
+  <span class="step"><i></i>Understood: appointment, child with fever</span>
+  <span class="step"><i></i>Checked OPD: 6:30 pm free</span>
+  <div class="m in"><span class="ag"><i></i>AI agent</span>Yes. I can book tomorrow, 6:30 pm. Shall I confirm?<div class="btns"><span>Confirm</span><span>Other time</span></div><span class="t">9:12 pm</span></div>
+  <div class="m out">Confirm<span class="t">9:13 pm</span></div>
+  <span class="step"><i></i>Booked token 14 and set a reminder</span>
+  <div class="m in"><span class="ag"><i></i>AI agent</span>Booked for tomorrow, 6:30 pm. Token 14. I'll remind you at 5:30. Hope he feels better soon.<span class="t">9:13 pm</span></div>
+</div>
+<div class="bar"><span>Message</span><i></i></div>
+</body></html>

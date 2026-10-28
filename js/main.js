@@ -12,11 +12,13 @@
   var toggle = document.getElementById('langToggle');
   var textEls = document.querySelectorAll('[data-gu]');
   var labelEls = document.querySelectorAll('[data-gu-label]');
+  var altEls = document.querySelectorAll('[data-gu-alt]');
   var waEls = document.querySelectorAll('.js-wa');
 
   // Remember the English that shipped in the HTML, so the page needs no duplicate data-en.
   textEls.forEach(function (el) { el.dataset.en = el.textContent; });
   labelEls.forEach(function (el) { el.dataset.enLabel = el.getAttribute('aria-label') || ''; });
+  altEls.forEach(function (el) { el.dataset.enAlt = el.getAttribute('alt') || ''; });
 
   function waHref(message) {
     return 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(message);
@@ -39,6 +41,9 @@
     });
     labelEls.forEach(function (el) {
       el.setAttribute('aria-label', gu ? el.dataset.guLabel : el.dataset.enLabel);
+    });
+    altEls.forEach(function (el) {
+      el.setAttribute('alt', gu ? el.dataset.guAlt : el.dataset.enAlt);
     });
     waEls.forEach(function (el) {
       var msg = gu ? el.dataset.msgGu : el.dataset.msgEn;

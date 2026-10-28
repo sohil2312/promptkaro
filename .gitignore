@@ -5,3 +5,4 @@ playwright-report/
 .DS_Store
 tools/render/node_modules/
 tools/render/out/
+tools/samples/out/

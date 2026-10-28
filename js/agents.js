@@ -54,9 +54,9 @@
       { t: 'in', at: '7:42 pm', text: { en: 'Is the 5G phone (128 GB) available? Price?', gu: '5G ફોન (128 GB) છે? ભાવ?' } },
       { t: 'log', ms: 420, tool: T.ai, text: { en: 'Read message: stock and price question', gu: 'મેસેજ વાંચ્યો: સ્ટોક અને ભાવનો સવાલ' } },
       { t: 'log', ms: 610, tool: T.inv, text: { en: 'Checked inventory: 3 in stock', gu: 'ઇન્વેન્ટરી ચેક કરી: 3 સ્ટોકમાં' } },
-      { t: 'log', ms: 540, tool: T.price, text: { en: 'Fetched price ₹13,999 and EMI ₹1,167/month', gu: 'ભાવ ₹13,999 અને EMI ₹1,167/મહિને મેળવ્યા' } },
-      { t: 'out', at: '7:42 pm', text: { en: 'Yes, 3 in stock. ₹13,999, or ₹1,167 a month on EMI. Shall I keep one for you?', gu: 'હા, 3 સ્ટોકમાં છે. ₹13,999, અથવા EMI પર ₹1,167/મહિને. તમારા માટે એક રાખી દઉં?' },
-        buttons: [{ en: 'Keep one', gu: 'એક રાખો' }, { en: 'Show EMI', gu: 'EMI બતાવો' }] },
+      { t: 'log', ms: 540, tool: T.price, text: { en: 'Fetched price ₹13,999 and the three colours', gu: 'ભાવ ₹13,999 અને ત્રણ રંગ મેળવ્યા' } },
+      { t: 'out', at: '7:42 pm', text: { en: 'Yes, 3 in stock at ₹13,999, in teal, sand and graphite. Shall I keep one for you?', gu: 'હા, 3 સ્ટોકમાં છે, ₹13,999. ટીલ, સેન્ડ અને ગ્રેફાઇટ રંગમાં. તમારા માટે એક રાખી દઉં?' },
+        buttons: [{ en: 'Keep one', gu: 'એક રાખો' }, { en: 'Show colours', gu: 'રંગ બતાવો' }] },
       { t: 'tap', i: 0, at: '7:43 pm' },
       { t: 'log', ms: 480, tool: T.inv, text: { en: 'Reserved 1 unit till 8 pm', gu: 'રાત્રે 8 સુધી 1 યુનિટ રાખ્યું' } },
       { t: 'log', ms: 350, tool: T.wa, text: { en: 'Told the owner', gu: 'માલિકને જાણ કરી' } },
@@ -104,8 +104,8 @@
       { t: 'out', at: '2:47 pm', text: { en: 'So glad you liked it! Would you leave us a short review?', gu: 'તમને ગમ્યું, ખૂબ આનંદ! એક નાનો રિવ્યૂ લખશો?' },
         buttons: [{ en: 'Write a review', gu: 'રિવ્યૂ લખો' }] }
     ] },
-    { biz: 'Sabar Properties', who: 'Ajay R.', events: [
-      { t: 'in', at: '11:30 pm', text: { en: 'Looking for a 2 BHK in Idar', gu: 'ઇડરમાં 2 BHK જોઈએ છે' } },
+    { biz: 'Aangan Homes', who: 'Ajay R.', events: [
+      { t: 'in', at: '11:30 pm', text: { en: 'Looking for a 2 BHK near the station', gu: 'સ્ટેશન પાસે 2 BHK જોઈએ છે' } },
       { t: 'log', ms: 420, tool: T.ai, text: { en: 'Read message: buying enquiry', gu: 'મેસેજ વાંચ્યો: ખરીદીની પૂછપરછ' } },
       { t: 'out', at: '11:30 pm', text: { en: "Happy to help. What's your budget?", gu: 'ચોક્કસ. તમારું બજેટ કેટલું છે?' },
         buttons: [{ en: 'Under ₹25 lakh', gu: '₹25 લાખથી ઓછું' }, { en: '₹25–35 lakh', gu: '₹25–35 લાખ' }, { en: 'Above ₹35 lakh', gu: '₹35 લાખથી વધુ' }] },
@@ -113,8 +113,8 @@
       { t: 'log', ms: 580, tool: T.list, text: { en: 'Matched 2 listings in budget', gu: 'બજેટમાં 2 લિસ્ટિંગ મળ્યા' } },
       { t: 'log', ms: 460, tool: T.crm, text: { en: 'Marked as a hot lead and alerted the owner', gu: 'હોટ લીડ ગણી માલિકને જાણ કરી' } },
       { t: 'out', at: '11:31 pm', cards: [
-          { kind: 'listing', title: { en: '2 BHK, Gandhi Nagar, Idar', gu: '2 BHK, ગાંધીનગર, ઇડર' }, sub: { en: '₹28 lakh', gu: '₹28 લાખ' } },
-          { kind: 'listing', title: { en: '2 BHK, Station Road, Idar', gu: '2 BHK, સ્ટેશન રોડ, ઇડર' }, sub: { en: '₹32 lakh', gu: '₹32 લાખ' } }],
+          { kind: 'listing', title: { en: '2 BHK, Aangan Homes, east facing', gu: '2 BHK, આંગણ હોમ્સ, પૂર્વમુખી' }, sub: { en: '₹28 lakh', gu: '₹28 લાખ' } },
+          { kind: 'listing', title: { en: '2 BHK, Station Road, garden view', gu: '2 BHK, સ્ટેશન રોડ, બગીચા તરફ' }, sub: { en: '₹32 lakh', gu: '₹32 લાખ' } }],
         text: { en: 'Here are 2 that fit. Shall I fix a site visit?', gu: 'આ 2 બજેટમાં છે. સાઇટ વિઝિટ ગોઠવું?' } }
     ] }
   ];
@@ -442,206 +442,133 @@
     io.observe(compare);
   }
 
-  /* ============================== Dashboards ============================== */
-  var dashes = Array.prototype.slice.call(document.querySelectorAll('[data-dash]'));
-  if (!dashes.length) return;
+  /* ============================== Automated dashboard ============================== */
+  var db = document.getElementById('dashboard');
+  if (db) initDashboard();
 
-  // Sales: running totals through the day; the last four are the live sales.
-  var SALES_BASE = [0, 2100, 5200, 8800, 12400, 17900, 21000, 26300, 29800, 32124];
-  var SALES_LIVE = [
-    { item: { en: 'Earbuds', gu: 'ઇયરબડ્સ' }, tag: 'UPI', amt: 1299 },
-    { item: { en: 'Charger 33W', gu: 'ચાર્જર 33W' }, tag: { en: 'Cash', gu: 'રોકડ' }, amt: 899 },
-    { item: { en: '5G phone', gu: '5G ફોન' }, tag: 'EMI', amt: 13999 },
-    { item: { en: 'Phone cover', gu: 'કવર' }, tag: 'UPI', amt: 299 }
-  ];
-  var SALES_OLD = [
-    { item: { en: 'Smart watch', gu: 'સ્માર્ટ વોચ' }, tag: 'UPI', amt: 2499 },
-    { item: { en: 'USB cable', gu: 'USB કેબલ' }, tag: { en: 'Cash', gu: 'રોકડ' }, amt: 249 },
-    { item: { en: 'Screen guard', gu: 'સ્ક્રીન ગાર્ડ' }, tag: 'UPI', amt: 199 }
-  ];
+  function initDashboard() {
+    var CH = { WhatsApp: { en: 'WhatsApp', gu: 'WhatsApp', cls: 'whatsapp' }, Website: { en: 'Website', gu: 'વેબસાઇટ', cls: 'website' }, Walkin: { en: 'Walk-in', gu: 'દુકાનમાં', cls: 'walkin' } };
+    var PAID = { en: 'Paid, UPI', gu: 'ચૂકવ્યા, UPI' }, CASH = { en: 'Cash', gu: 'રોકડ' }, CARD = { en: 'Card', gu: 'કાર્ડ' };
+    var ST = { packed: { en: 'Packed', gu: 'પેક' }, ready: { en: 'Ready for pickup', gu: 'લેવા માટે તૈયાર' }, done: { en: 'Delivered', gu: 'પહોંચાડ્યું' }, handed: { en: 'Handed over', gu: 'આપી દીધું' } };
+    function item(img, en, gu) { return { img: img, name: { en: en, gu: gu } }; }
+    var OLD = [
+      { no: 1038, who: 'Ajay R.', item: item('watch', 'Smart watch', 'સ્માર્ટ વોચ'), amt: 2499, ch: 'WhatsApp', agent: true, pay: PAID, st: 'done' },
+      { no: 1037, who: 'Nisha T.', item: item('phone', '5G phone, 256 GB', '5G ફોન, 256 GB'), amt: 16499, ch: 'Walkin', agent: false, pay: CARD, st: 'handed' },
+      { no: 1036, who: 'Arjun M.', item: item('charger', 'Charger 33W', 'ચાર્જર 33W'), amt: 899, ch: 'Website', agent: false, pay: PAID, st: 'done' },
+      { no: 1035, who: 'Fatima B.', item: item('earbuds', 'Earbuds', 'ઇયરબડ્સ'), amt: 1299, ch: 'WhatsApp', agent: true, pay: PAID, st: 'done' }
+    ];
+    // Four orders arrive live; the numbers add up to the static HTML.
+    var LIVE = [
+      { no: 1039, who: 'Ravi K.', item: item('earbuds', 'Earbuds', 'ઇયરબડ્સ'), amt: 1299, ch: 'WhatsApp', agent: true, pay: PAID, st: 'packed', chat: true, receipt: true,
+        feed: [{ en: 'AI agent took an earbuds order from Ravi K.', gu: 'AI એજન્ટે રવિ કે.નો ઇયરબડ્સ ઓર્ડર લીધો' }, { en: 'Earbuds down to 2, reorder sent', gu: 'ઇયરબડ્સ 2 બાકી, ફરી ઓર્ડર મોકલ્યો' }], earbuds: 2 },
+      { no: 1040, who: 'Meena P.', item: item('charger', 'Charger 33W', 'ચાર્જર 33W'), amt: 899, ch: 'Walkin', agent: false, pay: CASH, st: 'handed',
+        feed: [{ en: 'Billing added a walk-in sale: Charger 33W', gu: 'બિલિંગે દુકાનનું વેચાણ ઉમેર્યું: ચાર્જર 33W' }] },
+      { no: 1041, who: 'Kiran S.', item: item('phone', '5G phone, 128 GB', '5G ફોન, 128 GB'), amt: 13999, ch: 'WhatsApp', agent: true, pay: PAID, st: 'ready', chat: true, receipt: true,
+        feed: [{ en: 'AI agent kept a 5G phone for Kiran S.', gu: 'AI એજન્ટે કિરણ એસ. માટે 5G ફોન રાખ્યો' }] },
+      { no: 1042, who: 'Hetal D.', item: item('watch', 'Watch strap', 'ઘડિયાળનો પટ્ટો'), amt: 299, ch: 'Website', agent: false, pay: PAID, st: 'packed', receipt: true,
+        feed: [{ en: 'Receipt sent to Hetal D. on WhatsApp', gu: 'હેતલ ડી.ને WhatsApp પર રસીદ મોકલી' }] }
+    ];
+    var OLD_FEED = [{ en: 'Review request sent to Ajay R.', gu: 'અજય આર.ને રિવ્યૂ માટે મેસેજ મોકલ્યો' }, { en: 'Receipt sent to Fatima B. on WhatsApp', gu: 'ફાતિમા બી.ને WhatsApp પર રસીદ મોકલી' }];
+    var TODAY = [0, 2100, 5200, 8800, 12400, 17900, 21000, 26300, 29800, 32124, 33423, 34322, 48321, 48620];
+    var BASE = { revenue: 32124, orders: 19, chats: 59, agent: 52, receipts: 20, reorders: 0, earbuds: 3 };
 
-  function sparkPaths(series) {
-    var max = 50000, n = SALES_BASE.length + SALES_LIVE.length - 1;
-    var pts = series.map(function (v, i) { return [(i / n) * 300, 60 - (v / max) * 56]; });
-    var line = pts.map(function (p, i) { return (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1); }).join(' ');
-    var last = pts[pts.length - 1];
-    return { line: line, area: line + ' L' + last[0].toFixed(1) + ' 64 L0 64 Z' };
-  }
+    var tbody = document.getElementById('dbOrders');
+    var feedList = document.getElementById('dbFeed');
+    var line = document.getElementById('dbLine'), area = document.getElementById('dbArea'), dot = document.getElementById('dbDot');
+    var kRev = document.getElementById('kpiRevenue'), kOrd = document.getElementById('kpiOrders'), kChat = document.getElementById('kpiChats'), kAgent = document.getElementById('kpiAgent');
+    var budsRow = db.querySelector('[data-sku="earbuds"]'), reorder = document.getElementById('dbReorder');
+    var rReceipt = db.querySelector('[data-rule="receipt"]'), rReorder = db.querySelector('[data-rule="reorder"]');
+    var step = LIVE.length; // finished state first
 
-  function saleRow(s) {
-    var li = el('li');
-    li.appendChild(el('span', null, tr(s.item)));
-    li.appendChild(el('span', 'dash-tag', tr(s.tag)));
-    li.appendChild(el('b', 'num', inr.format(s.amt)));
-    return li;
-  }
-
-  var dashState = { sales: 4, queue: 3, fees: 4, stock: 4 };
-
-  // What each board's automation rule shows at each step: runs today and the last action.
-  function sent(name, gu) { return { en: 'Receipt sent to ' + name, gu: gu + 'ને રસીદ મોકલી' }; }
-  function told(name, gu) { return { en: 'Told ' + name + ': your turn is coming up', gu: gu + 'ને કહ્યું: તમારો વારો આવે છે' }; }
-  var NONE = { en: 'No runs yet today', gu: 'આજે હજી ચાલ્યો નથી' };
-  var ORDERED = { en: 'Ordered 20 earbuds', gu: '20 ઇયરબડ્સનો ઓર્ડર આપ્યો' };
-  var RULES = {
-    sales: [[19, sent('Ajay R.', 'અજય આર.')], [20, sent('Ravi K.', 'રવિ કે.')], [21, sent('Meena P.', 'મીના પી.')], [22, sent('Kiran S.', 'કિરણ એસ.')], [23, sent('Hetal D.', 'હેતલ ડી.')]],
-    queue: [[13, told('Arjun', 'અર્જુન')], [14, told('Fatima', 'ફાતિમા')], [14, told('Fatima', 'ફાતિમા')], [15, told('Jaya', 'જયા')]],
-    fees: [[0, NONE], [1, sent("Dhruv's parents", 'ધ્રુવના વાલી')], [2, sent("Isha's parents", 'ઇશાના વાલી')], [3, sent("Kavya's parents", 'કાવ્યાના વાલી')], [4, sent("Om's parents", 'ઓમના વાલી')]],
-    stock: [[0, NONE], [0, NONE], [0, NONE], [1, ORDERED], [1, ORDERED]]
-  };
-  function setRule(card, key, k, fire) {
-    var rule = card.querySelector('.rule');
-    if (!rule) return;
-    var st = RULES[key][k];
-    var count = rule.querySelector('.rule-count b');
-    var changed = count.textContent !== String(st[0]);
-    count.textContent = st[0];
-    var last = rule.querySelector('.rule-last-text');
-    last.textContent = tr(st[1]);
-    last.removeAttribute('data-gu'); // main.js must not overwrite this live text
-    if (fire && changed && !reduce.matches) {
-      rule.classList.remove('is-firing'); void rule.offsetWidth; rule.classList.add('is-firing');
-      count.animate([{ transform: 'translateY(-6px)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 300, easing: EASE_OUT });
-      last.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, easing: 'ease' });
+    function path(n) {
+      var pts = TODAY.slice(0, n).map(function (v, i) { return [i / 13 * 600, 180 - 8 - v / 50000 * 160]; });
+      var d = pts.map(function (p, i) { return (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1); }).join(' ');
+      return { d: d, area: d + ' L' + pts[pts.length - 1][0].toFixed(1) + ' 180 L0 180 Z', last: pts[pts.length - 1] };
     }
-  }
+    function row(o) {
+      var r = el('tr'); r.dataset.order = o.no;
+      r.appendChild(el('td', 'num', '#' + o.no));
+      r.appendChild(el('td', null, o.who));
+      var itd = el('td'), wrap = el('span', 'db-item'), im = document.createElement('img');
+      im.src = '/assets/img/' + o.item.img + '-thumb.webp'; im.alt = ''; im.width = 40; im.height = 40; im.decoding = 'async';
+      wrap.appendChild(im); wrap.appendChild(el('span', null, tr(o.item.name))); itd.appendChild(wrap); r.appendChild(itd);
+      var ctd = el('td'), c = CH[o.ch];
+      ctd.appendChild(el('span', 'db-ch db-ch-' + c.cls, tr(c)));
+      if (o.agent) ctd.appendChild(el('span', 'db-agent', tr({ en: 'AI agent', gu: 'AI એજન્ટ' })));
+      r.appendChild(ctd);
+      r.appendChild(el('td', null, tr(o.pay)));
+      var std = el('td'); std.appendChild(el('span', 'db-status db-' + (o.st === 'handed' ? 'done' : o.st), tr(ST[o.st]))); r.appendChild(std);
+      r.appendChild(el('td', 'num db-amt', inr.format(o.amt)));
+      return r;
+    }
+    function feedItem(t) { var li = el('li'); li.appendChild(el('span', 'log-icon')); li.appendChild(el('span', null, tr(t))); return li; }
 
-  var DASH = {
-    sales: {
-      steps: SALES_LIVE.length,
-      render: function (card, k) {
-        var series = SALES_BASE.slice();
-        var total = SALES_BASE[SALES_BASE.length - 1];
-        var feedItems = SALES_OLD.slice();
-        for (var j = 0; j < k; j++) { total += SALES_LIVE[j].amt; series.push(total); feedItems.unshift(SALES_LIVE[j]); }
-        var p = sparkPaths(series);
-        card.querySelector('#sparkLine').setAttribute('d', p.line);
-        card.querySelector('#sparkArea').setAttribute('d', p.area);
-        card.querySelector('#salesTotal').textContent = inr.format(total);
-        var feed = card.querySelector('#salesFeed');
-        feed.textContent = '';
-        feedItems.slice(0, 3).forEach(function (s) { feed.appendChild(saleRow(s)); });
-      },
-      step: function (card, k) {
-        var before = SALES_BASE[SALES_BASE.length - 1];
-        for (var j = 0; j < k - 1; j++) before += SALES_LIVE[j].amt;
-        DASH.sales.render(card, k);
-        var feed = card.querySelector('#salesFeed');
-        feed.firstElementChild.animate([{ opacity: 0, transform: 'translateY(-10px) scale(0.98)', backgroundColor: '#E7F8EF' }, { opacity: 1, transform: 'none', backgroundColor: '#FFFFFF' }],
-          { duration: 700, easing: EASE_OUT });
-        countTo(card.querySelector('#salesTotal'), before, before + SALES_LIVE[k - 1].amt, inr.format);
-        var line = card.querySelector('#sparkLine');
-        var len = line.getTotalLength();
-        line.animate([{ strokeDasharray: len, strokeDashoffset: 40 }, { strokeDasharray: len, strokeDashoffset: 0 }], { duration: 600, easing: EASE_OUT });
-      }
-    },
+    // Draw the board as it is after `k` live orders.
+    function render(k) {
+      var v = { revenue: BASE.revenue, orders: BASE.orders + k, chats: BASE.chats, agent: BASE.agent, receipts: BASE.receipts, reorders: BASE.reorders, earbuds: BASE.earbuds };
+      var feed = OLD_FEED.slice();
+      LIVE.slice(0, k).forEach(function (o) {
+        v.revenue += o.amt;
+        if (o.chat) { v.chats++; v.agent++; }
+        if (o.receipt) v.receipts++;
+        if (o.earbuds != null) { v.earbuds = o.earbuds; v.reorders++; }
+        o.feed.forEach(function (f) { feed.unshift(f); });
+      });
+      var rows = LIVE.slice(0, k).reverse().concat(OLD).slice(0, 5);
+      tbody.textContent = '';
+      rows.forEach(function (o) { tbody.appendChild(row(o)); });
+      feedList.textContent = '';
+      feed.slice(0, 3).forEach(function (f) { feedList.appendChild(feedItem(f)); });
+      kRev.textContent = inr.format(v.revenue); kOrd.textContent = v.orders; kChat.textContent = v.chats; kAgent.textContent = v.agent;
+      var p = path(10 + k);
+      line.setAttribute('d', p.d); area.setAttribute('d', p.area); dot.setAttribute('cx', p.last[0].toFixed(1)); dot.setAttribute('cy', p.last[1].toFixed(1));
+      budsRow.classList.toggle('is-low', v.earbuds <= 2);
+      budsRow.querySelector('b').textContent = v.earbuds;
+      budsRow.querySelector('.db-bar i').className = 'lvl-' + v.earbuds;
+      reorder.hidden = v.reorders === 0;
+      rReceipt.textContent = v.receipts; rReorder.textContent = v.reorders;
+      return v;
+    }
 
-    queue: {
-      steps: 3,
-      // k: 0 = now 12, 1 = now 13, 2 = agent booked 18, 3 = now 15
-      render: function (card, k) {
-        var now = [12, 13, 14, 15][k];
-        var names = { 13: 'Meena', 14: 'Arjun', 15: 'Fatima', 16: 'Kunal', 17: 'Jaya', 18: 'Ravi' };
-        var last = k >= 2 ? 18 : 17;
-        if (k === 2) now = 14; // the agent's booking arrives while 14 is being seen
-        card.querySelector('#queueNow').textContent = now;
-        card.querySelector('#queueWait').textContent = (k >= 3 ? 8 : 9) + ' min';
-        var list = card.querySelector('#queueList');
-        list.textContent = '';
-        for (var t = now + 1; t <= Math.min(last, now + 4); t++) {
-          var li = el('li', t === 18 ? 'is-agent' : null);
-          li.appendChild(el('b', 'num', String(t)));
-          li.appendChild(el('span', null, names[t]));
-          if (t === 18) li.appendChild(el('em', null, tr({ en: 'booked by agent', gu: 'એજન્ટે બુક કર્યું' })));
-          list.appendChild(li);
-        }
-      },
-      step: function (card, k) {
-        var list = card.querySelector('#queueList');
-        var big = card.querySelector('#queueNow');
-        var advancing = k !== 2;
-        var rows = Array.prototype.slice.call(list.children);
-        var tops = rows.map(function (r) { return r.getBoundingClientRect().top; });
-        DASH.queue.render(card, k);
-        if (advancing) {
-          big.animate([{ transform: 'translateY(-14px)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 420, easing: SPRING });
-          // Rows slide up into their new places.
-          Array.prototype.slice.call(list.children).forEach(function (r, i) {
-            var from = tops[i + 1];
-            if (from != null) {
-              var d = from - r.getBoundingClientRect().top;
-              if (d) r.animate([{ transform: 'translateY(' + d + 'px)' }, { transform: 'none' }], { duration: 380, easing: EASE_OUT });
-            }
-          });
-        } else {
-          var added = list.lastElementChild;
-          added.animate([{ opacity: 0, transform: 'translateY(10px)', backgroundColor: '#E7F8EF' }, { opacity: 1, transform: 'none', backgroundColor: '#FFFFFF' }],
-            { duration: 700, easing: EASE_OUT });
-        }
-      }
-    },
+    function pulse(node) { if (!reduce.matches) node.animate([{ transform: 'translateY(-5px)', opacity: 0.3 }, { transform: 'none', opacity: 1 }], { duration: 320, easing: EASE_OUT }); }
 
-    fees: {
-      steps: 4,
-      kids: [{ n: 'Dhruv', a: 18000 }, { n: 'Isha', a: 18000 }, { n: 'Kavya', a: 20000 }, { n: 'Om', a: 18000 }],
-      render: function (card, k) {
-        var total = 298000;
-        var list = card.querySelector('#feesList');
-        list.textContent = '';
-        DASH.fees.kids.forEach(function (kid, i) {
-          var paid = i < k;
-          if (paid) total += kid.a;
-          var li = el('li', paid ? 'is-paid' : 'is-pending');
-          li.appendChild(el('span', null, kid.n));
-          li.appendChild(el('b', 'num', inr.format(kid.a)));
-          list.appendChild(li);
-        });
-        var pct = total / 480000 * 100;
-        card.querySelector('#feesRing').style.setProperty('--p', pct.toFixed(2));
-        card.querySelector('#feesPct').textContent = Math.round(pct) + '%';
-        card.querySelector('#feesTotal').textContent = inr.format(total);
-        return total;
-      },
-      step: function (card, k) {
-        var before = 298000;
-        for (var j = 0; j < k - 1; j++) before += DASH.fees.kids[j].a;
-        DASH.fees.render(card, k);
-        countTo(card.querySelector('#feesTotal'), before, before + DASH.fees.kids[k - 1].a, inr.format);
-        var row = card.querySelector('#feesList').children[k - 1];
-        row.animate([{ backgroundColor: '#E7F8EF', transform: 'scale(1.03)' }, { backgroundColor: '#FFFFFF', transform: 'none' }], { duration: 700, easing: EASE_OUT });
-      }
-    },
-
-    stock: {
-      steps: 4,
-      // 0: earbuds 5; 1: 4; 2: 2 and low; 3: reorder sent; 4: supplier confirmed
-      render: function (card, k) {
-        var buds = [5, 4, 2, 2, 2][k];
-        var li = card.querySelectorAll('#stockList li')[1];
-        li.classList.toggle('is-low', buds <= 2);
-        var bar = li.querySelector('.stock-bar i');
-        bar.className = 'lvl-' + buds;
-        li.querySelector('b').textContent = buds;
-        var events = card.querySelectorAll('#stockEvents li');
-        events[0].hidden = k < 3;
-        events[1].hidden = k < 4;
-      },
-      step: function (card, k) {
-        var li = card.querySelectorAll('#stockList li')[1];
-        var bar = li.querySelector('.stock-bar i');
-        var w0 = bar.getBoundingClientRect().width;
-        DASH.stock.render(card, k);
-        if (k <= 2) {
-          var w1 = bar.getBoundingClientRect().width || 1;
-          bar.animate([{ transform: 'scaleX(' + (w0 / w1) + ')' }, { transform: 'none' }], { duration: 500, easing: EASE_OUT });
-          li.querySelector('b').animate([{ transform: 'translateY(-6px)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 300, easing: EASE_OUT });
-        } else {
-          var ev = card.querySelectorAll('#stockEvents li')[k - 3];
-          ev.animate([{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: 360, easing: EASE_OUT });
-        }
+    function advance() {
+      var before = render(step);
+      step++;
+      var after = render(step);
+      if (reduce.matches) return;
+      var newRow = tbody.firstElementChild;
+      newRow.classList.add('is-new');
+      newRow.animate([{ opacity: 0, transform: 'translateY(-10px)' }, { opacity: 1, transform: 'none' }], { duration: 420, easing: EASE_OUT });
+      feedList.firstElementChild.animate([{ opacity: 0, transform: 'translateY(-8px)' }, { opacity: 1, transform: 'none' }], { duration: 380, easing: EASE_OUT });
+      countTo(kRev, before.revenue, after.revenue, inr.format);
+      [kOrd, kChat, kAgent, rReceipt, rReorder].forEach(function (n, i) {
+        var keys = ['orders', 'chats', 'agent', 'receipts', 'reorders'];
+        if (before[keys[i]] !== after[keys[i]]) pulse(n);
+      });
+      line.animate([{ strokeDasharray: '1200', strokeDashoffset: '60' }, { strokeDasharray: '1200', strokeDashoffset: '0' }], { duration: 600, easing: EASE_OUT });
+      if (before.earbuds !== after.earbuds) {
+        var bar = budsRow.querySelector('.db-bar i');
+        bar.animate([{ transform: 'scaleX(' + (before.earbuds / after.earbuds) + ')' }, { transform: 'none' }], { duration: 500, easing: EASE_OUT });
+        reorder.animate([{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], { duration: 380, delay: 300, easing: EASE_OUT, fill: 'backwards' });
       }
     }
-  };
+
+    render(step);
+    document.addEventListener('pk:lang', function () { render(step); });
+    if (reduce.matches || !('IntersectionObserver' in window) || !('animate' in Element.prototype)) return;
+
+    step = 0; render(0); // rewind to earlier today, then play while on screen
+    var timer = 0;
+    new IntersectionObserver(function (entries) {
+      clearTimeout(timer);
+      if (!entries[0].isIntersecting) return;
+      (function tick() {
+        if (step >= LIVE.length) return;
+        timer = setTimeout(function () { advance(); tick(); }, step === 0 ? 900 : 2600);
+      })();
+    }, { threshold: 0.3 }).observe(db);
+  }
 
   function countTo(node, from, to, fmt) {
     if (reduce.matches) { node.textContent = fmt(to); return; }
@@ -654,38 +581,4 @@
     }
     requestAnimationFrame(frame);
   }
-
-  // Finished state everywhere first (also the language-switch path).
-  function renderAllFinal() {
-    dashes.forEach(function (card) {
-      var key = card.dataset.dash;
-      DASH[key].render(card, dashState[key]);
-      setRule(card, key, dashState[key], false);
-    });
-  }
-  renderAllFinal();
-  document.addEventListener('pk:lang', renderAllFinal);
-
-  if (reduce.matches || !('IntersectionObserver' in window) || !('animate' in Element.prototype)) return;
-
-  // Rewind, then play each board's events once while it's on screen.
-  dashes.forEach(function (card) { var key = card.dataset.dash; dashState[key] = 0; DASH[key].render(card, 0); setRule(card, key, 0, false); });
-  var timers = {};
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      var card = entry.target, key = card.dataset.dash, d = DASH[key];
-      clearTimeout(timers[key]);
-      if (!entry.isIntersecting) return;
-      (function tick() {
-        if (dashState[key] >= d.steps) { io.unobserve(card); return; }
-        timers[key] = setTimeout(function () {
-          dashState[key]++;
-          d.step(card, dashState[key]);
-          setRule(card, key, dashState[key], true);
-          tick();
-        }, dashState[key] === 0 ? 700 : 1500);
-      })();
-    });
-  }, { threshold: 0.5 });
-  dashes.forEach(function (card) { io.observe(card); });
 })();

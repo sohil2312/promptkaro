@@ -22,14 +22,3 @@
 .legal-footer .container { display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-5); }
 .legal-footer a { color: var(--ink-2); }
 
-.pricing-table { width: 100%; margin-block: var(--s-4) var(--s-5); border-collapse: collapse; font-size: 1rem; }
-.pricing-table th, .pricing-table td { padding: var(--s-3) var(--s-3) var(--s-3) 0; text-align: left; vertical-align: top; border-bottom: 1px solid var(--rule); color: var(--ink-2); }
-.pricing-table th { color: var(--ink-3); font-weight: var(--fw-body); font-size: var(--fs-sm); }
-.pricing-table td:first-child { color: var(--ink); font-weight: var(--fw-strong); }
-.pricing-table td:nth-child(2) { font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--ink); }
-@media (max-width: 559px) {
-  .pricing-table thead { display: none; }
-  .pricing-table tr { display: grid; grid-template-columns: auto 1fr; gap: 0 var(--s-3); padding-block: var(--s-3); border-bottom: 1px solid var(--rule); }
-  .pricing-table td { border: 0; padding: 0; }
-  .pricing-table td:last-child { grid-column: 1 / -1; margin-top: var(--s-1); }
-}

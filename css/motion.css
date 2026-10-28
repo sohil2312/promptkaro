@@ -84,13 +84,12 @@
       animation-timeline: view();
       animation-range: entry 60% cover 45%;
     }
-    .plan, .timeline-step {
+    .timeline-step {
       animation: settle linear both;
       animation-timeline: view();
       animation-range: entry 0% entry 40%;
     }
-    .plan:nth-child(2) { animation-range: entry 4% entry 44%; }
-    .plan:nth-child(3) { animation-range: entry 8% entry 48%; }
+
   }
 }
 @keyframes fill-x { from { background-size: 0% 100%, auto; } to { background-size: 100% 100%, auto; } }
@@ -111,45 +110,14 @@
 }
 @keyframes fade { from { opacity: 0; } }
 
-/* ---------- Sample cards: the site builds itself from the price list ----------
-   Transitions, not keyframes, so a tab switch mid-build retargets smoothly. */
-.js .sample-head { transition: clip-path 460ms var(--ease-in-out); }
-.js .sample-lead,
-.js .sample-note,
-.js .sample-btn { transition: opacity 280ms var(--ease-out), transform 280ms var(--ease-out); }
-.js .sample-rows li > span {
-  transition: color 220ms ease, background-color 220ms ease, filter 220ms ease;
-  border-radius: 6px;
-}
-.js .sample-status { transition: background-color 200ms ease; }
-.js .sample-status-label { transition: opacity 160ms ease; }
-
-.sample.is-building .sample-head:not(.is-in) { clip-path: inset(0 100% 0 0 round var(--r-2)); }
-.sample.is-building .sample-lead:not(.is-in),
-.sample.is-building .sample-note:not(.is-in) { opacity: 0; transform: translateY(6px); }
-.sample.is-building .sample-btn:not(.is-in) { opacity: 0; transform: scale(0.94); }
-.sample.is-building .sample-rows li:not(.is-in) > span {
-  color: transparent;
-  background-color: var(--ground-2);
-  filter: blur(1px);
-}
-/* Skeleton shimmer runs only while the card is building */
-.sample.is-building .sample-rows li:not(.is-in) > span {
-  background-image: linear-gradient(90deg, transparent 0, rgb(255 255 255 / 0.7) 50%, transparent 100%);
-  background-size: 200% 100%;
-  background-repeat: no-repeat;
-  animation: shimmer 900ms linear infinite;
-}
 @keyframes shimmer { from { background-position: 150% 0; } to { background-position: -50% 0; } }
 
-.sample-status[data-state="building"] .sample-status-icon::before { animation: spin 700ms linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
-.sample-status[data-state="ready"] .sample-status-icon { animation: pop 320ms var(--ease-out); }
+
 @keyframes pop { from { transform: scale(0.6); opacity: 0; } }
 
 /* Tactile: the card tilts toward the pointer (springy, set by JS) and squishes on press */
-.sample { transform-style: preserve-3d; will-change: transform; }
-.sample-shine {
+.tilt-shine {
   position: absolute;
   inset: 0;
   border-radius: inherit;
@@ -158,16 +126,6 @@
   transition: opacity 240ms ease;
   background: radial-gradient(circle at var(--mx, 50%) var(--my, 0%), rgb(255 255 255 / 0.35), transparent 55%);
   mix-blend-mode: soft-light;
-}
-.sample.is-tilting .sample-shine { opacity: 1; }
-
-@media (prefers-reduced-motion: reduce) {
-  .sample.is-building .sample-rows li:not(.is-in) > span,
-  .sample-status[data-state="building"] .sample-status-icon::before { animation: none; }
-  .sample.is-building .sample-head:not(.is-in) { clip-path: none; }
-  .sample.is-building .sample-lead:not(.is-in),
-  .sample.is-building .sample-note:not(.is-in),
-  .sample.is-building .sample-btn:not(.is-in) { transform: none; }
 }
 
 /* ---------- Product cards: each fragment fills itself in once, when it comes into view ---------- */
@@ -192,8 +150,8 @@
 .product.is-typing .frag-searchbar { box-shadow: inset 0 0 0 2px var(--rani); }
 
 /* Tilt sheen for any tilting card */
-.product .sample-shine { mix-blend-mode: soft-light; }
-.product.is-tilting .sample-shine { opacity: 1; }
+.product .tilt-shine { mix-blend-mode: soft-light; }
+.product.is-tilting .tilt-shine { opacity: 1; }
 .product { transform-style: preserve-3d; }
 
 @media (prefers-reduced-motion: reduce) {
@@ -229,8 +187,7 @@
 .msg.is-typing .wa-dots i { animation: typing 1.2s var(--ease-in-out) infinite; }
 .msg.is-typing .wa-dots i:nth-child(2) { animation-delay: 0.15s; }
 .msg.is-typing .wa-dots i:nth-child(3) { animation-delay: 0.3s; }
-.frag-emi-send { transition: background-color var(--t-ui) ease, transform var(--t-press) var(--ease-out); }
-.frag-emi-send:active, .frag-emi-send.is-pressed { transform: scale(0.97); }
+
 .frag-tiles li.is-picked { box-shadow: inset 0 0 0 2px var(--action); transition: box-shadow 200ms ease; }
 
 @media (prefers-reduced-motion: reduce) {
@@ -240,20 +197,26 @@
 
 /* Agents: spinners spin only while a step is working; the fee ring fills smoothly */
 .log-step.is-working .log-icon, .wa-agent.is-working .log-icon { animation: spin 700ms linear infinite; }
-.ring { transition: --p 700ms var(--ease-out); }
+
 .agent-pause { transition: background-color var(--t-ui) ease, transform var(--t-press) var(--ease-out); }
 .agent-pause:active { transform: scale(0.97); }
 @media (prefers-reduced-motion: reduce) {
   .log-step.is-working .log-icon, .wa-agent.is-working .log-icon { animation: none; }
-  .ring { transition: none; }
+
 }
 
-/* Rules flash when they fire */
-.rule.is-firing .rule-icon { animation: rule-fire 700ms var(--ease-out); }
 @keyframes rule-fire { 0% { transform: scale(1); } 35% { transform: scale(1.18) rotate(-8deg); box-shadow: 0 0 0 6px rgb(255 178 36 / 0.25); } 100% { transform: none; box-shadow: 0 0 0 0 rgb(255 178 36 / 0); } }
 .js .cmp-list [data-c], .js .cmp-outcome { transition: opacity 280ms var(--ease-out), transform 280ms var(--ease-out); }
 .compare.is-armed [data-c]:not(.is-in) { display: none; }
 .compare.is-armed .cmp-outcome:not(.is-in) { display: flex; opacity: 0; transform: translateY(6px); }
+
+/* AI assistant: the request types itself in; previews and dashboard rows slide in */
+.product.is-armed .ai-query { clip-path: inset(0 100% 0 0); }
+.js .ai-pick { transition: opacity 300ms var(--ease-out), transform 300ms var(--ease-out); }
+.db-orders tr.is-new td { animation: row-in 700ms var(--ease-out); }
+@keyframes row-in { from { background: #E7F8EF; } to { background: transparent; } }
+.db-live i { animation: live-blink 1.6s ease-in-out infinite; }
+@keyframes live-blink { 50% { opacity: 0.35; } }
 @media (prefers-reduced-motion: reduce) {
-  .rule.is-firing .rule-icon { animation: none; }
+  .db-orders tr.is-new td, .db-live i { animation: none; }
 }

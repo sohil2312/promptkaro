@@ -1,7 +1,8 @@
 /* PromptKaro — showcase.js
-   "What your site could look like": pick a business, watch its sample site build
-   itself from the price list (tilt lives in tilt.js). Without JS every sample is
-   listed, complete, one after another. */
+   "Real landing pages, not templates": pick a business, see its full sample site.
+   Each preview takes itself on a slow tour of the page once it is on screen, and
+   hands over the moment the visitor scrolls, clicks or uses the keyboard inside it.
+   Without JS every preview is listed and scrollable. */
 
 (function () {
   'use strict';
@@ -12,103 +13,90 @@
   var tabs = Array.prototype.slice.call(root.querySelectorAll('[role="tab"]'));
   var panels = tabs.map(function (t) { return document.getElementById(t.getAttribute('aria-controls')); });
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-  var EASE_OUT = 'cubic-bezier(0.23, 1, 0.32, 1)';
-  var STATUS = {
-    en: { building: 'Building from your price list…', ready: 'Demo ready' },
-    gu: { building: 'તમારા ભાવ-પત્રકથી બને છે…', ready: 'ડેમો તૈયાર' }
-  };
   var current = 0;
-  var seen = false;
 
-  function lang() { return document.documentElement.lang === 'gu' ? 'gu' : 'en'; }
+  panels.forEach(function (p, i) { if (i !== current) p.hidden = true; });
 
-  /* ---------- Build status chip, added to every sample (decorative) ---------- */
-  var samples = panels.map(function (p) { return p.querySelector('.sample'); });
-  samples.forEach(function (sample) {
-    var chip = document.createElement('span');
-    chip.className = 'sample-status';
-    chip.setAttribute('aria-hidden', 'true');
-    chip.dataset.state = 'ready';
-    chip.innerHTML = '<span class="sample-status-icon"></span><span class="sample-status-label"></span>';
-    sample.querySelector('.sample-head').prepend(chip);
-    setStatus(sample, 'ready');
-  });
+  /* ---------- The tour: ease down through the page, pause, glide back up ---------- */
+  var tour = { raf: 0, view: null };
+  function easeInOut(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
 
-  function setStatus(sample, state) {
-    var chip = sample.querySelector('.sample-status');
-    chip.dataset.state = state;
-    chip.querySelector('.sample-status-label').textContent = STATUS[lang()][state];
+  function stopTour() {
+    if (tour.raf) cancelAnimationFrame(tour.raf);
+    tour.raf = 0;
+    tour.view = null;
   }
 
-  document.addEventListener('pk:lang', function () {
-    samples.forEach(function (s) { setStatus(s, s.querySelector('.sample-status').dataset.state); });
+  function startTour(view) {
+    stopTour();
+    if (reduce.matches || view.dataset.toured) return; // each preview tours once; after that it's the visitor's
+    var img = view.querySelector('img');
+    function go() {
+      var max = view.scrollHeight - view.clientHeight;
+      if (max <= 0) return;
+      tour.view = view;
+      view.scrollTop = 0;
+      var down = Math.min(11000, Math.max(6000, max * 5)); // about 200px a second, never rushed
+      var hold = 900, up = 1400, start = null;
+      (function step(now) {
+        if (tour.view !== view) return;
+        if (start === null) start = now;
+        var t = now - start;
+        if (t < 500) view.scrollTop = 0;                                    // a beat on the hero first
+        else if (t < 500 + down) view.scrollTop = max * easeInOut((t - 500) / down);
+        else if (t < 500 + down + hold) view.scrollTop = max;
+        else if (t < 500 + down + hold + up) view.scrollTop = max * (1 - easeInOut((t - 500 - down - hold) / up));
+        else { view.scrollTop = 0; view.dataset.toured = 'done'; stopTour(); return; }
+        tour.raf = requestAnimationFrame(step);
+      })(performance.now());
+    }
+    if (img && !img.complete) img.addEventListener('load', go, { once: true }); else go();
+  }
+
+  // Any real interaction inside a preview ends the tour for good on that preview.
+  panels.forEach(function (p) {
+    var view = p.querySelector('.site-view');
+    if (!view) return;
+    ['wheel', 'pointerdown', 'touchstart', 'keydown'].forEach(function (ev) {
+      view.addEventListener(ev, function () {
+        view.dataset.toured = 'user';
+        if (tour.view === view) stopTour();
+      }, { passive: true });
+    });
   });
 
-  /* ---------- The build: header wipes in, rows resolve, button pops ---------- */
-  var buildTimers = [];
-
-  function build(sample) {
-    buildTimers.forEach(clearTimeout);
-    buildTimers = [];
-    if (reduce.matches) { setStatus(sample, 'ready'); return; }
-
-    var parts = [sample.querySelector('.sample-head'), sample.querySelector('.sample-lead')]
-      .concat(Array.prototype.slice.call(sample.querySelectorAll('.sample-rows li')))
-      .concat([sample.querySelector('.sample-note'), sample.querySelector('.sample-btn')]);
-
-    parts.forEach(function (p) { p.classList.remove('is-in'); });
-    sample.classList.add('is-building');
-    setStatus(sample, 'building');
-    void sample.offsetWidth; // commit the "empty" state so transitions run
-
-    // Header and lead first, then rows like a waterfall, the action last.
-    var times = [0, 160];
-    var rows = parts.length - 4;
-    for (var i = 0; i < rows; i++) times.push(320 + i * 150);
-    times.push(320 + rows * 150 + 80);   // note
-    times.push(320 + rows * 150 + 230);  // button
-
-    parts.forEach(function (p, i) {
-      buildTimers.push(setTimeout(function () { p.classList.add('is-in'); }, times[i]));
-    });
-    buildTimers.push(setTimeout(function () {
-      sample.classList.remove('is-building');
-      parts.forEach(function (p) { p.classList.remove('is-in'); });
-      setStatus(sample, 'ready');
-    }, times[times.length - 1] + 320));
+  var onScreen = false;
+  function tourCurrent() {
+    var view = panels[current].querySelector('.site-view');
+    if (view && onScreen) startTour(view);
   }
 
   /* ---------- Tabs ---------- */
-  panels.forEach(function (p, i) { if (i !== current) p.hidden = true; });
-
   function select(index, focus) {
     if (index === current) { if (focus) tabs[index].focus(); return; }
-    var prev = panels[current];
-    var next = panels[index];
-
+    var prev = panels[current], next = panels[index];
     tabs.forEach(function (t, i) {
       var on = i === index;
       t.setAttribute('aria-selected', on ? 'true' : 'false');
       t.tabIndex = on ? 0 : -1;
     });
     if (focus) tabs[index].focus();
-
-    prev.getAnimations({ subtree: true }).forEach(function (a) { a.cancel(); });
+    stopTour();
     prev.hidden = true;
     next.hidden = false;
     current = index;
 
-    var copy = next.querySelector('.panel-copy');
-    if (copy && 'animate' in copy) {
-      copy.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 220, delay: 40, easing: 'ease', fill: 'backwards' });
+    if ('animate' in next && !reduce.matches) {
+      var preview = next.querySelector('.site-preview');
+      var copy = next.querySelector('.panel-copy');
+      // Blur bridges the swap so it reads as one change, not two objects.
+      if (preview) preview.animate([
+        { opacity: 0, filter: 'blur(4px)', transform: 'translateY(8px)' },
+        { opacity: 1, filter: 'blur(0)', transform: 'none' }
+      ], { duration: 280, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
+      if (copy) copy.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 220, delay: 40, easing: 'ease', fill: 'backwards' });
     }
-    if (samples[index] && 'animate' in samples[index] && !reduce.matches) {
-      samples[index].animate([
-        { opacity: 0, transform: 'translateY(8px) scale(0.98)' },
-        { opacity: 1, transform: 'none' }
-      ], { duration: 280, easing: EASE_OUT });
-    }
-    build(samples[index]);
+    tourCurrent();
   }
 
   tabs.forEach(function (tab, i) {
@@ -126,15 +114,11 @@
     });
   });
 
-  // First build when the showcase is properly on screen.
+  // Tour only while the showcase is actually on screen; pause when it scrolls away.
   if ('IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function (entries) {
-      if (seen || !entries[0].isIntersecting) return;
-      seen = true;
-      io.disconnect();
-      build(samples[current]);
-    }, { threshold: 0.35 });
-    io.observe(root);
+    new IntersectionObserver(function (entries) {
+      onScreen = entries[0].isIntersecting;
+      if (onScreen) { if (!tour.view) tourCurrent(); } else stopTour();
+    }, { threshold: 0.45 }).observe(root);
   }
-
 })();
