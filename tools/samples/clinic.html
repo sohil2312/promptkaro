@@ -1,0 +1,89 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shanti Clinic</title><style>@font-face{font-family:'Fig';src:url(fonts/figtree.woff2) format('woff2');font-weight:100 900;font-display:block}:root{--display:'Fig';--body:'Fig';--ink:#0F2A2C;--muted:#4E6566;--bg:#FFFFFF;--soft:#E6F4F5;--panel:radial-gradient(90% 80% at 50% 40%, #FFFFFF, #D7EEF0);--card:#F5FAFA;--accent:#0F6B73;--accent-ink:#0F6B73;--on-accent:#FFFFFF;--line:#DCEAEA;--r-sm:50%;--r-md:16px;--r-lg:24px;--r-btn:999px;--track:-0.02em;--h-weight:700;--card-shadow:none}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased}
+body{font-family:var(--body);color:var(--ink);background:var(--bg);line-height:1.55;font-size:17px}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+nav{display:flex;align-items:center;gap:28px;height:76px}
+.brand{font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+.brand i{width:30px;height:30px;border-radius:var(--r-sm);background:var(--accent);display:inline-block}
+.links{display:flex;gap:26px;margin-left:auto;font-size:15px;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;gap:8px;height:46px;padding:0 20px;border-radius:var(--r-btn);font-weight:600;font-size:15px;white-space:nowrap}
+.btn-wa{background:#008069;color:#fff}
+.btn-alt{box-shadow:inset 0 0 0 1.5px currentColor}
+.hero{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center;padding:36px 0 72px}
+.eyebrow-chip{display:inline-flex;gap:8px;align-items:center;padding:6px 12px;border-radius:999px;background:var(--soft);color:var(--accent-ink);font-size:14px;font-weight:600}
+h1{font-family:var(--display);font-size:62px;line-height:1.02;letter-spacing:var(--track);margin:18px 0 18px;font-weight:var(--h-weight)}
+.lead{font-size:20px;color:var(--muted);max-width:30ch}
+.ctas{display:flex;gap:14px;margin-top:28px}
+.hero-art{position:relative;border-radius:var(--r-lg);background:var(--panel);aspect-ratio:1/0.86;display:grid;place-items:center;overflow:hidden}
+.hero-art img{width:84%;filter:drop-shadow(0 30px 40px rgba(0,0,0,.18))}
+.tag{position:absolute;padding:10px 14px;border-radius:14px;background:#fff;box-shadow:0 10px 30px -12px rgba(0,0,0,.3);font-size:14px;line-height:1.3}
+.tag b{display:block;font-size:16px}
+.strip{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:0 0 72px}
+.strip div{padding:22px;border-radius:var(--r-md);background:var(--soft)}
+.strip b{display:block;font-family:var(--display);font-size:19px;margin-bottom:4px}
+.strip span{color:var(--muted);font-size:15px}
+section h2{font-family:var(--display);font-size:40px;line-height:1.08;letter-spacing:var(--track);font-weight:var(--h-weight);margin-bottom:10px}
+.sub{color:var(--muted);margin-bottom:28px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;padding-bottom:80px}
+.card{border-radius:var(--r-md);background:var(--card);padding:14px;box-shadow:var(--card-shadow)}
+.card .ph{aspect-ratio:1;border-radius:calc(var(--r-md) - 6px);background:var(--panel);display:grid;place-items:center;margin-bottom:12px}
+.card .ph img{width:78%}
+.card b{display:block;font-weight:600}
+.card .price{font-weight:700;margin-top:2px}
+.card small{color:var(--muted)}
+.card .mini{margin-top:10px;display:flex;justify-content:space-between;align-items:center}
+.card .mini span{font-size:13px;color:#008069;font-weight:600}
+.chips{display:flex;gap:10px;margin-bottom:22px}
+.chips span{padding:8px 14px;border-radius:999px;background:var(--soft);font-size:14px;font-weight:600}
+.chips span:first-child{background:var(--ink);color:var(--bg)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;padding-bottom:80px}
+.panel{border-radius:var(--r-lg);background:var(--panel);padding:36px}
+.rows{display:grid;gap:0}
+.rows div{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line)}
+.rows div b{font-weight:600}
+.band{border-radius:var(--r-lg);background:var(--accent);color:var(--on-accent);padding:44px;display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:56px}
+.band h2{color:inherit;margin:0;font-size:36px}
+.band .btn-wa{background:#fff;color:#0b5c4b}
+footer{padding:28px 0 40px;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;border-top:1px solid var(--line)}
+.grid .card:nth-child(4n+2) .ph img{transform:scaleX(-1) rotate(-5deg) scale(.92)}
+.grid .card:nth-child(4n+3) .ph img{transform:rotate(7deg) scale(1.06)}
+.grid .card:nth-child(4n+4) .ph img{transform:scaleX(-1) rotate(4deg) scale(.86)}
+.grid .card:nth-child(4n+2) .ph{filter:hue-rotate(-14deg) saturate(1.1)}
+.grid .card:nth-child(4n+3) .ph{filter:hue-rotate(12deg)}
+.grid .card:nth-child(4n+4) .ph{filter:saturate(.85) brightness(1.03)}
+@media (max-width:700px){
+  body{font-size:16px}
+  .wrap{padding:0 18px}
+  nav{height:64px}
+  .links{display:none}
+  nav .btn{margin-left:auto;height:40px;padding:0 14px}
+  .hero{grid-template-columns:1fr;gap:24px;padding:12px 0 40px}
+  h1{font-size:40px}
+  .lead{font-size:17px}
+  .ctas{flex-wrap:wrap}
+  .strip{grid-template-columns:1fr;padding-bottom:44px}
+  section h2{font-size:30px}
+  .grid{grid-template-columns:repeat(2,1fr);gap:12px;padding-bottom:48px}
+  .split{grid-template-columns:1fr;padding-bottom:48px}
+  .panel{padding:22px}
+  .band{flex-direction:column;align-items:flex-start;padding:28px}
+  .band h2{font-size:28px}
+  footer{flex-direction:column;gap:6px}
+}
+.grid{grid-template-columns:repeat(4,1fr)}.card .ph img{width:70%}</style></head>
+<body class=""><div class="wrap">
+<nav><span class="brand"><i></i>Shanti Clinic</span><span class="links"><a>Timings</a><a>Services</a><a>Doctor</a><a>Visit</a></span><a class="btn btn-wa"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.13c-.25.69-1.44 1.32-2 1.41-.51.08-1.16.11-1.87-.12-.43-.14-.98-.32-1.69-.62-2.98-1.29-4.93-4.29-5.08-4.49-.15-.2-1.21-1.61-1.21-3.07s.77-2.18 1.04-2.48c.27-.3.6-.37.8-.37h.57c.18.01.43-.07.67.51.25.6.84 2.06.92 2.21.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.45.52-.15.15-.3.31-.13.6.17.3.77 1.27 1.65 2.06 1.13 1.01 2.09 1.32 2.39 1.47.3.15.47.13.64-.08.18-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.74.82 2.04.97.3.15.5.22.57.35.08.12.08.72-.17 1.41Z"/></svg>Book on WhatsApp</a></nav>
+<header class="hero"><div class="hero-copy"><span class="eyebrow-chip">Family doctor</span><h1>Care for the whole family, close to home.</h1><p class="lead">Children and elders welcome. Book a time on WhatsApp and skip the waiting room.</p>
+<div class="ctas"><a class="btn btn-wa"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.13c-.25.69-1.44 1.32-2 1.41-.51.08-1.16.11-1.87-.12-.43-.14-.98-.32-1.69-.62-2.98-1.29-4.93-4.29-5.08-4.49-.15-.2-1.21-1.61-1.21-3.07s.77-2.18 1.04-2.48c.27-.3.6-.37.8-.37h.57c.18.01.43-.07.67.51.25.6.84 2.06.92 2.21.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.45.52-.15.15-.3.31-.13.6.17.3.77 1.27 1.65 2.06 1.13 1.01 2.09 1.32 2.39 1.47.3.15.47.13.64-.08.18-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.74.82 2.04.97.3.15.5.22.57.35.08.12.08.72-.17 1.41Z"/></svg>Book an appointment</a><a class="btn btn-alt">See timings</a></div></div>
+<div class="hero-art"><img src="img/stethoscope.webp" alt=""><span class="tag" style="left:7%;bottom:14%"><b>Open today</b>5 pm to 8 pm</span></div></header>
+<div class="strip"><div><b>Short waits</b><span>Book a slot and come at your time.</span></div><div><b>Reminders on WhatsApp</b><span>We message you before your turn.</span></div><div><b>Reports on your phone</b><span>Lab reports shared as PDF.</span></div></div>
+<section><h2>What we treat</h2><p class="sub">General medicine for all ages.</p><div class="chips"></div><div class="grid"><div class="card"><div class="ph"><img src="img/stethoscope.webp" alt=""></div><b>General check-up</b><small>Adults and elders</small><div class="mini"><span class="price">₹300</span><span>Book</span></div></div><div class="card"><div class="ph"><img src="img/stethoscope.webp" alt=""></div><b>Child care</b><small>Fever, cough, vaccines</small><div class="mini"><span class="price">₹300</span><span>Book</span></div></div><div class="card"><div class="ph"><img src="img/stethoscope.webp" alt=""></div><b>Diabetes and BP</b><small>Regular follow-ups</small><div class="mini"><span class="price">₹250</span><span>Book</span></div></div><div class="card"><div class="ph"><img src="img/stethoscope.webp" alt=""></div><b>Lab tests</b><small>Sample at the clinic</small><div class="mini"><span class="price">From ₹150</span><span>Book</span></div></div></div></section>
+<section class="split"><div><h2>Dr. A. Mehta, MBBS</h2><p class="sub" style="max-width:44ch">Fifteen years of family practice. Takes time to explain, in Gujarati, Hindi or English.</p></div>
+<div class="panel"><div class="rows"><div><span>Morning OPD</span><b>10 am to 1 pm</b></div><div><span>Evening OPD</span><b>5 pm to 8 pm</b></div><div><span>Sunday</span><b>Closed</b></div><div><span>Emergencies</span><b>Call before you come</b></div></div></div></section>
+<div class="band"><h2>Need to see the doctor today?</h2><a class="btn btn-wa"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.13c-.25.69-1.44 1.32-2 1.41-.51.08-1.16.11-1.87-.12-.43-.14-.98-.32-1.69-.62-2.98-1.29-4.93-4.29-5.08-4.49-.15-.2-1.21-1.61-1.21-3.07s.77-2.18 1.04-2.48c.27-.3.6-.37.8-.37h.57c.18.01.43-.07.67.51.25.6.84 2.06.92 2.21.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.45.52-.15.15-.3.31-.13.6.17.3.77 1.27 1.65 2.06 1.13 1.01 2.09 1.32 2.39 1.47.3.15.47.13.64-.08.18-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.74.82 2.04.97.3.15.5.22.57.35.08.12.08.72-.17 1.41Z"/></svg>Book on WhatsApp</a></div>
+<footer><span>© 2026 Shanti Clinic</span><span>General medicine and family care</span></footer>
+</div></body></html>

@@ -138,15 +138,16 @@ function earbuds() {
   return { group: shadowed(g), elev: 0.42, fit: 1.22, baseYaw: 0.28 };
 }
 
-function phone() {
+function phone(opts = {}) {
   const g = new THREE.Group();
   const W = 0.76, H = 1.58, D = 0.08;
   const body = rr(W, H, D, 0.1, M.darkMetal, 10);
   g.add(body);
   // Back glass with a camera island
-  const back = rr(W - 0.03, H - 0.03, 0.01, 0.09, M.tealGlass, 8);
+  const backMat = opts.color ? new THREE.MeshPhysicalMaterial({ color: opts.color, metalness: 0.15, roughness: 0.14, clearcoat: 1, clearcoatRoughness: 0.05 }) : M.tealGlass;
+  const back = rr(W - 0.03, H - 0.03, 0.01, 0.09, backMat, 8);
   back.position.z = -D / 2 + 0.002; g.add(back);
-  const island = rr(0.3, 0.3, 0.03, 0.07, M.tealGlass, 6);
+  const island = rr(0.3, 0.3, 0.03, 0.07, backMat, 6);
   island.position.set(-W / 2 + 0.2, H / 2 - 0.2, -D / 2 - 0.012); g.add(island);
   [[-0.06, 0.06], [0.06, -0.06]].forEach(([x, y]) => {
     const ring = new THREE.Mesh(new THREE.CylinderGeometry(0.055, 0.055, 0.03, 48), M.metal);
@@ -162,7 +163,7 @@ function phone() {
     c.fillStyle = grd; c.fillRect(0, 0, w, h);
     c.fillStyle = '#1D3B8F'; c.fillRect(0, 0, w, 250);
     c.fillStyle = '#fff'; c.font = '700 54px Anek'; c.fillText('Shreeji Mobile', 40, 150);
-    c.font = '400 30px Anek'; c.globalAlpha = 0.85; c.fillText('Station Road, Idar', 40, 200); c.globalAlpha = 1;
+    c.font = '400 30px Anek'; c.globalAlpha = 0.85; c.fillText('Station Road', 40, 200); c.globalAlpha = 1;
     const items = [['5G phone', '₹13,999', '#2F5960'], ['Smart watch', '₹2,499', '#D2386F'], ['Earbuds', '₹1,299', '#E9E6DE'], ['Charger 33W', '₹899', '#F2B528']];
     items.forEach(([n, p, col], i) => {
       const y = 290 + i * 170;
@@ -174,8 +175,9 @@ function phone() {
     c.fillStyle = '#008069'; roundRect(c, 30, h - 150, w - 60, 100, 50); c.fill();
     c.fillStyle = '#fff'; c.font = '700 36px Anek'; c.textAlign = 'center'; c.fillText('Order on WhatsApp', w / 2, h - 88);
   });
+  const screenTex = opts.screenTex || tex;
   const screen = new THREE.Mesh(new THREE.PlaneGeometry(W - 0.07, H - 0.07),
-    new THREE.MeshPhysicalMaterial({ map: tex, emissive: 0xffffff, emissiveMap: tex, emissiveIntensity: 0.18, roughness: 0.05, clearcoat: 1, clearcoatRoughness: 0.03 }));
+    new THREE.MeshPhysicalMaterial({ map: screenTex, emissive: 0xffffff, emissiveMap: screenTex, emissiveIntensity: opts.screenTex ? 0.32 : 0.18, roughness: 0.05, clearcoat: 1, clearcoatRoughness: 0.03 }));
   screen.position.z = D / 2 + 0.0045; g.add(screen);
   const notch = new THREE.Mesh(new THREE.CircleGeometry(0.018, 24), new THREE.MeshBasicMaterial({ color: 0x000000 }));
   notch.position.set(0, H / 2 - 0.07, D / 2 + 0.006); g.add(notch);
@@ -187,7 +189,8 @@ function phone() {
   g.rotation.x = -0.12;
   holder.add(g);
   holder.add(contactShadow(1.1, 0.5, 0.45));
-  return { group: shadowed(holder), elev: 0.16, fit: 1.48, baseYaw: -0.45 };
+  holder.userData.screen = screen;
+  return { group: shadowed(holder), elev: opts.elev ?? 0.16, fit: opts.fit ?? 1.48, baseYaw: opts.yaw ?? -0.45 };
 }
 
 function watch() {
@@ -291,7 +294,202 @@ function pin() {
   return { group: shadowed(g), elev: 0.2, fit: 1.4, baseYaw: 0.3 };
 }
 
-const BUILD = { earbuds, phone, watch, charger, coin, pin };
+
+/* ---------------- Food: a Gujarati thali ---------------- */
+function noiseTex(size, base, spots, n, rMin, rMax, alpha = 1) {
+  return canvasTex(size, size, (c, w, h) => {
+    c.fillStyle = base; c.fillRect(0, 0, w, h);
+    for (let i = 0; i < n; i++) {
+      const r = rMin + Math.random() * (rMax - rMin);
+      c.globalAlpha = alpha * (0.35 + Math.random() * 0.65);
+      c.fillStyle = spots[i % spots.length];
+      c.beginPath(); c.ellipse(Math.random() * w, Math.random() * h, r, r * (0.6 + Math.random() * 0.6), Math.random() * 3, 0, Math.PI * 2); c.fill();
+    }
+    c.globalAlpha = 1;
+  });
+}
+function thali() {
+  const g = new THREE.Group();
+  const steel = new THREE.MeshPhysicalMaterial({ color: 0xcfd3d6, metalness: 1, roughness: 0.22 });
+  const plate = new THREE.Mesh(new THREE.CylinderGeometry(1.05, 1.0, 0.04, 96), steel);
+  plate.position.y = 0.02; g.add(plate);
+  const rim = new THREE.Mesh(new THREE.TorusGeometry(1.04, 0.035, 20, 120), steel);
+  rim.rotation.x = Math.PI / 2; rim.position.y = 0.055; g.add(rim);
+  function katori(x, z, fill, rough = 0.55) {
+    const pts = [new THREE.Vector2(0, 0), new THREE.Vector2(0.17, 0), new THREE.Vector2(0.22, 0.05), new THREE.Vector2(0.245, 0.13), new THREE.Vector2(0.255, 0.15), new THREE.Vector2(0.235, 0.15), new THREE.Vector2(0.225, 0.13)];
+    const bowl = new THREE.Mesh(new THREE.LatheGeometry(pts, 64), steel);
+    bowl.material.side = THREE.DoubleSide;
+    bowl.position.set(x, 0.04, z); g.add(bowl);
+    const surface = new THREE.Mesh(new THREE.CircleGeometry(0.225, 64), new THREE.MeshPhysicalMaterial({ map: fill, roughness: rough, clearcoat: 0.5, clearcoatRoughness: 0.35 }));
+    surface.rotation.x = -Math.PI / 2; surface.position.set(x, 0.165, z); g.add(surface);
+  }
+  katori(-0.52, -0.42, noiseTex(256, '#E0A11B', ['#F2C14E', '#B9780E', '#7FA33A'], 90, 3, 9));          // dal with tadka
+  katori(0.02, -0.66, noiseTex(256, '#6E8E2C', ['#8DB043', '#4E6A1C', '#C9A227', '#E9D9A6'], 140, 4, 12)); // sabzi
+  katori(0.55, -0.42, noiseTex(256, '#F2DC8F', ['#FFF1C4', '#D8B85C', '#9BB54A'], 60, 2, 6));             // kadhi
+  katori(0.72, 0.12, noiseTex(256, '#F4E6C9', ['#FFF6E4', '#E8CE9B', '#E3A21A'], 50, 2, 6), 0.4);         // shrikhand
+  // rice mound
+  const rice = new THREE.Mesh(new THREE.SphereGeometry(0.32, 64, 32, 0, Math.PI * 2, 0, Math.PI / 2),
+    new THREE.MeshPhysicalMaterial({ map: noiseTex(256, '#F7F5EE', ['#FFFFFF', '#E9E4D6', '#DAD3BF'], 900, 1, 3), roughness: 0.7, sheen: 0.5, sheenColor: 0xffffff }));
+  rice.scale.set(1.2, 0.55, 1); rice.position.set(-0.05, 0.04, 0.12); g.add(rice);
+  // rotis
+  const rotiTex = noiseTex(256, '#D9A863', ['#8C5A22', '#B87C3A', '#E8C48A', '#6E4317'], 160, 2, 9);
+  [[-0.58, 0.36, 0.0, 0.05], [-0.46, 0.46, 0.35, 0.075]].forEach(([x, z, rot, y]) => {
+    const roti = new THREE.Mesh(new THREE.CylinderGeometry(0.33, 0.33, 0.018, 64), new THREE.MeshStandardMaterial({ map: rotiTex, roughness: 0.85 }));
+    roti.position.set(x, y, z); roti.rotation.set(0.06, rot, -0.05); g.add(roti);
+  });
+  // papad and a lemon wedge
+  const papad = new THREE.Mesh(new THREE.CylinderGeometry(0.26, 0.26, 0.008, 48), new THREE.MeshStandardMaterial({ map: noiseTex(256, '#EFD9A4', ['#C99B4D', '#FBEAC4', '#8E6A33'], 300, 1, 3), roughness: 0.8 }));
+  papad.position.set(0.42, 0.06, 0.55); papad.rotation.z = 0.08; g.add(papad);
+  const lemon = new THREE.Mesh(new THREE.SphereGeometry(0.08, 32, 16, 0, Math.PI), new THREE.MeshPhysicalMaterial({ color: 0xe8d23a, roughness: 0.45, clearcoat: 0.6 }));
+  lemon.position.set(0.1, 0.06, 0.62); lemon.rotation.set(-Math.PI / 2, 0, 0.4); g.add(lemon);
+  g.add(contactShadow(2.6, 2.6, 0.32));
+  return { group: shadowed(g), elev: 0.78, fit: 1.08, baseYaw: 0.2 };
+}
+
+/* ---------------- Coaching: books and a pencil ---------------- */
+function books() {
+  const g = new THREE.Group();
+  const pagesTex = canvasTex(256, 64, (c, w, h) => { c.fillStyle = '#F4EEDF'; c.fillRect(0, 0, w, h); c.strokeStyle = 'rgba(150,130,100,0.25)'; for (let y = 2; y < h; y += 2) { c.beginPath(); c.moveTo(0, y); c.lineTo(w, y); c.stroke(); } });
+  const pagesMat = new THREE.MeshStandardMaterial({ map: pagesTex, roughness: 0.9 });
+  const stack = [[1.5, 0.22, 1.05, 0x7A1F2B, 0.05], [1.35, 0.18, 0.98, 0x1F4E79, -0.12], [1.42, 0.26, 1.0, 0x2E6B4A, 0.18], [1.2, 0.16, 0.88, 0xD99A1E, -0.05]];
+  let y = 0;
+  stack.forEach(([w, h, d, col, rot]) => {
+    const book = new THREE.Group();
+    const cover = new THREE.MeshPhysicalMaterial({ color: col, roughness: 0.55, clearcoat: 0.25, clearcoatRoughness: 0.4 });
+    const top = rr(w, 0.025, d, 0.012, cover, 3); top.position.y = h / 2 - 0.0125; book.add(top);
+    const bottom = rr(w, 0.025, d, 0.012, cover, 3); bottom.position.y = -h / 2 + 0.0125; book.add(bottom);
+    const spine = rr(0.04, h, d, 0.02, cover, 3); spine.position.x = -w / 2 + 0.02; book.add(spine);
+    const pages = new THREE.Mesh(new THREE.BoxGeometry(w - 0.06, h - 0.05, d - 0.05), pagesMat); pages.position.x = 0.01; book.add(pages);
+    const band = rr(0.045, h + 0.004, d + 0.004, 0.02, new THREE.MeshStandardMaterial({ color: 0xE8D9A8, metalness: 0.6, roughness: 0.35 }), 3);
+    band.position.x = -w / 2 + 0.2; book.add(band);
+    book.position.y = y + h / 2; book.rotation.y = rot;
+    y += h; g.add(book);
+  });
+  // pencil lying across the top
+  const pencil = new THREE.Group();
+  const body = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.045, 1.1, 6), new THREE.MeshPhysicalMaterial({ color: 0xF2B528, roughness: 0.35, clearcoat: 0.8 }));
+  pencil.add(body);
+  const wood = new THREE.Mesh(new THREE.ConeGeometry(0.045, 0.14, 6), new THREE.MeshStandardMaterial({ color: 0xE6C08A, roughness: 0.8 }));
+  wood.position.y = 0.62; pencil.add(wood);
+  const lead = new THREE.Mesh(new THREE.ConeGeometry(0.014, 0.045, 12), new THREE.MeshStandardMaterial({ color: 0x2b2b2b, roughness: 0.4, metalness: 0.4 }));
+  lead.position.y = 0.67; pencil.add(lead);
+  const ferrule = new THREE.Mesh(new THREE.CylinderGeometry(0.047, 0.047, 0.08, 24), M.metal); ferrule.position.y = -0.59; pencil.add(ferrule);
+  const eraser = new THREE.Mesh(new THREE.CylinderGeometry(0.046, 0.046, 0.08, 24), new THREE.MeshStandardMaterial({ color: 0xE77D8E, roughness: 0.8 })); eraser.position.y = -0.67; pencil.add(eraser);
+  pencil.rotation.z = Math.PI / 2; pencil.rotation.y = 0.55; pencil.position.set(0.05, y + 0.05, 0.05);
+  g.add(pencil);
+  g.add(contactShadow(2.2, 1.7, 0.4));
+  return { group: shadowed(g), elev: 0.42, fit: 1.12, baseYaw: -0.35 };
+}
+
+/* ---------------- Clinic: a stethoscope ---------------- */
+function stethoscope() {
+  const g = new THREE.Group();
+  const tubeMat = new THREE.MeshPhysicalMaterial({ color: 0x0F6B73, roughness: 0.45, clearcoat: 0.6, clearcoatRoughness: 0.3 });
+  const steel = new THREE.MeshPhysicalMaterial({ color: 0xd8dcdf, metalness: 1, roughness: 0.16 });
+  const main = new THREE.CatmullRomCurve3([
+    new THREE.Vector3(0.9, 0.06, 0.55), new THREE.Vector3(0.3, 0.035, 0.7), new THREE.Vector3(-0.4, 0.035, 0.5),
+    new THREE.Vector3(-0.7, 0.035, 0.0), new THREE.Vector3(-0.35, 0.035, -0.45), new THREE.Vector3(0.15, 0.035, -0.35), new THREE.Vector3(0.3, 0.035, -0.05)]);
+  g.add(new THREE.Mesh(new THREE.TubeGeometry(main, 160, 0.035, 20, false), tubeMat));
+  // Y split into two ear tubes
+  [[1, 0.0], [-1, 0.0]].forEach(([s]) => {
+    const branch = new THREE.CatmullRomCurve3([new THREE.Vector3(0.3, 0.035, -0.05), new THREE.Vector3(0.45, 0.035, 0.1 * s + 0.05), new THREE.Vector3(0.62, 0.035, 0.2 * s + 0.05)]);
+    g.add(new THREE.Mesh(new THREE.TubeGeometry(branch, 40, 0.03, 16, false), tubeMat));
+    const ear = new THREE.CatmullRomCurve3([new THREE.Vector3(0.62, 0.035, 0.2 * s + 0.05), new THREE.Vector3(0.95, 0.035, 0.32 * s + 0.05), new THREE.Vector3(1.2, 0.035, 0.36 * s + 0.05)]);
+    g.add(new THREE.Mesh(new THREE.TubeGeometry(ear, 40, 0.018, 16, false), steel));
+    const tip = new THREE.Mesh(new THREE.SphereGeometry(0.045, 24, 16), new THREE.MeshStandardMaterial({ color: 0x1e2422, roughness: 0.7 }));
+    tip.position.set(1.22, 0.04, 0.36 * s + 0.05); tip.scale.set(1.2, 1, 1); g.add(tip);
+  });
+  // chest piece
+  const chest = new THREE.Group();
+  const bell = new THREE.Mesh(new THREE.CylinderGeometry(0.19, 0.2, 0.08, 64), steel); chest.add(bell);
+  const diaphragm = new THREE.Mesh(new THREE.CylinderGeometry(0.17, 0.17, 0.01, 64), new THREE.MeshPhysicalMaterial({ color: 0x15191a, roughness: 0.3, clearcoat: 1 }));
+  diaphragm.position.y = 0.045; chest.add(diaphragm);
+  const stem = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 0.18, 24), steel); stem.rotation.z = Math.PI / 2; stem.position.set(0.18, 0, 0); chest.add(stem);
+  chest.position.set(1.08, 0.045, 0.6); chest.rotation.y = 0.5; g.add(chest);
+  g.add(contactShadow(1.6, 1.1, 0.14));
+  return { group: shadowed(g), elev: 0.95, fit: 1.0, baseYaw: 0.1 };
+}
+
+/* ---------------- Property: a modern apartment building ---------------- */
+function building() {
+  const g = new THREE.Group();
+  const concrete = new THREE.MeshStandardMaterial({ color: 0xEDE8DF, roughness: 0.8 });
+  const warm = new THREE.MeshStandardMaterial({ color: 0xC9A27A, roughness: 0.7 });
+  const glass = new THREE.MeshPhysicalMaterial({ color: 0x2b4a57, metalness: 0.4, roughness: 0.06, clearcoat: 1 });
+  const lit = new THREE.MeshStandardMaterial({ color: 0xffe7b0, emissive: 0xffd98a, emissiveIntensity: 0.5, roughness: 0.4 });
+  const floors = 7, W = 1.6, D = 1.0, FH = 0.28;
+  const core = new THREE.Mesh(new THREE.BoxGeometry(W, floors * FH, D), concrete);
+  core.position.y = floors * FH / 2 + 0.1; g.add(core);
+  const podium = new THREE.Mesh(new THREE.BoxGeometry(W + 0.2, 0.32, D + 0.2), warm); podium.position.y = 0.16; g.add(podium);
+  const shop = new THREE.Mesh(new THREE.BoxGeometry(W - 0.2, 0.22, 0.01), glass); shop.position.set(0, 0.17, (D + 0.2) / 2 + 0.006); g.add(shop);
+  for (let f = 0; f < floors; f++) {
+    const y = 0.42 + f * FH;
+    for (let i = 0; i < 4; i++) {
+      const x = -W / 2 + 0.22 + i * 0.39;
+      const win = new THREE.Mesh(new THREE.BoxGeometry(0.28, 0.18, 0.01), (f * 3 + i) % 5 === 1 ? lit : glass);
+      win.position.set(x, y, D / 2 + 0.006); g.add(win);
+      const side = new THREE.Mesh(new THREE.BoxGeometry(0.01, 0.18, 0.2), (f + i) % 4 === 0 ? lit : glass);
+      if (i < 3) { side.position.set(W / 2 + 0.006, y, -D / 2 + 0.2 + i * 0.3); g.add(side); }
+    }
+    // balcony slab with glass railing
+    const slab = new THREE.Mesh(new THREE.BoxGeometry(W + 0.04, 0.03, 0.18), concrete); slab.position.set(0, y - 0.11, D / 2 + 0.09); g.add(slab);
+    const rail = new THREE.Mesh(new THREE.BoxGeometry(W + 0.04, 0.1, 0.008), new THREE.MeshPhysicalMaterial({ color: 0xaecbd1, roughness: 0.05, transmission: 0.6, transparent: true, opacity: 0.55 }));
+    rail.position.set(0, y - 0.05, D / 2 + 0.18); g.add(rail);
+  }
+  const roof = new THREE.Mesh(new THREE.BoxGeometry(W + 0.12, 0.05, D + 0.12), warm); roof.position.y = floors * FH + 0.12; g.add(roof);
+  // landscaping
+  const ground = new THREE.Mesh(new THREE.CylinderGeometry(1.7, 1.7, 0.03, 64), new THREE.MeshStandardMaterial({ color: 0xD9D3C4, roughness: 0.9 }));
+  ground.position.y = -0.015; g.add(ground);
+  const lawn = new THREE.Mesh(new THREE.CylinderGeometry(0.7, 0.7, 0.035, 48), new THREE.MeshStandardMaterial({ color: 0x7FA65A, roughness: 0.95 }));
+  lawn.position.set(-1.0, 0, 0.9); lawn.scale.z = 0.6; g.add(lawn);
+  [[-1.25, 0.95, 0.28], [-0.85, 1.15, 0.22], [1.15, 0.9, 0.25]].forEach(([x, z, r]) => {
+    const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.035, 0.35, 12), new THREE.MeshStandardMaterial({ color: 0x6b4a2e, roughness: 0.9 }));
+    trunk.position.set(x, 0.17, z); g.add(trunk);
+    const crown = new THREE.Mesh(new THREE.IcosahedronGeometry(r, 2), new THREE.MeshStandardMaterial({ color: 0x4F7F3A, roughness: 0.85, flatShading: true }));
+    crown.position.set(x, 0.35 + r * 0.8, z); g.add(crown);
+  });
+  g.add(contactShadow(3.6, 3.6, 0.25));
+  return { group: shadowed(g), elev: 0.28, fit: 1.0, baseYaw: -0.55 };
+}
+
+/* ---------------- Devices with real screenshots ---------------- */
+function laptop(opts = {}) {
+  const g = new THREE.Group();
+  const alu = new THREE.MeshPhysicalMaterial({ color: 0xc9ccd0, metalness: 1, roughness: 0.32 });
+  const W = 2.4, D = 1.62;
+  const base = rr(W, 0.06, D, 0.05, alu, 6); base.position.y = 0.03; g.add(base);
+  const keys = canvasTex(1024, 512, (c, w, h) => {
+    c.fillStyle = '#2a2e30'; c.fillRect(0, 0, w, h);
+    const rows = 6, cols = 14, kw = w / cols, kh = h / rows * 0.82;
+    for (let r = 0; r < rows; r++) for (let k = 0; k < cols; k++) { c.fillStyle = '#121516'; roundRect(c, k * kw + 3, r * (h / rows) + 3, kw - 6, kh, 6); c.fill(); }
+  });
+  const deck = new THREE.Mesh(new THREE.PlaneGeometry(W - 0.4, 0.78), new THREE.MeshStandardMaterial({ map: keys, roughness: 0.6 }));
+  deck.rotation.x = -Math.PI / 2; deck.position.set(0, 0.0605, -0.22); g.add(deck);
+  const pad = rr(0.9, 0.004, 0.55, 0.03, new THREE.MeshPhysicalMaterial({ color: 0xbfc3c7, metalness: 0.9, roughness: 0.22 }), 4);
+  pad.position.set(0, 0.061, 0.45); g.add(pad);
+  const hinge = new THREE.Group(); hinge.position.set(0, 0.06, -D / 2 + 0.02);
+  const lid = rr(W, 1.55, 0.035, 0.05, alu, 6); lid.position.y = 0.775; hinge.add(lid);
+  const bezel = rr(W - 0.04, 1.51, 0.004, 0.04, M.blackGlass, 4); bezel.position.set(0, 0.775, 0.018); hinge.add(bezel);
+  const sw = W - 0.16, sh = sw * 10 / 16;
+  const screen = new THREE.Mesh(new THREE.PlaneGeometry(sw, sh),
+    new THREE.MeshPhysicalMaterial({ map: opts.screenTex || null, color: opts.screenTex ? 0xffffff : 0x111111, emissive: 0xffffff, emissiveMap: opts.screenTex || null, emissiveIntensity: opts.screenTex ? 0.35 : 0, roughness: 0.04, clearcoat: 1, clearcoatRoughness: 0.02 }));
+  screen.position.set(0, 0.79, 0.0215); hinge.add(screen);
+  hinge.rotation.x = -(opts.open ?? 0.22);
+  g.add(hinge);
+  g.add(contactShadow(3.2, 2.2, 0.32));
+  g.userData.screen = screen;
+  return { group: shadowed(g), elev: opts.elev ?? 0.3, fit: opts.fit ?? 1.0, baseYaw: opts.yaw ?? 0.32 };
+}
+
+function duo(opts = {}) {
+  const g = new THREE.Group();
+  const l = laptop({ screenTex: opts.screenTex, open: 0.22 }).group; g.add(l);
+  const p = phone({ screenTex: opts.phoneTex, color: 0x1f2a2e }).group;
+  p.scale.setScalar(0.62); p.position.set(1.35, 0, 0.75); p.rotation.y = -0.35; g.add(p);
+  return { group: g, elev: 0.26, fit: 0.98, baseYaw: 0.25 };
+}
+
+const BUILD = { earbuds, phone, watch, charger, coin, pin, thali, books, stethoscope, building, laptop, duo };
 let current = null;
 
 function fitCamera(obj) {
@@ -306,20 +504,42 @@ function fitCamera(obj) {
   camera.lookAt(sphere.center);
 }
 
-window.renderProduct = (name, yawDeg = 0) => {
-  if (!current || current.name !== name) {
+const loader = new THREE.TextureLoader();
+async function tex(url) {
+  const t = await loader.loadAsync(url);
+  t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 16; t.generateMipmaps = true;
+  t.minFilter = THREE.LinearMipmapLinearFilter;
+  return t;
+}
+window.renderProduct = async (name, yawDeg = 0, opts = {}) => {
+  const key = name + JSON.stringify(opts);
+  if (!current || current.key !== key) {
     if (current) scene.remove(current.obj.group);
-    const obj = BUILD[name]();
+    const o = Object.assign({}, opts);
+    if (o.screen) o.screenTex = await tex(o.screen);
+    if (o.phoneScreen) o.phoneTex = await tex(o.phoneScreen);
+    const obj = BUILD[name](o);
     scene.add(obj.group);
-    current = { name, obj };
+    current = { name, key, obj };
     floor.visible = false;
     obj.group.rotation.y = obj.baseYaw;
-    fitCamera(obj); // frame once at the base pose so turntable frames don't zoom
+    fitCamera(obj);
   }
   const { obj } = current;
   obj.group.rotation.y = obj.baseYaw + THREE.MathUtils.degToRad(yawDeg);
   renderer.render(scene, camera);
   return renderer.domElement.toDataURL('image/png');
+};
+// Screen corners in image coordinates (0..1), for overlaying a video on a rendered device
+window.screenCorners = () => {
+  const scr = current && (current.obj.group.userData.screen);
+  if (!scr) return null;
+  scr.geometry.computeBoundingBox();
+  const b = scr.geometry.boundingBox;
+  return [[b.min.x, b.max.y], [b.max.x, b.max.y], [b.max.x, b.min.y], [b.min.x, b.min.y]].map(([x, y]) => {
+    const v = new THREE.Vector3(x, y, 0).applyMatrix4(scr.matrixWorld).project(camera);
+    return [(v.x + 1) / 2, (1 - v.y) / 2];
+  });
 };
 window.resetProduct = () => { if (current) { scene.remove(current.obj.group); current = null; } };
 window.ready = true;

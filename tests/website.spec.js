@@ -16,12 +16,12 @@ test.describe('1. Layout', () => {
     await page.goto(PAGE_URL);
     await expect(page).toHaveTitle(/PromptKaro/);
     await expect(page.locator('h1')).toHaveCount(1);
-    await expect(page.locator('h1')).toContainText('48');
+    await expect(page.locator('h1')).toContainText('Pay only if you like');
   });
 
   test('every section has a heading', async ({ page }) => {
     await page.goto(PAGE_URL);
-    for (const id of ['#work', '#how', '#products', '#agents', '#prices', '#about', '#faq']) {
+    for (const id of ['#work', '#how', '#products', '#agents', '#types', '#about', '#faq']) {
       await expect(page.locator(`${id} h2`)).toHaveCount(1);
     }
   });
@@ -107,50 +107,49 @@ test.describe('3. Interaction', () => {
     await expect(page.locator('#panel-food')).toBeVisible();
   });
 
-  test('sample card builds itself, then shows "Demo ready"', async ({ page }) => {
+  test('examples are full landing pages that tour themselves, then hand over', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto(PAGE_URL);
+    const view = page.locator('#panel-mobile .site-view');
+    await expect(view.locator('img')).toHaveAttribute('src', '/assets/img/site-mobile.webp');
     await page.locator('#showcase').scrollIntoViewIfNeeded();
-    const sample = page.locator('#panel-mobile .sample');
-    await expect(sample).toHaveClass(/is-building/);
-    await expect(sample.locator('.sample-status')).toHaveAttribute('data-state', 'ready', { timeout: 4000 });
-    await expect(sample).not.toHaveClass(/is-building/);
-    await expect(sample.locator('.sample-btn')).toBeVisible();
-
-    await page.getByRole('tab', { name: 'Property dealer' }).click();
-    const next = page.locator('#panel-property .sample');
-    await expect(next).toHaveClass(/is-building/);
-    await expect(next.locator('.sample-status')).toHaveAttribute('data-state', 'ready', { timeout: 4000 });
-  });
-
-  test('sample build status follows the language', async ({ page }) => {
-    await page.goto(PAGE_URL);
-    await page.locator('#langToggle').click();
-    await expect(page.locator('#panel-mobile .sample-status-label')).toHaveText(/ડેમો તૈયાર|ભાવ-પત્રક/);
+    await expect.poll(() => view.evaluate((v) => v.scrollTop), { timeout: 6000 }).toBeGreaterThan(40);
+    // scrolling yourself ends the tour for that preview
+    await view.hover();
+    await page.mouse.wheel(0, 10);
+    await expect(view).toHaveAttribute('data-toured', 'user');
+    // every preview is a long page, taller than its window
+    for (const key of ['mobile', 'coaching', 'clinic', 'property', 'food']) {
+      const h = await page.locator(`#panel-${key} .site-view img`).getAttribute('height');
+      expect(Number(h)).toBeGreaterThan(1500);
+    }
   });
 
   test('product cards fill themselves in when scrolled into view', async ({ page }) => {
     await page.goto(PAGE_URL);
-    for (const demo of ['search', 'catalog', 'emi', 'chart']) {
+    for (const demo of ['search', 'catalog', 'assistant', 'chart']) {
       const card = page.locator(`.product[data-demo="${demo}"]`);
       await card.scrollIntoViewIfNeeded();
       await expect(card).not.toHaveClass(/is-armed/, { timeout: 12000 });
     }
     await expect(page.locator('.frag-chart [data-count]')).toHaveText('39');
     await expect(page.locator('.frag-chip-wa')).toBeVisible();
-    await expect(page.locator('.frag-share')).toBeVisible();
+    await expect(page.locator('.frag-share')).toHaveCount(2);
+    for (const share of await page.locator('.frag-share').all()) await expect(share).toBeVisible();
   });
 
-  test('coin stack follows the EMI: fewer months, more coins', async ({ page }) => {
+  test('AI shopping assistant understands the request and picks matching products', async ({ page }) => {
     await page.goto(PAGE_URL);
-    const range = page.locator('#emiMonths');
-    await range.scrollIntoViewIfNeeded();
-    await page.waitForTimeout(1800);
-    const live = page.locator('#emiCoins .coin:not(.is-leaving)');
-    await range.fill('3');
-    await expect(live).toHaveCount(11);
-    await range.fill('24');
-    await expect(live).toHaveCount(1);
-    await expect(page.locator('#emiCoins .coin')).toHaveCount(1, { timeout: 2000 }); // leaving coins are removed
+    const card = page.locator('.product[data-demo="assistant"]');
+    await card.scrollIntoViewIfNeeded();
+    await expect(card).not.toHaveClass(/is-armed/, { timeout: 15000 });
+    await expect(card.locator('.ai-query')).toHaveText('Phone under ₹15,000 with a good camera');
+    await expect(card.locator('.ai-steps .wa-agent')).toHaveCount(3);
+    await expect(card.locator('.ai-pick')).toHaveCount(3);
+    await expect(card.locator('.ai-pick.is-best')).toHaveCount(1);
+    for (const img of await card.locator('.ai-pick img').all()) {
+      await expect.poll(() => img.evaluate((i) => i.complete && i.naturalWidth > 0)).toBe(true);
+    }
   });
 
   test('product visuals are rendered photos that load, not vector icons', async ({ page }) => {
@@ -164,7 +163,6 @@ test.describe('3. Interaction', () => {
       expect(await img.getAttribute('width')).toBe('450'); // explicit size, no layout shift
     }
     await expect(page.locator('.map-pin img')).toHaveCount(1);
-    await expect(page.locator('#emiCoins img.coin').first()).toBeVisible();
   });
 
   test('on desktop the products turn with the mouse (turntable sprites)', async ({ page }, info) => {
@@ -186,7 +184,7 @@ test.describe('3. Interaction', () => {
 
   test('each product hands off to a WhatsApp conversation', async ({ page }) => {
     await page.goto(PAGE_URL);
-    for (const demo of ['search', 'catalog', 'emi']) {
+    for (const demo of ['search', 'catalog', 'assistant']) {
       const card = page.locator(`.product[data-demo="${demo}"]`);
       await card.scrollIntoViewIfNeeded();
       await expect(card).not.toHaveClass(/is-armed/, { timeout: 12000 });
@@ -200,18 +198,6 @@ test.describe('3. Interaction', () => {
     await expect(dash).not.toHaveClass(/is-armed/, { timeout: 12000 });
     await expect(dash.locator('.wa-toast')).toBeVisible();
     await expect(dash.locator('[data-count]')).toHaveText('39');
-  });
-
-  test('sending an EMI plan writes the live plan into the chat', async ({ page }) => {
-    await page.goto(PAGE_URL);
-    const card = page.locator('.product[data-demo="emi"]');
-    await card.scrollIntoViewIfNeeded();
-    await expect(card).not.toHaveClass(/is-armed/, { timeout: 12000 });
-    await page.locator('#emiMonths').fill('6');
-    await page.locator('#emiSend').click();
-    await expect(page.locator('.js-plan')).toHaveText('EMI plan: 5G phone, ₹2,333 × 6 months');
-    await page.locator('#langToggle').click();
-    await expect(page.locator('.js-plan')).toHaveText('EMI પ્લાન: 5G ફોન, ₹2,333 × 6 મહિના');
   });
 
   test('agent console plays a scenario: message, logged steps, auto-reply', async ({ page }) => {
@@ -232,26 +218,29 @@ test.describe('3. Interaction', () => {
     await page.getByRole('tab', { name: 'Orders' }).focus();
     await page.keyboard.press('End');
     await expect(page.getByRole('tab', { name: 'Leads' })).toHaveAttribute('aria-selected', 'true');
-    await expect(page.locator('#agentBiz')).toHaveText('Sabar Properties');
+    await expect(page.locator('#agentBiz')).toHaveText('Aangan Homes');
   });
 
-  test('dashboards tick through their events and land on the final numbers', async ({ page }) => {
+  test('automated dashboard fills itself: orders arrive, numbers and rules update', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto(PAGE_URL);
-    for (const key of ['sales', 'queue', 'fees', 'stock']) {
-      await page.locator(`[data-dash="${key}"]`).scrollIntoViewIfNeeded();
-      await page.waitForTimeout(200);
+    const db = page.locator('#dashboard');
+    await db.scrollIntoViewIfNeeded();
+    // rewound to earlier today, then the live orders arrive
+    await expect(page.locator('#kpiOrders')).toHaveText('23', { timeout: 15000 });
+    await expect(page.locator('#kpiRevenue')).toHaveText('₹48,620');
+    await expect(page.locator('#kpiChats')).toHaveText('61');
+    await expect(page.locator('#dbOrders tr').first()).toContainText('#1042');
+    await expect(page.locator('#dbOrders tr')).toHaveCount(5);
+    await expect(page.locator('#dbStock [data-sku="earbuds"]')).toHaveClass(/is-low/);
+    await expect(page.locator('#dbReorder')).toBeVisible();
+    await expect(page.locator('[data-rule="receipt"]')).toHaveText('23');
+    await expect(page.locator('[data-rule="reorder"]')).toHaveText('1');
+    await expect(page.locator('#dbFeed li').first()).toContainText('Receipt sent to Hetal D.');
+    // a real dashboard: chart, channels, insights and stock, not just bars
+    for (const sel of ['.db-chart', '.db-channels', '.db-insights', '.db-stock', '.db-side']) {
+      await expect(db.locator(sel)).toBeVisible();
     }
-    await page.locator('[data-dash="sales"]').scrollIntoViewIfNeeded();
-    await expect(page.locator('#salesTotal')).toHaveText('₹48,620', { timeout: 10000 });
-    await page.locator('[data-dash="queue"]').scrollIntoViewIfNeeded();
-    await expect(page.locator('#queueNow')).toHaveText('15', { timeout: 10000 });
-    await expect(page.locator('#queueList .is-agent')).toHaveCount(1);
-    await page.locator('[data-dash="fees"]').scrollIntoViewIfNeeded();
-    await expect(page.locator('#feesTotal')).toHaveText('₹3,72,000', { timeout: 10000 });
-    await expect(page.locator('#feesPct')).toHaveText('78%');
-    await page.locator('[data-dash="stock"]').scrollIntoViewIfNeeded();
-    await expect(page.locator('#stockEvents li').nth(1)).toBeVisible({ timeout: 10000 });
-    await expect(page.locator('#stockList li.is-low')).toHaveCount(1);
   });
 
   test('bot vs AI agent: same message, the agent books and the bot loops', async ({ page }) => {
@@ -272,33 +261,30 @@ test.describe('3. Interaction', () => {
     expect(botBg).not.toBe(agentBg);
   });
 
-  test('dashboards show automation rules that fire as events arrive', async ({ page }) => {
+  test('site types: six realistic device views, each asking for a quote', async ({ page }) => {
     await page.goto(PAGE_URL);
-    await expect(page.locator('.dash .rule')).toHaveCount(4);
-    await expect(page.locator('.dash .auto-src')).toHaveCount(4);
-    const stock = page.locator('[data-dash="stock"]');
-    await stock.scrollIntoViewIfNeeded();
-    await expect(stock.locator('.rule-count b')).toHaveText('1', { timeout: 10000 });
-    await expect(stock.locator('.rule-last-text')).toHaveText('Ordered 20 earbuds');
-    const sales = page.locator('[data-dash="sales"]');
-    await sales.scrollIntoViewIfNeeded();
-    await expect(sales.locator('.rule-count b')).toHaveText('23', { timeout: 10000 });
-    await expect(sales.locator('.rule-last-text')).toHaveText('Receipt sent to Hetal D.');
+    const cards = page.locator('#types .type-card');
+    await expect(cards).toHaveCount(6);
+    await page.locator('#types').scrollIntoViewIfNeeded();
+    for (const card of await cards.all()) {
+      const img = card.locator('.type-visual img');
+      await img.scrollIntoViewIfNeeded();
+      await expect.poll(() => img.evaluate((i) => i.complete && i.naturalWidth > 0)).toBe(true);
+      expect(await img.getAttribute('src')).toMatch(/\/assets\/img\/device-[a-z]+\.webp$/);
+      const href = decodeURIComponent(await card.locator('.js-wa').getAttribute('href'));
+      expect(href).toContain('quote');
+    }
+    await expect(page.locator('#types svg')).toHaveCount(0);
   });
 
-  test('EMI calculator works as a real control', async ({ page }) => {
+  test('the motion example plays its recording only while on screen', async ({ page }) => {
     await page.goto(PAGE_URL);
-    const range = page.locator('#emiMonths');
-    await range.scrollIntoViewIfNeeded();
-    await page.waitForTimeout(1800); // demo glide finishes
-    await expect(page.locator('#emiMonthsOut')).toHaveText('12');
-    await expect(page.locator('#emiValue')).toHaveText('₹1,167');
-    await range.fill('6');
-    await expect(page.locator('#emiMonthsOut')).toHaveText('6');
-    await expect(page.locator('#emiValue')).toHaveText('₹2,333');
-    await range.focus();
-    await page.keyboard.press('ArrowRight');
-    await expect(page.locator('#emiMonthsOut')).toHaveText('7');
+    const video = page.locator('#motionVideo');
+    await expect.poll(() => video.evaluate((v) => v.paused)).toBe(true);
+    await video.scrollIntoViewIfNeeded();
+    await expect.poll(() => video.evaluate((v) => !v.paused && v.currentTime > 0), { timeout: 8000 }).toBe(true);
+    await page.locator('#faq').scrollIntoViewIfNeeded();
+    await expect.poll(() => video.evaluate((v) => v.paused)).toBe(true);
   });
 
   test('hero chat plays to the end and offers a replay', async ({ page }) => {
@@ -334,15 +320,15 @@ test.describe('4. Language', () => {
     await page.goto(PAGE_URL);
     await page.locator('#langToggle').click();
     await expect(page.locator('html')).toHaveAttribute('lang', 'gu');
-    await expect(page.locator('h1')).toContainText('કલાકમાં');
+    await expect(page.locator('h1')).toContainText('ગમે તો જ પૈસા');
     const href = await page.locator('#heroCta').getAttribute('href');
     expect(decodeURIComponent(href)).toContain('મફત ડેમો');
 
     await page.reload();
-    await expect(page.locator('h1')).toContainText('કલાકમાં'); // persisted
+    await expect(page.locator('h1')).toContainText('ગમે તો જ પૈસા'); // persisted
 
     await page.locator('#langToggle').click();
-    await expect(page.locator('h1')).toContainText('48 hours');
+    await expect(page.locator('h1')).toContainText('Pay only if you like');
   });
 
   test('every translatable element has Gujarati text', async ({ page }) => {
@@ -380,17 +366,20 @@ test.describe('5. Robustness', () => {
     for (const id of ['#panel-mobile', '#panel-coaching', '#panel-clinic', '#panel-property', '#panel-food']) {
       await expect(page.locator(id)).toBeVisible();
     }
-    await expect(page.locator('.plan')).toHaveCount(3);
+    await expect(page.locator('#types .type-card')).toHaveCount(6);
+    await expect(page.locator('.site-view img')).toHaveCount(5);
+    await expect(page.locator('.ai-pick')).toHaveCount(3);
     await expect(page.locator('.frag-tiles li')).toHaveCount(4);
     await expect(page.locator('.frag-result')).toBeVisible();
     await expect(page.locator('.frag-chart [data-count]')).toHaveText('39');
     await expect(page.locator('#agentChat .msg')).toHaveCount(4);
     await expect(page.locator('#agentLog .log-step')).toHaveCount(5);
-    await expect(page.locator('#salesTotal')).toHaveText('₹48,620');
+    await expect(page.locator('#kpiRevenue')).toHaveText('₹48,620');
+    await expect(page.locator('#dbOrders tr')).toHaveCount(5);
     await expect(page.locator('.agent-tabs')).toBeHidden();
     await expect(page.locator('.compare .cmp-outcome.is-good')).toBeVisible();
     await expect(page.locator('.compare-bot .msg')).toHaveCount(6);
-    await expect(page.locator('[data-dash="stock"] .rule-count b')).toHaveText('1');
+    await expect(page.locator('[data-rule="reorder"]')).toHaveText('1');
     await ctx.close();
   });
 
@@ -402,8 +391,13 @@ test.describe('5. Robustness', () => {
     await expect(page.locator('#chatList .is-pending')).toHaveCount(0);
     await expect(page.locator('#chatReplay')).toBeHidden();
     await page.locator('#showcase').scrollIntoViewIfNeeded();
-    await expect(page.locator('#panel-mobile .sample')).not.toHaveClass(/is-building/);
+    await page.waitForTimeout(1200);
+    expect(await page.locator('#panel-mobile .site-view').evaluate((v) => v.scrollTop)).toBe(0); // no auto tour
     await expect(page.locator('.product.is-armed')).toHaveCount(0);
+    await expect(page.locator('#kpiOrders')).toHaveText('23'); // dashboard shown complete
+    await page.locator('#motionVideo').scrollIntoViewIfNeeded();
+    await page.waitForTimeout(600);
+    expect(await page.locator('#motionVideo').evaluate((v) => v.paused)).toBe(true);
     await ctx.close();
   });
 
@@ -458,23 +452,51 @@ test.describe('6. Accessibility', () => {
 });
 
 test.describe('7. Content', () => {
-  test('prices match the Terms of Service', async ({ page }) => {
+  test('no fixed prices or time promises: quotes on request', async ({ page }) => {
     await page.goto(PAGE_URL);
-    const prices = await page.locator('.plan-price').allTextContents();
-    expect(prices.map((p) => p.trim())).toEqual(['₹4,999', '₹9,999', '₹19,999']);
+    const text = await page.locator('body').innerText();
+    expect(text).not.toMatch(/₹\s?(4,999|9,999|19,999|1,999)/);
+    expect(text).not.toMatch(/48\s?(hours|hrs?|h)\b/i);
+    expect(text).not.toMatch(/calculator|EMI/);
+    await expect(page.locator('#types')).toContainText('quote');
     const terms = read('terms.html');
-    for (const p of ['₹4,999', '₹9,999', '₹19,999']) expect(terms).toContain(p);
+    expect(terms).not.toMatch(/₹4,999|48 ?h(ou)?r/i);
+    expect(terms).toContain('quote');
   });
 
-  test('care plan price is shown', async ({ page }) => {
+  test('no phone number on display and no town names for now', async ({ page }) => {
+    for (const url of ['/', '/terms.html', '/privacy.html']) {
+      await page.goto(url);
+      const text = await page.locator('body').innerText();
+      expect(text, url).not.toMatch(/94290|9429051036|\+91/);
+      expect(text, url).not.toMatch(/Idar|Himatnagar|Himmatnagar|Sabarkantha|ઇડર|હિંમતનગર/i);
+    }
     await page.goto(PAGE_URL);
-    await expect(page.locator('.care-price')).toHaveText('₹1,999');
+    await expect(page.locator('a[href^="tel:"]')).toHaveCount(0);
   });
 
-  test('footer shows copyright, place and legal links', async ({ page }) => {
+  test('wordmark caret sits on the baseline at cap height', async ({ page }) => {
+    await page.goto(PAGE_URL);
+    const m = await page.evaluate(async () => {
+      await document.fonts.ready;
+      const w = document.querySelector('.site-header .wordmark');
+      const probe = document.createElement('span');
+      probe.style.cssText = 'display:inline-block;width:0;height:0';
+      w.querySelector('.wordmark-karo').appendChild(probe);
+      const base = probe.getBoundingClientRect().top;
+      probe.remove();
+      const c = w.querySelector('.wordmark-cursor').getBoundingClientRect();
+      const fs = parseFloat(getComputedStyle(w).fontSize);
+      return { bottom: c.bottom - base, height: c.height / fs };
+    });
+    expect(Math.abs(m.bottom)).toBeLessThan(1);
+    expect(m.height).toBeGreaterThan(0.64);
+    expect(m.height).toBeLessThan(0.72);
+  });
+
+  test('footer shows copyright and legal links', async ({ page }) => {
     await page.goto(PAGE_URL);
     await expect(page.locator('.footer-base')).toContainText('© 2026 PromptKaro');
-    await expect(page.locator('.footer-base')).toContainText('Idar');
     await expect(page.locator('a[href="/privacy.html"]')).toHaveCount(1);
     await expect(page.locator('a[href="/terms.html"]')).toHaveCount(1);
   });

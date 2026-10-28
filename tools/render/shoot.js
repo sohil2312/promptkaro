@@ -13,7 +13,7 @@ const fs = require('fs');
   await p.waitForFunction(() => window.ready === true, null, { timeout: 60000 });
   for (const n of names.split(',')) {
     for (const y of yaws.split(',')) {
-      const url = await p.evaluate(([n, y]) => window.renderProduct(n, +y), [n, y]);
+      const url = await p.evaluate(([n, y, o]) => window.renderProduct(n, +y, o), [n, y, JSON.parse(process.env.OPTS || '{}')]);
       fs.writeFileSync(`${outDir}/${n}_${y}.png`, Buffer.from(url.split(',')[1], 'base64'));
     }
     console.log('done', n);

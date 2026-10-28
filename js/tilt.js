@@ -1,6 +1,6 @@
 /* PromptKaro — tilt.js
    Cards with give: tilt toward the mouse through a damped spring (lags, settles,
-   never snaps) and squish slightly on press. Applies to sample sites and product cards. */
+   never snaps) and squish slightly on press. Applies to the product cards. */
 
 (function () {
   'use strict';
@@ -10,7 +10,7 @@
 
   function attach(card, maxTilt) {
     var shine = document.createElement('span');
-    shine.className = 'sample-shine';
+    shine.className = 'tilt-shine';
     shine.setAttribute('aria-hidden', 'true');
     card.appendChild(shine);
 
@@ -64,7 +64,6 @@
     card.addEventListener('pointercancel', function () { pressTarget = 1; kick(); });
   }
 
-  document.querySelectorAll('.sample').forEach(function (el) { attach(el, 5); });
-  // Product cards are larger, so they tilt less for the same feel.
+  // Large cards, so a small tilt is enough to feel physical.
   document.querySelectorAll('[data-tilt]').forEach(function (el) { attach(el, 3); });
 })();
