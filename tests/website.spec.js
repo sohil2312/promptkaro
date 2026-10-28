@@ -315,6 +315,20 @@ test.describe('3. Interaction', () => {
     await expect.poll(() => video.evaluate((v) => v.paused)).toBe(true);
   });
 
+  test('headline word rotates without moving the page, and reads as one sentence', async ({ page }) => {
+    await page.setViewportSize({ width: 412, height: 915 });
+    await page.goto(PAGE_URL);
+    const h1 = page.locator('h1');
+    const before = (await h1.boundingBox()).height;
+    await expect(page.locator('#heroWord .rot-word').first()).toHaveText('AI agent', { timeout: 6000 });
+    await expect(page.locator('#heroWord .rot-word').first()).toHaveText('dashboard', { timeout: 6000 });
+    expect(Math.abs((await h1.boundingBox()).height - before)).toBeLessThan(2);
+    await expect(h1.locator('.visually-hidden')).toHaveText('See your website first. Pay only if you like it.');
+    // the text column uses the phone's width
+    const lead = await page.locator('.hero-lead').boundingBox();
+    expect(lead.width).toBeGreaterThan(412 - 2 * 16 - 8);
+  });
+
   test('hero stage plays the PromptKaro story, then turns into the next business', async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto(PAGE_URL);

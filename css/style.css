@@ -307,7 +307,7 @@ html[lang="gu"] .lang-gu { background: var(--ground); color: var(--ink); box-sha
 html[lang="gu"] .hero-title { font-size: calc(var(--fs-h1) * 0.8); line-height: 1.15; letter-spacing: -0.01em; max-width: 13ch; }
 .hero-lead {
   margin-top: var(--s-5);
-  max-width: 30ch;
+  max-width: 34ch;
   font-size: var(--fs-lead);
   line-height: 1.4;
   color: var(--ink-2);
@@ -320,6 +320,14 @@ html[lang="gu"] .hero-title { font-size: calc(var(--fs-h1) * 0.8); line-height: 
   margin-top: var(--s-6);
 }
 .hero-note { margin-top: var(--s-4); font-size: var(--fs-sm); color: var(--ink-3); }
+
+/* ---------- Rotating word in the headline (js/headline.js) ---------- */
+/* The word has its own line, so a longer word never reflows the headline or moves the page. */
+.rot { position: relative; display: table; white-space: nowrap; color: var(--action); perspective: 600px; }
+.rot-word { display: inline-block; }
+.rot-word.is-next { position: absolute; left: 0; top: 0; }
+.rot-ch { display: inline-block; transform-origin: 50% 100%; backface-visibility: hidden; }
+.rot-line { position: absolute; left: 0; right: 0; bottom: 0.02em; height: 0.07em; border-radius: 0.04em; background: var(--marigold); }
 
 /* ---------- Hero stage: a website, its product and its WhatsApp agent, changing together ---------- */
 .hero-stage { position: relative; min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-4); perspective: 1200px; }
@@ -1474,3 +1482,10 @@ html[lang="gu"] .dash-head h3 { line-height: 1.2; letter-spacing: 0; }
 .today-top b { font-weight: var(--fw-strong); }
 .today-insight { padding: var(--s-3); border-radius: var(--r-1); background: #F1EEFF; color: #2E2560; font-size: var(--fs-sm); line-height: 1.45; }
 .today-insight b { color: #5B3FD6; }
+
+/* Phones: the headline and lead use the whole width, no empty column on the right. */
+@media (max-width: 719px) {
+  .hero-title { max-width: none; font-size: clamp(2.75rem, 12.4vw, 3.75rem); }
+  html[lang="gu"] .hero-title { max-width: none; font-size: clamp(2.25rem, 10vw, 3rem); }
+  .hero-lead { max-width: none; }
+}
