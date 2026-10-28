@@ -204,6 +204,21 @@ guides flag. What was there, what replaced it, and why:
 | `transition` defaults, `ease`, no `:active` states | Custom curves, exact properties, press feedback everywhere | Emil Kowalski's rules |
 | Inline styles + `'unsafe-inline'` CSP, third-party font hosts | `style-src 'self'`, hashed inline script, `font-src 'self'` | Tighter security, fewer hosts |
 
+## Layout rules, enforced by tests (section 9)
+
+- **Type scale** (Refactoring UI: a constrained scale): 13 labels, 15 small, 16 UI (buttons, nav,
+  tabs), 18 body, 20–24 lead, 24–32 h3, 32–52 h2, the hero h1. Nothing in between.
+- **Spacing on a 4px grid:** every margin, padding and gap is a multiple of 4. Section rhythm and
+  gutters step at breakpoints (64/96/128 and 16/24/32/40) instead of fluid values.
+- **Targets 44px** (Fitts's law / WCAG 2.5.5): links, buttons, tabs, dots, the logo.
+- **Nothing is cut:** no ellipsis on real content, tab rows wrap, tables drop columns on phones
+  instead of scrolling sideways, captions get their own line.
+- **No empty containers:** cards that sit side by side fill with real content rather than
+  stretching around a void (the Dashboard card shows today's numbers).
+- **Proximity:** headings sit closer to what they introduce than to what came before.
+- **Caching:** CSS/JS are linked with `?v=<content hash>` (`tools/site/version.py`, run after any
+  CSS/JS change); HTML always revalidates, so a deploy never shows new HTML with old CSS.
+
 ## Rules for future changes
 
 1. Every colour and font goes through a token. No new families.

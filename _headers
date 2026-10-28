@@ -6,9 +6,16 @@
   Permissions-Policy: camera=(), microphone=(), geolocation=()
   Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-Du+OJKJSbdUgz5nrHeWWINvez6XKDDU/tyj/5c2uvwo='; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'none'
   X-XSS-Protection: 0
-  Cache-Control: public, max-age=3600
   Cross-Origin-Opener-Policy: same-origin
   Cross-Origin-Resource-Policy: same-origin
 
 /assets/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# HTML and images use Netlify's default (revalidate on every visit, served from the CDN).
+# CSS and JS are linked with ?v=<content hash> (tools/site/version.py), so they can be kept a year.
+/css/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/js/*
   Cache-Control: public, max-age=31536000, immutable

@@ -354,7 +354,7 @@ test.describe('3. Interaction', () => {
 
   test('dashboards for other businesses switch with tabs', async ({ page }) => {
     await page.goto(PAGE_URL);
-    await expect(page.locator('.dash-more [role="tab"]')).toHaveCount(4);
+    await expect(page.locator('.dash-more [role="tab"]')).toHaveCount(7);
     await expect(page.locator('#dpanel-furniture')).toBeVisible();
     await page.locator('#dtab-wedding').click();
     await expect(page.locator('#dpanel-wedding')).toBeVisible();
@@ -436,7 +436,7 @@ test.describe('5. Robustness', () => {
     }
     await expect(page.locator('#types .type-card')).toHaveCount(6);
     await expect(page.locator('.site-view img')).toHaveCount(11);
-    await expect(page.locator('.dash-panel')).toHaveCount(4);
+    await expect(page.locator('.dash-panel')).toHaveCount(7);
     await expect(page.locator('.ai-pick')).toHaveCount(3);
     await expect(page.locator('.frag-tiles li')).toHaveCount(4);
     await expect(page.locator('.frag-result')).toBeVisible();
@@ -612,6 +612,50 @@ test.describe('7. Content', () => {
       await expect(page.locator('h1')).toBeVisible();
       await expect(page.locator('.legal-header .wordmark')).toBeVisible();
     }
+  });
+});
+
+test.describe('9. Layout rules (Refactoring UI, Practical UI, Laws of UX)', () => {
+  for (const width of [1440, 768, 390]) {
+    test(`type scale, 4px grid and 44px targets at ${width}px`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto(PAGE_URL);
+      const v = await page.evaluate(() => {
+        const out = { sizes: new Set(), grid: [], targets: [], cut: [] };
+        for (const e of document.querySelectorAll('body *')) {
+          if (e.closest('[data-ui],svg,.visually-hidden,[hidden],.sprite') || !e.getBoundingClientRect().width) continue;
+          const cs = getComputedStyle(e);
+          if ([...e.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim())) {
+            const fs = parseFloat(cs.fontSize);
+            if (fs < 30) out.sizes.add(Math.round(fs));
+            if (cs.textOverflow === 'ellipsis' && e.scrollWidth > e.clientWidth + 1) out.cut.push(e.className);
+          }
+          for (const k of ['marginTop', 'marginBottom', 'paddingTop', 'paddingBottom', 'paddingLeft', 'paddingRight', 'rowGap', 'columnGap']) {
+            const px = parseFloat(cs[k]);
+            if (px > 0 && px % 4 !== 0 && !(k === 'marginTop' && e.matches('.btn'))) out.grid.push(`${e.className} ${k}=${px}`);
+          }
+          if (e.matches('a, button, [role=tab], summary') && !e.closest('p, .footer-links, dd, .ticks-list')) {
+            const r = e.getBoundingClientRect();
+            if (r.height < 44) out.targets.push(`${e.className || e.textContent.trim().slice(0, 20)} ${Math.round(r.height)}`);
+          }
+        }
+        return { sizes: [...out.sizes].sort((a, b) => a - b), grid: out.grid, targets: out.targets, cut: out.cut };
+      });
+      // small text comes from one scale: 13, 15, 16, 18, 20–24 and the logo
+      for (const sz of v.sizes) expect([13, 15, 16, 18, 20, 21, 22, 23, 24, 25, 26, 27, 28], `font ${sz}px`).toContain(sz);
+      expect(v.grid).toEqual([]);
+      expect(v.targets).toEqual([]);
+      expect(v.cut).toEqual([]);
+    });
+  }
+
+  test('CSS and JS are versioned by content so a deploy never mixes old and new files', () => {
+    for (const f of ['index.html', 'terms.html', 'privacy.html', 'credits.html', '404.html']) {
+      const refs = [...read(f).matchAll(/(?:href|src)="(\/(?:css|js)\/[^"]+)"/g)].map((m) => m[1]);
+      expect(refs.length, f).toBeGreaterThan(0);
+      for (const r of refs) expect(r, f).toMatch(/\?v=[0-9a-f]{10}$/);
+    }
+    expect(read('css/legal.css')).not.toContain('@import');
   });
 });
 

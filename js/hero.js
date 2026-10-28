@@ -134,15 +134,18 @@
     label.textContent = tr(s.label);
     Array.prototype.forEach.call(dotsWrap.children, function (d, i) { d.setAttribute('aria-current', i === current ? 'true' : 'false'); });
   }
+  // Phones get the phone-width screenshot of each site, so the stage is readable there too.
+  var narrow = window.matchMedia('(max-width: 700px)');
+  function srcFor(s) { return narrow.matches ? s.shot.replace('.webp', '-m.webp') : s.shot; }
   function shotFor(s) {
     var img = new Image();
     img.className = 'stage-shot';
     img.alt = '';
     img.decoding = 'async';
-    img.width = 1100;
-    img.src = s.shot;
+    img.src = srcFor(s);
     return img;
   }
+  if (narrow.matches) view.querySelector('.stage-shot').src = srcFor(SCENES[0]);
   function msgNode(m) {
     var li = document.createElement('li');
     if (m.step) {
