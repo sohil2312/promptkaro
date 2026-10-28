@@ -1,0 +1,62 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Himal Cooling dashboard</title><style>:root{--accent:#0E6BA8;--side:#0F1B24}
+@font-face{font-family:'Manrope';src:url(fonts/manrope.woff2) format('woff2');font-weight:200 800}
+*{box-sizing:border-box;margin:0;padding:0}html{-webkit-font-smoothing:antialiased}ul{list-style:none}
+body{font-family:'Manrope';background:#F4F5F2;color:#16201B;font-size:14px;line-height:1.45}
+.app{display:grid;grid-template-columns:220px 1fr;min-height:100vh}
+.side{background:var(--side);color:#E9EEEA;padding:22px 16px;display:flex;flex-direction:column;gap:4px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:16px;margin-bottom:22px}
+.logo i{width:30px;height:30px;border-radius:8px;background:var(--accent);display:grid;place-items:center;font-style:normal;color:#fff;font-size:14px}
+.side a{padding:9px 12px;border-radius:8px;color:#C5D0CA;font-weight:600}
+.side a.on{background:rgba(255,255,255,.1);color:#fff}
+.side h6{font-size:11px;letter-spacing:.08em;color:#8FA199;margin:22px 0 8px 12px;font-weight:700}
+.rule{background:rgba(255,255,255,.06);border-radius:10px;padding:10px 12px;display:grid;grid-template-columns:28px 1fr auto;gap:8px;align-items:center;font-size:12.5px;color:#DCE4DF;margin-bottom:6px}
+.sw{width:26px;height:15px;border-radius:999px;background:#25D366;position:relative}.sw:after{content:'';position:absolute;right:2px;top:2px;width:11px;height:11px;border-radius:50%;background:#fff}
+.rule b{color:#FFD27A}
+main{padding:22px 26px}
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.top h1{font-size:22px;font-weight:800;letter-spacing:-.02em}.top small{color:#6B7771;display:block;font-size:13px}
+.live{display:inline-flex;align-items:center;gap:6px;background:#E4F5EC;color:#0B7A47;font-weight:700;font-size:12px;padding:5px 10px;border-radius:999px}.live i{width:7px;height:7px;border-radius:50%;background:#16A34A}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
+.kpi{background:#fff;border-radius:14px;padding:14px 16px;box-shadow:0 1px 2px rgba(16,24,20,.05)}
+.kpi small{color:#6B7771;font-size:12px}.kpi b{display:block;font-size:26px;font-weight:800;letter-spacing:-.02em;margin:2px 0}
+.up{color:#0B7A47;background:#E4F5EC;font-size:11.5px;font-weight:700;padding:2px 7px;border-radius:999px}.dn{color:#B42318;background:#FDECEA;font-size:11.5px;font-weight:700;padding:2px 7px;border-radius:999px}
+.card{background:#fff;border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(16,24,20,.05)}
+.card h3{font-size:14px;font-weight:800;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
+.card h3 small{font-weight:600;color:#6B7771;font-size:12px}
+.row{display:grid;gap:14px;margin-bottom:14px}
+table{width:100%;border-collapse:collapse;font-size:13px}th{text-align:left;color:#6B7771;font-weight:600;font-size:12px;padding:6px 8px;border-bottom:1px solid #EEF0EC}
+td{padding:9px 8px;border-bottom:1px solid #F1F2EF;vertical-align:middle}
+.t{display:flex;align-items:center;gap:8px}.t img{width:34px;height:34px;border-radius:8px;object-fit:cover;background:#F2F0EB}
+.pill{font-size:11.5px;font-weight:700;padding:3px 8px;border-radius:999px;white-space:nowrap}
+.p-g{background:#E4F5EC;color:#0B7A47}.p-y{background:#FFF3D6;color:#8A5A00}.p-b{background:#E6EEFF;color:#2547A8}.p-r{background:#FDECEA;color:#B42318}.p-n{background:#EFF1EE;color:#4A5651}
+.ai{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;color:#0B7A47}.ai:before{content:'';width:12px;height:12px;border-radius:4px;background:#0B7A47}
+.bar{height:8px;border-radius:99px;background:#EEF0EC;overflow:hidden}.bar i{display:block;height:100%;border-radius:99px;background:var(--accent)}
+.feed li{display:grid;grid-template-columns:18px 1fr auto;gap:8px;padding:7px 0;font-size:13px;border-bottom:1px solid #F1F2EF}
+.feed li:before{content:'';width:16px;height:16px;border-radius:50%;background:#2BB673;margin-top:1px}
+.feed small{color:#8A958F}
+.insight{background:#F1EEFF;border-radius:10px;padding:10px 12px;margin-bottom:8px;font-size:13px;color:#2E2560}
+.insight b{color:#5B3FD6}
+</style></head><body><div class="app"><aside class="side"><div class="logo"><i>H</i>Himal Cooling</div><a class="on">Overview</a><a class="">Quotes</a><a class="">Dispatch</a><a class="">Dealers</a><a class="">Service</a><h6>AUTOMATIONS</h6><div class="rule"><span class="sw"></span><span>Quote PDF for every enquiry</span><b>42</b></div><div class="rule"><span class="sw"></span><span>Dispatch update to the buyer</span><b>27</b></div><div class="rule"><span class="sw"></span><span>Service reminder after 6 months</span><b>63</b></div></aside><main>
+<div class="top"><div><h1>Sales and dispatch</h1><small>October, compared with September</small></div><span class="live"><i></i>Live, synced just now</span></div>
+<div class="kpis">
+ <div class="kpi"><small>Quotes sent</small><b>42</b><span class="up">38 within 1 hour</span></div>
+ <div class="kpi"><small>Quote to order</small><b>38%</b><span class="up">+6 pts</span></div>
+ <div class="kpi"><small>Units dispatched</small><b>1,140</b><span class="up">+9%</span></div>
+ <div class="kpi"><small>On-time delivery</small><b>96%</b><span class="dn">2 late</span></div>
+</div>
+<div class="row" style="grid-template-columns:1.6fr 1fr">
+ <div class="card"><h3>Quote pipeline <small>this week</small></h3><table><tr><th>Buyer</th><th>Model</th><th>Qty</th><th>Value</th><th>Status</th></tr>
+  <tr><td>Fresh Sip Beverages</td><td><span class="t"><img src="img/mfg-fridge.webp">HC-330, branded</span></td><td>50</td><td>₹14.2 L</td><td><span class="pill p-y">Quote sent</span> <span class="ai">AI agent</span></td></tr>
+  <tr><td>Sagar Dairy</td><td><span class="t"><img src="img/mfg-fridge.webp">HC-450</span></td><td>24</td><td>₹8.9 L</td><td><span class="pill p-g">Order confirmed</span></td></tr>
+  <tr><td>CityMart stores</td><td><span class="t"><img src="img/mfg-fridge.webp">HC-660D</span></td><td>12</td><td>₹7.6 L</td><td><span class="pill p-b">Negotiating</span></td></tr>
+  <tr><td>Care Pharmacy chain</td><td><span class="t"><img src="img/mfg-fridge.webp">HC-220</span></td><td>30</td><td>₹6.1 L</td><td><span class="pill p-y">Quote sent</span> <span class="ai">AI agent</span></td></tr>
+  <tr><td>Spice Route hotels</td><td><span class="t"><img src="img/mfg-fridge.webp">HC-1000D</span></td><td>6</td><td>₹5.4 L</td><td><span class="pill p-n">Sample visit</span></td></tr></table></div>
+ <div class="card"><h3>Units dispatched by week</h3>
+  <div style="display:flex;align-items:flex-end;gap:14px;height:170px;padding:0 6px"><div style="flex:1;text-align:center"><div style="height:104px;background:#BFD7EA;border-radius:8px 8px 3px 3px"></div><small style="color:#6B7771">W1</small></div><div style="flex:1;text-align:center"><div style="height:122px;background:#BFD7EA;border-radius:8px 8px 3px 3px"></div><small style="color:#6B7771">W2</small></div><div style="flex:1;text-align:center"><div style="height:96px;background:#BFD7EA;border-radius:8px 8px 3px 3px"></div><small style="color:#6B7771">W3</small></div><div style="flex:1;text-align:center"><div style="height:140px;background:#BFD7EA;border-radius:8px 8px 3px 3px"></div><small style="color:#6B7771">W4</small></div><div style="flex:1;text-align:center"><div style="height:152px;background:#0E6BA8;border-radius:8px 8px 3px 3px"></div><small style="color:#6B7771">W5</small></div></div>
+  <div style="display:flex;justify-content:space-between;margin-top:12px;font-size:13px"><span>Factory capacity used</span><b>81%</b></div><div class="bar" style="margin-top:6px"><i style="width:81%"></i></div></div>
+</div>
+<div class="row" style="grid-template-columns:1fr 1fr 1fr">
+ <div class="card"><h3>Production line</h3><div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #F1F2EF"><span>Line 1 · HC-330</span><span class="pill p-g">Running</span></div><div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #F1F2EF"><span>Line 2 · HC-450</span><span class="pill p-g">Running</span></div><div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #F1F2EF"><span>Line 3 · HC-660D</span><span class="pill p-y">Changeover</span></div><div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #F1F2EF"><span>Paint shop</span><span class="pill p-g">Running</span></div></div>
+ <div class="card"><h3>AI insights</h3><div class="insight"><b>Summer orders</b> from beverage brands start 3 weeks earlier than last year. Raise HC-330 stock.</div><div class="insight"><b>5 quotes</b> have had no reply for 4 days. Follow-ups are drafted.</div></div>
+ <div class="card"><h3>Live activity</h3><ul class="feed"><li><span>Quote PDF sent to Fresh Sip</span><small>1m</small></li><li><span>Truck 2 left with 48 units</span><small>22m</small></li><li><span>Service reminder sent to 11 dealers</span><small>1h</small></li></ul></div>
+</div></main></div></body></html>

@@ -28,8 +28,17 @@ see it first, pay only if you like it, a quote based on what you need, no invent
   band, WhatsApp booking steps), a coaching class (parent test report, timetable with seats left,
   weekly rhythm, fees), a restaurant (editorial hero, printed-style menu with dotted leaders,
   today's special, reservation card) and a property launch (price tag, key facts, floor plan with
-  room sizes, homes left per type, site-visit days). No photo repeats more than twice on a page.
-  Phones get a phone-width screenshot (`site-<key>-m.webp` via `<picture>`).
+  room sizes, homes left per type, site-visit days). Six more were added later
+  (`tools/samples/build_more.py`): an interior and architecture studio (editorial serif, full-bleed
+  room photo, project grid), a boutique (Bodoni storefront, try at home), a wedding planner (maroon
+  and gold, marigold decor, the wedding week), handicrafts (makers and gifting), furniture (split
+  showroom hero, bestsellers, see-it-in-your-room, plus three inner pages for the multi-page
+  preview) and a manufacturer (B2B: stats, model table, quote form). No photo repeats more than
+  twice on a page. Phones get a phone-width screenshot (`site-<key>-m.webp` via `<picture>`).
+- **The examples sit beside each other:** on screens 720px and up the eleven businesses are a
+  list down the side (name and a one-line description), the preview fills the middle and "What's
+  on this site" sits to its right from 1100px. On phones the list is a row of chips above.
+  Generated from `tools/site/showcase.json` by `tools/site/build_showcase.py`.
 
 ## Tokens (all in `css/style.css` `:root`)
 
@@ -62,9 +71,14 @@ Based on Emil Kowalski's design-engineering rules.
 
 - Curves: `--ease-out: cubic-bezier(0.23, 1, 0.32, 1)`, `--ease-in-out: cubic-bezier(0.77, 0, 0.175, 1)`,
   `--ease-drawer: cubic-bezier(0.32, 0.72, 0, 1)`. Never `ease-in`, never `transition: all`.
-- **One orchestrated moment:** the hero chat plays once when it's on screen (typing indicator,
-  messages push up with FLIP, 300ms ease-out), then offers "Play again". Finishes instantly if the
-  tab is hidden.
+- **The hero stage** (`js/hero.js`, GSAP): a browser, a product card and a WhatsApp phone,
+  aligned to the headline's top line. Scene 1 is the PromptKaro story (a shop owner asks on
+  WhatsApp and gets a demo). Then it cycles through a furniture store, the automated dashboard, an
+  interior studio, a boutique, a manufacturer and a wedding planner: the product card turns away
+  and the next one springs in, the next website opens out of the card as a growing circle and
+  scrolls itself, and the phone switches to that business's AI agent answering a customer (step
+  chip with spinner, typing, reply). Pause button and dots (WCAG 2.2.2); pauses off screen and in
+  a hidden tab; reduced motion shows scene 1 complete and the dots switch instantly.
 - Page load: hero lines rise 16px with 60–70ms stagger, once.
 - Feedback: every pressable scales to 0.97 on `:active` (140ms). Hover effects only under
   `(hover: hover) and (pointer: fine)`.
@@ -95,17 +109,32 @@ Based on Emil Kowalski's design-engineering rules.
   payments, reviews, leads). The owner's WhatsApp view plays the conversation while the agent log
   streams each step with a spinner, tool chip and time, ending in a summary. Autoplay advances
   every scenario while on screen (Pause / Play all); choosing a tab hands control to the visitor.
-- **Site types, quote-based:** six types (basic, premium, with motion, with a catalog, with a
-  WhatsApp AI agent, with an automated dashboard), each shown on a rendered phone or laptop whose
-  screen is a real screenshot of a sample page (`tools/render` `phone` / `laptop` / `duo` with
-  `screen` textures). The motion type plays a recording on the laptop screen (positioned from the
-  render's measured screen corners), only while visible, never under reduced motion.
+- **Site types, quote-based:** one-page, multi-page, with motion and animation, with a catalog,
+  with a WhatsApp AI agent, with an automated dashboard, each on a rendered phone or laptop. The
+  first three have live screens: the one-page phone scrolls a whole site, the multi-page laptop
+  moves through four pages of the furniture site with a page chip following, the motion laptop
+  plays a recording. Live content is warped onto the four screen corners measured from each
+  render (`data-quad`, a `matrix3d` projection in `js/types.js`), so it sits on the glass at any
+  size. Plays only while visible, never under reduced motion.
+- **More dashboards:** under the live mobile-shop dashboard, HD dashboards for a furniture store
+  (production board), a manufacturer (quote pipeline, dispatch), a wedding planner (the week,
+  vendors, RSVPs) and an interior studio (projects, site visits), from `tools/samples/build_dash.py`.
+  The agent console has twelve scenarios, including custom sofa sizes, a site visit, try at home,
+  a bulk quote with PDF, a wedding enquiry and gift hampers, some with photo cards in the chat.
 - **Real product imagery, not vectors:** products (phone, smartwatch, earbuds, charger, three
   phone colourways) and the map pin are physically based 3D renders (original, generic designs) made in
   `tools/render`, shipped as WebP with explicit sizes and lazy loading. On desktop (fine pointer,
   no data saver, motion allowed) a 24-frame turntable sprite swaps in: the product spins into place
   and then follows the mouse across its card. Phones get the light stills (about 20 KB each).
   Sample sites and the hero link preview use the same renders as product photos.
+- **Photoreal scenes and products for the newer samples** are rendered with Blender Cycles (bpy,
+  path tracing with denoising) by `tools/render/blender/render.py`: rooms with a wood floor, rugs
+  and window light; seamless-backdrop product shots; transparent cutouts with real contact
+  shadows (shadow catcher), faded at the edges by `export.py`. Furniture, fashion, glass and
+  ceramic objects come from the open Khronos glTF Sample Assets (CC0 / CC BY 4.0, listed on
+  `/credits.html`, fetched by `fetch-models.sh`); marigold garlands, candles, diyas, terracotta
+  pots and the architect's model are modelled in Blender from primitives with PBR materials.
+  Never flat vector drawings.
 - **Cards feel physical:** on mouse, a product card tilts up to 3° toward the pointer through a
   damped spring (it lags and settles, never snaps) with a soft sheen; on press, mouse or touch,
   it squishes to 0.98.
@@ -197,7 +226,12 @@ From the lists the owner shared:
   navbar.gallery, checklist.design, rebrand.gallery, ogpedia (OG images). Inspiration galleries
   couldn't be opened from the build sandbox.
 - **Avoid for this site:** reactbits, Aceternity, fancycomponents, cursify (over-animated "AI
-  default" look, as the owner's own note says); GSAP / Three.js / Lottie / Rive (too heavy for a
-  one-page site on mobile data; CSS + Web Animations API cover everything here).
+  default" look, as the owner's own note says); Lottie / Rive.
+- **Used later from the Motion list:** GSAP (self-hosted, `js/vendor/gsap.min.js`, 73 KB, for the
+  hero timelines only), Three.js (offline device renders), Blender via `bpy` (the Blender MCP idea
+  from the games list, run headless for Cycles renders), FFmpeg (the motion recording).
 - **Fonts:** Fontshare, uncut.wtf and freefaces are good free sources, but almost none of them
-  cover Gujarati. Anek (Ek Type) does, which is why it was chosen.
+  cover Gujarati. Anek (Ek Type) does, which is why it was chosen. Fontshare and uncut were
+  blocked from the build sandbox, so the sample sites use open fonts from fontsource
+  (Instrument Serif, Manrope, Bodoni Moda, Jost, Cormorant, Young Serif, Work Sans, Newsreader,
+  Archivo, plus the earlier Bricolage, Fraunces, Figtree, Lexend and Syne).

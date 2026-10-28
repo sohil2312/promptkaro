@@ -6,3 +6,4 @@ playwright-report/
 tools/render/node_modules/
 tools/render/out/
 tools/samples/out/
+tools/render/models/

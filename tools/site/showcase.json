@@ -1,0 +1,376 @@
+[
+ {
+  "key": "mobile",
+  "tab_en": "Mobile shop",
+  "tab_gu": "મોબાઇલ શોપ",
+  "url": "shreejimobile.in",
+  "label_en": "Sample website for a mobile shop: an offer bar, a hero with this week's phone, price and colours, shop by category, popular products with stock, in-shop services and a visit card that shows if the shop is open.",
+  "label_gu": "મોબાઇલ શોપની નમૂના વેબસાઇટ: ઓફર બાર, આ અઠવાડિયાનો ફોન ભાવ અને રંગ સાથે, કેટેગરી, સ્ટોક સાથે લોકપ્રિય પ્રોડક્ટ, દુકાનની સેવાઓ અને દુકાન ખુલ્લી છે કે નહીં તે બતાવતું કાર્ડ.",
+  "ticks": [
+   [
+    "Offer bar and this week's phone with price",
+    "ઓફર બાર અને ભાવ સાથે આ અઠવાડિયાનો ફોન"
+   ],
+   [
+    "Categories and products with live stock",
+    "કેટેગરી અને સ્ટોક સાથે પ્રોડક્ટ"
+   ],
+   [
+    "Setup, exchange and warranty",
+    "સેટઅપ, એક્સચેન્જ અને વોરંટી"
+   ],
+   [
+    "Shows if the shop is open right now",
+    "દુકાન અત્યારે ખુલ્લી છે કે નહીં"
+   ],
+   [
+    "Tell us your budget on WhatsApp",
+    "બજેટ કહો, WhatsApp પર ફોન સૂચવીએ"
+   ]
+  ],
+  "msg_en": "Hi PromptKaro, I run a mobile shop. I'd like a site like your sample.",
+  "msg_gu": "નમસ્તે PromptKaro, મારી મોબાઇલ શોપ છે. તમારા નમૂના જેવી સાઇટ જોઈએ છે.",
+  "desc_en": "Storefront with stock",
+  "desc_gu": "સ્ટોક સાથે દુકાન"
+ },
+ {
+  "key": "furniture",
+  "tab_en": "Furniture",
+  "tab_gu": "ફર્નિચર",
+  "desc_en": "Catalogue and room preview",
+  "desc_gu": "કેટલોગ અને રૂમમાં પ્રિવ્યૂ",
+  "url": "sheeshamhouse.in",
+  "label_en": "Sample website for a furniture store: a showroom hero, categories, bestsellers with fabric colours and prices, and a see-it-in-your-room service.",
+  "label_gu": "ફર્નિચર સ્ટોરની નમૂના વેબસાઇટ: શોરૂમ હીરો, કેટેગરી, કાપડના રંગ અને ભાવ સાથે બેસ્ટસેલર, અને તમારા રૂમમાં જોવાની સેવા.",
+  "ticks": [
+   [
+    "Showroom photos up front",
+    "આગળ શોરૂમના ફોટા"
+   ],
+   [
+    "Bestsellers with fabrics and prices",
+    "કાપડ અને ભાવ સાથે બેસ્ટસેલર"
+   ],
+   [
+    "Warranty, delivery and custom sizes",
+    "વોરંટી, ડિલિવરી અને કસ્ટમ સાઇઝ"
+   ],
+   [
+    "See it in your room",
+    "તમારા રૂમમાં જુઓ"
+   ],
+   [
+    "Catalogue on WhatsApp",
+    "WhatsApp પર કેટલોગ"
+   ]
+  ],
+  "msg_en": "Hi PromptKaro, I run a furniture store. I'd like a site like your sample.",
+  "msg_gu": "નમસ્તે PromptKaro, મારો ફર્નિચર સ્ટોર છે. તમારા નમૂના જેવી સાઇટ જોઈએ છે."
+ },
+ {
+  "key": "interior",
+  "tab_en": "Interior & architecture",
+  "tab_gu": "ઇન્ટિરિયર અને આર્કિટેક્ચર",
+  "desc_en": "Portfolio and site visits",
+  "desc_gu": "પોર્ટફોલિયો અને સાઇટ વિઝિટ",
+  "url": "studioaakar.in",
+  "label_en": "Sample website for an interior and architecture studio: a full-width room photo, services, selected projects with photos, the process and a consultation booking.",
+  "label_gu": "ઇન્ટિરિયર અને આર્કિટેક્ચર સ્ટુડિયોની નમૂના વેબસાઇટ: મોટો રૂમનો ફોટો, સેવાઓ, ફોટા સાથે પ્રોજેક્ટ, કામની રીત અને કન્સલ્ટેશન બુકિંગ.",
+  "ticks": [
+   [
+    "Full-width photos of your rooms",
+    "તમારા રૂમના મોટા ફોટા"
+   ],
+   [
+    "Interiors, architecture and turnkey",
+    "ઇન્ટિરિયર, આર્કિટેક્ચર અને ટર્નકી"
+   ],
+   [
+    "Selected projects with details",
+    "વિગતો સાથે પસંદગીના પ્રોજેક્ટ"
+   ],
+   [
+    "Your process, step by step",
+    "તમારી કામની રીત, પગલે પગલે"
+   ],
+   [
+    "Photos or plans sent on WhatsApp",
+    "WhatsApp પર ફોટા કે પ્લાન"
+   ]
+  ],
+  "msg_en": "Hi PromptKaro, I run an interior and architecture studio. I'd like a site like your sample.",
+  "msg_gu": "નમસ્તે PromptKaro, મારો ઇન્ટિરિયર અને આર્કિટેક્ચર સ્ટુડિયો છે. તમારા નમૂના જેવી સાઇટ જોઈએ છે."
+ },
+ {
+  "key": "boutique",
+  "tab_en": "Boutique",
+  "tab_gu": "બુટિક",
+  "desc_en": "Collections and try at home",
+  "desc_gu": "કલેક્શન અને ઘરે ટ્રાય",
+  "url": "rangrez.in",
+  "label_en": "Sample website for a boutique: a festive collection hero, new arrivals with sizes and prices, try-at-home and alterations, and a trial booking.",
+  "label_gu": "બુટિકની નમૂના વેબસાઇટ: તહેવારનું કલેક્શન, સાઇઝ અને ભાવ સાથે નવી વસ્તુઓ, ઘરે ટ્રાય અને ઓલ્ટરેશન, અને ટ્રાયલ બુકિંગ.",
+  "ticks": [
+   [
+    "A new collection, front and centre",
+    "આગળ જ નવું કલેક્શન"
+   ],
+   [
+    "Products with sizes and prices",
+    "સાઇઝ અને ભાવ સાથે પ્રોડક્ટ"
+   ],
+   [
+    "Try at home and free alterations",
+    "ઘરે ટ્રાય અને મફત ઓલ્ટરેશન"
+   ],
+   [
+    "Category filters",
+    "કેટેગરી ફિલ્ટર"
+   ],
+   [
+    "Order and trial booking on WhatsApp",
+    "WhatsApp પર ઓર્ડર અને ટ્રાયલ"
+   ]
+  ],
+  "msg_en": "Hi PromptKaro, I run a boutique. I'd like a site like your sample.",
+  "msg_gu": "નમસ્તે PromptKaro, મારું બુટિક છે. તમારા નમૂના જેવી સાઇટ જોઈએ છે."
+ },
+ {
+  "key": "property",
+  "tab_en": "Real estate builder",
+  "tab_gu": "રિયલ એસ્ટેટ બિલ્ડર",
+  "url": "aanganhomes.in",
+  "label_en": "Sample website for a property project: a hero with the starting price, key facts, a floor plan with room sizes, homes left in each type, amenities and site visit booking.",
+  "label_gu": "પ્રોપર્ટી પ્રોજેક્ટની નમૂના વેબસાઇટ: શરૂઆતના ભાવ સાથે હીરો, મુખ્ય માહિતી, રૂમના માપ સાથે ફ્લોર પ્લાન, દરેક પ્રકારમાં બાકી ઘર, સુવિધાઓ અને સાઇટ વિઝિટ બુકિંગ.",
+  "ticks": [
+   [
+    "Hero with the starting price",
+    "શરૂઆતના ભાવ સાથે હીરો"
+   ],
+   [
+    "Floor plan with room sizes",
+    "રૂમના માપ સાથે ફ્લોર પ્લાન"
+   ],
+   [
+    "Homes left in each type",
+    "દરેક પ્રકારમાં કેટલા ઘર બાકી"
+   ],
+   [
+    "Amenities",
+    "સુવિધાઓ"
+   ],
+   [
+    "Site visit on the day you pick",
+    "દિવસ પસંદ કરી સાઇટ વિઝિટ"
+   ]
+  ],
+  "msg_en": "Hi PromptKaro, I'm a real estate builder. I'd like a site like your sample.",
+  "msg_gu": "નમસ્તે PromptKaro, હું રિયલ એસ્ટેટ બિલ્ડર છું. તમારા નમૂના જેવી સાઇટ જોઈએ છે.",
+  "desc_en": "Floor plans and visits",
+  "desc_gu": "ફ્લોર પ્લાન અને વિઝિટ"
+ },
+ {
+  "key": "manufacturer",
+  "tab_en": "Manufacturer",
+  "tab_gu": "મેન્યુફેક્ચરર",
+  "desc_en": "Models, specs and quotes",
+  "desc_gu": "મોડેલ, સ્પેક્સ અને ભાવ",
+  "url": "himalcooling.in",
+  "label_en": "Sample website for a manufacturer: a product hero, factory numbers, a model table with capacities, industries served and a quote request.",
+  "label_gu": "મેન્યુફેક્ચરરની નમૂના વેબસાઇટ: પ્રોડક્ટ હીરો, ફેક્ટરીના આંકડા, ક્ષમતા સાથે મોડેલ ટેબલ, ઉદ્યોગો અને ભાવ માટેની વિનંતી.",
+  "ticks": [
+   [
+    "Product hero with key promises",
+    "મુખ્ય વચનો સાથે પ્રોડક્ટ હીરો"
+   ],
+   [
+    "Model table with specs",
+    "સ્પેક્સ સાથે મોડેલ ટેબલ"
+   ],
+   [
+    "Industries you supply",
+    "તમે સપ્લાય કરતા ઉદ્યોગો"
+   ],
+   [
+    "Factory capacity and warranty",
+    "ફેક્ટરી ક્ષમતા અને વોરંટી"
+   ],
+   [
+    "Quote requests on WhatsApp",
+    "WhatsApp પર ભાવની વિનંતી"
+   ]
+  ],
+  "msg_en": "Hi PromptKaro, I'm a manufacturer. I'd like a site like your sample.",
+  "msg_gu": "નમસ્તે PromptKaro, હું મેન્યુફેક્ચરર છું. તમારા નમૂના જેવી સાઇટ જોઈએ છે."
+ },
+ {
+  "key": "wedding",
+  "tab_en": "Wedding planner",
+  "tab_gu": "વેડિંગ પ્લાનર",
+  "desc_en": "Services and wedding week",
+  "desc_gu": "સેવાઓ અને લગ્નનું અઠવાડિયું",
+  "url": "shubhutsav.in",
+  "label_en": "Sample website for a wedding planner: a marigold decor hero, services, a sample wedding week and a short enquiry that sends a plan on WhatsApp.",
+  "label_gu": "વેડિંગ પ્લાનરની નમૂના વેબસાઇટ: ગલગોટાની સજાવટ, સેવાઓ, લગ્નના અઠવાડિયાનો નમૂનો અને WhatsApp પર પ્લાન મોકલતી પૂછપરછ.",
+  "ticks": [
+   [
+    "A hero that shows your decor",
+    "તમારી સજાવટ બતાવતો હીરો"
+   ],
+   [
+    "Decor, venues, food and guests",
+    "સજાવટ, વેન્યુ, ભોજન અને મહેમાન"
+   ],
+   [
+    "A sample wedding week",
+    "લગ્નના અઠવાડિયાનો નમૂનો"
+   ],
+   [
+    "Three-question enquiry",
+    "ત્રણ પ્રશ્નોની પૂછપરછ"
+   ],
+   [
+    "Plans and quotes on WhatsApp",
+    "WhatsApp પર પ્લાન અને ભાવ"
+   ]
+  ],
+  "msg_en": "Hi PromptKaro, I'm a wedding planner. I'd like a site like your sample.",
+  "msg_gu": "નમસ્તે PromptKaro, હું વેડિંગ પ્લાનર છું. તમારા નમૂના જેવી સાઇટ જોઈએ છે."
+ },
+ {
+  "key": "handicrafts",
+  "tab_en": "Handicrafts",
+  "tab_gu": "હસ્તકલા",
+  "desc_en": "Shop and the makers",
+  "desc_gu": "દુકાન અને કારીગરો",
+  "url": "kalahaat.in",
+  "label_en": "Sample website for a handicrafts shop: handmade pottery and brass with prices, the artisan families who make them and gifting hampers.",
+  "label_gu": "હસ્તકલાની દુકાનની નમૂના વેબસાઇટ: ભાવ સાથે હાથબનાવટનાં માટીકામ અને પિત્તળ, તે બનાવતા કારીગર પરિવારો અને ગિફ્ટ હેમ્પર.",
+  "ticks": [
+   [
+    "Handmade products with prices",
+    "ભાવ સાથે હાથબનાવટની વસ્તુઓ"
+   ],
+   [
+    "Made-to-order times",
+    "ઓર્ડર પર બનાવવાનો સમય"
+   ],
+   [
+    "The makers behind each piece",
+    "દરેક વસ્તુના કારીગર"
+   ],
+   [
+    "Corporate and wedding gifting",
+    "કોર્પોરેટ અને લગ્નની ભેટ"
+   ],
+   [
+    "Order on WhatsApp",
+    "WhatsApp પર ઓર્ડર"
+   ]
+  ],
+  "msg_en": "Hi PromptKaro, I sell handicrafts. I'd like a site like your sample.",
+  "msg_gu": "નમસ્તે PromptKaro, હું હસ્તકલાની વસ્તુઓ વેચું છું. તમારા નમૂના જેવી સાઇટ જોઈએ છે."
+ },
+ {
+  "key": "clinic",
+  "tab_en": "Clinic",
+  "tab_gu": "ક્લિનિક",
+  "url": "shanticlinic.in",
+  "label_en": "Sample website for a clinic: a live OPD card with free time slots and tokens booked, services with fees and time, the doctor's introduction and how booking on WhatsApp works.",
+  "label_gu": "ક્લિનિકની નમૂના વેબસાઇટ: ખાલી સમય અને ટોકન સાથે લાઇવ OPD કાર્ડ, ફી અને સમય સાથે સેવાઓ, ડૉક્ટરનો પરિચય અને WhatsApp પર બુકિંગ કેવી રીતે થાય.",
+  "ticks": [
+   [
+    "Live OPD card with free slots",
+    "ખાલી સમય સાથે લાઇવ OPD કાર્ડ"
+   ],
+   [
+    "Services with fees and time",
+    "ફી અને સમય સાથે સેવાઓ"
+   ],
+   [
+    "Doctor's introduction and hours",
+    "ડૉક્ટરનો પરિચય અને સમય"
+   ],
+   [
+    "Token booking on WhatsApp",
+    "WhatsApp પર ટોકન બુકિંગ"
+   ],
+   [
+    "Reminder before your turn",
+    "વારો આવે તે પહેલાં યાદી"
+   ]
+  ],
+  "msg_en": "Hi PromptKaro, I run a clinic. I'd like a site like your sample.",
+  "msg_gu": "નમસ્તે PromptKaro, મારું ક્લિનિક છે. તમારા નમૂના જેવી સાઇટ જોઈએ છે.",
+  "desc_en": "Live OPD booking",
+  "desc_gu": "લાઇવ OPD બુકિંગ"
+ },
+ {
+  "key": "coaching",
+  "tab_en": "Coaching class",
+  "tab_gu": "કોચિંગ ક્લાસ",
+  "url": "vidyaclasses.in",
+  "label_en": "Sample website for a coaching class: a hero with a weekly test report sent to parents, a timetable with seats left, a week at the class, fees and a free demo class.",
+  "label_gu": "કોચિંગ ક્લાસની નમૂના વેબસાઇટ: વાલીઓને મોકલાતો સાપ્તાહિક ટેસ્ટ રિપોર્ટ, બાકી સીટ સાથે ટાઇમટેબલ, ક્લાસનું અઠવાડિયું, ફી અને મફત ડેમો ક્લાસ.",
+  "ticks": [
+   [
+    "Test report that parents receive",
+    "વાલીઓને મોકલાતો ટેસ્ટ રિપોર્ટ"
+   ],
+   [
+    "Timetable with seats left",
+    "બાકી સીટ સાથે ટાઇમટેબલ"
+   ],
+   [
+    "How a week runs",
+    "અઠવાડિયાનું આયોજન"
+   ],
+   [
+    "Fees, payable in parts",
+    "હપ્તામાં ભરી શકાય તેવી ફી"
+   ],
+   [
+    "Free demo class booking",
+    "મફત ડેમો ક્લાસ બુકિંગ"
+   ]
+  ],
+  "msg_en": "Hi PromptKaro, I run a coaching class. I'd like a site like your sample.",
+  "msg_gu": "નમસ્તે PromptKaro, મારો કોચિંગ ક્લાસ છે. તમારા નમૂના જેવી સાઇટ જોઈએ છે.",
+  "desc_en": "Timetable and results",
+  "desc_gu": "ટાઇમટેબલ અને પરિણામ"
+ },
+ {
+  "key": "food",
+  "tab_en": "Restaurant",
+  "tab_gu": "રેસ્ટોરન્ટ",
+  "url": "annapurnadining.in",
+  "label_en": "Sample website for a restaurant: an editorial hero with the thali, a printed-style menu with prices, today's special and a table reservation card.",
+  "label_gu": "રેસ્ટોરન્ટની નમૂના વેબસાઇટ: થાળી સાથે હીરો, ભાવ સાથે છાપેલા મેનુ જેવું મેનુ, આજની સ્પેશિયલ અને ટેબલ બુકિંગ કાર્ડ.",
+  "ticks": [
+   [
+    "Big hero with your thali",
+    "થાળી સાથે મોટો હીરો"
+   ],
+   [
+    "Menu with prices",
+    "ભાવ સાથે મેનુ"
+   ],
+   [
+    "Today's special",
+    "આજની સ્પેશિયલ"
+   ],
+   [
+    "Book by day, time and guests",
+    "દિવસ, સમય અને લોકો પસંદ કરી બુકિંગ"
+   ],
+   [
+    "Confirmed on WhatsApp",
+    "WhatsApp પર ખાતરી"
+   ]
+  ],
+  "msg_en": "Hi PromptKaro, I run a restaurant. I'd like a site like your sample.",
+  "msg_gu": "નમસ્તે PromptKaro, મારું રેસ્ટોરન્ટ છે. તમારા નમૂના જેવી સાઇટ જોઈએ છે.",
+  "desc_en": "Menu and table booking",
+  "desc_gu": "મેનુ અને ટેબલ બુકિંગ"
+ }
+]

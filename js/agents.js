@@ -1,6 +1,6 @@
 /* PromptKaro — agents.js
    1. Agent console: the owner's WhatsApp on the left, the agent's live log on the right.
-      Six scenarios play as event scripts; tabs switch, autoplay advances (with pause).
+      Twelve scenarios play as event scripts; tabs switch, autoplay advances (with pause).
    2. Dashboards: four boards that tick through real-looking events once, while on screen.
    Without JS the first scenario and every dashboard show in their finished state. */
 
@@ -45,7 +45,10 @@
     bill: { en: 'Billing', gu: 'બિલિંગ' },
     google: 'Google',
     list: { en: 'Listings', gu: 'લિસ્ટિંગ' },
-    crm: 'CRM'
+    crm: 'CRM',
+    catalog: { en: 'Catalogue', gu: 'કેટલોગ' },
+    quote: { en: 'Quote', gu: 'ભાવ' },
+    photo: { en: 'Photos', gu: 'ફોટા' }
   };
 
   /* ---------- Scenarios (sample businesses and customers) ---------- */
@@ -116,6 +119,62 @@
           { kind: 'listing', title: { en: '2 BHK, Aangan Homes, east facing', gu: '2 BHK, આંગણ હોમ્સ, પૂર્વમુખી' }, sub: { en: '₹28 lakh', gu: '₹28 લાખ' } },
           { kind: 'listing', title: { en: '2 BHK, Station Road, garden view', gu: '2 BHK, સ્ટેશન રોડ, બગીચા તરફ' }, sub: { en: '₹32 lakh', gu: '₹32 લાખ' } }],
         text: { en: 'Here are 2 that fit. Shall I fix a site visit?', gu: 'આ 2 બજેટમાં છે. સાઇટ વિઝિટ ગોઠવું?' } }
+    ] },
+    { biz: 'Sheesham House', who: 'Priya M.', events: [
+      { t: 'in', at: '8:12 pm', text: { en: 'Can the blue velvet sofa be made 2.1 m long?', gu: 'વાદળી વેલ્વેટ સોફા 2.1 મીટર લાંબો બનાવી શકો?' } },
+      { t: 'log', ms: 420, tool: T.ai, text: { en: 'Read message: custom size request', gu: 'મેસેજ વાંચ્યો: કસ્ટમ સાઇઝની વિનંતી' } },
+      { t: 'log', ms: 600, tool: T.catalog, text: { en: 'Found Curve velvet sofa, sizes 1.8 to 2.6 m', gu: 'કર્વ વેલ્વેટ સોફા મળ્યો, 1.8 થી 2.6 મી' } },
+      { t: 'log', ms: 520, tool: T.inv, text: { en: 'Checked blue velvet stock: 14 m', gu: 'વાદળી વેલ્વેટનો સ્ટોક: 14 મી' } },
+      { t: 'out', at: '8:12 pm', cards: [{ img: '/assets/img/fur-velvet-card.webp', title: { en: 'Curve velvet sofa, 2.1 m', gu: 'કર્વ વેલ્વેટ સોફા, 2.1 મી' }, sub: { en: '₹39,500 · ready in 12 days', gu: '₹39,500 · 12 દિવસમાં તૈયાર' } }],
+        text: { en: 'Yes. 2.1 m in the same blue is ₹39,500. Send a photo of your room and I will show it in place.', gu: 'હા. એ જ વાદળીમાં 2.1 મી ₹39,500. રૂમનો ફોટો મોકલો, સોફા ગોઠવીને બતાવીશ.' },
+        buttons: [{ en: 'Send room photo', gu: 'રૂમનો ફોટો મોકલો' }, { en: 'Book showroom visit', gu: 'શોરૂમ વિઝિટ' }] }
+    ] },
+    { biz: 'Studio Aakar', who: 'Nirav D.', events: [
+      { t: 'in', at: '4:05 pm', text: { en: 'We want our new 3 BHK designed. When can you visit?', gu: 'નવા 3 BHKનું ઇન્ટિરિયર કરાવવું છે. ક્યારે આવી શકો?' } },
+      { t: 'log', ms: 420, tool: T.ai, text: { en: 'Read message: interior project lead', gu: 'મેસેજ વાંચ્યો: ઇન્ટિરિયર પ્રોજેક્ટની લીડ' } },
+      { t: 'log', ms: 640, tool: T.cal, text: { en: "Found Saturday 11 am in the designer's calendar", gu: 'ડિઝાઇનરના કેલેન્ડરમાં શનિવાર 11 વાગ્યે ખાલી' } },
+      { t: 'log', ms: 380, tool: T.crm, text: { en: 'Added Nirav as a new project', gu: 'નીરવને નવા પ્રોજેક્ટ તરીકે ઉમેર્યા' } },
+      { t: 'out', at: '4:05 pm', cards: [{ img: '/assets/img/int-living-card.webp', title: { en: 'A recent living room', gu: 'તાજેતરનો લિવિંગ રૂમ' }, sub: { en: 'Mehta residence, 3 BHK', gu: 'મહેતા નિવાસ, 3 BHK' } }],
+        text: { en: 'Our designer can visit on Saturday at 11 am. Please share the floor plan before that.', gu: 'અમારા ડિઝાઇનર શનિવારે 11 વાગ્યે આવી શકે. તે પહેલાં ફ્લોર પ્લાન મોકલજો.' },
+        buttons: [{ en: 'Confirm Saturday', gu: 'શનિવાર નક્કી' }, { en: 'Other day', gu: 'બીજો દિવસ' }] }
+    ] },
+    { biz: 'Rangrez Boutique', who: 'Sneha P.', events: [
+      { t: 'in', at: '9:40 pm', text: { en: 'Is the embroidered corset top there in M? Can I try it first?', gu: 'ભરતકામવાળું કોર્સેટ ટોપ M માં છે? પહેલાં ટ્રાય કરી શકું?' } },
+      { t: 'log', ms: 400, tool: T.ai, text: { en: 'Read message: size and trial request', gu: 'મેસેજ વાંચ્યો: સાઇઝ અને ટ્રાયલ' } },
+      { t: 'log', ms: 560, tool: T.inv, text: { en: 'Checked sizes: S, M and L in stock', gu: 'સાઇઝ ચેક કરી: S, M અને L સ્ટોકમાં' } },
+      { t: 'log', ms: 480, tool: T.cal, text: { en: 'Found a try-at-home slot tomorrow, 6 pm', gu: 'કાલે સાંજે 6 નો ઘરે ટ્રાયલનો સમય મળ્યો' } },
+      { t: 'out', at: '9:40 pm', cards: [{ img: '/assets/img/bou-corset-card.webp', title: { en: 'Embroidered corset top', gu: 'ભરતકામવાળું કોર્સેટ ટોપ' }, sub: '₹3,499' }],
+        text: { en: 'M is in stock. We can bring S, M and L tomorrow at 6 pm. Alterations are free.', gu: 'M સ્ટોકમાં છે. કાલે સાંજે 6 વાગ્યે S, M અને L લઈ આવીએ. ઓલ્ટરેશન મફત.' },
+        buttons: [{ en: 'Book the trial', gu: 'ટ્રાયલ બુક કરો' }] }
+    ] },
+    { biz: 'Himal Cooling Systems', who: 'Fresh Sip Beverages', events: [
+      { t: 'in', at: '10:08 am', text: { en: 'Need a quote: 50 visi coolers, 330 L, with our logo. Delivery to two depots.', gu: 'ભાવ જોઈએ: 50 વિઝી કૂલર, 330 લિ, અમારા લોગો સાથે. બે ડેપોમાં ડિલિવરી.' } },
+      { t: 'log', ms: 420, tool: T.ai, text: { en: 'Read message: bulk order enquiry', gu: 'મેસેજ વાંચ્યો: બલ્ક ઓર્ડર પૂછપરછ' } },
+      { t: 'log', ms: 520, tool: T.price, text: { en: 'Applied the 50-unit price for HC-330', gu: 'HC-330 માટે 50 નંગનો ભાવ લગાવ્યો' } },
+      { t: 'log', ms: 480, tool: T.quote, text: { en: 'Added branding and two-depot freight', gu: 'બ્રાન્ડિંગ અને બે ડેપોનું ભાડું ઉમેર્યું' } },
+      { t: 'log', ms: 360, tool: T.pdf, text: { en: 'Created the quote PDF', gu: 'ક્વોટની PDF બનાવી' } },
+      { t: 'log', ms: 300, tool: T.crm, text: { en: 'Alerted the sales head', gu: 'સેલ્સ હેડને જાણ કરી' } },
+      { t: 'out', at: '10:09 am', cards: [{ kind: 'doc', title: 'Quote-FreshSip-HC330.pdf', sub: { en: '2 pages', gu: '2 પાનાં' } }],
+        text: { en: '₹28,400 each for 50, branded, delivered to both depots in 3 weeks. The quote is attached.', gu: '50 માટે બ્રાન્ડિંગ સાથે એક નંગ ₹28,400, 3 અઠવાડિયામાં બંને ડેપો પર. ક્વોટ જોડ્યો છે.' },
+        buttons: [{ en: 'Confirm order', gu: 'ઓર્ડર નક્કી' }, { en: 'Talk to sales', gu: 'સેલ્સ સાથે વાત' }] }
+    ] },
+    { biz: 'Shubh Utsav', who: 'Kavya & Arjun', events: [
+      { t: 'in', at: '9:12 pm', text: { en: 'Our wedding is on 14 Feb, about 300 guests. Are you free?', gu: '14 ફેબ્રુઆરીએ લગ્ન છે, લગભગ 300 મહેમાન. તમે ફ્રી છો?' } },
+      { t: 'log', ms: 420, tool: T.ai, text: { en: 'Read message: wedding enquiry', gu: 'મેસેજ વાંચ્યો: લગ્નની પૂછપરછ' } },
+      { t: 'log', ms: 600, tool: T.cal, text: { en: 'Checked 12 to 15 Feb: free', gu: '12 થી 15 ફેબ્રુઆરી ચેક કર્યું: ખાલી' } },
+      { t: 'log', ms: 480, tool: T.photo, text: { en: 'Picked 3 decor plans for 300 guests', gu: '300 મહેમાન માટે 3 સજાવટ પ્લાન પસંદ કર્યા' } },
+      { t: 'out', at: '9:12 pm', cards: [{ img: '/assets/img/wed-table-card.webp', title: { en: 'Marigold and candle decor', gu: 'ગલગોટા અને મીણબત્તીની સજાવટ' }, sub: { en: 'Plan 1 of 3', gu: '3 માંથી પ્લાન 1' } }],
+        text: { en: '14 Feb is open. Here is the first of three decor plans. Shall we meet this week?', gu: '14 ફેબ્રુઆરી ખાલી છે. ત્રણમાંથી પહેલો સજાવટ પ્લાન આ રહ્યો. આ અઠવાડિયે મળીએ?' },
+        buttons: [{ en: 'See all 3 plans', gu: 'ત્રણેય પ્લાન' }, { en: 'Fix a meeting', gu: 'મીટિંગ ગોઠવો' }] }
+    ] },
+    { biz: 'Kala Haat', who: 'Riya S.', events: [
+      { t: 'in', at: '5:30 pm', text: { en: 'Need 120 Diwali hampers for our office. What can you do?', gu: 'ઓફિસ માટે 120 દિવાળી હેમ્પર જોઈએ છે. શું કરી શકો?' } },
+      { t: 'log', ms: 420, tool: T.ai, text: { en: 'Read message: corporate gifting', gu: 'મેસેજ વાંચ્યો: કોર્પોરેટ ગિફ્ટિંગ' } },
+      { t: 'log', ms: 560, tool: T.inv, text: { en: 'Checked makers: 140 diya sets possible by 25 Oct', gu: 'કારીગરો ચેક કર્યા: 25 ઓક્ટો સુધીમાં 140 દીવા સેટ શક્ય' } },
+      { t: 'log', ms: 420, tool: T.price, text: { en: 'Priced hamper: brass diya set and bowl', gu: 'હેમ્પરનો ભાવ: પિત્તળના દીવા અને વાટકો' } },
+      { t: 'out', at: '5:31 pm', cards: [{ img: '/assets/img/craft-hero-card.webp', title: { en: 'Brass and terracotta hamper', gu: 'પિત્તળ અને માટીનું હેમ્પર' }, sub: { en: '₹1,850 each for 120', gu: '120 માટે એક ₹1,850' } }],
+        text: { en: '120 hampers can be ready by 25 Oct, with your card inside. Shall I send a sample first?', gu: '25 ઓક્ટો સુધીમાં 120 હેમ્પર તૈયાર, અંદર તમારું કાર્ડ. પહેલાં નમૂનો મોકલું?' },
+        buttons: [{ en: 'Send a sample', gu: 'નમૂનો મોકલો' }] }
     ] }
   ];
 
@@ -173,7 +232,11 @@
       var li = el('li', 'msg msg-' + dir);
       if (dir === 'out') li.appendChild(el('span', 'msg-agent', tr(UI.auto)));
       (ev.cards || []).forEach(function (c) {
-        var card = el('span', 'msg-card' + (c.kind === 'pay' ? ' msg-pay' : ''));
+        var card = el('span', 'msg-card' + (c.kind === 'pay' ? ' msg-pay' : '') + (c.img ? ' msg-photo' : ''));
+        if (c.img) {
+          var im = el('img'); im.src = c.img; im.alt = ''; im.width = 480; im.height = 320; im.decoding = 'async';
+          card.appendChild(im);
+        }
         card.appendChild(el('b', null, tr(c.title)));
         card.appendChild(el('small', null, tr(c.sub)));
         li.appendChild(card);
