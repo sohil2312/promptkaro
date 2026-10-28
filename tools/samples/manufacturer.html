@@ -6,72 +6,104 @@ img{display:block;max-width:100%}a{color:inherit;text-decoration:none}ul,ol{list
 .show-m{display:none}
 @media (max-width:700px){.wrap{padding:0 18px}.hide-m{display:none!important}.show-m{display:inline}nav{gap:12px!important}nav .brand{white-space:nowrap;font-size:18px!important}nav .btn{font-size:14px!important;padding:0 12px!important}nav .btn svg{width:16px}.offer{font-size:12px!important}}
 
-body{font-family:'Archivo';color:#14191D;background:#F2F3F4;font-size:16px;line-height:1.5}
-.top{background:#14191D;color:#C9D1D6;font-size:13px}
-.top .wrap{display:flex;justify-content:space-between;height:36px;align-items:center}
-nav{display:flex;align-items:center;gap:28px;height:76px}
-.brand{font-weight:800;font-size:22px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
-.brand i{width:28px;height:28px;background:#0E6BA8;clip-path:polygon(0 0,100% 0,100% 70%,70% 100%,0 100%)}
-.links{display:flex;gap:26px;margin-left:auto;color:#4B565E;font-size:15px}
-nav .btn{border-radius:4px;height:44px}
-.hero{display:grid;grid-template-columns:.9fr 1.1fr;gap:0;background:#fff;border-radius:6px;overflow:hidden}
-.hero .txt{padding:52px 44px}
-.hero small{font-weight:700;font-size:13px;color:#0E6BA8;letter-spacing:.04em}
-.hero h1{font-weight:800;font-size:54px;line-height:1.02;letter-spacing:-.03em;margin:14px 0}
-.hero p{color:#4B565E;font-size:18px}
-.hero ul{margin:22px 0 28px;display:grid;gap:8px}
-.hero li{display:flex;gap:10px;align-items:center;font-weight:600}
-.hero li:before{content:'';width:8px;height:8px;background:#0E6BA8}
-.hero .btn{border-radius:4px}
-.hero img{width:100%;height:100%;object-fit:cover}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:#14191D;color:#fff;border-radius:6px;margin:16px 0 64px}
-.stats div{padding:24px 26px}.stats div+div{box-shadow:inset 1px 0 0 #2A333A}
-.stats b{display:block;font-size:30px;font-weight:800;letter-spacing:-.02em}
-.stats span{color:#9BA7AF;font-size:14px}
-h2{font-weight:800;font-size:38px;letter-spacing:-.03em;margin-bottom:8px}
-.sub{color:#4B565E;margin-bottom:22px}
-.models{display:grid;grid-template-columns:280px 1fr;gap:20px;margin-bottom:64px}
-.models .ph{background:#fff;border-radius:6px;display:grid;place-items:center;padding:16px}
-table{width:100%;border-collapse:collapse;background:#fff;border-radius:6px;overflow:hidden;font-size:15px}
-th{background:#E3E7EA;text-align:left;padding:14px 16px;font-size:13px;color:#4B565E;font-weight:600}
-td{padding:14px 16px;border-top:1px solid #E3E7EA}
-td:first-child{font-weight:700}
-.ind{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:64px}
-.ind div{background:#fff;border-radius:6px;padding:20px;border-top:3px solid #0E6BA8}
-.ind b{display:block;font-size:18px;margin-bottom:4px}.ind span{color:#4B565E;font-size:14px}
-.rfq{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center;background:#0E6BA8;color:#fff;border-radius:6px;padding:40px;margin-bottom:48px}
-.rfq h3{font-size:34px;font-weight:800;letter-spacing:-.02em;line-height:1.05}
-.rfq p{color:#CFE3F1;margin-top:10px}
-.form{background:#fff;color:#14191D;border-radius:6px;padding:22px;display:grid;gap:12px}
-.form label{display:grid;gap:4px;font-size:13px;color:#4B565E;font-weight:600}
-.form span.f{display:block;border:1px solid #CBD2D7;border-radius:4px;padding:11px 12px;font-size:15px;color:#14191D;font-weight:500}
-.form .btn{border-radius:4px}
-footer{display:flex;justify-content:space-between;padding-bottom:36px;color:#4B565E;font-size:13px}
+body{font-family:'Archivo';color:#16191B;background:#F3F4F2;font-size:16px;line-height:1.55}
+.wrap{max-width:1200px}
+nav{display:flex;align-items:center;gap:32px;height:76px}
+.brand{display:flex;align-items:baseline;gap:8px;font-weight:800;font-size:22px;letter-spacing:.08em}
+.brand small{font-weight:500;font-size:13px;letter-spacing:0;color:#5E676C}
+.links{display:flex;gap:28px;margin-left:auto;color:#3F474C;font-size:15px}
+nav .btn{border-radius:8px;height:44px}
+/* Hero: the product in a dark studio, with callouts to the parts that matter */
+.hero{position:relative;border-radius:16px;overflow:hidden;background:#23272A;color:#EEF2F3}
+.hero img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:60% 50%}
+.hero .copy{position:absolute;left:48px;top:48px;max-width:430px}
+.hero h1{font-weight:800;font-size:60px;line-height:1;letter-spacing:-.035em}
+.hero p{color:#B9C2C6;font-size:18px;margin:16px 0 26px;max-width:34ch}
+.hero .btn{border-radius:8px}
+.hero .ghost{box-shadow:inset 0 0 0 1.5px #5E676C;color:#EEF2F3;margin-left:8px}
+.call{position:absolute;display:flex;align-items:center;gap:10px;font-size:13px;color:#DDE4E6}
+.call:before{content:'';width:9px;height:9px;border-radius:50%;background:#7FD3E6;box-shadow:0 0 0 4px rgba(127,211,230,.25)}
+.call b{display:block;color:#fff;font-size:14px}
+.call>span{background:rgba(20,23,25,.78);padding:6px 10px;border-radius:8px;backdrop-filter:blur(4px)}
+.c1{left:71%;top:12%}.c2{left:71%;top:44%}.c3{left:71%;top:86%}
+/* Lineup: every model, to scale */
+.sec{padding:96px 0 0}
+h2{font-weight:800;font-size:44px;line-height:1.05;letter-spacing:-.03em;max-width:18ch}
+.lede{color:#4B5459;font-size:18px;margin-top:12px;max-width:52ch}
+.lineup{margin-top:32px;border-radius:16px;overflow:hidden;background:#E7EAEC}
+.lineup img{width:100%}
+.specs{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:0;border-top:1px solid #D5DADD}
+.specs div{padding:18px 18px 4px 0}
+.specs b{display:block;font-size:20px;font-weight:800;letter-spacing:-.01em}
+.specs span{display:block;color:#4B5459;font-size:14px;line-height:1.5}
+.specs em{font-style:normal;display:inline-block;margin-top:8px;font-size:13px;font-weight:600;color:#0F5B6B}
+/* Branding: your logo on the canopy */
+.brandrow{display:grid;grid-template-columns:1.25fr .75fr;gap:48px;align-items:center;margin-top:32px}
+.brandrow img{width:100%;border-radius:16px;background:#ECEFF1}
+.steps{display:grid;gap:22px}
+.steps div{display:grid;grid-template-columns:36px 1fr;gap:14px}
+.steps i{font-style:normal;width:36px;height:36px;border-radius:50%;background:#16191B;color:#fff;display:grid;place-items:center;font-weight:700;font-size:14px}
+.steps b{display:block;font-size:17px}
+.steps span{color:#4B5459;font-size:15px}
+/* An order, week by week */
+.weeks{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:32px}
+.wk{background:#fff;border-radius:12px;padding:20px}
+.wk small{color:#0F5B6B;font-weight:700;font-size:13px}
+.wk b{display:block;font-size:18px;margin:4px 0}
+.wk span{color:#4B5459;font-size:14px}
+/* Quote on WhatsApp: show the message, not a fake form */
+.quote{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin:96px 0 56px;padding:48px;border-radius:16px;background:#16191B;color:#EEF2F3}
+.quote h2{color:#fff}
+.quote p{color:#B9C2C6;margin:12px 0 24px}
+.quote .btn{border-radius:8px}
+.chat{background:#EFEAE2;border-radius:14px;padding:18px;display:grid;gap:8px}
+.bub{max-width:85%;padding:9px 12px;border-radius:10px;font-size:14px;line-height:1.4;color:#111B21;background:#fff}
+.bub.me{justify-self:end;background:#D9FDD3}
+.bub small{display:block;text-align:right;color:#667781;font-size:11px;margin-top:2px}
+footer{display:flex;justify-content:space-between;padding:0 0 36px;color:#5E676C;font-size:13px}
 @media (max-width:700px){
- .top{display:none}nav{height:62px}.links{display:none}nav .btn{margin-left:auto}
- .hero{grid-template-columns:1fr}.hero .txt{padding:26px}.hero h1{font-size:38px}
- .stats{grid-template-columns:1fr 1fr}.stats div:nth-child(3){box-shadow:inset 0 1px 0 #2A333A}.stats div:nth-child(4){box-shadow:inset 1px 1px 0 #2A333A}
- h2{font-size:30px}.models{grid-template-columns:1fr}table{font-size:13px}th,td{padding:10px}.hm{display:none}
- .ind{grid-template-columns:1fr 1fr}.rfq{grid-template-columns:1fr;padding:24px}footer{flex-direction:column;gap:4px}
+ nav{height:62px}.links{display:none}nav .btn{margin-left:auto}.brand small{display:none}
+ .hero{display:flex;flex-direction:column-reverse}.hero img{aspect-ratio:4/3;object-position:78% 50%}.hero .copy{position:static;padding:26px 22px 4px;max-width:none}.hero h1{font-size:38px}.hero p{font-size:16px}
+ .hero .ghost{display:none}.call{display:none}
+ .sec{padding-top:64px}h2{font-size:30px}
+ .specs{grid-template-columns:1fr 1fr;row-gap:8px}.brandrow{grid-template-columns:1fr;gap:24px}
+ .weeks{grid-template-columns:1fr 1fr}.quote{grid-template-columns:1fr;padding:26px;gap:24px;margin-top:64px}
+ footer{flex-direction:column;gap:4px}
 }
-</style></head><body class=""><div class="top"><div class="wrap"><span>Factory visits Monday to Saturday</span><span>Dealer enquiries welcome</span></div></div>
-<div class="wrap">
-<nav><span class="brand"><i></i>Himal Cooling Systems</span><span class="links"><a>Products</a><a>Industries</a><a>Factory</a><a>Dealers</a></span><a class="btn wa"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.13c-.25.69-1.44 1.32-2 1.41-.51.08-1.16.11-1.87-.12-.43-.14-.98-.32-1.69-.62-2.98-1.29-4.93-4.29-5.08-4.49-.15-.2-1.21-1.61-1.21-3.07s.77-2.18 1.04-2.48c.27-.3.6-.37.8-.37h.57c.18.01.43-.07.67.51.25.6.84 2.06.92 2.21.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.45.52-.15.15-.3.31-.13.6.17.3.77 1.27 1.65 2.06 1.13 1.01 2.09 1.32 2.39 1.47.3.15.47.13.64-.08.18-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.74.82 2.04.97.3.15.5.22.57.35.08.12.08.72-.17 1.41Z"/></svg><span class="hide-m">Request a quote</span><span class="show-m">Quote</span></a></nav>
-<header class="hero"><div class="txt"><small>MANUFACTURER · COMMERCIAL REFRIGERATION</small><h1>Visi coolers built for Indian summers.</h1><p>Single and double door coolers for beverage brands, dairies and shops, made in our own factory.</p>
-<ul><li>Runs at 43 °C outside</li><li>Your brand on the canopy</li><li>Service network in 40 cities</li></ul><a class="btn wa"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.13c-.25.69-1.44 1.32-2 1.41-.51.08-1.16.11-1.87-.12-.43-.14-.98-.32-1.69-.62-2.98-1.29-4.93-4.29-5.08-4.49-.15-.2-1.21-1.61-1.21-3.07s.77-2.18 1.04-2.48c.27-.3.6-.37.8-.37h.57c.18.01.43-.07.67.51.25.6.84 2.06.92 2.21.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.45.52-.15.15-.3.31-.13.6.17.3.77 1.27 1.65 2.06 1.13 1.01 2.09 1.32 2.39 1.47.3.15.47.13.64-.08.18-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.74.82 2.04.97.3.15.5.22.57.35.08.12.08.72-.17 1.41Z"/></svg>Get a quote in 24 hours</a></div><img src="img/mfg-hero.webp" alt=""></header>
-<div class="stats"><div><b>1,200</b><span>units a month</span></div><div><b>6</b><span>models in stock</span></div><div><b>2 years</b><span>compressor warranty</span></div><div><b>48 hours</b><span>dispatch for stock models</span></div></div>
-<h2>Models</h2><p class="sub">Bulk pricing for 10 units or more. Custom branding from 25 units.</p>
-<div class="models"><div class="ph"><img src="img/mfg-fridge.webp" alt=""></div>
-<table><thead><tr><th>Model</th><th>Capacity</th><th class="hm">Doors</th><th>Temperature</th><th>Best for</th></tr></thead><tbody>
-<tr><td>HC-220</td><td>220 L</td><td class="hm">1 glass</td><td>2 to 8 °C</td><td>Small shops</td></tr>
-<tr><td>HC-330</td><td>330 L</td><td class="hm">1 glass</td><td>2 to 8 °C</td><td>Beverage brands</td></tr>
-<tr><td>HC-450</td><td>450 L</td><td class="hm">1 glass</td><td>2 to 8 °C</td><td>Dairies</td></tr>
-<tr><td>HC-660D</td><td>660 L</td><td class="hm">2 glass</td><td>2 to 8 °C</td><td>Supermarkets</td></tr>
-<tr><td>HC-1000D</td><td>1,000 L</td><td class="hm">2 glass</td><td>0 to 6 °C</td><td>Distributors</td></tr>
-</tbody></table></div>
-<h2>Industries we supply</h2><p class="sub">Coolers set for what each one stores.</p>
-<div class="ind"><div><b>Beverage brands</b><span>Branded coolers for retail</span></div><div><b>Dairies</b><span>Milk and curd at 4 °C</span></div><div><b>Pharmacies</b><span>Vaccines and insulin</span></div><div><b>Restaurants</b><span>Back-of-house storage</span></div></div>
-<div class="rfq"><div><h3>Tell us what you need. Get a quote in 24 hours.</h3><p>Model, quantity and delivery city are enough to start.</p></div>
-<div class="form"><label>Model<span class="f">HC-330, single glass door</span></label><label>Quantity<span class="f">50 units</span></label><label>Delivery city<span class="f">Your city</span></label><a class="btn wa"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.13c-.25.69-1.44 1.32-2 1.41-.51.08-1.16.11-1.87-.12-.43-.14-.98-.32-1.69-.62-2.98-1.29-4.93-4.29-5.08-4.49-.15-.2-1.21-1.61-1.21-3.07s.77-2.18 1.04-2.48c.27-.3.6-.37.8-.37h.57c.18.01.43-.07.67.51.25.6.84 2.06.92 2.21.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.45.52-.15.15-.3.31-.13.6.17.3.77 1.27 1.65 2.06 1.13 1.01 2.09 1.32 2.39 1.47.3.15.47.13.64-.08.18-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.74.82 2.04.97.3.15.5.22.57.35.08.12.08.72-.17 1.41Z"/></svg>Send on WhatsApp</a></div></div>
+</style></head><body class=""><div class="wrap">
+<nav><span class="brand">HIMAL<small>Cooling Systems</small></span><span class="links"><a>Models</a><a>Branding</a><a>How we work</a><a>Dealers</a></span><a class="btn wa"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.13c-.25.69-1.44 1.32-2 1.41-.51.08-1.16.11-1.87-.12-.43-.14-.98-.32-1.69-.62-2.98-1.29-4.93-4.29-5.08-4.49-.15-.2-1.21-1.61-1.21-3.07s.77-2.18 1.04-2.48c.27-.3.6-.37.8-.37h.57c.18.01.43-.07.67.51.25.6.84 2.06.92 2.21.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.45.52-.15.15-.3.31-.13.6.17.3.77 1.27 1.65 2.06 1.13 1.01 2.09 1.32 2.39 1.47.3.15.47.13.64-.08.18-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.74.82 2.04.97.3.15.5.22.57.35.08.12.08.72-.17 1.41Z"/></svg><span class="hide-m">Ask for a quote</span><span class="show-m">Quote</span></a></nav>
+<header class="hero"><img src="img/mfg-hero.webp" alt="">
+ <div class="copy"><h1>Cold drinks, even at 43&nbsp;°C outside.</h1>
+ <p>Visi coolers for beverage brands, dairies and shops. Built in our own factory, with your name on the canopy.</p>
+ <a class="btn wa"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.13c-.25.69-1.44 1.32-2 1.41-.51.08-1.16.11-1.87-.12-.43-.14-.98-.32-1.69-.62-2.98-1.29-4.93-4.29-5.08-4.49-.15-.2-1.21-1.61-1.21-3.07s.77-2.18 1.04-2.48c.27-.3.6-.37.8-.37h.57c.18.01.43-.07.67.51.25.6.84 2.06.92 2.21.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.45.52-.15.15-.3.31-.13.6.17.3.77 1.27 1.65 2.06 1.13 1.01 2.09 1.32 2.39 1.47.3.15.47.13.64-.08.18-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.74.82 2.04.97.3.15.5.22.57.35.08.12.08.72-.17 1.41Z"/></svg>Ask for a quote</a><a class="btn ghost">See the models</a></div>
+ <span class="call c1"><span><b>Lit canopy</b>Your logo, LED backlit</span></span>
+ <span class="call c2"><span><b>Double-glazed door</b>No fog in humid shops</span></span>
+ <span class="call c3"><span><b>R290 compressor</b>Lower power bills</span></span>
+</header>
+<section class="sec"><h2>Five sizes, from a corner shop to a supermarket</h2><p class="lede">Shown to scale. Every model holds 2 to 8 °C, uses LED lighting inside and comes with a 2-year compressor warranty.</p>
+<div class="lineup"><img src="img/mfg-lineup.webp" alt=""></div>
+<div class="specs">
+ <div><b>HC-220</b><span>220 L · 1 door</span><span>155 cm tall</span><em>Small shops</em></div>
+ <div><b>HC-330</b><span>330 L · 1 door</span><span>195 cm tall</span><em>Beverage brands</em></div>
+ <div><b>HC-450</b><span>450 L · 1 door</span><span>205 cm tall</span><em>Dairies</em></div>
+ <div><b>HC-660D</b><span>660 L · 2 doors</span><span>200 cm tall</span><em>Supermarkets</em></div>
+ <div><b>HC-1000D</b><span>1,000 L · 2 doors</span><span>210 cm tall</span><em>Distributors</em></div>
+</div></section>
+<section class="sec"><h2>Your brand on every cooler</h2><p class="lede">From 25 units we print your logo on the canopy and match the colour. You approve a sample before we make the batch.</p>
+<div class="brandrow"><img src="img/mfg-brands.webp" alt="">
+ <div class="steps">
+  <div><i>1</i><p><b>Send your logo</b><span>Any file, on WhatsApp.</span></p></div>
+  <div><i>2</i><p><b>See it on the cooler</b><span>A render like this one, in two days.</span></p></div>
+  <div><i>3</i><p><b>Approve one sample</b><span>Built and photographed before the batch.</span></p></div>
+ </div></div></section>
+<section class="sec"><h2>An order of 50 coolers, week by week</h2>
+<div class="weeks">
+ <div class="wk"><small>Week 1</small><b>Quote and sample</b><span>Price, branding and a sample cooler.</span></div>
+ <div class="wk"><small>Week 2</small><b>Production</b><span>Cabinets, wiring and glass doors.</span></div>
+ <div class="wk"><small>Week 3</small><b>Testing</b><span>Every unit runs 24 hours at full load.</span></div>
+ <div class="wk"><small>Week 4</small><b>Dispatch</b><span>Packed, loaded and tracked to your depots.</span></div>
+</div></section>
+<section class="quote"><div><h2>Ask for a quote on WhatsApp</h2><p>Tell us the model, how many and where they go. We reply with a price and a delivery date.</p><a class="btn wa"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.13c-.25.69-1.44 1.32-2 1.41-.51.08-1.16.11-1.87-.12-.43-.14-.98-.32-1.69-.62-2.98-1.29-4.93-4.29-5.08-4.49-.15-.2-1.21-1.61-1.21-3.07s.77-2.18 1.04-2.48c.27-.3.6-.37.8-.37h.57c.18.01.43-.07.67.51.25.6.84 2.06.92 2.21.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.45.52-.15.15-.3.31-.13.6.17.3.77 1.27 1.65 2.06 1.13 1.01 2.09 1.32 2.39 1.47.3.15.47.13.64-.08.18-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.74.82 2.04.97.3.15.5.22.57.35.08.12.08.72-.17 1.41Z"/></svg>Message us on WhatsApp</a></div>
+ <div class="chat"><div class="bub me">Need 50 × HC-330 with our logo, delivery to two depots.<small>10:08</small></div><div class="bub">Thanks. ₹28,400 each with branding, delivered in 3 weeks. Quote PDF attached.<small>10:09</small></div></div></section>
 <footer><span>© 2026 Himal Cooling Systems</span><span>Commercial refrigeration manufacturer</span></footer>
 </div></body></html>
