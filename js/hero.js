@@ -1,8 +1,7 @@
 /* PromptKaro — hero.js
-   The hero stage: a website, its product and its WhatsApp agent, changing together.
+   The hero stage: a website and its WhatsApp agent, changing together.
    Scene 1 is the PromptKaro story itself (a shop owner asks for a site and gets a demo).
-   Every scene after that is one business: the product card transforms into that business's
-   website (a circle opening from the card), the site scrolls itself, and the business's AI
+   Every scene after that is one business: that business's website opens as a growing circle, the site scrolls itself, and the business's AI
    agent answers a customer in the phone. GSAP runs the timelines (js/vendor/gsap.min.js).
    Without JS, or with reduced motion, scene 1 is shown complete and the dots switch scenes
    instantly. Autoplay pauses off screen, in a hidden tab and on the pause button. */
@@ -17,11 +16,6 @@
   var view = document.getElementById('stageView');
   var url = document.getElementById('stageUrl');
   var kind = document.getElementById('stageKind');
-  var product = document.getElementById('stageProduct');
-  var pName = document.getElementById('stageProductName');
-  var pSub = document.getElementById('stageProductSub');
-  var pPrice = document.getElementById('stageProductPrice');
-  var pImg = product.querySelector('img');
   var chatName = document.getElementById('chatName');
   var chatAvatar = document.getElementById('chatAvatar');
   var status = document.getElementById('chatStatus');
@@ -50,11 +44,9 @@
   var SCENES = [
     { key: 'promptkaro', url: 'shreejimobile.in', shot: '/assets/img/site-mobile.webp', kind: WEB,
       label: { en: 'Website for a mobile shop, made from one WhatsApp chat', gu: 'એક WhatsApp ચેટથી બનેલી મોબાઇલ શોપની વેબસાઇટ' },
-      product: { img: '/assets/img/phone-450.webp', name: { en: '5G phone, 128 GB', gu: '5G ફોન, 128 GB' }, sub: 'Shreeji Mobile', price: '₹13,999' },
       story: true },
     { key: 'furniture', url: 'sheeshamhouse.in', shot: '/assets/img/site-furniture.webp', kind: WEB,
       label: { en: 'Furniture store: website and WhatsApp AI agent', gu: 'ફર્નિચર સ્ટોર: વેબસાઇટ અને WhatsApp AI એજન્ટ' },
-      product: { img: '/assets/img/fur-velvet-thumb.webp', name: { en: 'Curve velvet sofa', gu: 'કર્વ વેલ્વેટ સોફા' }, sub: 'Sheesham House', price: '₹42,000' },
       chat: { name: 'Sheesham House', avatar: 'S', msgs: [
         { out: { en: 'Does the blue sofa come in 2.1 metres?', gu: 'વાદળી સોફા 2.1 મીટરમાં મળશે?' }, at: '11:02' },
         { step: { en: 'Checked custom sizes and fabric stock', gu: 'કસ્ટમ સાઇઝ અને કાપડનો સ્ટોક ચેક કર્યો' } },
@@ -62,7 +54,6 @@
       ] } },
     { key: 'dashboard', url: 'dashboard.shreejimobile.in', shot: '/assets/img/hero-dashboard.webp', kind: { en: 'Automated dashboard', gu: 'ઓટોમેટેડ ડેશબોર્ડ' },
       label: { en: 'Automated dashboard that fills itself from WhatsApp, UPI and billing', gu: 'WhatsApp, UPI અને બિલિંગથી જાતે ભરાતું ડેશબોર્ડ' },
-      product: { kpi: 48620, from: 41120, name: { en: 'Revenue today', gu: 'આજની આવક' }, sub: { en: '+12% on last Tuesday', gu: 'ગયા મંગળવાર કરતાં +12%' } },
       chat: { name: 'Shreeji Mobile', avatar: 'S', status: { en: 'automations', gu: 'ઓટોમેશન' }, msgs: [
         { step: { en: 'UPI payment matched to order #1042', gu: 'UPI પેમેન્ટ ઓર્ડર #1042 સાથે મેળવ્યું' } },
         { in: { en: 'Receipt sent to Hetal D. Earbuds are down to 2, so I sent the supplier a reorder for 20.', gu: 'હેતલ ડી.ને રસીદ મોકલી. ઇયરબડ્સ 2 બાકી છે, એટલે સપ્લાયરને 20નો ઓર્ડર મોકલ્યો.' }, at: '18:40' },
@@ -70,7 +61,6 @@
       ] } },
     { key: 'interior', url: 'studioaakar.in', shot: '/assets/img/site-interior.webp', kind: WEB,
       label: { en: 'Interior and architecture studio: website and WhatsApp AI agent', gu: 'ઇન્ટિરિયર અને આર્કિટેક્ચર સ્ટુડિયો: વેબસાઇટ અને WhatsApp AI એજન્ટ' },
-      product: { img: '/assets/img/int-reading-thumb.webp', photo: true, name: { en: '3D concept, reading corner', gu: '3D કોન્સેપ્ટ, રીડિંગ કોર્નર' }, sub: 'Studio Aakar', price: { en: 'Ready', gu: 'તૈયાર' } },
       chat: { name: 'Studio Aakar', avatar: 'A', msgs: [
         { out: { en: 'We need our 3 BHK living room designed. Can you visit?', gu: 'અમારા 3 BHKનો લિવિંગ રૂમ ડિઝાઇન કરાવવો છે. મુલાકાત લઈ શકો?' }, at: '16:15' },
         { step: { en: 'Found a free slot in the designer’s calendar', gu: 'ડિઝાઇનરના કેલેન્ડરમાં ખાલી સમય શોધ્યો' } },
@@ -78,7 +68,6 @@
       ] } },
     { key: 'boutique', url: 'rangrez.in', shot: '/assets/img/site-boutique.webp', kind: WEB,
       label: { en: 'Boutique: website and WhatsApp AI agent', gu: 'બુટિક: વેબસાઇટ અને WhatsApp AI એજન્ટ' },
-      product: { img: '/assets/img/bou-corset-thumb.webp', name: { en: 'Embroidered corset top', gu: 'ભરતકામવાળું કોર્સેટ ટોપ' }, sub: 'Rangrez', price: '₹3,499' },
       chat: { name: 'Rangrez Boutique', avatar: 'R', msgs: [
         { out: { en: 'Is the corset top available in M?', gu: 'કોર્સેટ ટોપ M સાઇઝમાં છે?' }, at: '20:31' },
         { step: { en: 'Checked sizes in stock', gu: 'સ્ટોકમાં સાઇઝ ચેક કરી' } },
@@ -86,7 +75,6 @@
       ] } },
     { key: 'manufacturer', url: 'himalcooling.in', shot: '/assets/img/site-manufacturer.webp', kind: WEB,
       label: { en: 'Manufacturer: website and WhatsApp AI agent for quotes', gu: 'મેન્યુફેક્ચરર: વેબસાઇટ અને ક્વોટ માટે WhatsApp AI એજન્ટ' },
-      product: { img: '/assets/img/mfg-fridge-thumb.webp', name: { en: 'HC-330 visi cooler', gu: 'HC-330 વિઝી કૂલર' }, sub: 'Himal Cooling Systems', price: '330 L' },
       chat: { name: 'Himal Cooling', avatar: 'H', msgs: [
         { out: { en: 'Quote for 50 HC-330 coolers with our logo?', gu: 'અમારા લોગો સાથે 50 HC-330 કૂલરનો ભાવ?' }, at: '10:08' },
         { step: { en: 'Applied bulk price and branding cost', gu: 'બલ્ક ભાવ અને બ્રાન્ડિંગ ખર્ચ ગણ્યો' } },
@@ -94,7 +82,6 @@
       ] } },
     { key: 'wedding', url: 'shubhutsav.in', shot: '/assets/img/site-wedding.webp', kind: WEB,
       label: { en: 'Wedding planner: website and WhatsApp AI agent', gu: 'વેડિંગ પ્લાનર: વેબસાઇટ અને WhatsApp AI એજન્ટ' },
-      product: { img: '/assets/img/wed-table-thumb.webp', photo: true, name: { en: 'Marigold decor plan', gu: 'ગલગોટાની સજાવટ' }, sub: 'Shubh Utsav', price: { en: '3 options', gu: '3 વિકલ્પ' } },
       chat: { name: 'Shubh Utsav', avatar: 'U', msgs: [
         { out: { en: 'Wedding on 14 February, about 300 guests. Are you free?', gu: '14 ફેબ્રુઆરીએ લગ્ન છે, લગભગ 300 મહેમાન. તમે ફ્રી છો?' }, at: '21:12' },
         { step: { en: 'Checked the team calendar for 12 to 15 Feb', gu: '12 થી 15 ફેબ્રુઆરીનું કેલેન્ડર ચેક કર્યું' } },
@@ -108,20 +95,7 @@
   var paused = false, onScreen = true, started = false;
 
   /* ---------- Static setters (used by both the animated and the instant path) ---------- */
-  function setProduct(s) {
-    var p = s.product;
-    product.classList.toggle('is-kpi', !!p.kpi);
-    pImg.classList.toggle('is-photo', !!p.photo);
-    if (p.kpi) {
-      pImg.src = '/assets/img/earbuds-thumb.webp';
-      pPrice.textContent = '₹' + p.kpi.toLocaleString('en-IN');
-    } else {
-      pImg.src = p.img;
-      pPrice.textContent = tr(p.price);
-    }
-    pName.textContent = tr(p.name);
-    pSub.textContent = tr(p.sub);
-  }
+
   function setHead(s) {
     var c = s.chat;
     chatName.textContent = c ? c.name : 'PromptKaro';
@@ -174,7 +148,7 @@
     var s = SCENES[i];
     view.textContent = '';
     view.appendChild(shotFor(s));
-    setProduct(s); setHead(s); setFrame(s);
+    setHead(s); setFrame(s);
     clearSceneMessages();
     typing.hidden = true;
     storySteps.forEach(function (st) { st.hidden = !s.story; st.classList.remove('is-pending'); });
@@ -207,7 +181,7 @@
 
   document.addEventListener('pk:lang', function () {
     var s = SCENES[current];
-    setProduct(s); setHead(s); setFrame(s);
+    setHead(s); setFrame(s);
     if (!s.story) {
       var nodes = list.querySelectorAll('[data-scene]');
       var msgs = s.chat.msgs;
@@ -308,21 +282,10 @@
     tl = t;
 
     if (!first) {
-      // 1. The product card spins away and the next one springs in from the other side.
-      t.to(product, { rotationY: -90, opacity: 0.2, scale: 0.92, duration: 0.32, ease: 'power2.in' }, 0);
-      t.call(function () { setProduct(s); }, null, 0.32);
-      t.fromTo(product, { rotationY: 90, scale: 0.92 }, { rotationY: 0, opacity: 1, scale: 1, duration: 0.7, ease: 'back.out(1.6)' }, 0.32);
-      if (s.product.kpi) {
-        var n = { v: s.product.from };
-        t.to(n, { v: s.product.kpi, duration: 1.4, ease: 'power3.out', onUpdate: function () { pPrice.textContent = '₹' + Math.round(n.v).toLocaleString('en-IN'); } }, 0.5);
-      }
-
-      // 2. The website opens out of the card: a circle grows from the card's centre.
+      // 1. The next website opens as a circle growing from the lower left of the screen.
       var old = view.querySelector('.stage-shot');
       var img = shotFor(s);
-      var vr = view.getBoundingClientRect(), pr = product.getBoundingClientRect();
-      var cx = ((pr.left + pr.width / 2 - vr.left) / vr.width * 100).toFixed(1) + '%';
-      var cy = ((pr.top + pr.height / 2 - vr.top) / vr.height * 100).toFixed(1) + '%';
+      var cx = '20%', cy = '85%';
       t.call(function () {
         img.style.clipPath = 'circle(0% at ' + cx + ' ' + cy + ')';
         view.appendChild(img);
@@ -335,7 +298,7 @@
       }
       t.fromTo(url, { opacity: 0, y: -6 }, { opacity: 1, y: 0, duration: 0.4 }, 0.55);
 
-      // 3. The phone switches to this business: old messages lift away, the header changes.
+      // 2. The phone switches to this business: old messages lift away, the header changes.
       t.to(list.children, { opacity: 0, y: -16, duration: 0.3, stagger: 0.02, ease: 'power2.in' }, 0.2);
       t.call(function () {
         clearSceneMessages();

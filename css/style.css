@@ -329,7 +329,7 @@ html[lang="gu"] .hero-title { font-size: calc(var(--fs-h1) * 0.8); line-height: 
 .rot-ch { display: inline-block; transform-origin: 50% 100%; backface-visibility: hidden; }
 .rot-line { position: absolute; left: 0; right: 0; bottom: 0.02em; height: 0.07em; border-radius: 0.04em; background: var(--marigold); }
 
-/* ---------- Hero stage: a website, its product and its WhatsApp agent, changing together ---------- */
+/* ---------- Hero stage: a website and its WhatsApp agent, changing together ---------- */
 .hero-stage { position: relative; min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-4); perspective: 1200px; }
 .stage-browser { position: relative; margin: 0; border-radius: 16px; background: #FFFFFF; box-shadow: var(--float); overflow: hidden; }
 .stage-bar { display: flex; align-items: center; gap: var(--s-3); height: 40px; padding: 0 var(--s-3); background: #F1F2EE; }
@@ -339,15 +339,6 @@ html[lang="gu"] .hero-title { font-size: calc(var(--fs-h1) * 0.8); line-height: 
 .stage-kind { padding: 3px 10px; border-radius: var(--r-pill); background: var(--ink); color: var(--on-ink); font-size: 0.75rem; font-weight: var(--fw-strong); white-space: nowrap; }
 .stage-view { position: relative; height: 300px; overflow: hidden; background: #FFFFFF; }
 .stage-shot { position: absolute; left: 0; top: 0; width: 100%; height: auto; }
-.stage-product { position: relative; z-index: 2; display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; align-items: center; gap: var(--s-3); width: min(100%, 300px); margin: -56px 0 0 var(--s-3); padding: 8px 14px 8px 8px; border-radius: 18px; background: #FFFFFF; box-shadow: var(--float); }
-.stage-product-ph { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 12px; background: var(--ground-2); overflow: hidden; }
-.stage-product-ph img { width: 100%; height: 100%; object-fit: contain; }
-.stage-product-ph img.is-photo { object-fit: cover; }
-.stage-product-txt { display: flex; flex-direction: column; min-width: 0; line-height: 1.25; }
-.stage-product-txt b { font-size: 0.9375rem; font-weight: var(--fw-strong); line-height: 1.25; }
-.stage-product-txt small { font-size: 0.75rem; color: var(--ink-3); }
-.stage-product strong { font-size: 1rem; }
-.stage-product .is-up { color: var(--action); font-size: 0.75rem; }
 .stage-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--s-3); }
 .stage-pause { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--ground-2); color: var(--ink); }
 .stage-pause svg { width: 14px; height: 14px; fill: currentColor; }
@@ -791,7 +782,6 @@ html:not(.js) .dock { display: none; }
   .hero-stage { display: block; height: 600px; margin-top: var(--s-2); }
   .stage-browser { position: absolute; top: 0; left: 0; right: 120px; }
   .stage-view { height: 400px; }
-  .stage-product { position: absolute; left: -40px; top: 360px; margin: 0; }
   .stage-phone { position: absolute; right: 0; top: 150px; width: 300px; max-width: none; z-index: 1; }
   .stage-phone .chat { height: 420px; }
   .stage-controls { position: absolute; left: 0; right: 316px; top: 452px; }
